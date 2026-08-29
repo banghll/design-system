@@ -2,9 +2,6 @@
  * 블록은 하나가 한 화면이라 갤러리에 나란히 넣을 수 없다. 목록 + 실제 라우트로 연다.
  * 목록은 app/blocks/ 를 직접 읽어 만든다 — 손으로 관리하지 않는다.
  */
-import fs from "node:fs"
-import path from "node:path"
-
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
@@ -14,22 +11,43 @@ const GROUPS: { key: string; title: string; note: string }[] = [
   { key: "dashboard", title: "대시보드", note: "지표 · 차트 · 데이터 테이블 한 벌" },
   { key: "login", title: "로그인", note: "인증 진입 화면" },
   { key: "signup", title: "가입", note: "계정 생성 화면" },
-  { key: "calendar", title: "캘린더", note: "날짜 선택의 변형들" },
+  { key: "calendar", title: "캘린더 · 차트", note: "라우트가 아니라 컴포넌트 — 한 페이지에 38개를 모아 놓았다" },
   { key: "chart", title: "차트", note: "recharts 기반 기본형" },
 ]
 
-function readBlocks() {
-  const dir = path.join(process.cwd(), "app", "blocks")
-  if (!fs.existsSync(dir)) return []
-  return fs
-    .readdirSync(dir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-    .sort()
-}
+const BLOCKS = [
+  "calendars",
+  "dashboard-01",
+  "login-01",
+  "login-02",
+  "login-03",
+  "login-04",
+  "login-05",
+  "sidebar-01",
+  "sidebar-02",
+  "sidebar-03",
+  "sidebar-04",
+  "sidebar-05",
+  "sidebar-06",
+  "sidebar-07",
+  "sidebar-08",
+  "sidebar-09",
+  "sidebar-10",
+  "sidebar-11",
+  "sidebar-12",
+  "sidebar-13",
+  "sidebar-14",
+  "sidebar-15",
+  "sidebar-16",
+  "signup-01",
+  "signup-02",
+  "signup-03",
+  "signup-04",
+  "signup-05"
+]
 
 export default function BlocksIndex() {
-  const blocks = readBlocks()
+  const blocks = BLOCKS
   const grouped = GROUPS.map((g) => ({
     ...g,
     items: blocks.filter((b) => b.startsWith(g.key)),

@@ -4,6 +4,10 @@ import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 import "./globals.css"
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "slate × shadcn",
@@ -13,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className="h-full antialiased">
+    <html lang="ko" className={cn("dark h-full antialiased", "font-sans", inter.variable)}>
       <head>
         {/* slate typography.css 의 --font-sans / --font-display 가
             "DM Sans" · "Instrument Sans" 를 이름으로 참조한다.
