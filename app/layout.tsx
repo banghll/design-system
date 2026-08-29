@@ -2,12 +2,9 @@ import type { Metadata } from "next"
 
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
 
 import "./globals.css"
-import { Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "slate × shadcn",
@@ -17,12 +14,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={cn("dark h-full antialiased", "font-sans", inter.variable)}>
+    <html lang="ko" className={cn("dark h-full antialiased", "font-sans")}>
       <head>
-        {/* slate typography.css 의 --font-sans / --font-display 가
-            "DM Sans" · "Instrument Sans" 를 이름으로 참조한다.
-            next/font 는 해시된 패밀리명을 만들어 그 이름과 어긋나므로
-            여기서는 실제 패밀리명이 유지되는 방식으로 불러온다. */}
+        {/* 폰트는 next/font 를 쓰지 않는다.
+         * next/font 는 해시된 패밀리명(__DM_Sans_xxx)을 만들고 --font-sans 를 그 값으로
+         * 덮어쓴다. 그러면 tokens/typography.css 가 이름으로 참조하는 "DM Sans" 와
+         * 어긋나 파운데이션의 타이포 계약이 끊긴다.
+         * 실제 패밀리명이 유지되는 이 방식이라야 typography.css 의 --font-sans 가 그대로 산다. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
