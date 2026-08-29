@@ -15,7 +15,7 @@ import {
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
-import { CatalogShell } from "@/components/catalog-shell"
+import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
 import { Input } from "@/components/ui/input"
 
 const GROUPS = [
@@ -97,14 +97,12 @@ export default function BlocksIndex() {
 
   return (
     <CatalogShell>
-      <main className="mx-auto w-full max-w-5xl px-6 py-12">
-        <header className="mb-8">
-          <h1 className="text-2xl font-semibold">블록 {BLOCKS.length}개</h1>
-          <p className="text-muted-foreground mt-2 max-w-[62ch] text-sm">
+      <main className="mx-auto w-full max-w-[1200px] px-6 py-12 lg:px-10">
+        <CatalogHeader title="블록" count={`${BLOCKS.length}개`}>
             낱개 컴포넌트를 조립해 놓은 완성 화면이다. 하나가 한 화면이라 갤러리에
-            나란히 놓을 수 없어, 각각을 실제 라우트로 연다.
-          </p>
-        </header>
+            나란히 놓을 수 없어, 각각을 실제 라우트로 연다. 전부 우리 components/ui
+            를 참조하므로 컴포넌트를 고치면 블록도 따라 바뀐다.
+          </CatalogHeader>
 
         <div className="relative mb-8 max-w-sm">
           <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2" />
@@ -124,17 +122,13 @@ export default function BlocksIndex() {
 
         <div className="flex flex-col gap-10">
           {grouped.map(({ key, title, note, icon: Icon, items }) => (
-            <section key={key}>
-              <div className="mb-4 border-t pt-6">
-                <div className="flex items-center gap-2">
-                  <Icon className="size-4" />
-                  <h2 className="text-base font-semibold">{title}</h2>
-                  <span className="text-muted-foreground text-xs tabular-nums">
-                    {items.length}
-                  </span>
-                </div>
-                <p className="text-muted-foreground mt-1 text-sm">{note}</p>
-              </div>
+            <section key={key} id={key} className="scroll-mt-6">
+              <GroupHeader
+                title={title}
+                note={note}
+                count={items.length}
+                icon={Icon}
+              />
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
                 {items.map((b) => (
                   <Link

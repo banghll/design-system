@@ -3,7 +3,7 @@
  */
 "use client"
 
-import { CatalogShell } from "@/components/catalog-shell"
+import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
 
 import { AccountAccess as P0 } from "@/components/blocks/preview-02/cards/account-access"
 import { AlbumCard as P1 } from "@/components/blocks/preview-02/cards/album-card"
@@ -213,26 +213,12 @@ const ITEMS = [
 export default function PatternsPage() {
   return (
     <CatalogShell>
-    <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
-      <header className="mb-10">
-        <h1 className="text-2xl font-semibold">패턴 74개</h1>
-        <p className="text-muted-foreground mt-2 max-w-[62ch] text-sm">
+    <main className="mx-auto w-full max-w-[1200px] px-6 py-12 lg:px-10">
+      <CatalogHeader title="패턴" count="74개">
           preview 블록 세 개에 뭉쳐 있던 카드를 하나씩 떼어, 어느 파일에 있었는지가
-          아니라 <strong>언제 쓰는지</strong>로 묶었다. 각 카드는 그대로 복사해 쓸 수 있다.
-        </p>
-      </header>
-
-      <nav className="mb-10 flex flex-wrap gap-2">
-        {GROUPS.map(([key, title]) => (
-          <a
-            key={key}
-            href={`#${key}`}
-            className="rounded-full border px-3 py-1.5 text-xs"
-          >
-            {title} {ITEMS.filter((i) => i.group === key).length}
-          </a>
-        ))}
-      </nav>
+          아니라 언제 쓰는지로 묶었다. 각 카드는 그대로 복사해 쓸 수 있고,
+          전부 우리 components/ui 를 참조한다 — 컴포넌트를 고치면 여기도 바뀐다.
+        </CatalogHeader>
 
       <div className="flex flex-col gap-14">
         {GROUPS.map(([key, title, why]) => {
@@ -240,13 +226,7 @@ export default function PatternsPage() {
           if (!items.length) return null
           return (
             <section key={key} id={key} className="scroll-mt-6">
-              <div className="mb-6 border-t pt-6">
-                <div className="flex items-baseline gap-3">
-                  <h2 className="text-lg font-semibold">{title}</h2>
-                  <span className="text-muted-foreground text-xs">{items.length}개</span>
-                </div>
-                <p className="text-muted-foreground mt-1 max-w-[60ch] text-sm">{why}</p>
-              </div>
+              <GroupHeader title={title} note={why} count={items.length} />
 
               <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                 {items.map(({ id, title, note, src, Comp }) => (

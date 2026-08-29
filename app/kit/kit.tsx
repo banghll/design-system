@@ -2,6 +2,8 @@
  * data-kit 은 Paper 추출기가 잡는 표시다 — 갤러리와 추출 지그를 겸한다. */
 "use client"
 
+import { GroupHeader } from "@/components/catalog-shell"
+
 export function Kit({
   id,
   note,
@@ -46,13 +48,7 @@ export function Group({
 }) {
   return (
     <section id={id} className="scroll-mt-16">
-      <div
-        className="mb-6 border-t pt-8"
-        style={{ borderColor: "var(--color-border)" }}
-      >
-        <h2 className="text-heading-md">{title}</h2>
-        <p className="text-body-sm text-subtle mt-1">{note}</p>
-      </div>
+      <GroupHeader title={title} note={note} />
       <div className="flex flex-col gap-8">{children}</div>
     </section>
   )
