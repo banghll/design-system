@@ -3,6 +3,8 @@
  */
 "use client"
 
+import { CatalogShell } from "@/components/catalog-shell"
+
 import { AccountAccess as P0 } from "@/components/blocks/preview-02/cards/account-access"
 import { AlbumCard as P1 } from "@/components/blocks/preview-02/cards/album-card"
 import { CardOverview as P2 } from "@/components/blocks/preview-02/cards/card-overview"
@@ -210,6 +212,7 @@ const ITEMS = [
 
 export default function PatternsPage() {
   return (
+    <CatalogShell>
     <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
       <header className="mb-10">
         <h1 className="text-2xl font-semibold">패턴 74개</h1>
@@ -269,5 +272,6 @@ export default function PatternsPage() {
         })}
       </div>
     </main>
+    </CatalogShell>
   )
 }

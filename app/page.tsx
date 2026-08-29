@@ -1,8 +1,12 @@
+"use client"
+
 /* slate-ui · surface: 디자인 시스템 인덱스 · focus: 토큰→컴포넌트 연결 고리 · states: n/a (정적 문서)
  * tokens: --color-* · .text-* (파운데이션은 색·타이포만 준다)
  * spec: none · gates: 0 fail · self: C5 H4 S3 R4 D5 P3
  */
 import Link from "next/link"
+
+import { CatalogShell } from "@/components/catalog-shell"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -117,6 +121,7 @@ function Section({
 
 export default function Home() {
   return (
+    <CatalogShell>
     <main
       className="mx-auto w-full"
       style={{
@@ -306,5 +311,6 @@ export default function Home() {
         </Card>
       </Section>
     </main>
+    </CatalogShell>
   )
 }

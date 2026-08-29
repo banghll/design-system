@@ -38,6 +38,8 @@ const page = `/* 공식 예제 카탈로그 — scripts/gen-examples.mjs 가 생
  */
 "use client"
 
+import { CatalogShell } from "@/components/catalog-shell"
+
 ${imports}
 
 const ITEMS = [
@@ -46,6 +48,7 @@ ${items}
 
 export default function ExamplesPage() {
   return (
+    <CatalogShell>
     <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
       <header className="mb-8">
         <h1 className="text-2xl font-semibold">공식 예제 ${entries.length + SOLO.length}개</h1>
@@ -88,6 +91,7 @@ ${soloLinks}
         ))}
       </div>
     </main>
+    </CatalogShell>
   )
 }
 `

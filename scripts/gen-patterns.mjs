@@ -144,6 +144,8 @@ const page = `/* 패턴 카탈로그 — scripts/gen-patterns.mjs 가 생성한�
  */
 "use client"
 
+import { CatalogShell } from "@/components/catalog-shell"
+
 ${imports}
 
 const GROUPS: [string, string, string][] = ${JSON.stringify(GROUPS, null, 2)}
@@ -154,6 +156,7 @@ ${items}
 
 export default function PatternsPage() {
   return (
+    <CatalogShell>
     <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
       <header className="mb-10">
         <h1 className="text-2xl font-semibold">패턴 ${all.length}개</h1>
@@ -213,6 +216,7 @@ export default function PatternsPage() {
         })}
       </div>
     </main>
+    </CatalogShell>
   )
 }
 `

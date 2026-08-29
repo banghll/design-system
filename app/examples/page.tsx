@@ -4,6 +4,8 @@
  */
 "use client"
 
+import { CatalogShell } from "@/components/catalog-shell"
+
 import E0 from "@/components/examples/accordion-example"
 import E1 from "@/components/examples/alert-dialog-example"
 import E2 from "@/components/examples/alert-example"
@@ -130,6 +132,7 @@ const ITEMS = [
 
 export default function ExamplesPage() {
   return (
+    <CatalogShell>
     <main className="mx-auto w-full max-w-[1400px] px-6 py-12">
       <header className="mb-8">
         <h1 className="text-2xl font-semibold">공식 예제 64개</h1>
@@ -175,5 +178,6 @@ export default function ExamplesPage() {
         ))}
       </div>
     </main>
+    </CatalogShell>
   )
 }
