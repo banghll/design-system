@@ -1,0 +1,13 @@
+/* slate design system — layout
+ * tokens/layout.tokens.json 에서 생성. 직접 수정 금지.
+ * 앱쉘(사이드 패널+툴바) 전용 고정 치수. primitive/semantic 구분 없는 flat 토큰이다.
+ * "언제 구조를 바꾸는가"는 breakpoint 가, "얼마나 넓은가"는 여기가 답한다. */
+
+:root {
+  --layout-container-max: 1200px; /* 문서형 페이지 콘텐츠의 최대 너비 */
+  --layout-panel-width: 320px; /* 좌측 패널의 펼쳐진 상태 고정 너비 */
+  --layout-panel-width-collapsed: 64px; /* 좌측 패널이 접혔을 때(아이콘 레일)의 고정 너비 */
+  --layout-toolbar-height: 56px; /* 상단 툴바의 고정 높이 */
+  --layout-viewport-min-height: 600px; /* 앱쉘 레이아웃이 깨지지 않는 최소 뷰포트 높이 */
+  --layout-card-min-width: 240px; /* 갤러리형 카드 그리드의 카드 최소 폭 */
+}

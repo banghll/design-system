@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "tw-shimmer";
+@import "../tokens/index.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-2xl); /* slate 에 3xl 없음 — 2xl 로 접음 */
+  --radius-4xl: var(--radius-2xl); /* slate 에 4xl 없음 — 2xl 로 접음 */
+  @keyframes collapsible-down {
+  from {
+    height: 0;
+    }
+  to {
+    height: var(--radix-collapsible-content-height, var(--collapsible-panel-height, auto));
+    }
+  }
+  @keyframes collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height, var(--collapsible-panel-height, auto));
+    }
+  to {
+    height: 0;
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * slate ↔ shadcn 브리지
+ *
+ * shadcn/ui 와 ai-elements 의 모든 컴포넌트는 아래 왼쪽 이름만 참조한다.
+ * 그 값은 전부 slate 파운데이션의 Semantic 토큰을 가리킨다.
+ * 여기가 두 시스템이 만나는 유일한 지점이다 — 리터럴 값은 한 개도 없다.
+ *
+ * slate 는 다크 전용이다. `.dark` 분기를 두지 않고 :root 값이 곧 다크값이다.
+ * ───────────────────────────────────────────────────────────── */
+:root {
+  /* 표면 */
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
+  --card: var(--color-card);
+  --card-foreground: var(--color-foreground);
+  --popover: var(--color-card-alt);
+  --popover-foreground: var(--color-foreground);
+
+  /* 액션 */
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-static-white);
+  --secondary: var(--color-fill);
+  --secondary-foreground: var(--color-foreground);
+  --accent: var(--color-fill);
+  --accent-foreground: var(--color-foreground-strong);
+  --destructive: var(--color-destructive);
+  --destructive-foreground: var(--color-static-white);
+
+  /* 보조 텍스트 / 흐린 면 */
+  --muted: var(--color-fill-subtle);
+  --muted-foreground: var(--color-muted-foreground);
+
+  /* 선 */
+  --border: var(--color-border);
+  --input: var(--color-border);
+  --ring: var(--color-primary);
+
+  /* 차트 — slate Accent 팔레트 순서대로 */
+  --chart-1: var(--color-accent-blue);
+  --chart-2: var(--color-accent-violet);
+  --chart-3: var(--color-accent-cyan);
+  --chart-4: var(--color-accent-lime);
+  --chart-5: var(--color-accent-orange);
+
+  /* 사이드바 */
+  --sidebar: var(--color-background-alt);
+  --sidebar-foreground: var(--color-foreground);
+  --sidebar-primary: var(--color-primary);
+  --sidebar-primary-foreground: var(--color-static-white);
+  --sidebar-accent: var(--color-fill);
+  --sidebar-accent-foreground: var(--color-foreground-strong);
+  --sidebar-border: var(--color-border-subtle);
+  --sidebar-ring: var(--color-primary);
+
+  /* shadcn 은 radius 를 한 개의 기준값에서 파생시킨다. slate 의 md(10px)를 기준으로 둔다. */
+  --radius: var(--radius-md);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@custom-variant data-open (&:where([data-state="open"], [data-open]:not([data-open="false"])));
+
+@custom-variant data-closed (&:where([data-state="closed"], [data-closed]:not([data-closed="false"])));

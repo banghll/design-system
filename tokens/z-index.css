@@ -1,0 +1,22 @@
+/* slate design system — z-index
+ * tokens/z-index.tokens.json 에서 생성. 직접 수정 금지.
+ * 100 단위 스케일. 임의의 z-index 숫자를 쓰지 말고 항상 이 토큰을 참조한다. */
+
+:root {
+  /* UI 쌓임 순서의 기본값. */
+  --z-base: 0;
+  /* Select, Input 드롭다운, 컨텍스트 메뉴 등 사용자 인터랙션으로 열리는 플로팅 목록에 사용합니다. */
+  --z-dropdown: 100;
+  /* 고정 헤더, Left Panel, 사이드바 등 스크롤 시에도 화면에 고정되는 요소에 사용합니다. */
+  --z-sticky: 200;
+  /* 딤(bg/tint/overlay) 배경 레이어에 사용합니다. */
+  --z-overlay: 300;
+  /* Dialog, 확인창 등 사용자의 주의를 집중시키는 모달 컨테이너에 사용합니다. */
+  --z-modal: 400;
+  /* Popover, Tooltip trigger 등 모달 위에도 표시될 수 있는 부가 정보 요소에 사용합니다. */
+  --z-popover: 500;
+  /* Toast 알림 메시지에 사용합니다. */
+  --z-toast: 600;
+  /* Tooltip 등 최상위 정보 레이어에 사용합니다. */
+  --z-tooltip: 700;
+}

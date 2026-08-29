@@ -1,0 +1,15 @@
+/* slate design system — 전체 토큰.
+ * 필요한 카테고리만 골라 import 해도 된다.
+ * 다크 테마만 지원 — 별도 모드 전환 없이 :root 값이 곧 다크 값이다. */
+
+@import "./typography.css";
+@import "./spacing.css";
+@import "./breakpoint.css";
+@import "./layout.css";
+@import "./component-height.css";
+@import "./radius.css";
+@import "./icon.css";
+@import "./z-index.css";
+@import "./motion.css";
+@import "./color.css";
+@import "./elevation.css";

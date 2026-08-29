@@ -1,0 +1,38 @@
+/* slate design system — spacing
+ * tokens/spacing.tokens.json 에서 생성. 직접 수정 금지.
+ * Figma 오토레이아웃의 gap / padding 속성에 바인딩되는 두 스케일이다.
+ * 이름의 숫자가 곧 px 값이다 (--gap-40 = 40px). 인덱스가 아니다.
+ * 레이아웃 치수라 rem 이 아닌 px 로 출력한다. */
+
+:root {
+  /* gap — 요소 간 간격 (itemSpacing, counterAxisSpacing) */
+  --gap-2: 2px; /* 미세 요소 간격 */
+  --gap-4: 4px; /* 아이콘-텍스트 간격 */
+  --gap-6: 6px; /* 기본 요소 간격 */
+  --gap-8: 8px; /* 인라인 요소 간격 */
+  --gap-10: 10px; /* 리스트 아이템 간격 */
+  --gap-12: 12px; /* 카드 내부 간격 */
+  --gap-16: 16px; /* 섹션 내부 그룹 간격 */
+  --gap-20: 20px; /* 블록 요소 간격 */
+  --gap-24: 24px; /* 컨트롤 그룹 간격 */
+  --gap-40: 40px; /* 섹션 간 대형 간격 */
+  --gap-44: 44px; /* 컨텐츠 블록 분리 */
+
+  /* padding — 컨테이너 내부 여백 */
+  --padding-1: 1px; /* 미세 내부 여백 */
+  --padding-2: 2px; /* 초소 여백, 아이콘 여백 */
+  --padding-3: 3px; /* 소형 요소 내부 여백 */
+  --padding-4: 4px; /* Tag, Badge, 아이콘 컨테이너 */
+  --padding-6: 6px; /* 기본 컴포넌트 여백 */
+  --padding-7: 7px; /* 미디엄 변형 여백 */
+  --padding-8: 8px; /* Button, Input 내부 여백 */
+  --padding-9: 9px; /* 베이스 변형 여백 */
+  --padding-10: 10px; /* 카드, 리스트 아이템 여백 */
+  --padding-12: 12px; /* 카드, 패널 내부 여백 */
+  --padding-14: 14px; /* 대형 변형 여백 */
+  --padding-15: 15px; /* 컨테이너 여백 */
+  --padding-16: 16px; /* 섹션 헤더, 대형 컨테이너 */
+  --padding-20: 20px; /* Dialog, Modal 여백 */
+  --padding-24: 24px; /* 페이지 레벨 여백 */
+  --padding-48: 48px; /* 히어로, 풀 섹션 여백 */
+}

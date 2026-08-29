@@ -1,0 +1,14 @@
+/* slate design system — radius
+ * tokens/radius.tokens.json 에서 생성. 직접 수정 금지.
+ * radius 는 글자 크기와 무관한 물리적 모서리 크기라 rem 이 아닌 px 로 출력한다. */
+
+:root {
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 1000px;
+}

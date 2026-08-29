@@ -1,0 +1,14 @@
+/* slate design system — elevation (shadow)
+ * Figma "elevation/*" Effect Style에서 직접 이식. 손으로 관리.
+ * Effect Style은 Figma Variable이 아니라서 다른 카테고리처럼 *.tokens.json(DTCG) 소스를
+ * 만들 수 없다 — Variable 전용 필드(codeSyntax 등)가 Effect Style에는 없다.
+ * 각 값의 Purpose/Usage/Do not use는 Figma Effect Style description 참고.
+ * 컴포넌트는 이 5개 중 하나만 참조한다 — 크기(sm/md/lg)가 아니라 의도(intent) 기반 네이밍. */
+
+:root {
+  --shadow-subtle: 0 1px 2px 0 hsl(0 0% 0% / 8%);
+  --shadow-raised: 0 2px 6px 0 hsl(0 0% 0% / 6%), 0 0 2px 0 hsl(0 0% 0% / 8%);
+  --shadow-floating: 0 4px 12px 0 hsl(0 0% 0% / 8%), 0 0 2px 0 hsl(0 0% 0% / 10%);
+  --shadow-overlay: 0 12px 24px 0 hsl(0 0% 0% / 8%), 0 2px 6px 0 hsl(0 0% 0% / 6%), 0 0 2px 0 hsl(0 0% 0% / 12%);
+  --shadow-supreme: 0 24px 48px 0 hsl(0 0% 0% / 8%), 0 4px 10px 0 hsl(0 0% 0% / 5%), 0 0 2px 0 hsl(0 0% 0% / 14%);
+}

@@ -1,0 +1,60 @@
+/* slate design system — motion
+ * tokens/motion.tokens.json 에서 생성. 직접 수정 금지.
+ * 컴포넌트는 primitive(--duration-*, --ease-*)가 아니라
+ * semantic(--motion-*)을 참조한다:
+ *   transition: opacity var(--motion-enter-duration) var(--motion-enter-easing); */
+
+:root {
+  /* duration — primitive */
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+
+  /* easing — primitive */
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* motion — semantic. 컴포넌트는 여기만 참조한다. */
+
+  /* 버튼 press, 토글 전환, 체크박스 체크 등 사용자 입력에 대한 즉각적 시각 피드백에 사용하는 duration. */
+  --motion-feedback-duration: var(--duration-fast);
+  --motion-feedback-easing: var(--ease-out);
+
+  /* Tooltip, Dropdown, Popover, Snackbar 등 소형 UI 요소가 화면에 나타날 때 사용하는 duration. */
+  --motion-enter-duration: var(--duration-base);
+  --motion-enter-easing: var(--ease-out);
+
+  /* Tooltip, Dropdown, Popover, Snackbar 등 소형 UI 요소가 화면에서 사라질 때 사용하는 duration. */
+  --motion-exit-duration: var(--duration-fast);
+  --motion-exit-easing: var(--ease-in);
+
+  /* Modal, Dialog, Bottom Sheet, Full-screen Overlay 등 대형 UI 요소가 화면에 나타날 때 사용하는 duration. */
+  --motion-enter-lg-duration: var(--duration-slow);
+  --motion-enter-lg-easing: var(--ease-out);
+
+  /* Modal, Dialog, Bottom Sheet, Full-screen Overlay 등 대형 UI 요소가 화면에서 사라질 때 사용하는 duration. */
+  --motion-exit-lg-duration: var(--duration-base);
+  --motion-exit-lg-easing: var(--ease-in);
+
+  /* 리스트 아이템 재정렬, 드래그 앤 드롭, 위치 이동 등 요소가 한 위치에서 다른 위치로 이동할 때 사용하는 duration. */
+  --motion-move-duration: var(--duration-base);
+  --motion-move-easing: var(--ease-in-out);
+
+  /* Accordion 펼침/접힘, 패널 크기 조절, 확장/축소 등 요소의 크기가 변할 때 사용하는 duration. */
+  --motion-resize-duration: var(--duration-slow);
+  --motion-resize-easing: var(--ease-in-out);
+
+  /* 페이지 전환, 탭 전환, 라우팅 등 전체 뷰가 교체될 때 사용하는 duration. */
+  --motion-view-duration: var(--duration-slower);
+  --motion-view-easing: var(--ease-out);
+
+  /* Spinner, Progress bar, 무한 스크롤 로딩 등 시작과 끝이 없는 반복 애니메이션에 사용하는 easing. */
+  --motion-continuous-easing: var(--ease-linear);
+
+  /* 애니메이션을 의도적으로 비활성화할 때 사용하는 duration. */
+  --motion-none-duration: var(--duration-instant);
+}

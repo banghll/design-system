@@ -1,0 +1,421 @@
+/* slate design system — color
+ * ⚠️ 빌드 생성물이 아니다. tokens/color.tokens.json 과 짝을 이루지만 손으로 관리한다 —
+ * DTCG 소스는 Figma 원본 경로(primitive.* / semantic.*)를 쓰는데 CSS 변수명은 팀이 다시 붙인
+ * 이름이라 기계적으로 유도되지 않는다. 자세한 사정은 tokens/README.md 5장.
+ * 값을 고칠 때는 color.tokens.json 과 이 파일을 함께 고쳐야 한다 — `npm run check` 가 둘의 일치를 검사한다.
+ * 컴포넌트는 primitive(--color-{hue}-{step})가 아니라 semantic(--color-*)을 참조한다.
+ * 다크 테마만 지원 — .dark 분기 없음, :root 값이 곧 다크 값이다. */
+
+:root {
+  /* ---------- primitive ---------- */
+  --color-white: hsl(0 0% 100%);
+  --color-black: hsl(0 0% 0%);
+
+  /* cool-neutral */
+  --color-cool-neutral-100: hsl(0 0% 100%);
+  --color-cool-neutral-99: hsl(240 7% 97%);
+  --color-cool-neutral-98: hsl(240 5% 96%);
+  --color-cool-neutral-97: hsl(210 5% 92%);
+  --color-cool-neutral-96: hsl(220 5% 89%);
+  --color-cool-neutral-95: hsl(225 6% 87%);
+  --color-cool-neutral-90: hsl(220 5% 77%);
+  --color-cool-neutral-80: hsl(225 5% 70%);
+  --color-cool-neutral-70: hsl(222 5% 62%);
+  --color-cool-neutral-60: hsl(225 5% 55%);
+  --color-cool-neutral-50: hsl(225 5% 46%);
+  --color-cool-neutral-40: hsl(227 5% 37%);
+  --color-cool-neutral-30: hsl(230 4% 29%);
+  --color-cool-neutral-25: hsl(228 4% 23%);
+  --color-cool-neutral-23: hsl(228 5% 21%);
+  --color-cool-neutral-22: hsl(228 5% 19%);
+  --color-cool-neutral-20: hsl(225 5% 17%);
+  --color-cool-neutral-17: hsl(225 6% 14%);
+  --color-cool-neutral-15: hsl(220 5% 11%);
+  --color-cool-neutral-10: hsl(240 4% 9%);
+  --color-cool-neutral-7: hsl(240 2% 8%);
+  --color-cool-neutral-5: hsl(240 3% 6%);
+  --color-cool-neutral-0: hsl(0 0% 0%);
+
+  /* neutral */
+  --color-neutral-100: hsl(0 0% 100%);
+  --color-neutral-99: hsl(0 0% 97%);
+  --color-neutral-95: hsl(0 0% 86%);
+  --color-neutral-90: hsl(0 0% 77%);
+  --color-neutral-80: hsl(0 0% 69%);
+  --color-neutral-70: hsl(0 0% 61%);
+  --color-neutral-60: hsl(0 0% 54%);
+  --color-neutral-50: hsl(0 0% 45%);
+  --color-neutral-40: hsl(0 0% 36%);
+  --color-neutral-30: hsl(0 0% 28%);
+  --color-neutral-22: hsl(0 0% 19%);
+  --color-neutral-20: hsl(0 0% 16%);
+  --color-neutral-15: hsl(0 0% 11%);
+  --color-neutral-10: hsl(0 0% 9%);
+  --color-neutral-5: hsl(0 0% 6%);
+  --color-neutral-0: hsl(0 0% 0%);
+
+  /* blue */
+  --color-blue-100: hsl(0 0% 100%);
+  --color-blue-99: hsl(210 100% 98%);
+  --color-blue-95: hsl(216 91% 96%);
+  --color-blue-90: hsl(216 96% 89%);
+  --color-blue-80: hsl(216 100% 81%);
+  --color-blue-70: hsl(216 100% 71%);
+  --color-blue-65: hsl(216 100% 65%);
+  --color-blue-60: hsl(216 100% 60%);
+  --color-blue-55: hsl(216 100% 55%);
+  --color-blue-50: hsl(216 100% 50%);
+  --color-blue-45: hsl(216 100% 46%);
+  --color-blue-40: hsl(216 100% 41%);
+  --color-blue-30: hsl(216 100% 31%);
+  --color-blue-20: hsl(216 100% 20%);
+  --color-blue-10: hsl(217 100% 11%);
+  --color-blue-0: hsl(0 0% 0%);
+
+  /* red */
+  --color-red-100: hsl(0 0% 100%);
+  --color-red-99: hsl(0 100% 99%);
+  --color-red-95: hsl(0 90% 96%);
+  --color-red-90: hsl(0 95% 92%);
+  --color-red-80: hsl(0 100% 85%);
+  --color-red-70: hsl(0 100% 77%);
+  --color-red-60: hsl(0 100% 69%);
+  --color-red-50: hsl(0 100% 63%);
+  --color-red-40: hsl(0 79% 52%);
+  --color-red-30: hsl(0 87% 37%);
+  --color-red-20: hsl(0 95% 23%);
+  --color-red-10: hsl(0 97% 12%);
+  --color-red-0: hsl(0 0% 0%);
+
+  /* green */
+  --color-green-100: hsl(0 0% 100%);
+  --color-green-99: hsl(138 100% 97%);
+  --color-green-95: hsl(141 100% 93%);
+  --color-green-90: hsl(140 93% 83%);
+  --color-green-80: hsl(140 86% 73%);
+  --color-green-70: hsl(140 75% 59%);
+  --color-green-60: hsl(140 75% 47%);
+  --color-green-50: hsl(140 100% 37%);
+  --color-green-40: hsl(140 100% 29%);
+  --color-green-30: hsl(140 100% 22%);
+  --color-green-20: hsl(140 100% 14%);
+  --color-green-10: hsl(140 100% 7%);
+  --color-green-0: hsl(0 0% 0%);
+
+  /* orange */
+  --color-orange-100: hsl(0 0% 100%);
+  --color-orange-99: hsl(38 100% 98%);
+  --color-orange-95: hsl(35 92% 95%);
+  --color-orange-90: hsl(34 97% 89%);
+  --color-orange-80: hsl(34 100% 81%);
+  --color-orange-70: hsl(34 100% 72%);
+  --color-orange-60: hsl(34 100% 61%);
+  --color-orange-50: hsl(34 100% 50%);
+  --color-orange-40: hsl(34 100% 42%);
+  --color-orange-39: hsl(34 100% 41%);
+  --color-orange-30: hsl(34 100% 31%);
+  --color-orange-20: hsl(34 100% 20%);
+  --color-orange-10: hsl(33 100% 11%);
+  --color-orange-0: hsl(0 0% 0%);
+
+  /* red-orange */
+  --color-red-orange-100: hsl(0 0% 100%);
+  --color-red-orange-99: hsl(22 100% 98%);
+  --color-red-orange-95: hsl(22 93% 95%);
+  --color-red-orange-90: hsl(22 97% 88%);
+  --color-red-orange-80: hsl(22 100% 79%);
+  --color-red-orange-70: hsl(22 100% 69%);
+  --color-red-orange-60: hsl(22 100% 59%);
+  --color-red-orange-50: hsl(22 100% 50%);
+  --color-red-orange-48: hsl(22 100% 48%);
+  --color-red-orange-40: hsl(22 100% 39%);
+  --color-red-orange-30: hsl(22 100% 28%);
+  --color-red-orange-20: hsl(22 100% 17%);
+  --color-red-orange-10: hsl(22 100% 8%);
+  --color-red-orange-0: hsl(0 0% 0%);
+
+  /* lime */
+  --color-lime-100: hsl(0 0% 100%);
+  --color-lime-99: hsl(92 100% 97%);
+  --color-lime-95: hsl(95 100% 92%);
+  --color-lime-90: hsl(95 93% 83%);
+  --color-lime-80: hsl(95 89% 72%);
+  --color-lime-70: hsl(95 86% 59%);
+  --color-lime-60: hsl(95 82% 48%);
+  --color-lime-50: hsl(95 96% 41%);
+  --color-lime-40: hsl(95 100% 34%);
+  --color-lime-37: hsl(95 100% 31%);
+  --color-lime-30: hsl(95 100% 25%);
+  --color-lime-20: hsl(95 100% 16%);
+  --color-lime-10: hsl(95 100% 8%);
+  --color-lime-0: hsl(0 0% 0%);
+
+  /* cyan */
+  --color-cyan-100: hsl(0 0% 100%);
+  --color-cyan-99: hsl(188 100% 98%);
+  --color-cyan-95: hsl(189 100% 94%);
+  --color-cyan-90: hsl(189 100% 85%);
+  --color-cyan-80: hsl(189 100% 77%);
+  --color-cyan-70: hsl(189 91% 65%);
+  --color-cyan-60: hsl(189 85% 54%);
+  --color-cyan-50: hsl(189 100% 44%);
+  --color-cyan-40: hsl(189 100% 35%);
+  --color-cyan-30: hsl(189 100% 25%);
+  --color-cyan-20: hsl(189 100% 16%);
+  --color-cyan-10: hsl(188 100% 8%);
+  --color-cyan-0: hsl(0 0% 0%);
+
+  /* light-blue */
+  --color-light-blue-100: hsl(0 0% 100%);
+  --color-light-blue-99: hsl(195 100% 98%);
+  --color-light-blue-95: hsl(199 93% 95%);
+  --color-light-blue-90: hsl(199 97% 88%);
+  --color-light-blue-80: hsl(199 100% 82%);
+  --color-light-blue-70: hsl(199 100% 72%);
+  --color-light-blue-60: hsl(199 100% 62%);
+  --color-light-blue-50: hsl(199 100% 50%);
+  --color-light-blue-40: hsl(199 100% 41%);
+  --color-light-blue-30: hsl(199 100% 29%);
+  --color-light-blue-20: hsl(199 100% 19%);
+  --color-light-blue-10: hsl(199 100% 9%);
+  --color-light-blue-0: hsl(0 0% 0%);
+
+  /* violet */
+  --color-violet-100: hsl(0 0% 100%);
+  --color-violet-99: hsl(252 100% 99%);
+  --color-violet-95: hsl(253 90% 96%);
+  --color-violet-90: hsl(251 96% 91%);
+  --color-violet-80: hsl(252 100% 85%);
+  --color-violet-70: hsl(252 95% 76%);
+  --color-violet-60: hsl(252 91% 67%);
+  --color-violet-50: hsl(252 87% 60%);
+  --color-violet-45: hsl(252 83% 57%);
+  --color-violet-40: hsl(252 78% 53%);
+  --color-violet-30: hsl(252 80% 44%);
+  --color-violet-20: hsl(252 88% 30%);
+  --color-violet-10: hsl(252 95% 15%);
+  --color-violet-0: hsl(0 0% 0%);
+
+  /* purple */
+  --color-purple-100: hsl(0 0% 100%);
+  --color-purple-99: hsl(285 100% 99%);
+  --color-purple-95: hsl(280 100% 96%);
+  --color-purple-90: hsl(281 100% 92%);
+  --color-purple-80: hsl(281 100% 86%);
+  --color-purple-70: hsl(281 100% 79%);
+  --color-purple-60: hsl(281 100% 74%);
+  --color-purple-50: hsl(281 100% 67%);
+  --color-purple-40: hsl(281 76% 55%);
+  --color-purple-30: hsl(281 74% 42%);
+  --color-purple-20: hsl(281 85% 26%);
+  --color-purple-10: hsl(274 95% 14%);
+  --color-purple-0: hsl(0 0% 0%);
+
+  /* pink */
+  --color-pink-100: hsl(0 0% 100%);
+  --color-pink-99: hsl(312 100% 99%);
+  --color-pink-95: hsl(310 90% 96%);
+  --color-pink-90: hsl(310 96% 91%);
+  --color-pink-80: hsl(310 100% 86%);
+  --color-pink-70: hsl(310 100% 79%);
+  --color-pink-60: hsl(310 93% 72%);
+  --color-pink-50: hsl(310 89% 64%);
+  --color-pink-46: hsl(310 78% 59%);
+  --color-pink-40: hsl(310 65% 51%);
+  --color-pink-30: hsl(310 77% 37%);
+  --color-pink-20: hsl(310 92% 24%);
+  --color-pink-10: hsl(310 97% 12%);
+  --color-pink-0: hsl(0 0% 0%);
+
+  /* ---------- semantic. 컴포넌트는 여기만 참조한다. ---------- */
+
+  /* Label/Strong */
+  --color-foreground-strong: var(--color-white);
+
+  /* Label/Normal */
+  --color-foreground: var(--color-cool-neutral-99);
+
+  /* Label/Neutral (반투명) */
+  --color-foreground-subtle: hsl(220 5% 77% / 88%);
+
+  /* Label/Alternative (반투명) */
+  --color-muted-foreground: hsl(225 5% 70% / 60%);
+
+  /* Label/Assistive (반투명) */
+  --color-muted-foreground-subtle: hsl(225 5% 70% / 28%);
+
+  /* Label/Disable (반투명) */
+  --color-foreground-disabled: hsl(222 5% 62% / 16%);
+
+  /* Line/Normal/_Strong (반투명) */
+  --color-border-strong: hsl(220 5% 77% / 52%);
+
+  /* Line/Normal/Normal (반투명) */
+  --color-line: hsl(225 5% 46% / 32%);
+
+  /* Line/Normal/Neutral (반투명) */
+  --color-line-subtle: hsl(225 5% 46% / 28%);
+
+  /* Line/Normal/Alternative (반투명) */
+  --color-line-faint: hsl(225 5% 46% / 24%);
+
+  /* Line/Solid/Normal */
+  --color-border: var(--color-cool-neutral-25);
+
+  /* Line/Solid/Neutral */
+  --color-border-subtle: var(--color-cool-neutral-23);
+
+  /* Line/Solid/Alternative */
+  --color-border-faint: var(--color-cool-neutral-22);
+
+  /* Primary/Normal */
+  --color-primary: var(--color-blue-60);
+
+  /* Primary/Strong */
+  --color-primary-hover: var(--color-blue-55);
+
+  /* Primary/Heavy */
+  --color-primary-active: var(--color-blue-50);
+
+  /* Background/Normal/Normal */
+  --color-background: var(--color-cool-neutral-15);
+
+  /* Background/Normal/Alternative */
+  --color-background-alt: var(--color-cool-neutral-5);
+
+  /* Background/Elevated/Normal */
+  --color-card: var(--color-cool-neutral-17);
+
+  /* Background/Elevated/Alternative */
+  --color-card-alt: var(--color-cool-neutral-7);
+
+  /* Background/Transparent/Normal (반투명) */
+  --color-overlay: hsl(225 6% 14% / 60%);
+
+  /* Background/Transparent/Alternative (반투명) */
+  --color-overlay-alt: hsl(225 6% 14% / 60%);
+
+  /* Interaction/Inactive */
+  --color-interaction-inactive: var(--color-cool-neutral-40);
+
+  /* Interaction/Disable */
+  --color-interaction-disabled: var(--color-cool-neutral-22);
+
+  /* Status/Info/Default */
+  --color-info: var(--color-blue-65);
+
+  /* Status/Info/Background */
+  --color-info-bg: var(--color-blue-20);
+
+  /* Status/Info/Label */
+  --color-info-foreground: var(--color-blue-65);
+
+  /* Status/Positive/Default */
+  --color-success: var(--color-green-60);
+
+  /* Status/Positive/Background */
+  --color-success-bg: var(--color-green-20);
+
+  /* Status/Positive/Label */
+  --color-success-foreground: var(--color-green-60);
+
+  /* Status/Cautionary/Default */
+  --color-warning: var(--color-orange-60);
+
+  /* Status/Cautionary/Background */
+  --color-warning-bg: var(--color-orange-20);
+
+  /* Status/Cautionary/Label */
+  --color-warning-foreground: var(--color-orange-60);
+
+  /* Status/Negative/Default */
+  --color-destructive: var(--color-red-60);
+
+  /* Status/Negative/Background */
+  --color-destructive-bg: var(--color-red-20);
+
+  /* Status/Negative/Label */
+  --color-destructive-foreground: var(--color-red-60);
+
+  /* Accent/Background/Red Orange */
+  --color-accent-red-orange-bg: var(--color-red-orange-60);
+
+  /* Accent/Background/Lime */
+  --color-accent-lime-bg: var(--color-lime-60);
+
+  /* Accent/Background/Cyan */
+  --color-accent-cyan-bg: var(--color-cyan-60);
+
+  /* Accent/Background/Light Blue */
+  --color-accent-light-blue-bg: var(--color-light-blue-60);
+
+  /* Accent/Background/Violet */
+  --color-accent-violet-bg: var(--color-violet-60);
+
+  /* Accent/Background/Purple */
+  --color-accent-purple-bg: var(--color-purple-60);
+
+  /* Accent/Background/Pink */
+  --color-accent-pink-bg: var(--color-pink-60);
+
+  /* Accent/Foreground/Red */
+  --color-accent-red: var(--color-red-60);
+
+  /* Accent/Foreground/Red Orange */
+  --color-accent-red-orange: var(--color-red-orange-60);
+
+  /* Accent/Foreground/Orange */
+  --color-accent-orange: var(--color-orange-60);
+
+  /* Accent/Foreground/Lime */
+  --color-accent-lime: var(--color-lime-60);
+
+  /* Accent/Foreground/Green */
+  --color-accent-green: var(--color-green-60);
+
+  /* Accent/Foreground/Cyan */
+  --color-accent-cyan: var(--color-cyan-60);
+
+  /* Accent/Foreground/Light Blue */
+  --color-accent-light-blue: var(--color-light-blue-60);
+
+  /* Accent/Foreground/Blue */
+  --color-accent-blue: var(--color-blue-65);
+
+  /* Accent/Foreground/Violet */
+  --color-accent-violet: var(--color-violet-70);
+
+  /* Accent/Foreground/Purple */
+  --color-accent-purple: var(--color-purple-60);
+
+  /* Accent/Foreground/Pink */
+  --color-accent-pink: var(--color-pink-60);
+
+  /* Inverse/Primary */
+  --color-inverse-primary: var(--color-blue-50);
+
+  /* Inverse/Background */
+  --color-inverse-background: var(--color-white);
+
+  /* Inverse/Label */
+  --color-inverse-foreground: var(--color-cool-neutral-10);
+
+  /* Static/White */
+  --color-static-white: var(--color-white);
+
+  /* Static/Black */
+  --color-static-black: var(--color-black);
+
+  /* Fill/Normal (반투명) */
+  --color-fill: hsl(225 5% 46% / 24%);
+
+  /* Fill/Strong (반투명) */
+  --color-fill-strong: hsl(225 5% 46% / 28%);
+
+  /* Fill/Alternative (반투명) */
+  --color-fill-subtle: hsl(225 5% 46% / 12%);
+
+  /* Material/Dimmer (반투명) */
+  --color-scrim: hsl(240 4% 9% / 76%);
+
+}

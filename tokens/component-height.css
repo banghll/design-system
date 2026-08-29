@@ -1,0 +1,11 @@
+/* slate design system — component height
+ * tokens/component-height.tokens.json 에서 생성. 직접 수정 금지.
+ * 폼 컨트롤의 고정 높이 스케일. Figma 의 Size 축(32 · 40 · 48)이 여기 바인딩된다.
+ * 컨트롤 안쪽은 세로 가운데 정렬로 채운다 — 높이에서 역산한 여백은 토큰이 아니다.
+ * 글자 크기와 무관한 물리적 높이라 rem 이 아닌 px 로 출력한다. */
+
+:root {
+  --component-height-sm: 32px; /* 조밀한 자리의 컨트롤 높이 */
+  --component-height-md: 40px; /* 기본 컨트롤 높이 */
+  --component-height-lg: 48px; /* 터치 대상이 큰 자리의 컨트롤 높이 */
+}
