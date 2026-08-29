@@ -1,6 +1,6 @@
 /* slate-ui · surface: 컴포넌트 인벤토리 · focus: 살아 있는 샘플(왼쪽) · states: 기본·hover·focus·disabled
  * tokens: --color-card · --color-border-subtle · --gap-* · --radius-sm
- * spec: none · gates: 0 fail
+ * spec: none · gates: 0 fail · self: C5 H3 S3 R4 D5 P3
  */
 import Link from "next/link"
 
@@ -71,7 +71,7 @@ function Demo({ name, children }: { name: string; children: React.ReactNode }) {
       }}
     >
       <code
-        className="text-caption-3xs text-muted-foreground"
+        className="text-caption-3xs text-subtle"
         style={{ display: "block", marginBottom: "var(--gap-12)" }}
       >
         {name}
@@ -86,7 +86,7 @@ export default function ComponentsPage() {
     <main
       className="mx-auto w-full"
       style={{
-        maxWidth: "64rem",
+        maxWidth: "var(--layout-container-max)",
         padding: "var(--padding-24)",
         paddingTop: "var(--padding-48)",
         paddingBottom: "var(--padding-48)",
@@ -99,7 +99,7 @@ export default function ComponentsPage() {
         <h1 className="text-title-xl" style={{ marginBottom: "var(--gap-8)" }}>
           컴포넌트 {uiInventory.length + 48}개
         </h1>
-        <p className="text-body-sm text-muted-foreground" style={{ maxWidth: "60ch" }}>
+        <p className="text-body-sm text-subtle" style={{ maxWidth: "60ch" }}>
           shadcn/ui {uiInventory.length}개 + AI Elements 48개. 전부 이 레포 안의
           소스 파일이고, 전부 slate 토큰을 참조한다. 아래 샘플에 색상값을 적은
           곳은 한 군데도 없다.
@@ -112,7 +112,7 @@ export default function ComponentsPage() {
         <h2 className="text-heading-md" style={{ marginBottom: "var(--gap-16)" }}>
           살아 있는 샘플
         </h2>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid md:grid-cols-2" style={{ gap: "var(--gap-16)" }}>
           <Demo name="button">
             <div className="flex flex-wrap" style={{ gap: "var(--gap-8)" }}>
               <Button size="sm">기본</Button>
@@ -176,13 +176,13 @@ export default function ComponentsPage() {
                 <TabsTrigger value="b">가공</TabsTrigger>
                 <TabsTrigger value="c">발송</TabsTrigger>
               </TabsList>
-              <TabsContent value="a" className="text-body-sm text-muted-foreground" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="a" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
                 크롤링 대상 42곳
               </TabsContent>
-              <TabsContent value="b" className="text-body-sm text-muted-foreground" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="b" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
                 요약 4종 생성
               </TabsContent>
-              <TabsContent value="c" className="text-body-sm text-muted-foreground" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="c" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
                 08:00 스레드 DM
               </TabsContent>
             </Tabs>
@@ -201,16 +201,16 @@ export default function ComponentsPage() {
               <Slider defaultValue={[40]} max={100} step={1} />
               <div className="flex items-center" style={{ gap: "var(--gap-8)" }}>
                 <Spinner />
-                <span className="text-body-sm text-muted-foreground">처리 중</span>
+                <span className="text-body-sm text-subtle">처리 중</span>
               </div>
             </div>
           </Demo>
 
           <Demo name="skeleton">
             <div className="flex flex-col" style={{ gap: "var(--gap-8)" }}>
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
-              <Skeleton className="h-4 w-2/3" />
+              <Skeleton className="w-3/4" style={{ height: "var(--line-height-base)" }} />
+              <Skeleton className="w-1/2" style={{ height: "var(--line-height-base)" }} />
+              <Skeleton className="w-2/3" style={{ height: "var(--line-height-base)" }} />
             </div>
           </Demo>
 
@@ -218,13 +218,13 @@ export default function ComponentsPage() {
             <Accordion type="single" collapsible>
               <AccordionItem value="i1">
                 <AccordionTrigger className="text-body-sm">차단된 사이트는 어떻게 되나요?</AccordionTrigger>
-                <AccordionContent className="text-body-sm text-muted-foreground">
+                <AccordionContent className="text-body-sm text-subtle">
                   다음 회차에 자동으로 재시도합니다.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="i2">
                 <AccordionTrigger className="text-body-sm">발송 시각을 바꿀 수 있나요?</AccordionTrigger>
-                <AccordionContent className="text-body-sm text-muted-foreground">
+                <AccordionContent className="text-body-sm text-subtle">
                   스케줄 설정에서 변경합니다.
                 </AccordionContent>
               </AccordionItem>
@@ -260,17 +260,17 @@ export default function ComponentsPage() {
         <h2 className="text-heading-md" style={{ marginBottom: "var(--gap-8)" }}>
           AI Elements 48개
         </h2>
-        <p className="text-body-sm text-muted-foreground" style={{ marginBottom: "var(--gap-24)", maxWidth: "60ch" }}>
+        <p className="text-body-sm text-subtle" style={{ marginBottom: "var(--gap-24)", maxWidth: "60ch" }}>
           에이전트가 하는 일을 화면으로 옮긴 조각들이다. 대부분 데이터를 물려야
           의미가 생기므로 여기서는 이름과 쓰임만 적는다.
         </p>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid md:grid-cols-2" style={{ gap: "var(--gap-16)" }}>
           {aiGroups.map((g) => (
             <Card key={g.title}>
               <CardHeader>
                 <CardTitle className="text-body-sm">{g.title}</CardTitle>
                 {g.note ? (
-                  <p className="text-caption-2xs text-muted-foreground">{g.note}</p>
+                  <p className="text-caption-2xs text-subtle">{g.note}</p>
                 ) : null}
               </CardHeader>
               <CardContent className="flex flex-wrap" style={{ gap: "var(--gap-6)" }}>
@@ -302,9 +302,9 @@ export default function ComponentsPage() {
           {uiInventory.map((i) => (
             <code
               key={i}
-              className="text-caption-3xs text-muted-foreground"
+              className="text-caption-3xs text-subtle border"
               style={{
-                border: "1px solid var(--color-border-faint)",
+                borderColor: "var(--color-border-faint)",
                 borderRadius: "var(--radius-xs)",
                 padding: "var(--padding-3) var(--padding-6)",
               }}

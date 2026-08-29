@@ -139,3 +139,10 @@
 @custom-variant data-open (&:where([data-state="open"], [data-open]:not([data-open="false"])));
 
 @custom-variant data-closed (&:where([data-state="closed"], [data-closed]:not([data-closed="false"])));
+@layer utilities {
+  /* 보조 텍스트. --color-muted-foreground 는 배경 위 3.72:1 로 본문 기준(4.5:1)에
+   * 미달하므로 본문·설명문에는 이 클래스를 쓴다. 실측 7.77:1. */
+  .text-subtle {
+    color: var(--color-foreground-subtle);
+  }
+}

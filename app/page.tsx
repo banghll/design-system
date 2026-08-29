@@ -1,6 +1,6 @@
 /* slate-ui · surface: 디자인 시스템 인덱스 · focus: 토큰→컴포넌트 연결 고리 · states: n/a (정적 문서)
  * tokens: --color-background · --color-card · --color-border · --gap-* · --radius-*
- * spec: none · gates: 0 fail
+ * spec: none · gates: 0 fail · self: C5 H4 S3 R4 D5 P3
  */
 import Link from "next/link"
 
@@ -70,14 +70,15 @@ function Swatch({ token }: { token: string }) {
   return (
     <div className="flex flex-col" style={{ gap: "var(--gap-6)" }}>
       <div
-        className="h-14 w-full border"
+        className="w-full border"
         style={{
           background: `var(--color-${token})`,
           borderColor: "var(--color-border-subtle)",
           borderRadius: "var(--radius-sm)",
+          aspectRatio: "16 / 5",
         }}
       />
-      <code className="text-caption-2xs text-muted-foreground">{token}</code>
+      <code className="text-caption-2xs text-subtle">{token}</code>
     </div>
   )
 }
@@ -99,14 +100,14 @@ function Section({
         className="flex items-baseline"
         style={{ gap: "var(--gap-8)", marginBottom: "var(--gap-4)" }}
       >
-        <span className="text-caption-2xs text-muted-foreground tabular-nums">
+        <span className="text-caption-2xs text-subtle tabular-nums">
           {n}
         </span>
         <h2 className="text-heading-md">{title}</h2>
       </div>
       {note ? (
         <p
-          className="text-body-sm text-muted-foreground"
+          className="text-body-sm text-subtle"
           style={{ marginBottom: "var(--gap-16)", maxWidth: "58ch" }}
         >
           {note}
@@ -122,7 +123,7 @@ export default function Home() {
     <main
       className="mx-auto w-full"
       style={{
-        maxWidth: "var(--layout-container-lg, 1024px)",
+        maxWidth: "var(--layout-container-max)",
         padding: "var(--padding-24)",
         paddingTop: "var(--padding-48)",
         paddingBottom: "var(--padding-48)",
@@ -140,7 +141,7 @@ export default function Home() {
         <h1 className="text-display-3xl" style={{ marginBottom: "var(--gap-12)" }}>
           하나의 토큰, 두 개의 컴포넌트 라이브러리
         </h1>
-        <p className="text-body-base text-muted-foreground" style={{ maxWidth: "62ch" }}>
+        <p className="text-body-base text-subtle" style={{ maxWidth: "62ch" }}>
           이 레포에는 값이 하나도 없다. 색·간격·모서리·모션은 전부 slate
           파운데이션에서 오고, shadcn/ui 와 AI Elements 는 그 값을 참조하는
           껍데기다. 아래 화면의 모든 픽셀이 그 연결을 통과한 결과다.
@@ -176,7 +177,7 @@ export default function Home() {
           ].map(([label, tokens]) => (
             <div key={label as string}>
               <div
-                className="text-caption-xs text-muted-foreground"
+                className="text-caption-xs text-subtle"
                 style={{ marginBottom: "var(--gap-8)" }}
               >
                 {label as string}
@@ -211,8 +212,8 @@ export default function Home() {
                 style={{ gap: "var(--gap-16)" }}
               >
                 <code
-                  className="text-caption-2xs text-muted-foreground shrink-0"
-                  style={{ width: "9rem" }}
+                  className="text-caption-2xs text-subtle shrink-0"
+                  style={{ width: "11ch" }}
                 >
                   .{t.label}
                 </code>
@@ -228,7 +229,7 @@ export default function Home() {
         title="간격 · 모서리 · 그림자"
         note="이름의 숫자가 곧 px 다. --gap-40 은 40px 이고, 인덱스가 아니다."
       >
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid lg:grid-cols-3" style={{ gap: "var(--gap-16)" }}>
           <Card>
             <CardHeader>
               <CardTitle className="text-body-sm">gap</CardTitle>
@@ -244,15 +245,15 @@ export default function Home() {
                   style={{ gap: "var(--gap-12)" }}
                 >
                   <code
-                    className="text-caption-2xs text-muted-foreground shrink-0"
-                    style={{ width: "4.5rem" }}
+                    className="text-caption-2xs text-subtle shrink-0"
+                    style={{ width: "8ch" }}
                   >
                     gap-{g}
                   </code>
                   <div
-                    className="h-2"
                     style={{
                       width: `var(--gap-${g})`,
+                      height: "var(--gap-4)",
                       background: "var(--color-primary)",
                       borderRadius: "var(--radius-xs)",
                     }}
@@ -273,15 +274,16 @@ export default function Home() {
               {radii.map((r) => (
                 <div key={r} className="text-center">
                   <div
-                    className="size-12 border"
+                    className="aspect-square border"
                     style={{
+                      width: "var(--component-height-md)",
                       borderRadius: `var(--radius-${r})`,
                       background: "var(--color-fill)",
                       borderColor: "var(--color-border)",
                     }}
                   />
                   <code
-                    className="text-caption-3xs text-muted-foreground"
+                    className="text-caption-3xs text-subtle"
                     style={{ display: "block", marginTop: "var(--gap-4)" }}
                   >
                     {r}
@@ -307,10 +309,11 @@ export default function Home() {
                     padding: "var(--padding-10)",
                     background: "var(--color-card-alt)",
                     borderRadius: "var(--radius-sm)",
+          aspectRatio: "16 / 5",
                     boxShadow: `var(--shadow-${s})`,
                   }}
                 >
-                  <code className="text-caption-2xs text-muted-foreground">
+                  <code className="text-caption-2xs text-subtle">
                     {s}
                   </code>
                 </div>
@@ -330,7 +333,7 @@ export default function Home() {
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="text-caption-2xs text-muted-foreground">
+                  <tr className="text-caption-2xs text-subtle">
                     <th style={{ paddingBottom: "var(--padding-8)" }}>
                       컴포넌트가 부르는 이름
                     </th>
@@ -352,7 +355,7 @@ export default function Home() {
                       <td style={{ padding: "var(--padding-8) 0" }}>
                         <code
                           className="text-caption-xs"
-                          style={{ color: "var(--color-primary)" }}
+                          style={{ color: "var(--color-accent-blue)" }}
                         >
                           {right}
                         </code>
@@ -382,8 +385,8 @@ export default function Home() {
             <Button variant="ghost">고스트</Button>
             <Button variant="destructive">삭제</Button>
             <Button disabled>비활성</Button>
-            <Separator orientation="vertical" className="h-8" />
-            <Input placeholder="입력" style={{ width: "12rem" }} />
+            <Separator orientation="vertical" style={{ height: "var(--component-height-sm)" }} />
+            <Input placeholder="입력" className="flex-1" style={{ minWidth: "16ch" }} />
             <Switch />
           </CardContent>
         </Card>
