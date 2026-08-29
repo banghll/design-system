@@ -154,7 +154,16 @@ export default function Home() {
             <Link href="/movies">영화 평점</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/components">컴포넌트 전체 보기</Link>
+            <Link href="/kit">컴포넌트 갤러리</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/blocks">블록</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/patterns">패턴</Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/examples">공식 예제</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href="/ai">AI Elements 데모</Link>
