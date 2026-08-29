@@ -11,6 +11,7 @@ const GROUPS: { key: string; title: string; note: string }[] = [
   { key: "dashboard", title: "대시보드", note: "지표 · 차트 · 데이터 테이블 한 벌" },
   { key: "login", title: "로그인", note: "인증 진입 화면" },
   { key: "signup", title: "가입", note: "계정 생성 화면" },
+  { key: "preview", title: "쇼케이스", note: "ui.shadcn.com/create 의 미리보기 화면 — 레지스트리엔 껍데기만 있어 레포에서 직접 받아왔다" },
   { key: "calendar", title: "캘린더 · 차트", note: "라우트가 아니라 컴포넌트 — 한 페이지에 38개를 모아 놓았다" },
   { key: "chart", title: "차트", note: "recharts 기반 기본형" },
 ]
@@ -39,6 +40,9 @@ const BLOCKS = [
   "sidebar-14",
   "sidebar-15",
   "sidebar-16",
+  "preview",
+  "preview-02",
+  "preview-03",
   "signup-01",
   "signup-02",
   "signup-03",
