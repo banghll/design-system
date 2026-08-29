@@ -146,3 +146,16 @@
     color: var(--color-foreground-subtle);
   }
 }
+
+/* 게이트 19 — 모션을 줄이도록 설정한 사용자에게는 전이를 멈춘다.
+ * slate 의 --duration-instant(0ms)를 그대로 쓴다. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--duration-instant) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--duration-instant) !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -151,10 +151,16 @@ export default function Home() {
           style={{ gap: "var(--gap-8)", marginTop: "var(--gap-24)" }}
         >
           <Button asChild>
-            <Link href="/ai">AI Elements 데모</Link>
+            <Link href="/chat">AI 채팅 앱</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/movies">영화 평점</Link>
           </Button>
           <Button variant="outline" asChild>
             <Link href="/components">컴포넌트 전체 보기</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/ai">AI Elements 데모</Link>
           </Button>
         </div>
       </header>
