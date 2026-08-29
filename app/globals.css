@@ -41,13 +41,13 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-2xl);
-  --radius-3xl: var(--radius-2xl); /* slate 에 3xl 없음 — 2xl 로 접음 */
-  --radius-4xl: var(--radius-2xl); /* slate 에 4xl 없음 — 2xl 로 접음 */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 20px; /* slate 에 3xl 없음 — 2xl 로 접음 */
+  --radius-4xl: 20px; /* slate 에 4xl 없음 — 2xl 로 접음 */
   @keyframes collapsible-down {
   from {
     height: 0;
@@ -121,7 +121,7 @@
   --sidebar-ring: var(--color-primary);
 
   /* shadcn 은 radius 를 한 개의 기준값에서 파생시킨다. slate 의 md(10px)를 기준으로 둔다. */
-  --radius: var(--radius-md);
+  --radius: 10px;
 }
 
 @layer base {
@@ -153,9 +153,9 @@
   *,
   *::before,
   *::after {
-    animation-duration: var(--duration-instant) !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: var(--duration-instant) !important;
+    transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
 }

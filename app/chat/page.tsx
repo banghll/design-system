@@ -197,7 +197,7 @@ export default function ChatPage() {
         data-open={panelOpen}
         className="fixed inset-y-0 left-0 z-30 hidden shrink-0 flex-col border-r data-[open=true]:flex md:relative md:flex"
         style={{
-          width: "var(--layout-panel-width)",
+          width: "320px",
           background: "var(--color-background-alt)",
           borderColor: "var(--color-border-subtle)",
         }}
@@ -205,8 +205,8 @@ export default function ChatPage() {
         <div
           className="flex items-center justify-between border-b"
           style={{
-            height: "var(--layout-toolbar-height)",
-            padding: "0 var(--padding-12)",
+            height: "56px",
+            padding: "0 12px",
             borderColor: "var(--color-border-subtle)",
           }}
         >
@@ -225,14 +225,14 @@ export default function ChatPage() {
 
         <div
           className="flex min-h-0 flex-1 flex-col overflow-y-auto"
-          style={{ padding: "var(--padding-8)", gap: "var(--gap-2)" }}
+          style={{ padding: "8px", gap: "2px" }}
         >
           {threads === null ? (
-            <div className="flex flex-col" style={{ gap: "var(--gap-6)" }}>
+            <div className="flex flex-col" style={{ gap: "6px" }}>
               {[0, 1, 2].map((i) => (
                 <Skeleton
                   key={i}
-                  style={{ height: "var(--component-height-sm)" }}
+                  style={{ height: "32px" }}
                 />
               ))}
             </div>
@@ -248,17 +248,17 @@ export default function ChatPage() {
                 aria-current={t.id === activeId ? "page" : undefined}
                 className="text-body-sm w-full min-w-0 truncate text-left transition-colors"
                 style={{
-                  padding: "var(--padding-8) var(--padding-10)",
-                  borderRadius: "var(--radius-sm)",
-                  minHeight: "var(--component-height-sm)",
+                  padding: "8px 10px",
+                  borderRadius: "8px",
+                  minHeight: "32px",
                   background:
                     t.id === activeId ? "var(--color-fill)" : "transparent",
                   color:
                     t.id === activeId
                       ? "var(--color-foreground-strong)"
                       : "var(--color-foreground)",
-                  transitionDuration: "var(--motion-feedback-duration)",
-                  transitionTimingFunction: "var(--motion-feedback-easing)",
+                  transitionDuration: "100ms",
+                  transitionTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
                 }}
               >
                 {t.title}
@@ -272,13 +272,13 @@ export default function ChatPage() {
         <header
           className="flex items-center justify-between border-b"
           style={{
-            height: "var(--layout-toolbar-height)",
-            padding: "0 var(--padding-16)",
+            height: "56px",
+            padding: "0 16px",
             borderColor: "var(--color-border-subtle)",
-            gap: "var(--gap-12)",
+            gap: "12px",
           }}
         >
-          <div className="flex min-w-0 items-center" style={{ gap: "var(--gap-8)" }}>
+          <div className="flex min-w-0 items-center" style={{ gap: "8px" }}>
             <Button
               size="sm"
               variant="ghost"
@@ -310,7 +310,7 @@ export default function ChatPage() {
 
         <div
           className="mx-auto flex min-h-0 w-full flex-1 flex-col"
-          style={{ maxWidth: "var(--breakpoint-tablet)" }}
+          style={{ maxWidth: "768px" }}
         >
           <Conversation className="min-h-0 flex-1">
             <ConversationContent aria-live="polite" aria-busy={streaming}>
@@ -320,8 +320,8 @@ export default function ChatPage() {
                     <Sparkles
                       aria-hidden="true"
                       style={{
-                        width: "var(--icon-size-lg)",
-                        height: "var(--icon-size-lg)",
+                        width: "24px",
+                        height: "24px",
                       }}
                     />
                   }
@@ -356,8 +356,8 @@ export default function ChatPage() {
           <div
             className="flex flex-col"
             style={{
-              gap: "var(--gap-8)",
-              padding: "var(--padding-12) var(--padding-16) var(--padding-16)",
+              gap: "8px",
+              padding: "12px 16px 16px",
             }}
           >
             {failure ? (
@@ -365,7 +365,7 @@ export default function ChatPage() {
                 <AlertTitle>{failure.title}</AlertTitle>
                 <AlertDescription
                   className="flex flex-col items-start"
-                  style={{ gap: "var(--gap-8)" }}
+                  style={{ gap: "8px" }}
                 >
                   <span>{failure.detail}</span>
                   {failure.retry ? (

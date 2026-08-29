@@ -128,7 +128,7 @@ export default function AiPage() {
         className="flex items-center justify-between border-b"
         style={{
           borderColor: "var(--color-border-subtle)",
-          padding: "var(--padding-12) var(--padding-24)",
+          padding: "12px 24px",
         }}
       >
         <div>
@@ -144,7 +144,7 @@ export default function AiPage() {
 
       <div
         className="mx-auto flex min-h-0 w-full flex-1 flex-col"
-        style={{ maxWidth: "var(--breakpoint-tablet)" }}
+        style={{ maxWidth: "768px" }}
       >
         <Conversation className="min-h-0 flex-1">
           <ConversationContent aria-live="polite" aria-busy={streaming}>
@@ -154,8 +154,8 @@ export default function AiPage() {
                   <MessageSquare
                     aria-hidden="true"
                     style={{
-                      width: "var(--icon-size-lg)",
-                      height: "var(--icon-size-lg)",
+                      width: "24px",
+                      height: "24px",
                     }}
                   />
                 }
@@ -178,8 +178,8 @@ export default function AiPage() {
         <div
           className="flex flex-col"
           style={{
-            gap: "var(--gap-8)",
-            padding: "var(--padding-12) var(--padding-16) var(--padding-16)",
+            gap: "8px",
+            padding: "12px 16px 16px",
           }}
         >
           {failure ? (
@@ -187,7 +187,7 @@ export default function AiPage() {
               <AlertTitle>{failure.title}</AlertTitle>
               <AlertDescription
                 className="flex flex-col items-start"
-                style={{ gap: "var(--gap-8)" }}
+                style={{ gap: "8px" }}
               >
                 <span>{failure.detail}</span>
                 {failure.retry ? (

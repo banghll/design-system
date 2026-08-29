@@ -65,14 +65,14 @@ function Demo({ name, children }: { name: string; children: React.ReactNode }) {
       className="border"
       style={{
         borderColor: "var(--color-border-subtle)",
-        borderRadius: "var(--radius-md)",
+        borderRadius: "10px",
         background: "var(--color-card)",
-        padding: "var(--padding-16)",
+        padding: "16px",
       }}
     >
       <code
         className="text-caption-3xs text-subtle"
-        style={{ display: "block", marginBottom: "var(--gap-12)" }}
+        style={{ display: "block", marginBottom: "12px" }}
       >
         {name}
       </code>
@@ -86,17 +86,17 @@ export default function ComponentsPage() {
     <main
       className="mx-auto w-full"
       style={{
-        maxWidth: "var(--layout-container-max)",
-        padding: "var(--padding-24)",
-        paddingTop: "var(--padding-48)",
-        paddingBottom: "var(--padding-48)",
+        maxWidth: "1200px",
+        padding: "24px",
+        paddingTop: "48px",
+        paddingBottom: "48px",
       }}
     >
-      <header style={{ marginBottom: "var(--gap-40)" }}>
-        <Button variant="ghost" size="sm" asChild style={{ marginBottom: "var(--gap-16)" }}>
+      <header style={{ marginBottom: "40px" }}>
+        <Button variant="ghost" size="sm" asChild style={{ marginBottom: "16px" }}>
           <Link href="/">← 토큰</Link>
         </Button>
-        <h1 className="text-title-xl" style={{ marginBottom: "var(--gap-8)" }}>
+        <h1 className="text-title-xl" style={{ marginBottom: "8px" }}>
           컴포넌트 {uiInventory.length + 48}개
         </h1>
         <p className="text-body-sm text-subtle" style={{ maxWidth: "60ch" }}>
@@ -106,15 +106,15 @@ export default function ComponentsPage() {
         </p>
       </header>
 
-      <Separator style={{ marginBottom: "var(--gap-40)" }} />
+      <Separator style={{ marginBottom: "40px" }} />
 
-      <section style={{ marginBottom: "var(--gap-44)" }}>
-        <h2 className="text-heading-md" style={{ marginBottom: "var(--gap-16)" }}>
+      <section style={{ marginBottom: "44px" }}>
+        <h2 className="text-heading-md" style={{ marginBottom: "16px" }}>
           살아 있는 샘플
         </h2>
-        <div className="grid md:grid-cols-2" style={{ gap: "var(--gap-16)" }}>
+        <div className="grid md:grid-cols-2" style={{ gap: "16px" }}>
           <Demo name="button">
-            <div className="flex flex-wrap" style={{ gap: "var(--gap-8)" }}>
+            <div className="flex flex-wrap" style={{ gap: "8px" }}>
               <Button size="sm">기본</Button>
               <Button size="sm" variant="secondary">보조</Button>
               <Button size="sm" variant="outline">외곽선</Button>
@@ -125,7 +125,7 @@ export default function ComponentsPage() {
           </Demo>
 
           <Demo name="badge · avatar">
-            <div className="flex flex-wrap items-center" style={{ gap: "var(--gap-8)" }}>
+            <div className="flex flex-wrap items-center" style={{ gap: "8px" }}>
               <Badge>기본</Badge>
               <Badge variant="secondary">보조</Badge>
               <Badge variant="outline">외곽선</Badge>
@@ -137,8 +137,8 @@ export default function ComponentsPage() {
           </Demo>
 
           <Demo name="input · label · textarea">
-            <div className="flex flex-col" style={{ gap: "var(--gap-12)" }}>
-              <div className="flex flex-col" style={{ gap: "var(--gap-6)" }}>
+            <div className="flex flex-col" style={{ gap: "12px" }}>
+              <div className="flex flex-col" style={{ gap: "6px" }}>
                 <Label htmlFor="c-name">이름</Label>
                 <Input id="c-name" placeholder="입력하세요" />
               </div>
@@ -147,22 +147,22 @@ export default function ComponentsPage() {
           </Demo>
 
           <Demo name="checkbox · radio · switch">
-            <div className="flex flex-col" style={{ gap: "var(--gap-12)" }}>
-              <div className="flex items-center" style={{ gap: "var(--gap-8)" }}>
+            <div className="flex flex-col" style={{ gap: "12px" }}>
+              <div className="flex items-center" style={{ gap: "8px" }}>
                 <Checkbox id="c-1" defaultChecked />
                 <Label htmlFor="c-1">매일 아침 발송</Label>
               </div>
-              <RadioGroup defaultValue="a" className="flex" style={{ gap: "var(--gap-16)" }}>
-                <div className="flex items-center" style={{ gap: "var(--gap-6)" }}>
+              <RadioGroup defaultValue="a" className="flex" style={{ gap: "16px" }}>
+                <div className="flex items-center" style={{ gap: "6px" }}>
                   <RadioGroupItem value="a" id="r-a" />
                   <Label htmlFor="r-a">요약</Label>
                 </div>
-                <div className="flex items-center" style={{ gap: "var(--gap-6)" }}>
+                <div className="flex items-center" style={{ gap: "6px" }}>
                   <RadioGroupItem value="b" id="r-b" />
                   <Label htmlFor="r-b">전문</Label>
                 </div>
               </RadioGroup>
-              <div className="flex items-center" style={{ gap: "var(--gap-8)" }}>
+              <div className="flex items-center" style={{ gap: "8px" }}>
                 <Switch id="c-2" defaultChecked />
                 <Label htmlFor="c-2">Slack 알림</Label>
               </div>
@@ -176,13 +176,13 @@ export default function ComponentsPage() {
                 <TabsTrigger value="b">가공</TabsTrigger>
                 <TabsTrigger value="c">발송</TabsTrigger>
               </TabsList>
-              <TabsContent value="a" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="a" className="text-body-sm text-subtle" style={{ paddingTop: "8px" }}>
                 크롤링 대상 42곳
               </TabsContent>
-              <TabsContent value="b" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="b" className="text-body-sm text-subtle" style={{ paddingTop: "8px" }}>
                 요약 4종 생성
               </TabsContent>
-              <TabsContent value="c" className="text-body-sm text-subtle" style={{ paddingTop: "var(--padding-8)" }}>
+              <TabsContent value="c" className="text-body-sm text-subtle" style={{ paddingTop: "8px" }}>
                 08:00 스레드 DM
               </TabsContent>
             </Tabs>
@@ -196,10 +196,10 @@ export default function ComponentsPage() {
           </Demo>
 
           <Demo name="progress · slider · spinner">
-            <div className="flex flex-col" style={{ gap: "var(--gap-16)" }}>
+            <div className="flex flex-col" style={{ gap: "16px" }}>
               <Progress value={64} />
               <Slider defaultValue={[40]} max={100} step={1} />
-              <div className="flex items-center" style={{ gap: "var(--gap-8)" }}>
+              <div className="flex items-center" style={{ gap: "8px" }}>
                 <Spinner />
                 <span className="text-body-sm text-subtle">처리 중</span>
               </div>
@@ -207,7 +207,7 @@ export default function ComponentsPage() {
           </Demo>
 
           <Demo name="skeleton">
-            <div className="flex flex-col" style={{ gap: "var(--gap-8)" }}>
+            <div className="flex flex-col" style={{ gap: "8px" }}>
               <Skeleton className="w-3/4" style={{ height: "var(--line-height-base)" }} />
               <Skeleton className="w-1/2" style={{ height: "var(--line-height-base)" }} />
               <Skeleton className="w-2/3" style={{ height: "var(--line-height-base)" }} />
@@ -254,17 +254,17 @@ export default function ComponentsPage() {
         </div>
       </section>
 
-      <Separator style={{ marginBottom: "var(--gap-40)" }} />
+      <Separator style={{ marginBottom: "40px" }} />
 
-      <section style={{ marginBottom: "var(--gap-44)" }}>
-        <h2 className="text-heading-md" style={{ marginBottom: "var(--gap-8)" }}>
+      <section style={{ marginBottom: "44px" }}>
+        <h2 className="text-heading-md" style={{ marginBottom: "8px" }}>
           AI Elements 48개
         </h2>
-        <p className="text-body-sm text-subtle" style={{ marginBottom: "var(--gap-24)", maxWidth: "60ch" }}>
+        <p className="text-body-sm text-subtle" style={{ marginBottom: "24px", maxWidth: "60ch" }}>
           에이전트가 하는 일을 화면으로 옮긴 조각들이다. 대부분 데이터를 물려야
           의미가 생기므로 여기서는 이름과 쓰임만 적는다.
         </p>
-        <div className="grid md:grid-cols-2" style={{ gap: "var(--gap-16)" }}>
+        <div className="grid md:grid-cols-2" style={{ gap: "16px" }}>
           {aiGroups.map((g) => (
             <Card key={g.title}>
               <CardHeader>
@@ -273,7 +273,7 @@ export default function ComponentsPage() {
                   <p className="text-caption-2xs text-subtle">{g.note}</p>
                 ) : null}
               </CardHeader>
-              <CardContent className="flex flex-wrap" style={{ gap: "var(--gap-6)" }}>
+              <CardContent className="flex flex-wrap" style={{ gap: "6px" }}>
                 {g.items.map((i) => (
                   <code
                     key={i}
@@ -281,8 +281,8 @@ export default function ComponentsPage() {
                     style={{
                       background: "var(--color-fill-subtle)",
                       color: "var(--color-foreground)",
-                      borderRadius: "var(--radius-xs)",
-                      padding: "var(--padding-3) var(--padding-6)",
+                      borderRadius: "4px",
+                      padding: "3px 6px",
                     }}
                   >
                     {i}
@@ -295,18 +295,18 @@ export default function ComponentsPage() {
       </section>
 
       <section>
-        <h2 className="text-heading-md" style={{ marginBottom: "var(--gap-16)" }}>
+        <h2 className="text-heading-md" style={{ marginBottom: "16px" }}>
           shadcn/ui {uiInventory.length}개
         </h2>
-        <div className="flex flex-wrap" style={{ gap: "var(--gap-6)" }}>
+        <div className="flex flex-wrap" style={{ gap: "6px" }}>
           {uiInventory.map((i) => (
             <code
               key={i}
               className="text-caption-3xs text-subtle border"
               style={{
                 borderColor: "var(--color-border-faint)",
-                borderRadius: "var(--radius-xs)",
-                padding: "var(--padding-3) var(--padding-6)",
+                borderRadius: "4px",
+                padding: "3px 6px",
               }}
             >
               {i}

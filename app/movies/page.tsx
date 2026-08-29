@@ -98,7 +98,7 @@ function Stars({
       aria-label="별점"
       name={name}
       className="flex"
-      style={{ gap: "var(--gap-2)" }}
+      style={{ gap: "2px" }}
     >
       {[1, 2, 3, 4, 5].map((n) => (
         <RadioGroupPrimitive.Item
@@ -107,9 +107,9 @@ function Stars({
           aria-label={`${n}점`}
           className="grid place-items-center outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           style={{
-            width: "var(--icon-touch-target)",
-            height: "var(--icon-touch-target)",
-            borderRadius: "var(--radius-xs)",
+            width: "32px",
+            height: "32px",
+            borderRadius: "4px",
             color:
               n <= value
                 ? "var(--color-accent-orange)"
@@ -120,8 +120,8 @@ function Stars({
             aria-hidden="true"
             fill={n <= value ? "currentColor" : "none"}
             style={{
-              width: "var(--icon-size-md)",
-              height: "var(--icon-size-md)",
+              width: "20px",
+              height: "20px",
             }}
           />
         </RadioGroupPrimitive.Item>
@@ -134,7 +134,7 @@ function StarsRead({ score }: { score: number }) {
   return (
     <div
       className="flex items-center"
-      style={{ gap: "var(--gap-2)", color: "var(--color-accent-orange)" }}
+      style={{ gap: "2px", color: "var(--color-accent-orange)" }}
       aria-label={`내 별점 ${score}점`}
     >
       {[1, 2, 3, 4, 5].map((n) => (
@@ -143,8 +143,8 @@ function StarsRead({ score }: { score: number }) {
           aria-hidden="true"
           fill={n <= score ? "currentColor" : "none"}
           style={{
-            width: "var(--icon-size-xs)",
-            height: "var(--icon-size-xs)",
+            width: "12px",
+            height: "12px",
             color:
               n <= score
                 ? "var(--color-accent-orange)"
@@ -165,7 +165,7 @@ function Poster({ movie }: { movie: Movie }) {
         aspectRatio: "2 / 3",
         background: "var(--color-fill-subtle)",
         borderColor: "var(--color-border-subtle)",
-        borderRadius: "var(--radius-md)",
+        borderRadius: "10px",
         color: `var(${GENRE_ACCENT[movie.genre]})`,
       }}
     >
@@ -242,21 +242,21 @@ export default function MoviesPage() {
     <main
       className="mx-auto w-full"
       style={{
-        maxWidth: "var(--layout-container-max)",
-        padding: "var(--padding-24)",
-        paddingBottom: "var(--padding-48)",
+        maxWidth: "1200px",
+        padding: "24px",
+        paddingBottom: "48px",
       }}
     >
-      <header style={{ marginBottom: "var(--gap-24)" }}>
+      <header style={{ marginBottom: "24px" }}>
         <Button
           variant="ghost"
           size="sm"
           asChild
-          style={{ marginBottom: "var(--gap-12)" }}
+          style={{ marginBottom: "12px" }}
         >
           <Link href="/">← 디자인 시스템</Link>
         </Button>
-        <h1 className="text-title-xl" style={{ marginBottom: "var(--gap-6)" }}>
+        <h1 className="text-title-xl" style={{ marginBottom: "6px" }}>
           내가 본 영화
         </h1>
         <p className="text-body-sm text-subtle" style={{ maxWidth: "60ch" }}>
@@ -269,16 +269,16 @@ export default function MoviesPage() {
       {/* 필터 — 초점은 그리드다. 필터는 한 줄로 눕히고 강등한다. */}
       <div
         className="flex flex-wrap items-center"
-        style={{ gap: "var(--gap-8)", marginBottom: "var(--gap-16)" }}
+        style={{ gap: "8px", marginBottom: "16px" }}
       >
         <div className="relative min-w-0 flex-1" style={{ minWidth: "18ch" }}>
           <Search
             aria-hidden="true"
             className="pointer-events-none absolute top-1/2 -translate-y-1/2"
             style={{
-              left: "var(--padding-8)",
-              width: "var(--icon-size-base)",
-              height: "var(--icon-size-base)",
+              left: "8px",
+              width: "16px",
+              height: "16px",
               color: "var(--color-foreground-subtle)",
             }}
           />
@@ -287,7 +287,7 @@ export default function MoviesPage() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="제목이나 감독으로 찾기"
             aria-label="영화 검색"
-            style={{ paddingLeft: "var(--padding-24)" }}
+            style={{ paddingLeft: "24px" }}
           />
         </div>
 
@@ -318,15 +318,15 @@ export default function MoviesPage() {
         </Select>
       </div>
 
-      <Separator style={{ marginBottom: "var(--gap-24)" }} />
+      <Separator style={{ marginBottom: "24px" }} />
 
       {loading ? (
         <ul
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-          style={{ gap: "var(--gap-16)" }}
+          style={{ gap: "16px" }}
         >
           {Array.from({ length: 8 }).map((_, i) => (
-            <li key={i} className="flex flex-col" style={{ gap: "var(--gap-8)" }}>
+            <li key={i} className="flex flex-col" style={{ gap: "8px" }}>
               <Skeleton style={{ aspectRatio: "2 / 3", width: "100%" }} />
               <Skeleton style={{ height: "var(--line-height-base)", width: "80%" }} />
               <Skeleton style={{ height: "var(--line-height-sm)", width: "50%" }} />
@@ -336,13 +336,13 @@ export default function MoviesPage() {
       ) : visible.length === 0 ? (
         <div
           className="flex flex-col items-center text-center"
-          style={{ gap: "var(--gap-12)", padding: "var(--padding-48) 0" }}
+          style={{ gap: "12px", padding: "48px 0" }}
         >
           <X
             aria-hidden="true"
             style={{
-              width: "var(--icon-size-lg)",
-              height: "var(--icon-size-lg)",
+              width: "24px",
+              height: "24px",
               color: "var(--color-foreground-subtle)",
             }}
           />
@@ -360,7 +360,7 @@ export default function MoviesPage() {
       ) : (
         <ul
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-          style={{ gap: "var(--gap-16)" }}
+          style={{ gap: "16px" }}
         >
           {visible.map((m) => {
             const mine = reviews[m.id]
@@ -371,12 +371,12 @@ export default function MoviesPage() {
                   onClick={() => openDetail(m)}
                   className="flex w-full min-w-0 flex-col text-left outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
                   style={{
-                    gap: "var(--gap-8)",
-                    borderRadius: "var(--radius-md)",
+                    gap: "8px",
+                    borderRadius: "10px",
                   }}
                 >
                   <Poster movie={m} />
-                  <div className="flex min-w-0 flex-col" style={{ gap: "var(--gap-2)" }}>
+                  <div className="flex min-w-0 flex-col" style={{ gap: "2px" }}>
                     <span className="text-body-sm min-w-0 truncate">
                       {m.title}
                     </span>
@@ -414,7 +414,7 @@ export default function MoviesPage() {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="flex flex-col" style={{ gap: "var(--gap-16)" }}>
+              <div className="flex flex-col" style={{ gap: "16px" }}>
                 <Badge
                   variant="outline"
                   className="w-fit"
@@ -423,7 +423,7 @@ export default function MoviesPage() {
                   {open.genre}
                 </Badge>
 
-                <div className="flex flex-col" style={{ gap: "var(--gap-6)" }}>
+                <div className="flex flex-col" style={{ gap: "6px" }}>
                   <Label>내 별점</Label>
                   <Stars
                     name={`score-${open.id}`}
@@ -435,7 +435,7 @@ export default function MoviesPage() {
                   />
                 </div>
 
-                <div className="flex flex-col" style={{ gap: "var(--gap-6)" }}>
+                <div className="flex flex-col" style={{ gap: "6px" }}>
                   <Label htmlFor="note">메모</Label>
                   <Textarea
                     id="note"
