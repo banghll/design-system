@@ -76,6 +76,22 @@ docs/movies-prd.md   예제 제품의 요구사항
   화면이 그 자리에서 따라온다. 마음에 들면 CSS 를 복사해 `app/globals.css` 에 붙인다.
 - **모드 · 언어** — 라이트 / 다크 / 시스템, 한국어 / English.
 
+## 미리보기 이미지
+
+블록 목록의 그림은 미리 찍어 둔 이미지다. 카드마다 iframe 을 두면 카드 하나가
+Next 앱 하나가 되어, 210장을 훑으면 앱 210개가 살아 있게 된다.
+
+블록을 새로 넣거나 디자인이 바뀌면 다시 찍는다. dev 서버가 떠 있어야 한다.
+
+```bash
+node scripts/shoot-blocks.mjs        # 없는 것만
+node scripts/shoot-blocks.mjs --all  # 전부 다시
+```
+
+시스템에 깔린 크롬을 쓴다(`puppeteer-core`). 다른 경로에 있으면 `CHROME_PATH` 로
+알려주면 된다. 이미지가 없는 블록은 예전처럼 iframe 으로 떨어지므로,
+안 찍어도 화면이 비지는 않는다 — 느릴 뿐이다.
+
 ## 라이선스
 
 - shadcn/ui 컴포넌트와 블록 — MIT (shadcn-ui/ui)

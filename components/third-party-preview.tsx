@@ -7,18 +7,14 @@
 
 import { ArrowUpRight, Maximize2 } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
 
 import { SelectBox } from "@/components/block-curator"
+import { BlockThumb } from "@/components/block-thumb"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
 import { SOURCES, type ThirdPartyBlock } from "@/lib/third-party-catalog"
 import { cn } from "@/lib/utils"
-
-const FRAME_W = 1440
-const FRAME_H = 900
 
 export function ThirdPartyPreview({
   block,
@@ -28,25 +24,6 @@ export function ThirdPartyPreview({
   scale?: number
 }) {
   const { t, lang } = useLang()
-  const holder = useRef<HTMLDivElement>(null)
-  const [show, setShow] = useState(false)
-  const [ready, setReady] = useState(false)
-
-  useEffect(() => {
-    const el = holder.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setShow(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: "500px" }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
 
   const href = `/blocks/view3p/${block.id}`
   /* iframe 은 실제 라우트를 띄운다. 뷰어를 뷰어 안에 넣을 수는 없다. */
@@ -56,33 +33,8 @@ export function ThirdPartyPreview({
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-xl border">
       <SelectBox id={block.id} />
-      <div
-        ref={holder}
-        className="bg-muted/40 relative w-full overflow-hidden border-b"
-        style={{ height: FRAME_H * scale }}
-      >
-        {show ? (
-          <iframe
-            src={raw}
-            title={block.variant}
-            loading="lazy"
-            onLoad={() => setReady(true)}
-            tabIndex={-1}
-            className={cn(
-              "pointer-events-none origin-top-left border-0 transition-opacity duration-300",
-              ready ? "opacity-100" : "opacity-0"
-            )}
-            style={{ width: FRAME_W, height: FRAME_H, transform: `scale(${scale})` }}
-          />
-        ) : null}
-
-        {!ready ? (
-          <div className="absolute inset-0 flex flex-col gap-2 p-4">
-            <Skeleton className="h-6 w-1/3" />
-            <Skeleton className="h-4 w-1/2" />
-            <Skeleton className="mt-2 w-full flex-1" />
-          </div>
-        ) : null}
+      <div className="relative">
+        <BlockThumb id={block.id} src={raw} title={block.variant} scale={scale} />
 
         <Link
           href={href}
