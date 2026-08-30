@@ -24,6 +24,17 @@ const WIRING = {
       "data-active:bg-background data-active:text-foreground",
       "data-active:bg-(--tabs-active-surface) data-active:text-(--tabs-active-surface-foreground)",
     ],
+    /* 다크 전용 덮개를 걷어 낸다.
+     *
+     * 라이트에서는 토큰이 먹는데 다크에서는 안 먹었다. dark:data-active:bg-input/30
+     * 이 뒤에 남아 토큰을 덮고 있었기 때문이다. 토큰을 열어 놓고 그 위에 조건부
+     * 리터럴을 얹어 두면, «어떤 모드에서는 편집이 되고 어떤 모드에서는 안 되는»
+     * 도구가 된다. 모드별 값은 파운데이션의 색이 이미 갖고 있다. */
+    [
+      "components/ui/tabs.tsx",
+      " dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+      "",
+    ],
   ],
   alert: [
     ["components/ui/alert.tsx", "rounded-lg", "rounded-(--alert-radius)"],
@@ -48,8 +59,11 @@ let done = 0
 for (const [id, edits] of Object.entries(WIRING)) {
   for (const [file, from, to] of edits) {
     const src = fs.readFileSync(file, "utf8")
-    if (src.includes(to)) continue /* 이미 이어져 있다 */
+    /* 찾을 것이 없으면 이미 이어진 것이다. to 로 판단하면 안 된다 —
+     * 지우는 작업(to 가 빈 문자열)은 언제나 «이미 포함» 으로 읽혀 건너뛰어진다.
+     * 실제로 그래서 다크 덮개가 안 지워졌다. */
     if (!src.includes(from)) {
+      if (src.includes(to) || to === "") continue
       throw new Error(`${file}: «${from}» 을 못 찾았다. 코드가 바뀐 것이니 이 표를 고칠 것.`)
     }
     fs.writeFileSync(file, src.split(from).join(to))
