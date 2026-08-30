@@ -28,6 +28,7 @@ import {
   useCurator,
 } from "@/components/block-curator"
 import { useLang } from "@/components/lang"
+import type { TocItem } from "@/components/toc"
 import { BlockPreview } from "@/components/block-preview"
 import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
 import { Badge } from "@/components/ui/badge"
@@ -110,8 +111,22 @@ function BlocksCatalog() {
     groups.reduce((n, g) => n + g.items.length, 0) +
     thirdParty.reduce((n, g) => n + g.items.length, 0)
 
+  /* 목차는 지금 화면에 실제로 있는 것만 올린다 — 검색으로 걸러졌거나
+   * 숨긴 묶음이 목차에 남아 있으면 눌러도 아무 데도 안 간다. */
+  const toc = useMemo(() => {
+    const items: TocItem[] = groups.map((g) => ({ id: g.key, label: g.title }))
+    if (thirdParty.length) {
+      items.push({ id: "third-party", label: { ko: "서드파티", en: "Third party" } })
+      for (const g of thirdParty)
+        items.push({ id: `3p-${g.kind}`, label: g.kind, depth: 1 })
+    }
+    if (hidden.size)
+      items.push({ id: "hidden", label: { ko: "숨긴 블록", en: "Hidden" } })
+    return items
+  }, [groups, thirdParty, hidden])
+
   return (
-    <CatalogShell>
+    <CatalogShell toc={toc}>
       <div className="mx-auto max-w-6xl px-8 py-14">
         <CatalogHeader
           title={{ ko: "블록", en: "Blocks" }}

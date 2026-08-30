@@ -165,7 +165,9 @@ export default function PatternsPage() {
   const { t, lang } = useLang()
 
   return (
-    <CatalogShell>
+    <CatalogShell
+      toc={PATTERN_SECTIONS.map((s) => ({ id: s.id, label: s.label }))}
+    >
       <main className="mx-auto w-full max-w-[1200px] px-6 py-14 lg:px-10">
         <CatalogHeader
           title={{ ko: "패턴", en: "Patterns" }}

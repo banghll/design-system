@@ -228,7 +228,7 @@ export default function FoundationPage() {
   )
 
   return (
-    <CatalogShell>
+    <CatalogShell toc={SECTIONS.map((s) => ({ id: s.id, label: s.label }))}>
       <main className="mx-auto w-full max-w-[1100px] px-6 py-14 lg:px-10">
         <CatalogHeader title={{ ko: "파운데이션", en: "Foundation" }} count="shadcn/ui">
           {lang === "ko" ? (

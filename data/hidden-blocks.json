@@ -1,3 +1,24 @@
 {
-  "hidden": []
+  "hidden": [
+    "space-about-us-section-01",
+    "space-bento-grid-01",
+    "space-blog-01",
+    "space-contact-01",
+    "tailark-dusk-call-to-action-one",
+    "tailark-dusk-call-to-action-two",
+    "tailark-mist-call-to-action-one",
+    "tailark-mist-call-to-action-three",
+    "tailark-mist-call-to-action-two",
+    "tailark-mist-comparator-one",
+    "tailark-mist-contact-one",
+    "tailark-veil-call-to-action-four",
+    "tailark-veil-call-to-action-one",
+    "tailark-veil-call-to-action-three",
+    "tailark-veil-call-to-action-two",
+    "tailark-veil-comparator-one",
+    "tailark-veil-comparator-three",
+    "tailark-veil-comparator-two",
+    "tailark-veil-contact-one",
+    "tailark-veil-contact-two"
+  ]
 }
