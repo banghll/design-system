@@ -13,11 +13,12 @@ import {
   Boxes,
   Component,
   FileStack,
+  Menu,
   Palette,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { type Copy, useLang } from "@/components/lang"
 import { ShellControls } from "@/components/shell-controls"
@@ -26,7 +27,16 @@ import { ThemeSwitcher } from "@/components/theme-switcher"
 import { TokenEditor } from "@/components/token-editor"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { PAGES } from "@/lib/catalog-nav"
 import { cn } from "@/lib/utils"
 
@@ -38,6 +48,44 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   blocks: Blocks,
 }
 
+/* 페이지 목록. 사이드바와 모바일 서랍이 같은 것을 그린다 —
+ * 두 벌로 두면 한쪽에만 페이지가 늘어나는 일이 반드시 생긴다. */
+function NavList({
+  pathname,
+  onPick,
+}: {
+  pathname: string
+  onPick?: () => void
+}) {
+  const { t } = useLang()
+  return (
+    <nav className="flex flex-col gap-0.5 p-3">
+      {PAGES.map((page) => {
+        const Icon = ICONS[page.icon] ?? Boxes
+        const active =
+          page.href === "/" ? pathname === "/" : pathname.startsWith(page.href)
+
+        return (
+          <Link
+            key={page.href}
+            href={page.href}
+            onClick={onPick}
+            className={cn(
+              "flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
+              active
+                ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                : "text-muted-foreground hover:bg-sidebar-accent/50"
+            )}
+          >
+            <Icon className="size-4 shrink-0" />
+            <span className="min-w-0 flex-1 truncate">{t(page.label)}</span>
+          </Link>
+        )
+      })}
+    </nav>
+  )
+}
+
 export function CatalogShell({
   children,
   toc,
@@ -47,7 +95,14 @@ export function CatalogShell({
   toc?: TocItem[]
 }) {
   const pathname = usePathname()
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const [open, setOpen] = useState(false)
+
+  /* 어느 페이지에 있는지. 모바일에는 사이드바가 없으니 머리줄이 그 자리를 대신한다 */
+  const here =
+    PAGES.find((p) =>
+      p.href === "/" ? pathname === "/" : pathname.startsWith(p.href)
+    ) ?? PAGES[0]
 
   /* 카탈로그 페이지는 차트·이미지가 늦게 자리를 잡아, 브라우저 기본 앵커 이동만으로는
    * 목표가 어긋난다. 해시가 바뀌면 잠깐 동안 다시 맞춘다. */
@@ -79,29 +134,7 @@ export function CatalogShell({
         {/* 페이지 목록만 둔다. 페이지 안의 구획은 오른쪽 목차가 맡는다 —
           * 층이 다른 두 이동을 한자리에 겹쳐 두면 어느 쪽이 어느 쪽인지 섞인다. */}
         <ScrollArea className="min-h-0 flex-1">
-          <nav className="flex flex-col gap-0.5 p-3">
-            {PAGES.map((page) => {
-              const Icon = ICONS[page.icon] ?? Boxes
-              const active =
-                page.href === "/" ? pathname === "/" : pathname.startsWith(page.href)
-
-              return (
-                <Link
-                  key={page.href}
-                  href={page.href}
-                  className={cn(
-                    "flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
-                    active
-                      ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                      : "text-muted-foreground hover:bg-sidebar-accent/50"
-                  )}
-                >
-                  <Icon className="size-4 shrink-0" />
-                  <span className="min-w-0 flex-1 truncate">{t(page.label)}</span>
-                </Link>
-              )
-            })}
-          </nav>
+          <NavList pathname={pathname} />
         </ScrollArea>
 
         <div className="flex flex-col gap-2 p-3">
@@ -111,7 +144,71 @@ export function CatalogShell({
         </div>
       </aside>
 
-      <div className="min-w-0 flex-1">{children}</div>
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* 모바일 머리줄. 큰 화면에는 사이드바가 늘 보이므로 여기서는 사라진다.
+          * 예전에는 이게 없어서, 폰으로 들어오면 그 페이지에서 나갈 방법이 없었다. */}
+        <header className="bg-background/90 sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b px-3 backdrop-blur lg:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={lang === "ko" ? "메뉴 열기" : "Open menu"}
+              >
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72 gap-0 p-0">
+              <SheetHeader className="border-b">
+                <SheetTitle className="flex items-center gap-2 text-sm">
+                  <Boxes className="size-4" />
+                  shadcn 디자인 시스템
+                </SheetTitle>
+                <SheetDescription className="sr-only">
+                  {lang === "ko" ? "페이지 목록과 도구" : "Pages and tools"}
+                </SheetDescription>
+              </SheetHeader>
+
+              <ScrollArea className="min-h-0 flex-1">
+                <NavList pathname={pathname} onPick={() => setOpen(false)} />
+
+                {/* 이 페이지 안의 구획. 큰 화면에서는 오른쪽 목차가 맡지만
+                  * 모바일에는 그 자리가 없어서 같은 서랍에 이어 붙인다. */}
+                {toc?.length ? (
+                  <div className="border-t p-3">
+                    <div className="text-muted-foreground mb-1.5 px-2 text-[11px] font-medium">
+                      {t(here.label)}
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      {toc.map((i) => (
+                        <a
+                          key={i.id}
+                          href={"#" + i.id}
+                          onClick={() => setOpen(false)}
+                          className="text-muted-foreground hover:bg-sidebar-accent/50 hover:text-foreground truncate rounded-md px-2 py-1.5 text-sm"
+                        >
+                          {t(i.label)}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </ScrollArea>
+
+              <div className="flex flex-col gap-2 border-t p-3">
+                <ThemeSwitcher />
+                <ShellControls />
+              </div>
+            </SheetContent>
+          </Sheet>
+
+          <span className="min-w-0 flex-1 truncate text-sm font-medium">
+            {t(here.label)}
+          </span>
+        </header>
+
+        {children}
+      </div>
 
       {toc?.length ? <Toc items={toc} /> : null}
     </div>
