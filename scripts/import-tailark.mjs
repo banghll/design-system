@@ -34,6 +34,15 @@ if (!existsSync(SRC)) {
   process.exit(1)
 }
 
+/* 지우기로 한 블록은 다시 가져오지 않는다.
+ * 이 목록이 없으면 스크립트를 한 번 더 돌리는 순간 전부 되살아난다 —
+ * "안 쓰기로 했다" 는 결정이 파일 삭제보다 오래 살아야 한다. */
+const REMOVED = new Set(
+  existsSync("data/removed-blocks.json")
+    ? JSON.parse(readFileSync("data/removed-blocks.json", "utf8")).removed
+    : []
+)
+
 const pulled = new Set()
 
 /* 그 레포 고유 파일을 3p 안으로 끌어온다. 이미 옮겼으면 다시 안 옮긴다. */

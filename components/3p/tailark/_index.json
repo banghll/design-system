@@ -1,87 +1,9 @@
 [
   {
-    "id": "mist-call-to-action-one",
-    "variant": "mist",
-    "block": "call-to-action",
-    "name": "one"
-  },
-  {
-    "id": "mist-call-to-action-three",
-    "variant": "mist",
-    "block": "call-to-action",
-    "name": "three"
-  },
-  {
-    "id": "mist-call-to-action-two",
-    "variant": "mist",
-    "block": "call-to-action",
-    "name": "two"
-  },
-  {
-    "id": "mist-comparator-one",
-    "variant": "mist",
-    "block": "comparator",
-    "name": "one"
-  },
-  {
-    "id": "mist-contact-one",
-    "variant": "mist",
-    "block": "contact",
-    "name": "one"
-  },
-  {
-    "id": "mist-content-four",
-    "variant": "mist",
-    "block": "content",
-    "name": "four"
-  },
-  {
-    "id": "mist-content-one",
-    "variant": "mist",
-    "block": "content",
-    "name": "one"
-  },
-  {
-    "id": "mist-content-three",
-    "variant": "mist",
-    "block": "content",
-    "name": "three"
-  },
-  {
-    "id": "mist-content-two",
-    "variant": "mist",
-    "block": "content",
-    "name": "two"
-  },
-  {
-    "id": "mist-faqs-one",
-    "variant": "mist",
-    "block": "faqs",
-    "name": "one"
-  },
-  {
     "id": "mist-faqs-three",
     "variant": "mist",
     "block": "faqs",
     "name": "three"
-  },
-  {
-    "id": "mist-faqs-two",
-    "variant": "mist",
-    "block": "faqs",
-    "name": "two"
-  },
-  {
-    "id": "mist-features-eight",
-    "variant": "mist",
-    "block": "features",
-    "name": "eight"
-  },
-  {
-    "id": "mist-features-eleven",
-    "variant": "mist",
-    "block": "features",
-    "name": "eleven"
   },
   {
     "id": "mist-features-five",
@@ -90,34 +12,10 @@
     "name": "five"
   },
   {
-    "id": "mist-features-four",
-    "variant": "mist",
-    "block": "features",
-    "name": "four"
-  },
-  {
-    "id": "mist-features-nine",
-    "variant": "mist",
-    "block": "features",
-    "name": "nine"
-  },
-  {
-    "id": "mist-features-one",
-    "variant": "mist",
-    "block": "features",
-    "name": "one"
-  },
-  {
     "id": "mist-features-seven",
     "variant": "mist",
     "block": "features",
     "name": "seven"
-  },
-  {
-    "id": "mist-features-six",
-    "variant": "mist",
-    "block": "features",
-    "name": "six"
   },
   {
     "id": "mist-features-ten",
@@ -126,39 +24,9 @@
     "name": "ten"
   },
   {
-    "id": "mist-features-three",
-    "variant": "mist",
-    "block": "features",
-    "name": "three"
-  },
-  {
     "id": "mist-features-two",
     "variant": "mist",
     "block": "features",
-    "name": "two"
-  },
-  {
-    "id": "mist-footer-four",
-    "variant": "mist",
-    "block": "footer",
-    "name": "four"
-  },
-  {
-    "id": "mist-footer-one",
-    "variant": "mist",
-    "block": "footer",
-    "name": "one"
-  },
-  {
-    "id": "mist-footer-three",
-    "variant": "mist",
-    "block": "footer",
-    "name": "three"
-  },
-  {
-    "id": "mist-footer-two",
-    "variant": "mist",
-    "block": "footer",
     "name": "two"
   },
   {
@@ -168,28 +36,10 @@
     "name": "one"
   },
   {
-    "id": "mist-hero-section-five",
-    "variant": "mist",
-    "block": "hero-section",
-    "name": "five"
-  },
-  {
-    "id": "mist-hero-section-four",
-    "variant": "mist",
-    "block": "hero-section",
-    "name": "four"
-  },
-  {
     "id": "mist-hero-section-one",
     "variant": "mist",
     "block": "hero-section",
     "name": "one"
-  },
-  {
-    "id": "mist-hero-section-six",
-    "variant": "mist",
-    "block": "hero-section",
-    "name": "six"
   },
   {
     "id": "mist-hero-section-three",
@@ -204,22 +54,10 @@
     "name": "two"
   },
   {
-    "id": "mist-integrations-one",
-    "variant": "mist",
-    "block": "integrations",
-    "name": "one"
-  },
-  {
     "id": "mist-integrations-three",
     "variant": "mist",
     "block": "integrations",
     "name": "three"
-  },
-  {
-    "id": "mist-integrations-two",
-    "variant": "mist",
-    "block": "integrations",
-    "name": "two"
   },
   {
     "id": "mist-login-one",
@@ -228,70 +66,10 @@
     "name": "one"
   },
   {
-    "id": "mist-logo-cloud-one",
-    "variant": "mist",
-    "block": "logo-cloud",
-    "name": "one"
-  },
-  {
-    "id": "mist-logo-cloud-two",
-    "variant": "mist",
-    "block": "logo-cloud",
-    "name": "two"
-  },
-  {
-    "id": "mist-pricing-one",
-    "variant": "mist",
-    "block": "pricing",
-    "name": "one"
-  },
-  {
-    "id": "mist-pricing-two",
-    "variant": "mist",
-    "block": "pricing",
-    "name": "two"
-  },
-  {
     "id": "mist-sign-up-one",
     "variant": "mist",
     "block": "sign-up",
     "name": "one"
-  },
-  {
-    "id": "mist-stats-four",
-    "variant": "mist",
-    "block": "stats",
-    "name": "four"
-  },
-  {
-    "id": "mist-stats-one",
-    "variant": "mist",
-    "block": "stats",
-    "name": "one"
-  },
-  {
-    "id": "mist-stats-three",
-    "variant": "mist",
-    "block": "stats",
-    "name": "three"
-  },
-  {
-    "id": "mist-stats-two",
-    "variant": "mist",
-    "block": "stats",
-    "name": "two"
-  },
-  {
-    "id": "mist-team-one",
-    "variant": "mist",
-    "block": "team",
-    "name": "one"
-  },
-  {
-    "id": "mist-team-two",
-    "variant": "mist",
-    "block": "team",
-    "name": "two"
   },
   {
     "id": "mist-testimonials-five",
@@ -300,52 +78,10 @@
     "name": "five"
   },
   {
-    "id": "mist-testimonials-four",
-    "variant": "mist",
-    "block": "testimonials",
-    "name": "four"
-  },
-  {
-    "id": "mist-testimonials-one",
-    "variant": "mist",
-    "block": "testimonials",
-    "name": "one"
-  },
-  {
-    "id": "mist-testimonials-three",
-    "variant": "mist",
-    "block": "testimonials",
-    "name": "three"
-  },
-  {
-    "id": "mist-testimonials-two",
-    "variant": "mist",
-    "block": "testimonials",
-    "name": "two"
-  },
-  {
-    "id": "dusk-call-to-action-one",
-    "variant": "dusk",
-    "block": "call-to-action",
-    "name": "one"
-  },
-  {
-    "id": "dusk-call-to-action-two",
-    "variant": "dusk",
-    "block": "call-to-action",
-    "name": "two"
-  },
-  {
     "id": "dusk-content-four",
     "variant": "dusk",
     "block": "content",
     "name": "four"
-  },
-  {
-    "id": "dusk-content-one",
-    "variant": "dusk",
-    "block": "content",
-    "name": "one"
   },
   {
     "id": "dusk-content-three",
@@ -366,46 +102,10 @@
     "name": "one"
   },
   {
-    "id": "dusk-features-five",
-    "variant": "dusk",
-    "block": "features",
-    "name": "five"
-  },
-  {
-    "id": "dusk-features-four",
-    "variant": "dusk",
-    "block": "features",
-    "name": "four"
-  },
-  {
     "id": "dusk-features-one",
     "variant": "dusk",
     "block": "features",
     "name": "one"
-  },
-  {
-    "id": "dusk-features-seven",
-    "variant": "dusk",
-    "block": "features",
-    "name": "seven"
-  },
-  {
-    "id": "dusk-features-six",
-    "variant": "dusk",
-    "block": "features",
-    "name": "six"
-  },
-  {
-    "id": "dusk-features-three",
-    "variant": "dusk",
-    "block": "features",
-    "name": "three"
-  },
-  {
-    "id": "dusk-features-two",
-    "variant": "dusk",
-    "block": "features",
-    "name": "two"
   },
   {
     "id": "dusk-footer-one",
@@ -480,46 +180,10 @@
     "name": "two"
   },
   {
-    "id": "dusk-integrations-one",
-    "variant": "dusk",
-    "block": "integrations",
-    "name": "one"
-  },
-  {
-    "id": "dusk-logo-cloud-four",
-    "variant": "dusk",
-    "block": "logo-cloud",
-    "name": "four"
-  },
-  {
-    "id": "dusk-logo-cloud-one",
-    "variant": "dusk",
-    "block": "logo-cloud",
-    "name": "one"
-  },
-  {
-    "id": "dusk-logo-cloud-three",
-    "variant": "dusk",
-    "block": "logo-cloud",
-    "name": "three"
-  },
-  {
-    "id": "dusk-logo-cloud-two",
-    "variant": "dusk",
-    "block": "logo-cloud",
-    "name": "two"
-  },
-  {
     "id": "dusk-pricing-one",
     "variant": "dusk",
     "block": "pricing",
     "name": "one"
-  },
-  {
-    "id": "dusk-pricing-two",
-    "variant": "dusk",
-    "block": "pricing",
-    "name": "two"
   },
   {
     "id": "dusk-stats-one",
@@ -534,22 +198,10 @@
     "name": "two"
   },
   {
-    "id": "dusk-team-one",
-    "variant": "dusk",
-    "block": "team",
-    "name": "one"
-  },
-  {
     "id": "dusk-team-two",
     "variant": "dusk",
     "block": "team",
     "name": "two"
-  },
-  {
-    "id": "dusk-testimonials-one",
-    "variant": "dusk",
-    "block": "testimonials",
-    "name": "one"
   },
   {
     "id": "dusk-testimonials-two",
@@ -558,178 +210,10 @@
     "name": "two"
   },
   {
-    "id": "veil-call-to-action-four",
-    "variant": "veil",
-    "block": "call-to-action",
-    "name": "four"
-  },
-  {
-    "id": "veil-call-to-action-one",
-    "variant": "veil",
-    "block": "call-to-action",
-    "name": "one"
-  },
-  {
-    "id": "veil-call-to-action-three",
-    "variant": "veil",
-    "block": "call-to-action",
-    "name": "three"
-  },
-  {
-    "id": "veil-call-to-action-two",
-    "variant": "veil",
-    "block": "call-to-action",
-    "name": "two"
-  },
-  {
-    "id": "veil-comparator-one",
-    "variant": "veil",
-    "block": "comparator",
-    "name": "one"
-  },
-  {
-    "id": "veil-comparator-three",
-    "variant": "veil",
-    "block": "comparator",
-    "name": "three"
-  },
-  {
-    "id": "veil-comparator-two",
-    "variant": "veil",
-    "block": "comparator",
-    "name": "two"
-  },
-  {
-    "id": "veil-contact-one",
-    "variant": "veil",
-    "block": "contact",
-    "name": "one"
-  },
-  {
-    "id": "veil-contact-two",
-    "variant": "veil",
-    "block": "contact",
-    "name": "two"
-  },
-  {
-    "id": "veil-content-one",
-    "variant": "veil",
-    "block": "content",
-    "name": "one"
-  },
-  {
-    "id": "veil-content-three",
-    "variant": "veil",
-    "block": "content",
-    "name": "three"
-  },
-  {
-    "id": "veil-content-two",
-    "variant": "veil",
-    "block": "content",
-    "name": "two"
-  },
-  {
-    "id": "veil-faqs-five",
-    "variant": "veil",
-    "block": "faqs",
-    "name": "five"
-  },
-  {
-    "id": "veil-faqs-four",
-    "variant": "veil",
-    "block": "faqs",
-    "name": "four"
-  },
-  {
-    "id": "veil-faqs-one",
-    "variant": "veil",
-    "block": "faqs",
-    "name": "one"
-  },
-  {
-    "id": "veil-faqs-three",
-    "variant": "veil",
-    "block": "faqs",
-    "name": "three"
-  },
-  {
-    "id": "veil-faqs-two",
-    "variant": "veil",
-    "block": "faqs",
-    "name": "two"
-  },
-  {
-    "id": "veil-features-one",
-    "variant": "veil",
-    "block": "features",
-    "name": "one"
-  },
-  {
-    "id": "veil-features-three",
-    "variant": "veil",
-    "block": "features",
-    "name": "three"
-  },
-  {
-    "id": "veil-features-two",
-    "variant": "veil",
-    "block": "features",
-    "name": "two"
-  },
-  {
-    "id": "veil-footer-five",
-    "variant": "veil",
-    "block": "footer",
-    "name": "five"
-  },
-  {
-    "id": "veil-footer-four",
-    "variant": "veil",
-    "block": "footer",
-    "name": "four"
-  },
-  {
-    "id": "veil-footer-one",
-    "variant": "veil",
-    "block": "footer",
-    "name": "one"
-  },
-  {
-    "id": "veil-footer-six",
-    "variant": "veil",
-    "block": "footer",
-    "name": "six"
-  },
-  {
-    "id": "veil-footer-three",
-    "variant": "veil",
-    "block": "footer",
-    "name": "three"
-  },
-  {
-    "id": "veil-footer-two",
-    "variant": "veil",
-    "block": "footer",
-    "name": "two"
-  },
-  {
-    "id": "veil-forgot-password-one",
-    "variant": "veil",
-    "block": "forgot-password",
-    "name": "one"
-  },
-  {
     "id": "veil-forgot-password-three",
     "variant": "veil",
     "block": "forgot-password",
     "name": "three"
-  },
-  {
-    "id": "veil-forgot-password-two",
-    "variant": "veil",
-    "block": "forgot-password",
-    "name": "two"
   },
   {
     "id": "veil-hero-section-five",
@@ -742,36 +226,6 @@
     "variant": "veil",
     "block": "hero-section",
     "name": "four"
-  },
-  {
-    "id": "veil-hero-section-one",
-    "variant": "veil",
-    "block": "hero-section",
-    "name": "one"
-  },
-  {
-    "id": "veil-hero-section-three",
-    "variant": "veil",
-    "block": "hero-section",
-    "name": "three"
-  },
-  {
-    "id": "veil-hero-section-two",
-    "variant": "veil",
-    "block": "hero-section",
-    "name": "two"
-  },
-  {
-    "id": "veil-integrations-one",
-    "variant": "veil",
-    "block": "integrations",
-    "name": "one"
-  },
-  {
-    "id": "veil-integrations-two",
-    "variant": "veil",
-    "block": "integrations",
-    "name": "two"
   },
   {
     "id": "veil-login-one",
@@ -792,36 +246,6 @@
     "name": "two"
   },
   {
-    "id": "veil-logo-cloud-one",
-    "variant": "veil",
-    "block": "logo-cloud",
-    "name": "one"
-  },
-  {
-    "id": "veil-logo-cloud-two",
-    "variant": "veil",
-    "block": "logo-cloud",
-    "name": "two"
-  },
-  {
-    "id": "veil-pricing-one",
-    "variant": "veil",
-    "block": "pricing",
-    "name": "one"
-  },
-  {
-    "id": "veil-pricing-three",
-    "variant": "veil",
-    "block": "pricing",
-    "name": "three"
-  },
-  {
-    "id": "veil-pricing-two",
-    "variant": "veil",
-    "block": "pricing",
-    "name": "two"
-  },
-  {
     "id": "veil-sign-up-one",
     "variant": "veil",
     "block": "sign-up",
@@ -834,69 +258,9 @@
     "name": "three"
   },
   {
-    "id": "veil-sign-up-two",
-    "variant": "veil",
-    "block": "sign-up",
-    "name": "two"
-  },
-  {
     "id": "veil-stats-four",
     "variant": "veil",
     "block": "stats",
     "name": "four"
-  },
-  {
-    "id": "veil-stats-one",
-    "variant": "veil",
-    "block": "stats",
-    "name": "one"
-  },
-  {
-    "id": "veil-stats-three",
-    "variant": "veil",
-    "block": "stats",
-    "name": "three"
-  },
-  {
-    "id": "veil-stats-two",
-    "variant": "veil",
-    "block": "stats",
-    "name": "two"
-  },
-  {
-    "id": "veil-team-one",
-    "variant": "veil",
-    "block": "team",
-    "name": "one"
-  },
-  {
-    "id": "veil-team-two",
-    "variant": "veil",
-    "block": "team",
-    "name": "two"
-  },
-  {
-    "id": "veil-testimonials-four",
-    "variant": "veil",
-    "block": "testimonials",
-    "name": "four"
-  },
-  {
-    "id": "veil-testimonials-one",
-    "variant": "veil",
-    "block": "testimonials",
-    "name": "one"
-  },
-  {
-    "id": "veil-testimonials-three",
-    "variant": "veil",
-    "block": "testimonials",
-    "name": "three"
-  },
-  {
-    "id": "veil-testimonials-two",
-    "variant": "veil",
-    "block": "testimonials",
-    "name": "two"
   }
 ]

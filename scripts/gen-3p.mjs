@@ -6,6 +6,15 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
+/* 지우기로 한 블록은 다시 가져오지 않는다.
+ * 이 목록이 없으면 스크립트를 한 번 더 돌리는 순간 전부 되살아난다 —
+ * "안 쓰기로 했다" 는 결정이 파일 삭제보다 오래 살아야 한다. */
+const REMOVED = new Set(
+  existsSync("data/removed-blocks.json")
+    ? JSON.parse(readFileSync("data/removed-blocks.json", "utf8")).removed
+    : []
+)
+
 const ROOT = "components/3p"
 const entries = []
 
@@ -107,6 +116,7 @@ function resolves(dir) {
 
 const ok = []
 for (const e of entries) {
+  if (REMOVED.has(e.id)) continue
   const path = e.import.replace("@/", "")
   /* tailark 은 폴더를 그대로 가리키고(index.tsx), 나머지는 파일까지 가리킨다. */
   const folder = existsSync(path) && statSync(path).isDirectory()

@@ -11,7 +11,7 @@
  * 사용:  node scripts/fetch-3p.mjs <출처키> <레지스트리 URL 템플릿> <이름...>
  * 예:    node scripts/fetch-3p.mjs launch "https://www.launchuicomponents.com/r/{name}.json" hero faq
  */
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 
 /* 우리가 이미 가진 ui 컴포넌트 이름. 이름이 겹치면 우리 것을 쓴다. */
@@ -47,6 +47,15 @@ function rewrite(code, name) {
   )
 }
 
+/* 지우기로 한 블록은 다시 가져오지 않는다.
+ * 이 목록이 없으면 스크립트를 한 번 더 돌리는 순간 전부 되살아난다 —
+ * "안 쓰기로 했다" 는 결정이 파일 삭제보다 오래 살아야 한다. */
+const REMOVED = new Set(
+  existsSync("data/removed-blocks.json")
+    ? JSON.parse(readFileSync("data/removed-blocks.json", "utf8")).removed
+    : []
+)
+
 const skipped = []
 const written = []
 const missing = []
@@ -78,6 +87,10 @@ for (const name of poolNames) {
 if (pool.size) console.log(`  부품 창고 ${pool.size}개 (${poolNames.join(", ")})`)
 
 for (const name of blockNames) {
+  if (REMOVED.has(`${source}-${name}`)) {
+    skipped.push(`${name} — 지우기로 한 블록`)
+    continue
+  }
   const url = template.replace("{name}", name)
   let item
   try {
