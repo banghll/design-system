@@ -9,6 +9,7 @@
 
 import type { Copy } from "@/components/lang"
 import { BLOCK_GROUPS, BLOCKS } from "@/lib/block-catalog"
+import { THIRD_PARTY_BLOCKS } from "@/lib/third-party-catalog"
 
 export type Section = {
   id: string
@@ -131,12 +132,23 @@ export const PATTERN_SECTIONS: Section[] = [
 
 /* 블록 — 완성 화면.
  * 목록과 개수를 손으로 적지 않는다. 블록 카탈로그에서 세어 온다. */
-export const BLOCK_SECTIONS: Section[] = BLOCK_GROUPS.map((g) => ({
-  id: g.key,
-  label: g.title,
-  note: g.note,
-  count: BLOCKS.filter((b) => b.group === g.key).length,
-}))
+export const BLOCK_SECTIONS: Section[] = [
+  ...BLOCK_GROUPS.map((g) => ({
+    id: g.key,
+    label: g.title,
+    note: g.note,
+    count: BLOCKS.filter((b) => b.group === g.key).length,
+  })),
+  {
+    id: "third-party",
+    label: { ko: "서드파티", en: "Third party" },
+    note: {
+      ko: "공식이 비워 둔 자리 — 랜딩 · 마케팅 · 커머스 구획. MIT 저장소 세 곳에서 왔다",
+      en: "What the official set leaves empty — landing, marketing, commerce. From three MIT repos",
+    },
+    count: THIRD_PARTY_BLOCKS.length,
+  },
+]
 
 export const PAGES: Page[] = [
   {
@@ -305,8 +317,8 @@ export const PAGES: Page[] = [
     label: { ko: "블록", en: "Blocks" },
     icon: "blocks",
     summary: {
-      ko: `화면 한 벌 ${BLOCKS.length}개 — 새 화면의 출발점`,
-      en: `${BLOCKS.length} whole screens — where a new page starts`,
+      ko: `화면 한 벌 ${BLOCKS.length + THIRD_PARTY_BLOCKS.length}개 — 새 화면의 출발점`,
+      en: `${BLOCKS.length + THIRD_PARTY_BLOCKS.length} whole screens — where a new page starts`,
     },
     sections: BLOCK_SECTIONS,
   },

@@ -7,6 +7,8 @@ export type ThemeVars = Record<string, string>
 
 export type ThemePreset = {
   label?: string
+  /* tweakcn 원본이 들고 오는 필드. 우리는 안 쓰지만 지우면 원본과 어긋난다. */
+  createdAt?: string
   styles: { light: ThemeVars; dark: ThemeVars }
 }
 

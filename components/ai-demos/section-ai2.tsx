@@ -71,16 +71,16 @@ export function SectionAi2() {
       <Kit id="ai-file-tree">
         <div className="w-80">
           <FileTree defaultExpanded={new Set(["app"])}>
-            <FileTreeFolder path="app">
+            <FileTreeFolder path="app" name="app">
               <FileTreeName>app</FileTreeName>
-              <FileTreeFile path="app/page.tsx">
+              <FileTreeFile path="app/page.tsx" name="page.tsx">
                 <FileTreeName>page.tsx</FileTreeName>
               </FileTreeFile>
-              <FileTreeFile path="app/globals.css">
+              <FileTreeFile path="app/globals.css" name="globals.css">
                 <FileTreeName>globals.css</FileTreeName>
               </FileTreeFile>
             </FileTreeFolder>
-            <FileTreeFile path="README.md">
+            <FileTreeFile path="README.md" name="README.md">
               <FileTreeName>README.md</FileTreeName>
             </FileTreeFile>
           </FileTree>
@@ -91,7 +91,7 @@ export function SectionAi2() {
         <div className="w-[32rem]">
           <Commit defaultOpen>
             <CommitHeader>
-              <CommitHash hash="1ca12a3" />
+              <CommitHash>1ca12a3</CommitHash>
               <CommitMessage>Paper 내보내기용 추출 지그 추가</CommitMessage>
             </CommitHeader>
             <CommitContent>

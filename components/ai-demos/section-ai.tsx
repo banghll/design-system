@@ -176,7 +176,10 @@ export function SectionAi() {
 
       <Kit id="ai-confirmation">
         <div className="w-[30rem]">
-          <Confirmation>
+          <Confirmation
+            state="approval-requested"
+            approval={{ id: "demo", approved: undefined }}
+          >
             <ConfirmationTitle>이 작업을 실행할까요?</ConfirmationTitle>
             <ConfirmationRequest>
               수집 대상 42곳에 다시 요청합니다. 5분쯤 걸립니다.
@@ -216,9 +219,9 @@ export function SectionAi() {
       </Kit>
 
       <Kit id="ai-snippet">
-        <Snippet className="w-[30rem]">
+        <Snippet code="npx shadcn@latest add button" className="w-[30rem]">
           <SnippetText>npx shadcn@latest add button</SnippetText>
-          <SnippetCopyButton value="npx shadcn@latest add button" />
+          <SnippetCopyButton />
         </Snippet>
       </Kit>
 

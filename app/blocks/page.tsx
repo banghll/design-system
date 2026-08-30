@@ -8,8 +8,10 @@
 
 import {
   CalendarDays,
+  ExternalLink,
   LayoutDashboard,
   LogIn,
+  Package,
   PanelLeft,
   Search,
   Sparkles,
@@ -20,8 +22,15 @@ import { useMemo, useState } from "react"
 import { useLang } from "@/components/lang"
 import { BlockPreview } from "@/components/block-preview"
 import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
+import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import { ThirdPartyPreview } from "@/components/third-party-preview"
 import { BLOCK_GROUPS, BLOCKS } from "@/lib/block-catalog"
+import {
+  SOURCES,
+  THIRD_PARTY_BLOCKS,
+  THIRD_PARTY_KINDS,
+} from "@/lib/third-party-catalog"
 
 const GROUP_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
   sidebar: PanelLeft,
@@ -51,14 +60,37 @@ export default function BlocksPage() {
     })).filter((g) => g.items.length > 0)
   }, [q])
 
-  const total = groups.reduce((n, g) => n + g.items.length, 0)
+  /* 서드파티는 종류로 묶는다. 출처가 아니라 쓰임이 기준이어야
+   * "지금 필요한 자리" 로 찾을 수 있다. */
+  const thirdParty = useMemo(() => {
+    const needle = q.trim().toLowerCase()
+    return THIRD_PARTY_KINDS.map((kind) => ({
+      kind,
+      items: THIRD_PARTY_BLOCKS.filter(
+        (b) =>
+          b.kind === kind &&
+          (!needle ||
+            `${b.id} ${b.kind} ${b.variant} ${b.what.ko} ${b.what.en} ${b.when.ko} ${b.when.en}`
+              .toLowerCase()
+              .includes(needle))
+      ),
+    })).filter((g) => g.items.length > 0)
+  }, [q])
+
+  const total =
+    groups.reduce((n, g) => n + g.items.length, 0) +
+    thirdParty.reduce((n, g) => n + g.items.length, 0)
 
   return (
     <CatalogShell>
       <div className="mx-auto max-w-6xl px-8 py-14">
         <CatalogHeader
           title={{ ko: "블록", en: "Blocks" }}
-          count={lang === "ko" ? `${BLOCKS.length}개` : `${BLOCKS.length}`}
+          count={
+            lang === "ko"
+              ? `${BLOCKS.length + THIRD_PARTY_BLOCKS.length}개`
+              : `${BLOCKS.length + THIRD_PARTY_BLOCKS.length}`
+          }
         >
           {lang === "ko" ? (
             <>
@@ -120,6 +152,52 @@ export default function BlocksPage() {
               </div>
             </section>
           ))}
+
+          {thirdParty.length ? (
+            <section id="third-party" className="scroll-mt-8">
+              <GroupHeader
+                icon={Package}
+                title={{
+                  ko: "서드파티 — 공식이 다루지 않는 자리",
+                  en: "Third party — what the official set doesn't cover",
+                }}
+                note={{
+                  ko: "공식 shadcn 블록은 제품 안쪽(앱 셸 · 대시보드 · 인증)에 강하고 제품 바깥쪽(랜딩 · 마케팅 · 커머스)이 비어 있다. 그 자리를 MIT 라이선스 저장소 세 곳에서 채웠다. 남의 ui 컴포넌트로 우리 것을 덮지 않았다 — 이름이 겹치면 우리 것을 쓰고, 그쪽 고유 부품만 3p/ 안에 가둬 뒀다.",
+                  en: "The official shadcn blocks are strong inside the product — app shells, dashboards, auth — and empty outside it: landing, marketing, commerce. Three MIT-licensed repos fill that gap. None of their ui components overwrote ours; where names collide we keep ours, and only their own parts live inside 3p/.",
+                }}
+                count={thirdParty.reduce((n, g) => n + g.items.length, 0)}
+              />
+
+              <div className="mb-8 flex flex-wrap gap-2">
+                {Object.entries(SOURCES).map(([key, s]) => (
+                  <Badge key={key} variant="secondary" asChild className="font-normal">
+                    <a href={s.url} target="_blank" rel="noreferrer noopener">
+                      {s.label} · {s.license}
+                      <ExternalLink className="size-3" />
+                    </a>
+                  </Badge>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-12">
+                {thirdParty.map((g) => (
+                  <div key={g.kind} id={`3p-${g.kind}`} className="scroll-mt-8">
+                    <div className="mb-4 flex items-baseline gap-2">
+                      <h3 className="text-lg font-semibold">{g.kind}</h3>
+                      <span className="text-muted-foreground text-xs tabular-nums">
+                        {g.items.length}
+                      </span>
+                    </div>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      {g.items.map((b) => (
+                        <ThirdPartyPreview key={b.id} block={b} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </div>
       </div>
     </CatalogShell>

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 서드파티 원본 클론. scripts/import-tailark.mjs 가 필요한 것만 옮긴다
+/vendor
