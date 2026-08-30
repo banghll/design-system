@@ -464,7 +464,7 @@ export const BLOCKS: BlockMeta[] = [
 export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   {
     key: "sidebar",
-    title: { ko: "앱 셸 — 화면 전체의 뼈대", en: "App shell — the frame of the screen" },
+    title: { ko: "앱 셸", en: "App shell" },
     note: {
       ko: "본문이 어디에 놓이고 탐색이 어디에 붙는지를 정하는 층. 나머지 모든 것이 이 안에 들어가므로 가장 먼저, 그리고 가장 되돌리기 어려운 결정이다. 고르는 기준은 취향이 아니라 메뉴 개수 · depth · 본문이 필요한 폭이다.",
       en: "The layer that decides where content sits and where navigation attaches. Everything else goes inside it, which makes this the first and the hardest-to-reverse decision. Choose on item count, depth, and how much width the content needs — not on taste.",
@@ -472,7 +472,7 @@ export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   },
   {
     key: "dashboard",
-    title: { ko: "대시보드 — 상태를 훑는 화면", en: "Dashboard — scanning the state" },
+    title: { ko: "대시보드", en: "Dashboard" },
     note: {
       ko: "지표 · 차트 · 데이터 테이블이 한 벌로 묶인 화면. 위에서 숫자로 상태를 읽고, 아래 목록에서 개별 건으로 내려가는 순서를 전제로 한다.",
       en: "Metrics, chart and data table as one set. It assumes a top-down reading: state in numbers above, individual records below.",
@@ -480,7 +480,7 @@ export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   },
   {
     key: "preview",
-    title: { ko: "쇼케이스 — 스타일을 판단하는 화면", en: "Showcase — judging a style" },
+    title: { ko: "쇼케이스", en: "Showcase" },
     note: {
       ko: "제품 화면이 아니다. 여러 컴포넌트를 일부러 한 화면에 몰아넣어, 테마를 바꿨을 때 전체 인상이 어떻게 달라지는지 비교하기 위한 자리다.",
       en: "Not product screens. Components are deliberately crowded onto one page so you can compare the whole impression when a theme changes.",
@@ -488,7 +488,7 @@ export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   },
   {
     key: "login",
-    title: { ko: "로그인 — 이미 계정이 있을 때", en: "Sign in — for people who already have an account" },
+    title: { ko: "로그인", en: "Sign in" },
     note: {
       ko: "인증 진입 화면. 다섯 종의 차이는 장식이 아니라 진입 경로의 차이다 — 실제 사용자가 어떤 경로로 들어오는지를 보고 고른다.",
       en: "The authentication entry point. The five differ by entry path, not decoration — pick by how your users actually arrive.",
@@ -496,7 +496,7 @@ export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   },
   {
     key: "signup",
-    title: { ko: "가입 — 계정이 아직 없을 때", en: "Sign up — for people without an account" },
+    title: { ko: "가입", en: "Sign up" },
     note: {
       ko: "계정을 만드는 화면. 로그인과 짝을 이루되 항목 수와 동의 처리가 다르다. 항목이 다섯 개를 넘으면 한 화면에 넣지 않는다.",
       en: "Where an account is created. It mirrors sign-in but differs in field count and consent handling. Past five fields, stop putting it on one screen.",
@@ -504,7 +504,7 @@ export const BLOCK_GROUPS: { key: string; title: Copy; note: Copy }[] = [
   },
   {
     key: "calendars",
-    title: { ko: "캘린더 — 날짜를 고르는 방식", en: "Calendars — ways to pick a date" },
+    title: { ko: "캘린더", en: "Calendars" },
     note: {
       ko: "라우트가 아니라 컴포넌트 변형 모음. 날짜 UI 를 정할 때 어떤 선택지가 있는지 한 번에 훑는 자리다.",
       en: "Component variants rather than routes — one place to survey every option before settling on a date UI.",

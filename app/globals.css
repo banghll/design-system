@@ -127,6 +127,11 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
+  /* 한글 글꼴 이름. 실제 파일은 layout 의 <link> 가 CDN 에서 받아 온다.
+   * 인라인 <style> 로 두면 브라우저가 head 를 정리하면서 위치가 달라진다 —
+   * 이름은 CSS 에, 파일은 link 에. 둘을 갈라 두는 편이 안전하다. */
+  --font-pretendard: "Pretendard Variable", Pretendard;
+
   /* 모서리의 기준값. 위 @theme 의 sm~4xl 이 전부 여기서 계산된다 */
   --radius: 0.625rem;
 

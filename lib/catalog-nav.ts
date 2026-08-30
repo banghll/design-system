@@ -32,8 +32,8 @@ export const PATTERN_SECTIONS: Section[] = [
   {
     id: "empty",
     label: {
-      ko: "빈 상태 — 아직 아무것도 없을 때",
-      en: "Empty — nothing here yet",
+      ko: "빈 상태",
+      en: "Empty",
     },
     note: {
       ko: "데이터가 0건인 화면. 세 가지가 섞이기 쉬운데 서로 다르다 — 처음이라 비었을 때(다음에 할 일을 알려준다), 검색 결과가 없을 때(조건을 되돌릴 길을 준다), 권한이 없어 못 볼 때(누구에게 요청할지 적는다). 어느 쪽이든 막다른 화면이 되면 안 된다.",
@@ -44,8 +44,8 @@ export const PATTERN_SECTIONS: Section[] = [
   {
     id: "loading",
     label: {
-      ko: "로딩 — 아직 오지 않았을 때",
-      en: "Loading — not here yet",
+      ko: "로딩",
+      en: "Loading",
     },
     note: {
       ko: "요청은 갔는데 답이 안 온 구간. 0.3초 안에 끝날 것 같으면 아무것도 띄우지 않고, 그보다 길면 들어갈 자리의 모양대로 뼈대를 그린다. 스피너는 크기를 예측할 수 없을 때만.",
@@ -56,8 +56,8 @@ export const PATTERN_SECTIONS: Section[] = [
   {
     id: "notice",
     label: {
-      ko: "알림 — 먼저 말해야 할 때",
-      en: "Notices — speaking first",
+      ko: "알림",
+      en: "Notices",
     },
     note: {
       ko: "사용자가 찾지 않았는데 시스템이 먼저 꺼내는 말. 지금 화면을 막을 만큼 급하면 다이얼로그, 읽고 넘어가면 되면 배너, 방금 한 일의 결과면 토스트. 급하지 않은 것을 다이얼로그로 띄우는 게 가장 흔한 실수다.",
@@ -67,7 +67,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "form",
-    label: { ko: "폼 · 설정 — 값을 받을 때", en: "Forms — taking input" },
+    label: { ko: "폼 · 설정", en: "Forms" },
     note: {
       ko: "사용자가 값을 넣고 시스템이 저장하는 구간. 언제 검사하고(입력 중이 아니라 칸을 떠날 때), 오류를 어디에 붙이고(칸 바로 아래), 저장을 언제 알릴지(설정은 즉시, 문서는 명시적으로)가 정해져 있어야 한다.",
       en: "Where the user supplies values and the system stores them. Settle three things: when you validate (on blur, not on keystroke), where errors sit (under the field), and how saving is confirmed (settings save instantly, documents save explicitly).",
@@ -76,7 +76,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "metric",
-    label: { ko: "지표 · 차트 — 숫자를 읽힐 때", en: "Metrics — making numbers read" },
+    label: { ko: "지표 · 차트", en: "Metrics" },
     note: {
       ko: "숫자 하나로 상태를 알리는 자리. 값만 있으면 크고 작음을 판단할 수 없으므로 비교 대상(지난주 대비, 목표 대비)이 늘 같이 있어야 한다. 추세가 중요하면 카드가 아니라 차트다.",
       en: "Where one number carries the state. A value alone can't be judged big or small — always pair it with a comparison (vs. last week, vs. target). If the trend matters more than the value, it's a chart, not a card.",
@@ -85,7 +85,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "list",
-    label: { ko: "목록 · 표 — 여러 개를 다룰 때", en: "Lists — many at once" },
+    label: { ko: "목록 · 표", en: "Lists" },
     note: {
       ko: "같은 종류가 여러 건 있는 화면. 훑어보는 게 목적이면 목록, 값끼리 비교하는 게 목적이면 표. 표를 골랐다면 정렬·필터·건수·페이지 넷 중 무엇을 뺄지 먼저 정한다.",
       en: "Many of the same kind. Scanning? A list. Comparing values across rows? A table. If it's a table, decide up front which of sort, filter, count and paging you are leaving out.",
@@ -94,7 +94,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "media",
-    label: { ko: "미디어 · 파일 — 올리고 재생할 때", en: "Media — upload and playback" },
+    label: { ko: "미디어 · 파일", en: "Media" },
     note: {
       ko: "이미지·소리·영상·첨부. 올리는 쪽은 진행률과 실패한 파일을 개별로 보여 줘야 하고, 보는 쪽은 화면 비율을 미리 잡아 두어야 로드될 때 레이아웃이 튀지 않는다.",
       en: "Images, audio, video, attachments. On the way in, show per-file progress and per-file failure. On the way out, reserve the aspect ratio up front so nothing jumps when it loads.",
@@ -103,7 +103,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "device",
-    label: { ko: "기기 제어 — 물리 상태를 바꿀 때", en: "Device control — changing physical state" },
+    label: { ko: "기기 제어", en: "Device control" },
     note: {
       ko: "화면 밖의 무언가가 실제로 움직이는 조작. 화면 안의 토글과 다른 점은 '요청함'과 '반영됨' 사이에 지연이 있다는 것 — 그 중간 상태를 반드시 보여 준다.",
       en: "Controls where something outside the screen actually moves. Unlike an in-app toggle, there is a lag between requested and applied — that middle state must be visible.",
@@ -112,7 +112,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "dev",
-    label: { ko: "개발 · 운영 — 만드는 쪽이 볼 때", en: "Developer surfaces — for the people building" },
+    label: { ko: "개발 · 운영", en: "Developer surfaces" },
     note: {
       ko: "최종 사용자가 아니라 만들고 운영하는 사람이 보는 화면. 로그·환경 변수·API 키·배포 상태. 정보 밀도를 높게 잡아도 되는 유일한 자리다.",
       en: "Screens for the people building and operating, not the end user. Logs, environment variables, API keys, deploy status. The one place where high information density is the right default.",
@@ -121,7 +121,7 @@ export const PATTERN_SECTIONS: Section[] = [
   },
   {
     id: "ai",
-    label: { ko: "AI 대화 — 에이전트와 주고받을 때", en: "AI conversation — talking with an agent" },
+    label: { ko: "AI 대화", en: "AI conversation" },
     note: {
       ko: "답이 한 번에 오지 않고 흘러나오며, 중간에 도구를 쓰고, 틀릴 수 있는 대화. 그래서 일반 채팅과 다르다 — 진행 중임을 보이고, 무엇을 근거로 했는지 열어 주고, 멈출 수 있어야 한다.",
       en: "Answers that stream instead of arriving, call tools midway, and can be wrong. That's what separates it from chat: show that it's working, expose what it relied on, and let the user stop it.",

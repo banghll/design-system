@@ -29,18 +29,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={cn("h-full antialiased font-sans", dmSans.variable, mono.variable)}
     >
-      <head>
+      <body className="flex min-h-full flex-col">
         {/* 한글 — Pretendard. Google Fonts 에 없어 CDN 에서 동적 서브셋으로 받는다.
+          *
+          * 이걸 <head> 안에 직접 두었더니 모든 페이지가 두 번 그려졌다. 브라우저가
+          * head 를 자기 방식으로 정리하면서 React 가 기대한 DOM 과 어긋났고,
+          * 하이드레이션에 실패한 React 가 옆에 트리를 새로 만들어 서버 HTML 이
+          * 그대로 남았다. React 19 는 본문 안의 stylesheet 를 head 로 알아서
+          * 올려 주므로 여기 두는 것이 맞다.
+          *
           * 자체 호스팅으로 옮기려면 dist/web/variable 을 public/ 에 두면 된다. */}
         <link
           rel="stylesheet"
-          as="style"
-          crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
-        <style>{`:root { --font-pretendard: "Pretendard Variable", Pretendard; }`}</style>
-      </head>
-      <body className="flex min-h-full flex-col">
         <ThemeProvider>
           <LangProvider>
             <TooltipProvider>{children}</TooltipProvider>

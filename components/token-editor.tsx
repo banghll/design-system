@@ -233,15 +233,48 @@ export function TokenEditor() {
     }
   }, [open])
 
+  /* 블록 미리보기는 iframe 이라 별도 문서다. 부모의 :root 를 바꿔도 안 따라온다 —
+   * 화면의 절반이 안 움직이면 "토큰 하나가 전부를 바꾼다" 는 말이 거짓이 된다.
+   * 같은 출처라 안을 만질 수 있으므로 같은 값을 함께 얹는다. */
+  const applyToFrames = (fn: (root: HTMLElement) => void) => {
+    for (const f of Array.from(document.querySelectorAll("iframe"))) {
+      try {
+        const doc = f.contentDocument
+        if (doc?.documentElement) fn(doc.documentElement)
+      } catch {
+        /* 다른 출처의 iframe 은 건드릴 수 없다. 조용히 넘어간다. */
+      }
+    }
+  }
+
   const setToken = (name: string, value: string) => {
     document.documentElement.style.setProperty(`--${name}`, value)
+    applyToFrames((r) => r.style.setProperty(`--${name}`, value))
     setEdits((e) => ({ ...e, [name]: value }))
     setSwatches((s) => ({ ...s, [name]: toHex(value) }))
   }
 
+  /* 나중에 뜨는 iframe(스크롤해서 새로 만들어지는 미리보기)에도 얹어야 한다.
+   * 편집기가 열려 있는 동안만 지켜본다. */
+  useEffect(() => {
+    if (!open || !Object.keys(edits).length) return
+    const paint = () =>
+      applyToFrames((r) => {
+        for (const [k, v] of Object.entries(edits)) r.style.setProperty(`--${k}`, v)
+      })
+    paint()
+    const id = window.setInterval(paint, 800)
+    return () => window.clearInterval(id)
+  }, [open, edits])
+
   const reset = () => {
     const root = document.documentElement
-    for (const k of Object.keys(edits)) root.style.removeProperty(`--${k}`)
+    for (const k of Object.keys(edits)) {
+      root.style.removeProperty(`--${k}`)
+    }
+    applyToFrames((r) => {
+      for (const k of Object.keys(edits)) r.style.removeProperty(`--${k}`)
+    })
     setEdits({})
     setTimeout(sync, 0)
   }

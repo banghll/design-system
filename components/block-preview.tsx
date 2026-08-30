@@ -12,6 +12,7 @@ import { ArrowUpRight, Maximize2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
+import { SelectBox } from "@/components/block-curator"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -55,7 +56,8 @@ export function BlockPreview({
   }, [])
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border">
+      <SelectBox id={block.id} />
       <div
         ref={holder}
         className="bg-muted/40 relative w-full overflow-hidden border-b"
@@ -90,7 +92,7 @@ export function BlockPreview({
 
         {/* 축소된 화면은 글씨가 작아 눌러 볼 수 있게 한다. iframe 자체는 클릭을 먹지 않는다. */}
         <Link
-          href={`/blocks/${block.id}`}
+          href={`/blocks/view/${block.id}`}
           className="focus-visible:ring-ring absolute inset-0 flex items-end justify-end p-3 opacity-0 transition-opacity outline-none group-hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2"
         >
           <span className="bg-background/90 flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs backdrop-blur">
@@ -117,7 +119,7 @@ export function BlockPreview({
             </Badge>
           ))}
           <Button asChild size="sm" variant="ghost" className="ml-auto h-7 px-2">
-            <Link href={`/blocks/${block.id}`}>
+            <Link href={`/blocks/view/${block.id}`}>
               {lang === "ko" ? "열기" : "Open"}
               <ArrowUpRight className="size-3.5" />
             </Link>

@@ -9,6 +9,7 @@ import { ArrowUpRight, Maximize2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
+import { SelectBox } from "@/components/block-curator"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -47,11 +48,14 @@ export function ThirdPartyPreview({
     return () => io.disconnect()
   }, [])
 
-  const href = `/blocks/3p/${block.id}`
+  const href = `/blocks/view3p/${block.id}`
+  /* iframe 은 실제 라우트를 띄운다. 뷰어를 뷰어 안에 넣을 수는 없다. */
+  const raw = `/blocks/3p/${block.id}`
   const src = SOURCES[block.source]
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border">
+      <SelectBox id={block.id} />
       <div
         ref={holder}
         className="bg-muted/40 relative w-full overflow-hidden border-b"
@@ -59,7 +63,7 @@ export function ThirdPartyPreview({
       >
         {show ? (
           <iframe
-            src={href}
+            src={raw}
             title={block.variant}
             loading="lazy"
             onLoad={() => setReady(true)}
