@@ -17,12 +17,23 @@
  * 마음에 들면 CSS 로 복사해 globals.css 에 붙이면 그때부터 기본값이 된다. */
 "use client"
 
-import { Check, Copy as CopyIcon, RotateCcw, SlidersHorizontal, X } from "lucide-react"
+import {
+  Check,
+  Copy as CopyIcon,
+  Loader2,
+  RotateCcw,
+  Save,
+  SlidersHorizontal,
+  Trash2,
+  X,
+} from "lucide-react"
 import { useTheme } from "next-themes"
 import { useCallback, useEffect, useState } from "react"
 
+import type { SavedTheme } from "@/app/api/themes/route"
 import { type Copy, useLang } from "@/components/lang"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   Select,
@@ -34,10 +45,57 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Slider } from "@/components/ui/slider"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { toast } from "sonner"
 
 /* 패널 폭. 본문 여백과 패널 자체가 같은 값을 봐야 어긋나지 않는다. */
 const PANEL = "23rem"
 const OPEN_KEY = "ds-editor-open"
+const EDITS_KEY = "ds-editor-edits"
+
+/* 간격 슬라이더 — 값이 아니라 "기준의 몇 배" 로 다룬다.
+ * px 로 직접 적게 하면 밀도 토큰을 바꿨을 때 이 값만 따로 놀게 된다. */
+const SPACE_TOKENS: {
+  name: string
+  label: Copy
+  note: Copy
+  min: number
+  max: number
+  step: number
+}[] = [
+  {
+    name: "pad-card",
+    label: { ko: "카드 안쪽 여백", en: "Card padding" },
+    note: {
+      ko: "카드의 여백이자 카드 안 요소 사이 간격. 하나가 둘을 겸한다",
+      en: "Both the card's padding and the gap between things inside it",
+    },
+    min: 2,
+    max: 8,
+    step: 0.5,
+  },
+  {
+    name: "h-control",
+    label: { ko: "컨트롤 높이", en: "Control height" },
+    note: {
+      ko: "버튼과 입력의 높이. 나란히 놓이므로 같은 값을 쓴다",
+      en: "Buttons and inputs share this — they sit side by side",
+    },
+    min: 6,
+    max: 12,
+    step: 0.5,
+  },
+  {
+    name: "pad-control",
+    label: { ko: "컨트롤 좌우 여백", en: "Control padding" },
+    note: {
+      ko: "버튼·입력 안쪽의 좌우 여백. 글자가 테두리에 붙지 않게",
+      en: "Horizontal room inside buttons and inputs, so text isn't against the edge",
+    },
+    min: 1,
+    max: 6,
+    step: 0.5,
+  },
+]
 
 /* ── 편집 대상 ────────────────────────────────────────────────
  * 전부를 열어 두면 고를 수가 없다. 화면의 인상을 실제로 좌우하는 것만 둔다. */
@@ -190,7 +248,11 @@ export function TokenEditor() {
   const [swatches, setSwatches] = useState<Record<string, string>>({})
   const [radius, setRadius] = useState(10)
   const [spacing, setSpacing] = useState(4)
+  const [space, setSpace] = useState<Record<string, number>>({})
   const [copied, setCopied] = useState(false)
+  const [name, setName] = useState("")
+  const [saved, setSaved] = useState<SavedTheme[]>([])
+  const [saving, setSaving] = useState(false)
 
   /* 열 때마다, 그리고 모드가 바뀔 때마다 지금 값을 다시 읽는다.
    * 라이트와 다크는 값이 다르므로 편집기도 지금 보고 있는 쪽을 보여 줘야 한다. */
@@ -201,13 +263,45 @@ export function TokenEditor() {
     const r = parseFloat(readVar("radius"))
     if (!Number.isNaN(r)) setRadius(Math.round(r * 16))
     const s = parseFloat(readVar("spacing-base") || "0.25")
-    if (!Number.isNaN(s)) setSpacing(Number((s * 16).toFixed(2)))
+    const base = Number.isNaN(s) ? 4 : Number((s * 16).toFixed(2))
+    if (!Number.isNaN(s)) setSpacing(base)
+
+    /* 컴포넌트 간격은 px 로 계산돼 나오므로, 기준으로 나눠 배수로 되돌린다. */
+    const mult: Record<string, number> = {}
+    for (const tok of SPACE_TOKENS) {
+      const px = parseFloat(readVar(tok.name))
+      if (!Number.isNaN(px) && base) mult[tok.name] = Number((px / base).toFixed(2))
+    }
+    setSpace(mult)
   }, [])
 
-  /* 페이지를 옮겨 다녀도 열린 채로 남는다 — 여러 화면을 오가며 확인하는 도구다. */
+  /* 페이지를 옮겨 다녀도 열린 채로, 바꾼 값도 그대로 남는다.
+   * 파운데이션에서 색을 밀고 컴포넌트 탭으로 건너가 확인하는 게 이 도구의 쓰임인데,
+   * 이동할 때마다 값이 초기화되면 그 일을 할 수가 없다. */
   useEffect(() => {
     if (localStorage.getItem(OPEN_KEY) === "1") setOpen(true)
+    try {
+      const saved = JSON.parse(localStorage.getItem(EDITS_KEY) ?? "{}")
+      if (saved && typeof saved === "object" && Object.keys(saved).length) {
+        const root = document.documentElement
+        for (const [k, v] of Object.entries(saved)) {
+          root.style.setProperty(`--${k}`, String(v))
+        }
+        setEdits(saved as Record<string, string>)
+      }
+    } catch {
+      /* 저장된 값이 깨졌으면 그냥 없는 셈 친다. */
+    }
   }, [])
+
+  /* 바뀔 때마다 기록한다. 새로고침해도, 다른 탭으로 가도 남는다. */
+  useEffect(() => {
+    if (Object.keys(edits).length) {
+      localStorage.setItem(EDITS_KEY, JSON.stringify(edits))
+    } else {
+      localStorage.removeItem(EDITS_KEY)
+    }
+  }, [edits])
 
   useEffect(() => {
     if (open) sync()
@@ -254,18 +348,31 @@ export function TokenEditor() {
     setSwatches((s) => ({ ...s, [name]: toHex(value) }))
   }
 
-  /* 나중에 뜨는 iframe(스크롤해서 새로 만들어지는 미리보기)에도 얹어야 한다.
-   * 편집기가 열려 있는 동안만 지켜본다. */
+  /* 편집한 값을 계속 얹어 둔다.
+   *
+   * 두 가지를 막는다.
+   *  1) 나중에 뜨는 iframe — 스크롤하다 새로 만들어진 미리보기에는 값이 없다.
+   *  2) 프리셋이 덮어쓰는 것 — 테마 전환기는 마운트될 때 저장된 프리셋을
+   *     :root 에 다시 얹는데, 그때 편집한 값이 지워진다. 편집기가 더 나중의,
+   *     더 구체적인 의도이므로 위에 남아야 한다. */
   useEffect(() => {
-    if (!open || !Object.keys(edits).length) return
-    const paint = () =>
+    const keys = Object.keys(edits)
+    if (!keys.length) return
+    const paint = () => {
+      const root = document.documentElement
+      for (const [k, v] of Object.entries(edits)) {
+        if (root.style.getPropertyValue(`--${k}`) !== v) {
+          root.style.setProperty(`--${k}`, v)
+        }
+      }
       applyToFrames((r) => {
         for (const [k, v] of Object.entries(edits)) r.style.setProperty(`--${k}`, v)
       })
+    }
     paint()
     const id = window.setInterval(paint, 800)
     return () => window.clearInterval(id)
-  }, [open, edits])
+  }, [edits])
 
   const reset = () => {
     const root = document.documentElement
@@ -292,6 +399,89 @@ export function TokenEditor() {
   }
 
   const count = Object.keys(edits).length
+
+  /* 저장한 테마 목록을 읽어 온다. 파일이 정본이라 다른 컴퓨터에서도 같은 목록이다. */
+  useEffect(() => {
+    if (!open) return
+    fetch("/api/themes")
+      .then((r) => r.json())
+      .then((j) => setSaved(j.themes ?? []))
+      .catch(() => {})
+  }, [open])
+
+  const push = async (body: object) => {
+    setSaving(true)
+    try {
+      const res = await fetch("/api/themes", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body),
+      })
+      const j = await res.json()
+      if (!res.ok) throw new Error(j.error ?? "저장하지 못했습니다")
+      setSaved(j.themes ?? [])
+      return true
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : String(e))
+      return false
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const save = async () => {
+    if (!name.trim() || !count) return
+    const ok = await push({
+      save: {
+        id: `t${Date.now().toString(36)}`,
+        name,
+        mode: resolvedTheme === "dark" ? "dark" : "light",
+        vars: edits,
+        at: new Date().toISOString(),
+      },
+    })
+    if (ok) {
+      toast.success(
+        lang === "ko" ? `«${name}» 으로 저장했습니다` : `Saved as "${name}"`,
+        {
+          description:
+            lang === "ko"
+              ? "data/themes.json 에 기록됐습니다. 커밋하면 다른 컴퓨터에서도 보입니다."
+              : "Written to data/themes.json — commit it and every machine sees it.",
+        }
+      )
+      setName("")
+    }
+  }
+
+  const remove = (id: string) => push({ remove: id })
+
+  /* 저장한 테마를 다시 얹는다. 지금 값을 밀어내는 것이므로,
+   * 얹기 전에 지금 얹혀 있던 것을 먼저 걷어낸다 — 두 테마가 섞이면 안 된다. */
+  const apply = (th: SavedTheme) => {
+    const root = document.documentElement
+    for (const k of Object.keys(edits)) root.style.removeProperty(`--${k}`)
+    for (const [k, v] of Object.entries(th.vars)) root.style.setProperty(`--${k}`, v)
+    applyToFrames((r) => {
+      for (const [k, v] of Object.entries(th.vars)) r.style.setProperty(`--${k}`, v)
+    })
+    setEdits(th.vars)
+    setName(th.name)
+    setTimeout(sync, 0)
+    if (th.mode !== resolvedTheme) {
+      toast(
+        lang === "ko"
+          ? `이 테마는 ${th.mode === "dark" ? "다크" : "라이트"} 모드에서 만든 값입니다`
+          : `Saved in ${th.mode} mode`,
+        {
+          description:
+            lang === "ko"
+              ? "지금 모드와 달라 대비가 어긋나 보일 수 있습니다."
+              : "Contrast may look off in the current mode.",
+        }
+      )
+    }
+  }
 
   return (
     <>
@@ -446,6 +636,48 @@ export function TokenEditor() {
                   }}
                 />
               </div>
+
+              <Separator />
+
+              {/* 위 둘은 화면 전체에 걸리고, 아래는 컴포넌트 하나씩에 걸린다.
+                * 배수로 다루므로 밀도를 바꾸면 이것들도 함께 따라온다. */}
+              <div>
+                <Label className="mb-1 block">
+                  {lang === "ko" ? "컴포넌트 간격" : "Component spacing"}
+                </Label>
+                <p className="text-muted-foreground text-xs leading-relaxed">
+                  {lang === "ko"
+                    ? "값이 아니라 «기준의 몇 배» 로 다룬다. px 로 직접 적으면 위의 밀도를 바꿨을 때 이 값만 따로 놀게 된다."
+                    : "Set as multiples of the base, not raw pixels — otherwise these stop following when you change density above."}
+                </p>
+              </div>
+
+              {SPACE_TOKENS.map((tok) => {
+                const v = space[tok.name] ?? tok.min
+                return (
+                  <div key={tok.name}>
+                    <div className="mb-1 flex items-baseline justify-between gap-3">
+                      <Label>{t(tok.label)}</Label>
+                      <code className="text-muted-foreground shrink-0 text-xs tabular-nums">
+                        ×{v} · {Math.round(v * spacing)}px
+                      </code>
+                    </div>
+                    <p className="text-muted-foreground mb-4 text-xs leading-relaxed">
+                      {t(tok.note)}
+                    </p>
+                    <Slider
+                      value={[v]}
+                      min={tok.min}
+                      max={tok.max}
+                      step={tok.step}
+                      onValueChange={([n]) => {
+                        setSpace((s) => ({ ...s, [tok.name]: n }))
+                        setToken(tok.name, `calc(var(--spacing) * ${n})`)
+                      }}
+                    />
+                  </div>
+                )
+              })}
             </TabsContent>
 
             <TabsContent value="type" className="mt-0 flex flex-col gap-8 p-6">
@@ -519,6 +751,29 @@ export function TokenEditor() {
                   : "Nothing changed yet. Nudge any value and watch the screen follow."}
               </p>
             )}
+            {/* 이름을 붙여 저장한다. 이름 없이 저장하면 나중에 목록에서
+              * 무엇이 무엇인지 알아볼 수 없어, 결국 아무것도 안 고른다. */}
+            <div className="flex gap-2">
+              <Input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void save()
+                }}
+                placeholder={lang === "ko" ? "테마 이름" : "Theme name"}
+                disabled={!count}
+                className="flex-1"
+              />
+              <Button size="sm" onClick={() => void save()} disabled={!count || !name.trim() || saving}>
+                {saving ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <Save className="size-4" />
+                )}
+                {lang === "ko" ? "저장" : "Save"}
+              </Button>
+            </div>
+
             <div className="flex gap-2">
               <Button
                 variant="outline"
@@ -530,7 +785,13 @@ export function TokenEditor() {
                 <RotateCcw className="size-4" />
                 {lang === "ko" ? "되돌리기" : "Reset"}
               </Button>
-              <Button size="sm" className="flex-1" onClick={copy} disabled={!count}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                onClick={copy}
+                disabled={!count}
+              >
                 {copied ? <Check className="size-4" /> : <CopyIcon className="size-4" />}
                 {copied
                   ? lang === "ko"
@@ -541,6 +802,50 @@ export function TokenEditor() {
                     : "Copy CSS"}
               </Button>
             </div>
+
+            {/* 저장한 것들. 눌러서 다시 얹거나 지운다. */}
+            {saved.length ? (
+              <div className="flex flex-col gap-1.5 pt-1">
+                <p className="text-muted-foreground text-xs">
+                  {lang === "ko"
+                    ? `저장한 테마 ${saved.length}개 · data/themes.json`
+                    : `${saved.length} saved · data/themes.json`}
+                </p>
+                {saved.map((th) => (
+                  <div
+                    key={th.id}
+                    className="hover:bg-muted/50 -mx-2 flex items-center gap-2 rounded-md px-2 py-1"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => apply(th)}
+                      className="min-w-0 flex-1 truncate text-left text-sm"
+                    >
+                      {th.name}
+                    </button>
+                    <span className="text-muted-foreground shrink-0 text-[11px]">
+                      {th.mode === "dark"
+                        ? lang === "ko"
+                          ? "다크"
+                          : "dark"
+                        : lang === "ko"
+                          ? "라이트"
+                          : "light"}
+                      {" · "}
+                      {Object.keys(th.vars).length}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => void remove(th.id)}
+                      aria-label={lang === "ko" ? `${th.name} 지우기` : `Delete ${th.name}`}
+                      className="text-muted-foreground hover:text-destructive shrink-0"
+                    >
+                      <Trash2 className="size-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         </Tabs>
       </aside>

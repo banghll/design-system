@@ -138,6 +138,16 @@
   /* 밀도의 기준값. 4px 이 기본 — 줄이면 조밀해지고 늘리면 여유로워진다 */
   --spacing-base: 0.25rem;
 
+  /* 컴포넌트 간격. 전부를 토큰으로 열면 어느 것도 기준이 안 되므로,
+   * 화면 인상을 실제로 좌우하는 셋만 연다.
+   *  --pad-card    카드 안쪽 여백이자 카드 안 요소 사이 간격
+   *  --h-control   버튼과 입력의 높이. 둘이 나란히 놓이므로 같은 값을 쓴다
+   *  --pad-control 그 안쪽 좌우 여백 */
+  --pad-card: calc(var(--spacing) * 4);
+  --pad-card-sm: calc(var(--spacing) * 3);
+  --h-control: calc(var(--spacing) * 8);
+  --pad-control: calc(var(--spacing) * 2.5);
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 }
