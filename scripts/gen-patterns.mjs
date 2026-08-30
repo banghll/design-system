@@ -107,13 +107,51 @@ const META = {
   "files-chat": ["ai", "이미지·문서를 주고받는 대화", "Conversation that passes images and documents"],
 }
 
+/* 두 칸을 쓰는 카드. 좁은 칸에서 뜻을 잃는 것들이다 —
+ * 차트는 축이 겹치고, 표는 열이 접히고, 대화는 말풍선이 한 단어씩 끊긴다. */
+const WIDE = new Set([
+  "visitors",
+  "analytics-card",
+  "contribution-history",
+  "dividend-income",
+  "stock-performance",
+  "power-usage",
+  "sleep-report",
+  "weekly-fitness-summary",
+  "bar-chart-card",
+  "savings-targets",
+  "recent-transactions",
+  "upcoming-payments",
+  "payments",
+  "release-catalog",
+  "contributors",
+  "catalog-toolbar",
+  "environment-variables",
+  "invoice",
+  "typography-specimen",
+  "ui-elements",
+  "style-overview",
+  "icon-preview-grid",
+  "simple-chat",
+  "group-chat",
+  "reasoning-chat",
+  "tool-chat",
+  "sources-chat",
+  "files-chat",
+  "transfer-funds",
+  "book-appointment",
+  "assign-issue",
+  "invite-team",
+  "shipping-address",
+])
+
 const all = []
 for (const [block, arr] of Object.entries(CARDS)) {
   for (const c of arr) {
     if (!c.exp) continue
     const meta = META[c.file]
     if (!meta) continue
-    all.push({ ...c, block, group: meta[0], ko: meta[1], en: meta[2] })
+    all.push({ ...c, block, group: meta[0], ko: meta[1], en: meta[2], wide: WIDE.has(c.file) })
   }
 }
 
@@ -131,7 +169,7 @@ const items = all
         c.title || c.file
       )}, note: { ko: ${JSON.stringify(c.ko)}, en: ${JSON.stringify(
         c.en
-      )} }, src: ${JSON.stringify(c.block)}, Comp: P${i} },`
+      )} }, src: ${JSON.stringify(c.block)}, wide: ${c.wide}, Comp: P${i} },`
   )
   .join("\n")
 
@@ -199,9 +237,16 @@ export default function PatternsPage() {
                   count={items.length}
                 />
 
-                <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-                  {items.map(({ id, title, note, src, Comp }) => (
-                    <article key={id} className="flex min-w-0 flex-col gap-3">
+                <div className="grid gap-8 [grid-template-columns:repeat(auto-fill,minmax(min(100%,21rem),1fr))]">
+                  {items.map(({ id, title, note, src, wide, Comp }) => (
+                    <article
+                      key={id}
+                      className={
+                        wide
+                          ? "flex min-w-0 flex-col gap-3 [@media(min-width:44rem)]:col-span-2"
+                          : "flex min-w-0 flex-col gap-3"
+                      }
+                    >
                       <div className="flex flex-col gap-1">
                         <div className="flex items-baseline gap-2">
                           <span className="text-sm font-medium">{title}</span>

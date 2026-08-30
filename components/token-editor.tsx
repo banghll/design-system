@@ -22,16 +22,19 @@ import {
   Copy as CopyIcon,
   Loader2,
   RotateCcw,
+  MousePointerClick,
   Save,
   SlidersHorizontal,
   Trash2,
   X,
 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import type { SavedTheme } from "@/app/api/themes/route"
 import { type Copy, useLang } from "@/components/lang"
+import { TokenInspector } from "@/components/token-inspector"
+import { readPx } from "@/lib/token-read"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -253,6 +256,8 @@ export function TokenEditor() {
   const [name, setName] = useState("")
   const [saved, setSaved] = useState<SavedTheme[]>([])
   const [saving, setSaving] = useState(false)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const [picking, setPicking] = useState(false)
 
   /* 열 때마다, 그리고 모드가 바뀔 때마다 지금 값을 다시 읽는다.
    * 라이트와 다크는 값이 다르므로 편집기도 지금 보고 있는 쪽을 보여 줘야 한다. */
@@ -260,17 +265,18 @@ export function TokenEditor() {
     const next: Record<string, string> = {}
     for (const { name } of COLOR_TOKENS) next[name] = toHex(readVar(name))
     setSwatches(next)
-    const r = parseFloat(readVar("radius"))
-    if (!Number.isNaN(r)) setRadius(Math.round(r * 16))
-    const s = parseFloat(readVar("spacing-base") || "0.25")
-    const base = Number.isNaN(s) ? 4 : Number((s * 16).toFixed(2))
-    if (!Number.isNaN(s)) setSpacing(base)
+    /* 값이 calc 나 rem 으로 적혀 있어도 px 로 받아 온다 —
+     * 문자열을 직접 파싱하면 calc 에서 NaN 이 나와 슬라이더가 최솟값으로 튄다. */
+    const r = readPx("radius")
+    if (r != null) setRadius(Math.round(r))
+    const base = readPx("spacing-base") ?? 4
+    setSpacing(Number(base.toFixed(2)))
 
-    /* 컴포넌트 간격은 px 로 계산돼 나오므로, 기준으로 나눠 배수로 되돌린다. */
+    /* 컴포넌트 간격은 기준으로 나눠 배수로 되돌린다. */
     const mult: Record<string, number> = {}
     for (const tok of SPACE_TOKENS) {
-      const px = parseFloat(readVar(tok.name))
-      if (!Number.isNaN(px) && base) mult[tok.name] = Number((px / base).toFixed(2))
+      const px = readPx(tok.name)
+      if (px != null && base) mult[tok.name] = Number((px / base).toFixed(2))
     }
     setSpace(mult)
   }, [])
@@ -430,7 +436,21 @@ export function TokenEditor() {
   }
 
   const save = async () => {
-    if (!name.trim() || !count) return
+    if (!count) return
+    /* 이름이 없으면 막는 대신 무엇이 필요한지 말하고 그 칸으로 데려간다. */
+    if (!name.trim()) {
+      nameRef.current?.focus()
+      toast(
+        lang === "ko" ? "이름을 붙여야 저장할 수 있습니다" : "Name it first",
+        {
+          description:
+            lang === "ko"
+              ? "나중에 목록에서 알아보려면 이름이 필요합니다."
+              : "You'll need it to recognise this later.",
+        }
+      )
+      return
+    }
     const ok = await push({
       save: {
         id: `t${Date.now().toString(36)}`,
@@ -528,6 +548,27 @@ export function TokenEditor() {
             className="shrink-0"
           >
             <X className="size-4" />
+          </Button>
+        </div>
+
+        {/* 슬라이더는 무엇을 고칠지 이미 아는 사람에게만 쓸모가 있다.
+          * 화면에서 짚는 쪽이 실제로 하는 일에 가까워 여기 위에 둔다. */}
+        <div className="px-6 pb-3">
+          <Button
+            variant={picking ? "default" : "outline"}
+            size="sm"
+            className="w-full justify-start"
+            onClick={() => setPicking((v) => !v)}
+            aria-pressed={picking}
+          >
+            <MousePointerClick className="size-4" />
+            {picking
+              ? lang === "ko"
+                ? "고르는 중 · Esc 로 나가기"
+                : "Picking · Esc to exit"
+              : lang === "ko"
+                ? "화면에서 요소 골라 고치기"
+                : "Pick an element on screen"}
           </Button>
         </div>
 
@@ -755,6 +796,7 @@ export function TokenEditor() {
               * 무엇이 무엇인지 알아볼 수 없어, 결국 아무것도 안 고른다. */}
             <div className="flex gap-2">
               <Input
+                ref={nameRef}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => {
@@ -764,7 +806,7 @@ export function TokenEditor() {
                 disabled={!count}
                 className="flex-1"
               />
-              <Button size="sm" onClick={() => void save()} disabled={!count || !name.trim() || saving}>
+              <Button size="sm" onClick={() => void save()} disabled={!count || saving}>
                 {saving ? (
                   <Loader2 className="size-4 animate-spin" />
                 ) : (
@@ -849,6 +891,13 @@ export function TokenEditor() {
           </div>
         </Tabs>
       </aside>
+
+      <TokenInspector
+        active={picking}
+        onExit={() => setPicking(false)}
+        setToken={setToken}
+        spacing={spacing}
+      />
     </>
   )
 }
