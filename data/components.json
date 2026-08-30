@@ -252,7 +252,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "carousel": {
     "$doc": "가로로 넘겨 보는 목록.",
@@ -354,7 +356,9 @@
         "paddingX": "spacing.4",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "context-menu": {
     "$doc": "우클릭으로 여는 그 자리의 동작.",
@@ -422,7 +426,9 @@
         "paddingX": "spacing.4",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "empty": {
     "$doc": "보여줄 것이 없을 때의 화면.",
@@ -523,7 +529,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "kbd": {
     "$doc": "단축키를 글자로 표기한 것.",
@@ -579,7 +587,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "message-scroller": {
     "$doc": "새 메시지가 오면 아래로 따라가는 대화 목록.",
@@ -644,7 +654,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "overlay-stage": {
     "$doc": "",
@@ -796,7 +808,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "separator": {
     "$doc": "구분선.",
@@ -838,7 +852,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "skeleton": {
     "$doc": "올 내용의 자리를 미리 잡아 두는 뼈대.",
@@ -953,7 +969,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "textarea": {
     "$doc": "여러 줄짜리 값을 받는 자리.",
@@ -999,7 +1017,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "toggle": {
     "$doc": "눌린 상태가 남는 버튼.",
@@ -1022,7 +1042,9 @@
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
-    }
+    },
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground"
   },
   "tooltip": {
     "$doc": "hover 로만 보이는 짧은 설명.",

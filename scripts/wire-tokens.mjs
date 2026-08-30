@@ -18,6 +18,12 @@ const WIRING = {
    * «이 면 색을 바꿀 데가 없는데?» 는 bg-muted 가 코드에 박혀 있었기 때문이다. */
   tabs: [
     ["components/ui/tabs.tsx", "default: \"bg-muted\"", "default: \"bg-(--tabs-surface) text-(--tabs-surface-foreground)\""],
+    /* 골라진 탭. «지금 어디» 를 말하는 색이라 면 색만큼 중요하다 */
+    [
+      "components/ui/tabs.tsx",
+      "data-active:bg-background data-active:text-foreground",
+      "data-active:bg-(--tabs-active-surface) data-active:text-(--tabs-active-surface-foreground)",
+    ],
   ],
   alert: [
     ["components/ui/alert.tsx", "rounded-lg", "rounded-(--alert-radius)"],

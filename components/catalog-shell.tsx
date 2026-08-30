@@ -108,10 +108,89 @@ export function CatalogShell({
       p.href === "/" ? pathname === "/" : pathname.startsWith(p.href)
     ) ?? PAGES[0]
 
-  /* 카탈로그 페이지는 차트·이미지가 늦게 자리를 잡아, 브라우저 기본 앵커 이동만으로는
-   * 목표가 어긋난다. 해시가 바뀌면 잠깐 동안 다시 맞춘다. */
+  /* 탭을 옮기면 맨 위에서 시작해야 한다.
+   *
+   * 한 번 scrollTo(0) 하는 것으로는 안 됐다. 이유가 둘이다.
+   *
+   *  1) 브라우저가 이전 위치를 스스로 복원한다(scrollRestoration = auto).
+   *     우리가 0 으로 보낸 뒤에 복원이 일어나면 그쪽이 이긴다.
+   *  2) 스크롤 앵커링 — 컴포넌트 화면은 예제 60벌이 늦게 자리를 잡는데,
+   *     그때 위쪽 내용이 커지면 크롬이 «보고 있던 것을 그대로 두려고»
+   *     스크롤을 아래로 밀어 준다. 그래서 한복판에서 열린다.
+   *
+   * 복원을 끄고, 내용이 자리를 잡는 동안 몇 프레임에 걸쳐 다시 0 으로 보낸다.
+   * 해시로 들어온 경우는 그 자리로 가야 하므로 건드리지 않는다. */
   useEffect(() => {
-    if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" })
+    if (typeof history !== "undefined" && "scrollRestoration" in history) {
+      history.scrollRestoration = "manual"
+    }
+  }, [])
+
+  useEffect(() => {
+    if (location.hash) return
+
+    /* 탭을 열면 한복판에서 시작하던 문제.
+     *
+     * 원인은 스크롤 복원도, 앵커링도 아니었다. 컴포넌트 화면에 깔린 예제 60벌
+     * 중 몇이 마운트하면서 **자기 자신을 화면으로 끌어온다** — 명령 팔레트는
+     * 선택된 항목을, 스크롤러는 마지막 메시지를. 그 요소 안에 스크롤 상자가
+     * 없으면 scrollIntoView 가 문서를 움직이고, 가장 늦게 뜬 것이 이긴다.
+     * 그래서 10만 px 지점에서 열렸다.
+     *
+     * 되돌리는 쪽(scroll 이벤트·매 프레임 되돌리기)은 둘 다 못 미더웠다 —
+     * 그 신호가 안 오는 환경이 있다. 그래서 원인을 막는다. 화면이 자리를 잡는
+     * 동안에만 scrollIntoView 를 재운다. 사용자가 손을 대면 곧바로 되돌린다. */
+    const proto = Element.prototype
+    const real = proto.scrollIntoView
+    let restored = false
+
+    proto.scrollIntoView = function () {
+      /* 아무것도 하지 않는다. 이 창은 방금 열렸고, 사용자는 맨 위를 보려고 왔다. */
+    }
+
+    /* 사용자가 손을 댔는가. 댔으면 그 위치가 옳으므로 건드리지 않는다. */
+    let touched = false
+    const extra = [400, 1200, 2400]
+    const snapUnlessTouched = () => {
+      if (!touched && window.scrollY !== 0) {
+        window.scrollTo({ top: 0, behavior: "instant" })
+      }
+    }
+
+    const restore = () => {
+      if (restored) return
+      restored = true
+      proto.scrollIntoView = real
+      /* 재우는 동안 새어 나간 스크롤이 조금 남는다. 아직 아무도 손대지
+       * 않았다면 마지막으로 한 번 맨 위로 보낸다. */
+      snapUnlessTouched()
+      /* 재운 창이 닫힌 뒤에도 늦게 뜨는 예제가 몇 px 씩 밀어낸다.
+       * 몇 번 더 맨 위로 붙들어 준다 — 손을 댄 뒤에는 하지 않는다. */
+      extra.forEach((ms) => window.setTimeout(snapUnlessTouched, ms))
+      window.clearTimeout(timer)
+      window.removeEventListener("wheel", byUser)
+      window.removeEventListener("touchstart", byUser)
+      window.removeEventListener("pointerdown", byUser)
+      window.removeEventListener("keydown", byUser)
+    }
+
+    const byUser = () => {
+      touched = true
+      restore()
+    }
+
+    const opts = { passive: true } as const
+    window.addEventListener("wheel", byUser, opts)
+    window.addEventListener("touchstart", byUser, opts)
+    window.addEventListener("pointerdown", byUser, opts)
+    window.addEventListener("keydown", byUser, opts)
+
+    /* 예제가 다 뜨는 데 실제로 몇 초가 걸린다. 그 뒤에는 반드시 돌려놓는다 —
+     * 돌려놓지 않으면 목차 클릭이 먹지 않는 화면이 된다. */
+    const timer = window.setTimeout(restore, 3000)
+
+    window.scrollTo({ top: 0, behavior: "instant" })
+    return restore
   }, [pathname])
 
   useEffect(() => {
@@ -152,7 +231,7 @@ export function CatalogShell({
         </div>
       </aside>
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col [overflow-anchor:none]">
         {/* 모바일 머리줄. 큰 화면에는 사이드바가 늘 보이므로 여기서는 사라진다.
           * 예전에는 이게 없어서, 폰으로 들어오면 그 페이지에서 나갈 방법이 없었다. */}
         <header className="bg-background/90 sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b px-3 backdrop-blur lg:hidden">

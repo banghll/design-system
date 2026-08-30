@@ -48,6 +48,8 @@ const KIND = {
 
 const RECIPE = {
   control: {
+    activeSurface: "color.accent",
+    activeSurfaceForeground: "color.accent-foreground",
     radius: "radius.md",
     gap: "spacing.2",
     sizes: {
@@ -59,6 +61,8 @@ const RECIPE = {
   surface: {
     surface: "color.muted",
     surfaceForeground: "color.foreground",
+    activeSurface: "color.background",
+    activeSurfaceForeground: "color.foreground",
     radius: "radius.lg",
     gap: "spacing.2",
     sizes: {

@@ -5,6 +5,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* 스크롤 앵커링을 끈다.
+ *
+ * 컴포넌트 화면은 예제 60벌이 늦게 자리를 잡으면서 문서가 12만 px 까지 자란다.
+ * 그때 크롬은 «보고 있던 것을 그대로 두려고» 스크롤을 아래로 밀어 주는데,
+ * 방금 연 화면에서는 그게 «한복판에서 열림» 으로 보인다.
+ * 목록 화면에서 이 기능은 도움이 되지 않는다. */
+html,
+body {
+  overflow-anchor: none;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -275,6 +286,8 @@
   --calendar-gap: calc(var(--spacing) * 2);
   --calendar-surface: var(--muted);
   --calendar-surface-foreground: var(--foreground);
+  --calendar-active-surface: var(--background);
+  --calendar-active-surface-foreground: var(--foreground);
   --calendar-md-padding-x: calc(var(--spacing) * 3);
   --calendar-md-font-size: var(--text-sm);
 
@@ -333,6 +346,8 @@
   --command-gap: calc(var(--spacing) * 4);
   --command-surface: var(--popover);
   --command-surface-foreground: var(--popover-foreground);
+  --command-active-surface: var(--background);
+  --command-active-surface-foreground: var(--foreground);
   --command-md-padding-x: calc(var(--spacing) * 4);
   --command-md-font-size: var(--text-sm);
 
@@ -373,6 +388,8 @@
   --dropdown-menu-gap: calc(var(--spacing) * 4);
   --dropdown-menu-surface: var(--popover);
   --dropdown-menu-surface-foreground: var(--popover-foreground);
+  --dropdown-menu-active-surface: var(--background);
+  --dropdown-menu-active-surface-foreground: var(--foreground);
   --dropdown-menu-md-padding-x: calc(var(--spacing) * 4);
   --dropdown-menu-md-font-size: var(--text-sm);
 
@@ -431,6 +448,8 @@
   --item-gap: calc(var(--spacing) * 2);
   --item-surface: var(--muted);
   --item-surface-foreground: var(--foreground);
+  --item-active-surface: var(--background);
+  --item-active-surface-foreground: var(--foreground);
   --item-md-padding-x: calc(var(--spacing) * 3);
   --item-md-font-size: var(--text-sm);
 
@@ -463,6 +482,8 @@
   --menubar-gap: calc(var(--spacing) * 2);
   --menubar-surface: var(--muted);
   --menubar-surface-foreground: var(--foreground);
+  --menubar-active-surface: var(--background);
+  --menubar-active-surface-foreground: var(--foreground);
   --menubar-md-padding-x: calc(var(--spacing) * 3);
   --menubar-md-font-size: var(--text-sm);
 
@@ -500,6 +521,8 @@
   --navigation-menu-gap: calc(var(--spacing) * 2);
   --navigation-menu-surface: var(--muted);
   --navigation-menu-surface-foreground: var(--foreground);
+  --navigation-menu-active-surface: var(--background);
+  --navigation-menu-active-surface-foreground: var(--foreground);
   --navigation-menu-md-padding-x: calc(var(--spacing) * 3);
   --navigation-menu-md-font-size: var(--text-sm);
 
@@ -580,6 +603,8 @@
   /* select — 직접 그린 선택 목록. */
   --select-radius: var(--radius-md);
   --select-gap: calc(var(--spacing) * 2);
+  --select-active-surface: var(--background);
+  --select-active-surface-foreground: var(--foreground);
   --select-sm-height: calc(var(--spacing) * 7);
   --select-sm-padding-x: calc(var(--spacing) * 2.5);
   --select-sm-font-size: var(--text-xs);
@@ -611,6 +636,8 @@
   --sidebar-gap: calc(var(--spacing) * 2);
   --sidebar-surface: var(--muted);
   --sidebar-surface-foreground: var(--foreground);
+  --sidebar-active-surface: var(--background);
+  --sidebar-active-surface-foreground: var(--foreground);
   --sidebar-md-padding-x: calc(var(--spacing) * 3);
   --sidebar-md-font-size: var(--text-sm);
 
@@ -677,6 +704,8 @@
   --tabs-gap: calc(var(--spacing) * 2);
   --tabs-surface: var(--muted);
   --tabs-surface-foreground: var(--foreground);
+  --tabs-active-surface: var(--background);
+  --tabs-active-surface-foreground: var(--foreground);
   --tabs-md-padding-x: calc(var(--spacing) * 3);
   --tabs-md-font-size: var(--text-sm);
 
@@ -696,6 +725,8 @@
   /* toggle-group — 토글 여러 개를 한 축으로 묶은 것. */
   --toggle-group-radius: var(--radius-md);
   --toggle-group-gap: calc(var(--spacing) * 2);
+  --toggle-group-active-surface: var(--background);
+  --toggle-group-active-surface-foreground: var(--foreground);
   --toggle-group-sm-height: calc(var(--spacing) * 7);
   --toggle-group-sm-padding-x: calc(var(--spacing) * 2.5);
   --toggle-group-sm-font-size: var(--text-xs);
@@ -709,6 +740,8 @@
   /* toggle — 눌린 상태가 남는 버튼. */
   --toggle-radius: var(--radius-md);
   --toggle-gap: calc(var(--spacing) * 2);
+  --toggle-active-surface: var(--background);
+  --toggle-active-surface-foreground: var(--foreground);
   --toggle-sm-height: calc(var(--spacing) * 7);
   --toggle-sm-padding-x: calc(var(--spacing) * 2.5);
   --toggle-sm-font-size: var(--text-xs);

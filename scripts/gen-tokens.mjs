@@ -16,10 +16,14 @@ const components = JSON.parse(fs.readFileSync("data/components.json", "utf8"))
 /* --- lib/tokens.ts 와 같은 규칙 (ts 를 node 에서 직접 못 읽어 옮겨 적는다).
  *     바뀌면 양쪽을 함께 고친다 — 아래 자체 검사가 어긋나면 멈춘다. --- */
 const OPEN_PROPS = [
-  "height", "paddingX", "radius", "fontSize", "gap", "surface", "surfaceForeground",
+  "height", "paddingX", "radius", "fontSize", "gap",
+  "surface", "surfaceForeground", "activeSurface", "activeSurfaceForeground",
 ]
 /* 크기와 무관하게 컴포넌트 전체에 걸리는 것 */
-const FLAT_PROPS = ["radius", "gap", "surface", "surfaceForeground"]
+const FLAT_PROPS = [
+  "radius", "gap", "surface", "surfaceForeground",
+  "activeSurface", "activeSurfaceForeground",
+]
 
 const kebab = (p) =>
   p === "paddingX"
@@ -28,7 +32,11 @@ const kebab = (p) =>
       ? "font-size"
       : p === "surfaceForeground"
         ? "surface-foreground"
-        : p
+        : p === "activeSurface"
+          ? "active-surface"
+          : p === "activeSurfaceForeground"
+            ? "active-surface-foreground"
+            : p
 
 const varName = (c, p, size) =>
   size ? `--${c}-${size}-${kebab(p)}` : `--${c}-${kebab(p)}`

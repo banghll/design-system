@@ -28,10 +28,19 @@ export const OPEN_PROPS = [
    * 어느 색을 쓰는지 화면에서 보이지 않으면 그건 편집할 수 있는 게 아니다. */
   "surface",
   "surfaceForeground",
+  /* 골라진 상태의 면. 탭·토글처럼 «지금 이거» 를 색으로 말하는 것들은
+   * 고른 면의 색이 안 열리면 절반만 편집할 수 있는 셈이다. */
+  "activeSurface",
+  "activeSurfaceForeground",
 ] as const
 
 /** 크기 계열과 색 계열은 고르는 방식이 다르다 */
-export const COLOR_PROPS = ["surface", "surfaceForeground"] as const
+export const COLOR_PROPS = [
+  "surface",
+  "surfaceForeground",
+  "activeSurface",
+  "activeSurfaceForeground",
+] as const
 
 export type OpenProp = (typeof OPEN_PROPS)[number]
 
@@ -41,6 +50,8 @@ export type ComponentRecipe = {
   gap?: string
   surface?: string
   surfaceForeground?: string
+  activeSurface?: string
+  activeSurfaceForeground?: string
   sizes?: Record<string, Partial<Record<OpenProp, string>>>
   /** 화면 설명용 — 색인과 상세 페이지가 읽는다 */
   $doc?: string
@@ -59,7 +70,11 @@ export function varName(component: string, prop: OpenProp, size?: string) {
         ? "font-size"
         : prop === "surfaceForeground"
           ? "surface-foreground"
-          : prop
+          : prop === "activeSurface"
+            ? "active-surface"
+            : prop === "activeSurfaceForeground"
+              ? "active-surface-foreground"
+              : prop
   return size ? `--${component}-${size}-${kebab}` : `--${component}-${kebab}`
 }
 
@@ -140,7 +155,14 @@ export function flatten(
   recipe: ComponentRecipe
 ): { name: string; ref: string; prop: OpenProp; size?: string }[] {
   const out: { name: string; ref: string; prop: OpenProp; size?: string }[] = []
-  for (const prop of ["radius", "gap", "surface", "surfaceForeground"] as const) {
+  for (const prop of [
+    "radius",
+    "gap",
+    "surface",
+    "surfaceForeground",
+    "activeSurface",
+    "activeSurfaceForeground",
+  ] as const) {
     const ref = recipe[prop]
     if (ref) out.push({ name: varName(name, prop), ref, prop })
   }

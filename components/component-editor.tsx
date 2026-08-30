@@ -48,8 +48,10 @@ const FOREGROUNDS = [
 ]
 
 function optionsFor(prop: OpenProp): string[] {
-  if (prop === "surface") return SURFACES.map((c) => `color.${c}`)
-  if (prop === "surfaceForeground") return FOREGROUNDS.map((c) => `color.${c}`)
+  if (prop === "surface" || prop === "activeSurface")
+    return SURFACES.map((c) => `color.${c}`)
+  if (prop === "surfaceForeground" || prop === "activeSurfaceForeground")
+    return FOREGROUNDS.map((c) => `color.${c}`)
   if (prop === "radius") return RADIUS_STEPS.map((r) => `radius.${r}`)
   if (prop === "fontSize") return TEXT_STEPS.map((t) => `text.${t}`)
   const spacing = SPACING_STEPS.map((n) => `spacing.${n}`)
@@ -68,6 +70,8 @@ const PROP_LABEL: Record<OpenProp, { ko: string; en: string }> = {
   gap: { ko: "요소 사이", en: "Gap" },
   surface: { ko: "면 색", en: "Surface" },
   surfaceForeground: { ko: "면 위 글자", en: "On surface" },
+  activeSurface: { ko: "고른 면", en: "Selected surface" },
+  activeSurfaceForeground: { ko: "고른 면 글자", en: "On selected" },
 }
 
 function Row({
@@ -189,7 +193,16 @@ export function ComponentEditor({ component }: { component: string }) {
         <div className="text-xs font-semibold">
           {lang === "ko" ? "모든 크기 공통" : "All sizes"}
         </div>
-        {(["surface", "surfaceForeground", "radius", "gap"] as const).map((p) => (
+        {(
+          [
+            "surface",
+            "surfaceForeground",
+            "activeSurface",
+            "activeSurfaceForeground",
+            "radius",
+            "gap",
+          ] as const
+        ).map((p) => (
           <Row key={p} component={component} prop={p} />
         ))}
       </div>
