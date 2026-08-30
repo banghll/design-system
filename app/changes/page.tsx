@@ -12,7 +12,7 @@ import { useState } from "react"
 import { Check, Copy, Download, RotateCcw, Trash2 } from "lucide-react"
 import Link from "next/link"
 
-import { CatalogShell } from "@/components/catalog-shell"
+import { CatalogHeader, CatalogMain, CatalogShell } from "@/components/catalog-shell"
 import {
   editsToCss,
   merged,
@@ -68,34 +68,24 @@ export default function ChangesPage() {
 
   return (
     <CatalogShell>
-      <main className="mx-auto w-full max-w-[900px] px-6 py-10 lg:px-10">
-        <div className="mb-2 flex flex-wrap items-center gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            {lang === "ko" ? "변경사항" : "Changes"}
-          </h1>
-          {components.length ? (
-            <Badge>
-              {lang === "ko"
-                ? `${components.length}개 컴포넌트`
-                : `${components.length} components`}
-            </Badge>
-          ) : null}
-        </div>
-        <p className="text-muted-foreground max-w-[70ch] text-sm leading-relaxed">
-          {lang === "ko"
-            ? "여기 있는 값은 이 브라우저에만 있습니다. 레포에 남기려면 내보내서 data/components.json 에 덮고 커밋하세요 — 그때부터가 정본입니다."
-            : "These values live in this browser only. Export, overwrite data/components.json, and commit — that is when they become real."}
-        </p>
-
-        {unsaved.length ? (
-          <p className="text-muted-foreground mt-3 text-xs">
+      <CatalogMain>
+        <CatalogHeader
+          title={{ ko: "변경사항", en: "Changes" }}
+          count={components.length ? String(components.length) : undefined}
+        >
+          <p>
             {lang === "ko"
-              ? `아직 저장하지 않은 컴포넌트: ${unsaved.join(", ")} — 저장해야 여기 올라옵니다.`
-              : `Not saved yet: ${unsaved.join(", ")} — save them to bring them here.`}
+              ? "여기 있는 값은 이 브라우저에만 있습니다. 레포에 남기려면 내보내서 data/components.json 에 덮고 커밋하세요 — 그때부터가 정본입니다."
+              : "These values live in this browser only. Export, overwrite data/components.json, and commit — that is when they become real."}
           </p>
-        ) : null}
-
-        <Separator className="my-8" />
+          {unsaved.length ? (
+            <p className="mt-3 text-sm">
+              {lang === "ko"
+                ? `아직 저장하지 않은 컴포넌트: ${unsaved.join(", ")} — 저장해야 여기 올라옵니다.`
+                : `Not saved yet: ${unsaved.join(", ")} — save them to bring them here.`}
+            </p>
+          ) : null}
+        </CatalogHeader>
 
         {components.length === 0 ? (
           <Empty>
@@ -229,7 +219,7 @@ export default function ChangesPage() {
             </div>
           </div>
         )}
-      </main>
+      </CatalogMain>
     </CatalogShell>
   )
 }

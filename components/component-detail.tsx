@@ -9,6 +9,7 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Check, Loader2, Search, TriangleAlert } from "lucide-react"
 
+import { CatalogMain } from "@/components/catalog-shell"
 import { ComponentEditor } from "@/components/component-editor"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
@@ -301,16 +302,22 @@ export function ComponentDetail({
   id,
   what,
   when,
+  wired = true,
+  example,
 }: {
   id: string
   what: string
   when: string
+  /** 레시피가 실제 컴포넌트 코드에 연결돼 있는가 */
+  wired?: boolean
+  /** 공식 예제 — 파일럿 밖 컴포넌트는 이걸 미리보기로 쓴다 */
+  example?: React.ReactNode
 }) {
   const { lang } = useLang()
   const Preview = PREVIEW[id]
 
   return (
-    <main className="mx-auto w-full max-w-[1400px] px-6 py-10 lg:px-10">
+    <CatalogMain>
       <Link
         href="/components"
         className="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-1.5 text-sm"
@@ -319,27 +326,39 @@ export function ComponentDetail({
         {lang === "ko" ? "컴포넌트 목록" : "All components"}
       </Link>
 
-      <div className="mb-2 flex flex-wrap items-center gap-3">
-        <h1 className="font-mono text-3xl font-semibold tracking-tight">{id}</h1>
-        <Badge variant="secondary">{lang === "ko" ? "편집 가능" : "Editable"}</Badge>
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <h1 className="font-mono text-5xl leading-tight font-semibold tracking-tight">
+          {id}
+        </h1>
+        {wired ? (
+          <Badge variant="secondary">{lang === "ko" ? "편집 가능" : "Editable"}</Badge>
+        ) : (
+          <Badge variant="outline">
+            {lang === "ko" ? "토큰만 · 코드 미연결" : "Tokens only"}
+          </Badge>
+        )}
         <code className="text-muted-foreground text-xs">
           components/ui/{id}.tsx
         </code>
       </div>
-      <p className="max-w-[68ch] text-sm leading-relaxed">{what}</p>
-      <p className="text-muted-foreground max-w-[68ch] text-sm leading-relaxed">
-        {when}
-      </p>
+      <div className="text-muted-foreground max-w-[72ch] text-base leading-relaxed">
+        <p className="text-foreground">{what}</p>
+        <p className="mt-2">{when}</p>
+      </div>
 
-      <Separator className="my-8" />
+      <Separator className="mt-10 mb-14" />
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
-        <section>
+        {/* data-token-scope — 편집 중인 값은 여기에만 얹힌다. 저장하면 :root 로 올라가
+          * 전 화면에 반영된다. 이게 없으면 색 한 칸 밀 때마다 문서 전체가 다시 그려진다. */}
+        <section data-token-scope>
           <h2 className="mb-5 text-sm font-semibold">
             {lang === "ko" ? "모든 변형과 상태" : "Every variant and state"}
           </h2>
           {Preview ? (
             <Preview />
+          ) : example ? (
+            example
           ) : (
             <p className="text-muted-foreground text-sm">
               {lang === "ko" ? "미리보기가 아직 없습니다." : "No preview yet."}
@@ -351,6 +370,16 @@ export function ComponentDetail({
           <div className="bg-card rounded-xl border p-5">
             <ComponentEditor component={id} />
           </div>
+
+          {/* 이어져 있지 않다는 사실을 숨기지 않는다. 값을 바꿔도 화면이 안 바뀌면
+            * 사람은 도구를 의심하는 게 아니라 자기가 잘못한 줄 안다. */}
+          {!wired ? (
+            <p className="text-muted-foreground mt-4 text-xs leading-relaxed">
+              {lang === "ko"
+                ? "이 컴포넌트는 토큰 이름만 있고 아직 코드가 그 이름을 쓰지 않습니다. 값을 바꿔도 미리보기는 그대로입니다 — scripts/wire-tokens.mjs 에 연결을 한 줄 적으면 살아납니다."
+                : "This component has token names but its code does not use them yet. Changing a value will not move the preview — add one line to scripts/wire-tokens.mjs."}
+            </p>
+          ) : null}
 
           <div className="text-muted-foreground mt-4 flex items-start gap-2 text-xs leading-relaxed">
             <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
@@ -376,6 +405,6 @@ export function ComponentDetail({
           </div>
         </aside>
       </div>
-    </main>
+    </CatalogMain>
   )
 }

@@ -16,28 +16,50 @@ export type Foundation = {
   text: Record<string, string>
 }
 
-/** 여는 속성. 다섯 개로 못 박는다 — 더 열면 토큰이 아니라 그냥 CSS다. */
+/** 여는 속성. 이 목록 밖은 열지 않는다 — 더 열면 토큰이 아니라 그냥 CSS다. */
 export const OPEN_PROPS = [
   "height",
   "paddingX",
   "radius",
   "fontSize",
   "gap",
+  /* 면 색. 탭 띠나 배지처럼 «이 면이 무슨 색인가» 가 컴포넌트의 정체성인 것들이
+   * 있는데, 파운데이션에서 --muted 를 찾아 바꾸는 길밖에 없었다. 어느 컴포넌트가
+   * 어느 색을 쓰는지 화면에서 보이지 않으면 그건 편집할 수 있는 게 아니다. */
+  "surface",
+  "surfaceForeground",
 ] as const
+
+/** 크기 계열과 색 계열은 고르는 방식이 다르다 */
+export const COLOR_PROPS = ["surface", "surfaceForeground"] as const
 
 export type OpenProp = (typeof OPEN_PROPS)[number]
 
 export type ComponentRecipe = {
+  /** 크기와 무관하게 이 컴포넌트 전체에 걸리는 값 */
   radius?: string
   gap?: string
+  surface?: string
+  surfaceForeground?: string
   sizes?: Record<string, Partial<Record<OpenProp, string>>>
+  /** 화면 설명용 — 색인과 상세 페이지가 읽는다 */
+  $doc?: string
+  /** 이 레시피가 실제 컴포넌트 코드에 연결돼 있는가 */
+  $wired?: boolean
 }
 
 export type Components = Record<string, ComponentRecipe>
 
 /** CSS 변수 이름. 이 함수 하나만 보면 이름 규칙이 전부 보인다. */
 export function varName(component: string, prop: OpenProp, size?: string) {
-  const kebab = prop === "paddingX" ? "padding-x" : prop === "fontSize" ? "font-size" : prop
+  const kebab =
+    prop === "paddingX"
+      ? "padding-x"
+      : prop === "fontSize"
+        ? "font-size"
+        : prop === "surfaceForeground"
+          ? "surface-foreground"
+          : prop
   return size ? `--${component}-${size}-${kebab}` : `--${component}-${kebab}`
 }
 
@@ -66,6 +88,8 @@ export function resolveRef(ref: string): string {
       return key === "base" ? "var(--radius)" : `var(--radius-${key})`
     case "text":
       return `var(--text-${key})`
+    case "color":
+      return `var(--${key})`
     case "control":
       if (key === "height") return "var(--h-control)"
       if (key === "paddingX") return "var(--pad-control)"
@@ -99,6 +123,8 @@ export function refToPx(ref: string, f: Foundation, rootFontPx = 16): number | n
     }
     case "text":
       return rem(f.text[key] ?? "")
+    case "color":
+      return null
     case "control":
       return key === "height"
         ? refToPx(f.control.height, f, rootFontPx)
@@ -114,7 +140,7 @@ export function flatten(
   recipe: ComponentRecipe
 ): { name: string; ref: string; prop: OpenProp; size?: string }[] {
   const out: { name: string; ref: string; prop: OpenProp; size?: string }[] = []
-  for (const prop of ["radius", "gap"] as const) {
+  for (const prop of ["radius", "gap", "surface", "surfaceForeground"] as const) {
     const ref = recipe[prop]
     if (ref) out.push({ name: varName(name, prop), ref, prop })
   }

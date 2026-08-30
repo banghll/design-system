@@ -20,6 +20,7 @@
 import {
   Check,
   ChevronRight,
+  Plus,
   Copy as CopyIcon,
   FilePlus,
   Loader2,
@@ -56,6 +57,23 @@ import { toast } from "sonner"
 const PANEL = "23rem"
 const OPEN_KEY = "ds-editor-open"
 const EDITS_KEY = "ds-editor-edits"
+
+/* 사용자가 직접 더한 색 이름.
+ *
+ * 팔레트는 닫혀 있어야 한다는 게 원칙이지만, 닫아 두기만 하면 필요한 이름이
+ * 생겼을 때 갈 곳이 없어 결국 컴포넌트 안에 hex 를 적게 된다. 그래서 더하는
+ * 길을 열되, 더한 것이 «내가 더한 것» 으로 보이게 표시하고 지울 수 있게 한다. */
+const CUSTOM_KEY = "ds-editor-custom"
+
+type CustomToken = { name: string; value: string }
+
+function readCustom(): CustomToken[] {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOM_KEY) ?? "[]") as CustomToken[]
+  } catch {
+    return []
+  }
+}
 
 /* 간격 슬라이더 — 값이 아니라 "기준의 몇 배" 로 다룬다.
  * px 로 직접 적게 하면 밀도 토큰을 바꿨을 때 이 값만 따로 놀게 된다. */
@@ -328,6 +346,36 @@ export function TokenEditor() {
   const [saving, setSaving] = useState(false)
   const nameRef = useRef<HTMLInputElement>(null)
   const [picking, setPicking] = useState(false)
+  const [custom, setCustom] = useState<CustomToken[]>([])
+  const [newName, setNewName] = useState("")
+
+  useEffect(() => setCustom(readCustom()), [])
+
+  /* 더한 색은 :root 에 얹어 둔다. 지우면 이름째로 사라진다 —
+   * 값만 지우고 이름을 남기면 «없는 색을 가리키는 참조» 가 생긴다. */
+  const saveCustom = (next: CustomToken[]) => {
+    setCustom(next)
+    try {
+      localStorage.setItem(CUSTOM_KEY, JSON.stringify(next))
+    } catch {}
+    for (const t of next) document.documentElement.style.setProperty(`--${t.name}`, t.value)
+  }
+
+  const addCustom = () => {
+    const name = newName.trim().replace(/^--/, "").replace(/[^a-z0-9-]/gi, "-").toLowerCase()
+    if (!name) return
+    if (custom.some((c) => c.name === name) || COLOR_TOKENS.some((c) => c.name === name)) {
+      toast.error(lang === "ko" ? "이미 있는 이름입니다" : "That name already exists")
+      return
+    }
+    saveCustom([...custom, { name, value: "#888888" }])
+    setNewName("")
+  }
+
+  const removeCustom = (name: string) => {
+    document.documentElement.style.removeProperty(`--${name}`)
+    saveCustom(custom.filter((c) => c.name !== name))
+  }
 
   /* 열 때마다, 그리고 모드가 바뀔 때마다 지금 값을 다시 읽는다.
    * 라이트와 다크는 값이 다르므로 편집기도 지금 보고 있는 쪽을 보여 줘야 한다. */
@@ -667,6 +715,64 @@ export function TokenEditor() {
                   ? `지금 편집 중인 모드: ${resolvedTheme === "dark" ? "다크" : "라이트"}. 모드를 바꾸면 그쪽 값을 따로 편집한다.`
                   : `Editing ${resolvedTheme === "dark" ? "dark" : "light"} mode. Switch modes to edit the other set.`}
               </p>
+              {custom.map((tok) => (
+                <div
+                  key={tok.name}
+                  className="hover:bg-muted/50 -mx-2 flex items-center gap-3 rounded-md px-2 py-1.5"
+                >
+                  <label className="relative size-8 shrink-0 cursor-pointer overflow-hidden rounded-md border">
+                    <span className="block size-full" style={{ background: tok.value }} />
+                    <input
+                      type="color"
+                      value={tok.value}
+                      onChange={(e) =>
+                        saveCustom(
+                          custom.map((c) =>
+                            c.name === tok.name ? { ...c, value: e.target.value } : c
+                          )
+                        )
+                      }
+                      className="absolute inset-0 cursor-pointer opacity-0"
+                    />
+                  </label>
+                  <div className="min-w-0 flex-1">
+                    <code className="text-xs">--{tok.name}</code>
+                    <p className="text-muted-foreground text-[11px]">
+                      {lang === "ko" ? "내가 더한 색" : "Added by you"}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeCustom(tok.name)}
+                    aria-label={lang === "ko" ? `${tok.name} 지우기` : `Delete ${tok.name}`}
+                    className="text-muted-foreground hover:text-destructive shrink-0"
+                  >
+                    <Trash2 className="size-3.5" />
+                  </button>
+                </div>
+              ))}
+
+              {/* 더하기. 팔레트를 닫아 두기만 하면 필요한 이름이 생겼을 때
+                * 컴포넌트 안에 hex 를 적게 된다 — 그것보다는 이름을 늘리는 편이 낫다. */}
+              <div className="mt-2 flex gap-2">
+                <Input
+                  size="sm"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") addCustom()
+                  }}
+                  placeholder={lang === "ko" ? "새 색 이름 (예: brand)" : "New color name"}
+                  className="flex-1"
+                />
+                <Button size="sm" variant="outline" onClick={addCustom} disabled={!newName.trim()}>
+                  <Plus className="size-4" />
+                  {lang === "ko" ? "더하기" : "Add"}
+                </Button>
+              </div>
+
+              <Separator className="my-3" />
+
               {COLOR_TOKENS.map((tok) => (
                 <div
                   key={tok.name}

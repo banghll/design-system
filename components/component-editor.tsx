@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { OPEN_PROPS, type OpenProp, refToPx } from "@/lib/tokens"
+import { COLOR_PROPS, OPEN_PROPS, type OpenProp, refToPx } from "@/lib/tokens"
 
 /* 고를 수 있는 참조. 속성마다 «말이 되는 것» 만 연다 —
  * 높이 자리에 radius 를 고를 수 있으면 그건 선택지가 아니라 함정이다. */
@@ -36,7 +36,20 @@ const SPACING_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14,
 const RADIUS_STEPS = ["sm", "md", "lg", "xl", "2xl", "3xl"]
 const TEXT_STEPS = ["xs", "sm", "base", "lg"]
 
+/* 면에 쓸 수 있는 색. 파운데이션의 이름만 고를 수 있고, 여기 없는 색은 쓸 수 없다 —
+ * 컴포넌트가 자기만의 색을 갖기 시작하면 팔레트가 팔레트가 아니게 된다. */
+const SURFACES = [
+  "background", "card", "popover", "muted", "secondary", "accent",
+  "primary", "destructive", "sidebar", "input", "border",
+]
+const FOREGROUNDS = [
+  "foreground", "muted-foreground", "card-foreground", "popover-foreground",
+  "secondary-foreground", "accent-foreground", "primary-foreground", "destructive",
+]
+
 function optionsFor(prop: OpenProp): string[] {
+  if (prop === "surface") return SURFACES.map((c) => `color.${c}`)
+  if (prop === "surfaceForeground") return FOREGROUNDS.map((c) => `color.${c}`)
   if (prop === "radius") return RADIUS_STEPS.map((r) => `radius.${r}`)
   if (prop === "fontSize") return TEXT_STEPS.map((t) => `text.${t}`)
   const spacing = SPACING_STEPS.map((n) => `spacing.${n}`)
@@ -53,6 +66,8 @@ const PROP_LABEL: Record<OpenProp, { ko: string; en: string }> = {
   radius: { ko: "모서리", en: "Radius" },
   fontSize: { ko: "글자 크기", en: "Font size" },
   gap: { ko: "요소 사이", en: "Gap" },
+  surface: { ko: "면 색", en: "Surface" },
+  surfaceForeground: { ko: "면 위 글자", en: "On surface" },
 }
 
 function Row({
@@ -97,9 +112,17 @@ function Row({
           ))}
         </SelectContent>
       </Select>
-      <code className="text-muted-foreground w-12 shrink-0 text-right text-[11px] tabular-nums">
-        {px == null ? "—" : `${Math.round(px)}px`}
-      </code>
+      {COLOR_PROPS.includes(prop as (typeof COLOR_PROPS)[number]) ? (
+        <span
+          className="size-5 shrink-0 rounded border"
+          style={{ background: `var(--${ref.split(".")[1]})` }}
+          title={ref}
+        />
+      ) : (
+        <code className="text-muted-foreground w-12 shrink-0 text-right text-[11px] tabular-nums">
+          {px == null ? "—" : `${Math.round(px)}px`}
+        </code>
+      )}
       {layer === "repo" ? (
         <span className="w-3.5 shrink-0" />
       ) : (
@@ -166,7 +189,7 @@ export function ComponentEditor({ component }: { component: string }) {
         <div className="text-xs font-semibold">
           {lang === "ko" ? "모든 크기 공통" : "All sizes"}
         </div>
-        {(["radius", "gap"] as const).map((p) => (
+        {(["surface", "surfaceForeground", "radius", "gap"] as const).map((p) => (
           <Row key={p} component={component} prop={p} />
         ))}
       </div>

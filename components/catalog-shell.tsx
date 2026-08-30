@@ -111,6 +111,10 @@ export function CatalogShell({
   /* 카탈로그 페이지는 차트·이미지가 늦게 자리를 잡아, 브라우저 기본 앵커 이동만으로는
    * 목표가 어긋난다. 해시가 바뀌면 잠깐 동안 다시 맞춘다. */
   useEffect(() => {
+    if (!location.hash) window.scrollTo({ top: 0, behavior: "instant" })
+  }, [pathname])
+
+  useEffect(() => {
     const settle = () => {
       const id = decodeURIComponent(location.hash.slice(1))
       if (!id) return
@@ -216,6 +220,32 @@ export function CatalogShell({
 
       {toc?.length ? <Toc items={toc} /> : null}
     </div>
+  )
+}
+
+/* 모든 페이지의 본문 틀.
+ *
+ * 폭과 위아래 여백을 한 곳에서 정한다. 예전에는 페이지마다 1100 · 1200 · 900 ·
+ * 1400 이 제각각이었고, 탭을 옮길 때마다 본문이 좌우로 흔들렸다. 흔들리는 폭은
+ * «다른 사이트로 왔나» 로 읽힌다.
+ *
+ * wide 는 패턴·블록처럼 카드가 실제로 넓어야 하는 화면만 쓴다. */
+export function CatalogMain({
+  wide = false,
+  children,
+}: {
+  wide?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <main
+      className={cn(
+        "mx-auto w-full px-6 py-14 lg:px-10",
+        wide ? "max-w-[1200px]" : "max-w-[1100px]"
+      )}
+    >
+      {children}
+    </main>
   )
 }
 

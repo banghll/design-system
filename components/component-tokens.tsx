@@ -58,11 +58,22 @@ function write(key: string, e: Edits) {
   } catch {}
 }
 
-/** 화면에 실제로 얹히는 값 — 저장된 것 위에 지금 만지는 것이 덮인다. */
-const effective = (staged: Edits, draft: Edits): Edits => ({ ...staged, ...draft })
+/* 값을 어디에 얹는가 — 여기가 체감 속도를 정한다.
+ *
+ * 예전에는 초안이든 저장이든 전부 :root 에 얹고 문서 전체를 다시 그렸다.
+ * 컴포넌트 화면에는 예제가 60벌 넘게 깔려 있어서, 색을 한 칸 밀 때마다
+ * 그 60벌이 통째로 다시 계산됐다. 느린 게 당연했다.
+ *
+ * 그래서 둘로 가른다.
+ *   초안  지금 보고 있는 미리보기 영역([data-token-scope])에만 얹는다
+ *   저장  :root 에 얹어 전 화면에 반영한다
+ *
+ * «만지는 동안은 눈앞만, 저장하면 전체» 가 되고, 편집 중 다시 그려지는 범위가
+ * 문서 전체에서 미리보기 한 덩어리로 줄어든다. */
+const scopes = () =>
+  [...document.querySelectorAll<HTMLElement>("[data-token-scope]")]
 
-function apply(edits: Edits, base: Components) {
-  const root = document.documentElement
+function applyTo(el: HTMLElement, edits: Edits, base: Components) {
   const live = new Set<string>()
 
   for (const [k, ref] of Object.entries(edits)) {
@@ -72,7 +83,7 @@ function apply(edits: Edits, base: Components) {
     if (!OPEN_PROPS.includes(prop)) continue
     const name = varName(component, prop, size)
     try {
-      root.style.setProperty(name, resolveRef(ref))
+      el.style.setProperty(name, resolveRef(ref))
       live.add(name)
     } catch {
       /* 참조가 깨졌으면 그냥 두고 넘어간다 — 화면이 멈추는 것보다 낫다 */
@@ -82,11 +93,19 @@ function apply(edits: Edits, base: Components) {
   for (const name of Object.keys(base)) {
     if (name.startsWith("$")) continue
     for (const v of flatten(name, base[name] as ComponentRecipe)) {
-      if (!live.has(v.name)) root.style.removeProperty(v.name)
+      if (!live.has(v.name)) el.style.removeProperty(v.name)
     }
   }
 
-  nudge(root)
+  nudge(el)
+}
+
+function apply(staged: Edits, draft: Edits, base: Components) {
+  applyTo(document.documentElement, staged, base)
+  const boxes = scopes()
+  /* 미리보기 영역이 없는 화면(판정 화면 등)에서는 초안을 보여 줄 곳이 없다.
+   * 그런 화면은 저장된 값만 보여 준다 — «저장해야 전체에 반영» 과 같은 말이다. */
+  for (const el of boxes) applyTo(el, draft, base)
 }
 
 /* 값만 바꿨을 때 이미 그려진 요소가 옛 크기에 머무르는 브라우저가 있다.
@@ -148,7 +167,7 @@ export function ComponentTokenProvider({
     const s = read(STAGED_KEY)
     setDraft(d)
     setStaged(s)
-    apply(effective(s, d), base)
+    apply(s, d, base)
   }, [base])
 
   /* 다른 탭에서 고친 것도 따라온다 — /components/button 과 /preview 를
@@ -160,7 +179,7 @@ export function ComponentTokenProvider({
       const s = read(STAGED_KEY)
       setDraft(d)
       setStaged(s)
-      apply(effective(s, d), base)
+      apply(s, d, base)
     }
     window.addEventListener("storage", onStorage)
     return () => window.removeEventListener("storage", onStorage)
@@ -172,7 +191,7 @@ export function ComponentTokenProvider({
       write(STAGED_KEY, s)
       setDraft(d)
       setStaged(s)
-      apply(effective(s, d), base)
+      apply(s, d, base)
     },
     [base]
   )
@@ -236,7 +255,9 @@ export function ComponentTokenProvider({
       if (!recipe) return undefined
       return size
         ? recipe.sizes?.[size]?.[prop]
-        : (recipe[prop as "radius" | "gap"] as string | undefined)
+        : (recipe[prop as "radius" | "gap" | "surface" | "surfaceForeground"] as
+            | string
+            | undefined)
     },
     [draft, staged, base]
   )

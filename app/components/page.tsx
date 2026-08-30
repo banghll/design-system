@@ -12,6 +12,8 @@ import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-s
 import { OpenState } from "@/components/examples/open-states"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { SlidersHorizontal } from "lucide-react"
 import { PAGES } from "@/lib/catalog-nav"
 import EDITABLE from "@/data/components.json"
 
@@ -256,18 +258,23 @@ export default function ComponentsPage() {
                   <article key={id} id={id} className="scroll-mt-6">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-lg font-semibold">{id}</h3>
-                        {editable.has(id) ? (
-                          <Link
-                            href={"/components/" + id}
-                            className="text-primary text-xs underline underline-offset-4"
-                          >
-                            {lang === "ko" ? "편집 →" : "Edit →"}
-                          </Link>
-                        ) : null}
+                        <h3 className="text-xl font-semibold tracking-tight">{id}</h3>
                         <code className="text-muted-foreground text-[11px]">
                           components/ui/{id}.tsx
                         </code>
+                        {editable.has(id) ? (
+                          <Button
+                            asChild
+                            size="sm"
+                            variant="outline"
+                            className="ml-auto bg-background"
+                          >
+                            <Link href={"/components/" + id}>
+                              <SlidersHorizontal />
+                              {lang === "ko" ? "편집" : "Edit"}
+                            </Link>
+                          </Button>
+                        ) : null}
                       </div>
                       <p className="mt-1.5 max-w-[68ch] text-sm leading-relaxed">
                         {t(what)}

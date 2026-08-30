@@ -22,7 +22,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react"
 
-import { CatalogShell } from "@/components/catalog-shell"
+import { CatalogHeader, CatalogMain, CatalogShell } from "@/components/catalog-shell"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -358,22 +358,14 @@ export default function PreviewPage() {
 
   return (
     <CatalogShell>
-      <main className="mx-auto w-full max-w-[1200px] px-6 py-10 lg:px-10">
-        <div className="mb-2 flex flex-wrap items-center gap-3">
-          <h1 className="text-3xl font-semibold tracking-tight">
-            {lang === "ko" ? "판정 화면" : "Judgement screens"}
-          </h1>
-          <Badge variant="secondary">
-            {lang === "ko" ? "밀도 검증 전용" : "Density only"}
-          </Badge>
-        </div>
-        <p className="text-muted-foreground max-w-[70ch] text-sm leading-relaxed">
-          {lang === "ko"
-            ? "컴포넌트를 나열한 화면으로는 밀도를 판단할 수 없습니다. 표 한 줄에 버튼이 들어갔을 때, 폼이 한 화면에 들어오는지, 카드가 여러 장일 때 여백이 어떤지 — 그건 실제 화면에서만 보입니다. 컴포넌트 토큰을 바꾸면 이 세 화면이 즉시 따라옵니다."
-            : "You cannot judge density from a gallery of components. A button inside a table row, a form that must fit one screen, cards side by side — only real screens show that. Change a component token and these three follow immediately."}
-        </p>
-
-        <Separator className="my-8" />
+      <CatalogMain>
+        <CatalogHeader title={{ ko: "판정 화면", en: "Judgement" }} count="3">
+          <p>
+            {lang === "ko"
+              ? "컴포넌트를 나열한 화면으로는 밀도를 판단할 수 없습니다. 표 한 줄에 버튼이 들어갔을 때, 폼이 한 화면에 들어오는지, 카드가 여러 장일 때 여백이 어떤지 — 그건 실제 화면에서만 보입니다. 저장한 컴포넌트 토큰이 이 세 화면에 반영됩니다."
+              : "You cannot judge density from a gallery of components. A button inside a table row, a form that must fit one screen, cards side by side — only real screens show that. Saved component tokens land here."}
+          </p>
+        </CatalogHeader>
 
         <Tabs defaultValue="list">
           <TabsList>
@@ -395,7 +387,7 @@ export default function PreviewPage() {
             <DashboardScreen />
           </TabsContent>
         </Tabs>
-      </main>
+      </CatalogMain>
     </CatalogShell>
   )
 }
