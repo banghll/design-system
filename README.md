@@ -18,17 +18,62 @@ shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스와, 그것
 | `/studio` | 스튜디오 · 이미지 생성 |
 | `/reel` | 릴 · 영상 생성 ([PRD](docs/prd-reel.md)) |
 
-## 다른 컴퓨터에서 시작하기
+## 다른 컴퓨터에서 이어서 작업하기
+
+### 한 번만 — 원격 저장소 만들기
+
+이 레포는 아직 **이 컴퓨터에만** 있다. 옮기려면 올릴 곳이 하나 필요하다.
+
+1. github.com 에서 빈 저장소를 만든다. **Private 로.** README·.gitignore 는 체크하지 않는다 —
+   이미 있는 것과 부딪힌다.
+2. 여기서 연결하고 민다.
 
 ```bash
-git clone <이 저장소 주소>
+git remote add origin https://github.com/<계정>/design-system.git
+git push -u origin master
+```
+
+### 그다음부터 — 다른 컴퓨터에서
+
+```bash
+git clone https://github.com/<계정>/design-system.git
 cd design-system
 npm install
 npm run dev
 ```
 
-http://localhost:3000 — Node 20 이상이면 된다. 다른 준비물은 없다.
-데이터베이스도 API 키도 쓰지 않는다. 씨네덱의 기록은 브라우저 localStorage 에만 남는다.
+http://localhost:3000 — **Node 20 이상**이면 된다 (여기서는 24.19). 데이터베이스도 API 키도 없다.
+
+### 오갈 때
+
+```bash
+git pull      # 시작할 때
+git push      # 끝낼 때
+```
+
+두 컴퓨터에서 같은 파일을 고쳤으면 충돌이 난다. 한쪽을 끝내고 밀고, 다른 쪽에서 당긴 뒤
+시작하는 순서를 지키면 안 난다.
+
+### 무엇이 따라가고 무엇이 안 따라가나
+
+**따라간다** — 코드 전부, 저장한 테마(`data/themes.json`), 숨긴·지운 블록 목록,
+블록 썸네일, 에이전트 규칙(`AGENTS.md` · `docs/agentic-rules.md` ·
+`.claude/skills/build-screen`), 색인(`design-system.json`). 새 컴퓨터에서
+Claude Code 를 열면 규칙과 스킬이 그대로 걸린다.
+
+**안 따라간다** — `node_modules`(→ `npm install`), `.next`·`out`(빌드 결과),
+`vendor`(서드파티 원본 클론, 필요하면 `node scripts/fetch-3p.mjs`),
+그리고 **브라우저 localStorage 에 있는 것**: 편집기에서 아직 저장 안 한 값,
+언어·다크모드 선택, 씨네덱의 평점 기록. 이건 컴퓨터마다 따로 논다.
+
+> 편집기에서 만든 테마는 **이름을 붙여 저장**해야 `data/themes.json` 에 들어가고,
+> 그래야 커밋돼서 따라간다. 저장 안 한 값은 그 브라우저에만 있다.
+
+### 대화 이력은 어떻게 하나
+
+코드는 git 이 옮겨 주지만 **여태까지의 대화는 안 따라간다.** 새 컴퓨터에서는
+이 README 와 `docs/agentic-rules.md` 가 그 자리를 대신하도록 써 뒀다 —
+새 세션에서 "AGENTS.md 읽고 시작해" 라고 한 줄 주면 규칙·색인·금지 사항을 다 물고 들어간다.
 
 ## 에이전트로 화면 만들기
 
