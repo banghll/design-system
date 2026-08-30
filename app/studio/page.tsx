@@ -93,12 +93,42 @@ export default function StudioPage() {
       className="bg-background text-foreground flex h-dvh flex-col overflow-x-clip"
       style={
         {
-          /* --spacing is computed at :root, so overriding --spacing-base here
-           * would do nothing. Override the name that actually gets read. */
-          "--spacing": "0.22rem",
-          "--h-control": "calc(var(--spacing) * 8)",
-          "--pad-control": "calc(var(--spacing) * 2.5)",
-          "--pad-card": "calc(var(--spacing) * 3.5)",
+          "--secondary": "#f2f2f2",
+          "--muted": "#f2f2f2",
+          "--accent": "#f7f7f7",
+          "--sidebar": "#ffffff",
+          "--primary-foreground": "#ffffff",
+          "--card": "#ffffff",
+          "--background": "#fafafa",
+          "--primary": "#292929",
+          /* --spacing-base 가 아니라 --spacing. :root 에서 이미 계산돼 상속되므로
+           * 하위에서 base 를 바꿔도 안 먹는다. */
+          "--spacing": "0.25rem",
+          "--pad-card": "calc(var(--spacing) * 5)",
+          "--h-control": "calc(var(--spacing) * 10)",
+          "--pad-control": "calc(var(--spacing) * 4)",
+          "--font-sans": "Geist, var(--font-pretendard), ui-sans-serif, sans-serif",
+
+          /* Test 에 없는 나머지 절반 — 라이트 모드의 글자와 선.
+           * 테마가 «바꾼 값» 만 저장하기 때문에, 다른 모드 위에 입힐 때는
+           * 짝이 되는 값들을 함께 세워 줘야 대비가 무너지지 않는다. */
+          "--foreground": "#252525",
+          "--card-foreground": "#252525",
+          "--popover": "#ffffff",
+          "--popover-foreground": "#252525",
+          "--secondary-foreground": "#292929",
+          "--accent-foreground": "#292929",
+          "--muted-foreground": "#737373",
+          "--border": "#e5e5e5",
+          "--input": "#e5e5e5",
+          "--ring": "#a3a3a3",
+          "--sidebar-foreground": "#252525",
+          "--destructive": "#e7000b",
+          /* Test 가 정한 컨트롤 값에서 탭만 한 단 내린다 —
+           * 탭이 버튼과 같은 높이면 «전환» 이 «실행» 처럼 읽힌다. */
+          "--h-tab": "calc(var(--spacing) * 8)",
+          "--pad-tab": "calc(var(--spacing) * 3)",
+          "--gap-text": "calc(var(--spacing) * 1)",
         } as React.CSSProperties
       }
     >
