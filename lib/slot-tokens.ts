@@ -46,8 +46,8 @@ export const TOKEN_SPECS: Record<string, TokenSpec> = {
     max: 5.5,
     step: 0.25,
   },
-  "pad-card": {
-    name: "pad-card",
+  "card-md-padding-x": {
+    name: "card-md-padding-x",
     label: { ko: "카드 안쪽 여백", en: "Card padding" },
     note: {
       ko: "카드의 여백이자 카드 안 요소 사이 간격",
@@ -87,10 +87,10 @@ export const TOKEN_SPECS: Record<string, TokenSpec> = {
 /* data-slot → 그 컴포넌트가 쓰는 간격·크기 토큰.
  * 색은 여기 없다 — 화면에서 읽어 맞춘다. */
 export const SLOT_TOKENS: Record<string, string[]> = {
-  card: ["pad-card", "radius"],
-  "card-header": ["pad-card"],
-  "card-content": ["pad-card"],
-  "card-footer": ["pad-card", "radius"],
+  card: ["card-md-padding-x", "radius"],
+  "card-header": ["card-md-padding-x"],
+  "card-content": ["card-md-padding-x"],
+  "card-footer": ["card-md-padding-x", "radius"],
   button: ["h-control", "pad-control", "radius"],
   input: ["h-control", "pad-control", "radius"],
   "input-group": ["h-control", "pad-control", "radius"],

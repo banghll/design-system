@@ -38,7 +38,18 @@ node -e 'const r=require("./design-system.json");
 
 위에서부터 내려온다. 컴포넌트부터 시작하면 언제나 패턴을 다시 짜게 된다.
 
-### 2. 토큰만 쓴다
+### 2. 토큰만 쓴다 — 두 층이다
+
+- `data/foundation.json` — 전역. **값이 리터럴로 적히는 유일한 자리**
+- `data/components.json` — 컴포넌트 레시피. 파운데이션을 **참조만** 한다
+
+컴포넌트 값에 px 를 적지 않는다. `"height": "spacing.9"` 처럼 이름을 가리켜야
+밀도 기준을 바꿨을 때 함께 움직인다. 고친 뒤에는 `npm run gen`.
+
+편집 화면은 `/components/<id>` 다 — 지금은 button · input · card 셋.
+여는 속성은 height · paddingX · radius · fontSize · gap 다섯으로 못 박혀 있다.
+바꾼 결과는 `/preview` 세 화면(목록 · 폼 · 대시보드)에서 판정한다.
+
 
 - 색: `bg-primary`, `text-muted-foreground` — `#hex` 금지
 - 간격: `--spacing` 배수 — `p-4`, `gap-2`, `p-(--pad-card)`
@@ -66,7 +77,10 @@ node scripts/check-screen.mjs app/<이름>/page.tsx
 
 ### 4. 없는 걸 만들어야 한다면
 
-먼저 **보고한다.** "이건 시스템에 없어서 새로 만들어야 하는데, 이런 이유입니다."
+먼저 **보고한다.** 만들기로 했다면 `components/ui/` 가 아니라
+`components/_draft/` 에 만든다 — 규칙은 그 폴더의 README 에 있다.
+검사기가 `components/ui` 의 색인 밖 파일을 잡는다.
+ "이건 시스템에 없어서 새로 만들어야 하는데, 이런 이유입니다."
 승인 없이 `components/ui` 에 새 파일을 만들지 않는다. 시스템에 없는 것이
 화면마다 하나씩 생기면 그게 곧 시스템이 없는 상태다.
 
@@ -87,6 +101,7 @@ node scripts/check-screen.mjs app/<이름>/page.tsx
 
 | 명령 | 하는 일 |
 | --- | --- |
+| `node scripts/gen-tokens.mjs` | `data/*.json` → `globals.css` 의 생성 구획 |
 | `node scripts/gen-registry.mjs` | `design-system.json` — 에이전트가 읽는 색인 |
 | `node scripts/gen-components.mjs` | `/components` 페이지 |
 | `node scripts/gen-patterns.mjs` | `/patterns` 페이지 |

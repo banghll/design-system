@@ -73,8 +73,8 @@ const SPACE_TOKENS: {
     group: { ko: "전체 기준", en: "Baseline" },
     label: { ko: "컨트롤 높이", en: "Control height" },
     note: {
-      ko: "아래 버튼·입력·탭이 기본값으로 이 값을 받는다. 여기만 바꾸면 셋이 함께 움직인다",
-      en: "Buttons, inputs and tabs inherit this. Change it here and all three move together",
+      ko: "한 줄에 나란히 서는 것들이 받는 기준. 버튼·입력의 기본 크기와 셀렉트·토글이 전부 여기서 온다",
+      en: "The baseline for everything that stands in a row — button and input defaults, selects and toggles.",
     },
     min: 6,
     max: 14,
@@ -85,59 +85,11 @@ const SPACE_TOKENS: {
     group: { ko: "전체 기준", en: "Baseline" },
     label: { ko: "컨트롤 좌우 여백", en: "Control padding" },
     note: {
-      ko: "같은 방식으로 버튼·입력이 이 값을 물려받는다",
-      en: "Buttons and inputs inherit this the same way",
+      ko: "같은 방식으로 좌우 여백이 내려온다",
+      en: "Horizontal room comes down the same way",
     },
     min: 1,
     max: 8,
-    step: 0.5,
-  },
-  {
-    name: "h-button",
-    group: { ko: "버튼", en: "Button" },
-    label: { ko: "높이", en: "Height" },
-    note: {
-      ko: "버튼만 따로 키우고 싶을 때. 기준을 덮어쓴다",
-      en: "When only the button should grow — this overrides the baseline",
-    },
-    min: 6,
-    max: 16,
-    step: 0.5,
-  },
-  {
-    name: "pad-button",
-    group: { ko: "버튼", en: "Button" },
-    label: { ko: "좌우 여백", en: "Padding" },
-    note: {
-      ko: "글자가 테두리에 붙지 않게. 아이콘만 있는 버튼에는 안 걸린다",
-      en: "Keeps the label off the edge. Icon-only buttons are unaffected",
-    },
-    min: 1,
-    max: 10,
-    step: 0.5,
-  },
-  {
-    name: "h-input",
-    group: { ko: "입력", en: "Input" },
-    label: { ko: "높이", en: "Height" },
-    note: {
-      ko: "버튼과 나란히 놓이는 자리가 많아, 다르게 두면 줄이 어긋나 보인다",
-      en: "These often sit beside buttons — a mismatch reads as a broken row",
-    },
-    min: 6,
-    max: 16,
-    step: 0.5,
-  },
-  {
-    name: "pad-input",
-    group: { ko: "입력", en: "Input" },
-    label: { ko: "좌우 여백", en: "Padding" },
-    note: {
-      ko: "커서가 테두리에서 얼마나 떨어져 시작하는지",
-      en: "How far from the edge the cursor starts",
-    },
-    min: 1,
-    max: 10,
     step: 0.5,
   },
   {
@@ -158,22 +110,10 @@ const SPACE_TOKENS: {
     label: { ko: "좌우 여백", en: "Padding" },
     note: {
       ko: "탭이 여럿일 때 이 값이 전체 너비를 정한다",
-      en: "With several tabs, this decides the strip's whole width",
+      en: "With several tabs, this decides the strip’s whole width",
     },
     min: 0.5,
     max: 6,
-    step: 0.5,
-  },
-  {
-    name: "pad-card",
-    group: { ko: "카드", en: "Card" },
-    label: { ko: "안쪽 여백", en: "Padding" },
-    note: {
-      ko: "카드의 여백이자 카드 안 요소 사이 간격. 하나가 둘을 겸한다",
-      en: "Both the padding and the gap between things inside",
-    },
-    min: 2,
-    max: 10,
     step: 0.5,
   },
   {
@@ -185,8 +125,8 @@ const SPACE_TOKENS: {
       en: "Between a title and its description. Widen it and they read as two things",
     },
     min: 0,
-    max: 5,
-    step: 0.25,
+    max: 4,
+    step: 0.5,
   },
 ]
 

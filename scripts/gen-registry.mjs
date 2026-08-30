@@ -20,6 +20,21 @@ const read = (p) => fs.readFileSync(path.join(root, p), "utf8")
 
 /* ── 토큰 ───────────────────────────────────────────────
  * :root 에 적힌 것만 센다. @theme inline 은 파생이라 «고칠 수 있는 값» 이 아니다. */
+/* 두 층을 그대로 싣는다. 색인에 적힌 버튼 값과 화면에 그려진 버튼이 어긋나면
+ * 에이전트가 색인을 못 믿게 되고, 그러면 색인이 없는 것과 같다. */
+function layered() {
+  const foundation = JSON.parse(read("data/foundation.json"))
+  const components = JSON.parse(read("data/components.json"))
+  const strip = (o) =>
+    Object.fromEntries(Object.entries(o).filter(([k]) => !k.startsWith("$")))
+  return {
+    foundation: strip(foundation),
+    components: strip(components),
+    editable: Object.keys(strip(components)),
+    open: components.$open,
+  }
+}
+
 function tokens() {
   const css = read("app/globals.css")
   const rootBlock = css.slice(css.indexOf(":root {"), css.indexOf("\n}", css.indexOf(":root {")))
@@ -159,6 +174,7 @@ const registry = {
   /* 날짜는 넣지 않는다. 매번 바뀌면 실제로 바뀐 게 없는데도 diff 가 생긴다. */
   rule: "새 화면은 이 목록에서 고른다. 여기 없는 것을 새로 만들기 전에 반드시 보고한다.",
   tokens: tokens(),
+  layers: layered(),
   components: components(),
   patterns: patterns(),
   blocks: blocks(),

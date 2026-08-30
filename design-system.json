@@ -34,34 +34,40 @@
       "--sidebar-accent-foreground": "oklch(0.205 0 0)",
       "--sidebar-border": "oklch(0.922 0 0)",
       "--sidebar-ring": "oklch(0.708 0 0)",
+      "--input-radius": "var(--radius-md)",
+      "--input-gap": "calc(var(--spacing) * 2)",
+      "--input-xs-height": "calc(var(--spacing) * 6)",
+      "--input-xs-padding-x": "calc(var(--spacing) * 2)",
+      "--input-xs-font-size": "var(--text-xs)",
+      "--input-sm-height": "calc(var(--spacing) * 7)",
+      "--input-sm-padding-x": "calc(var(--spacing) * 2.5)",
+      "--input-sm-font-size": "var(--text-xs)",
+      "--input-md-height": "var(--h-control)",
+      "--input-md-padding-x": "var(--pad-control)",
+      "--input-md-font-size": "var(--text-sm)",
+      "--input-lg-height": "calc(var(--spacing) * 9)",
+      "--input-lg-padding-x": "calc(var(--spacing) * 3)",
+      "--input-lg-font-size": "var(--text-sm)",
+      "--card-radius": "var(--radius-xl)",
+      "--card-gap": "calc(var(--spacing) * 1)",
+      "--card-md-padding-x": "calc(var(--spacing) * 4)",
+      "--card-md-font-size": "var(--text-sm)",
+      "--card-sm-padding-x": "calc(var(--spacing) * 3)",
+      "--card-sm-font-size": "var(--text-sm)",
       "--background": "oklch(1 0 0)",
       "--foreground": "oklch(0.145 0 0)"
     },
     "shape": {
-      "--radius": "0.625rem",
-      "--spacing-base": "0.25rem"
+      "--spacing-base": "0.25rem",
+      "--radius": "0.625rem"
     },
     "control": {
-      "--pad-card": "calc(var(--spacing) * 4)",
-      "--pad-card-sm": "calc(var(--spacing) * 3)",
       "--h-control": "calc(var(--spacing) * 8)",
       "--pad-control": "calc(var(--spacing) * 2.5)",
-      "--h-button": "var(--h-control)",
-      "--h-button-xs": "calc(var(--h-button) - var(--spacing) * 2)",
-      "--h-button-sm": "calc(var(--h-button) - var(--spacing) * 1)",
-      "--h-button-lg": "calc(var(--h-button) + var(--spacing) * 1)",
-      "--pad-button": "var(--pad-control)",
-      "--pad-button-xs": "calc(var(--pad-button) * 0.8)",
-      "--pad-button-sm": "calc(var(--pad-button) * 0.9)",
-      "--pad-button-lg": "calc(var(--pad-button) * 1.2)",
-      "--h-input": "var(--h-control)",
-      "--h-input-xs": "calc(var(--h-input) - var(--spacing) * 2)",
-      "--h-input-sm": "calc(var(--h-input) - var(--spacing) * 1)",
-      "--h-input-lg": "calc(var(--h-input) + var(--spacing) * 1)",
-      "--pad-input": "var(--pad-control)",
-      "--pad-input-xs": "calc(var(--pad-input) * 0.8)",
-      "--pad-input-sm": "calc(var(--pad-input) * 0.9)",
-      "--pad-input-lg": "calc(var(--pad-input) * 1.2)",
+      "--h-control-sm": "calc(var(--h-control) - var(--spacing) * 1)",
+      "--h-control-lg": "calc(var(--h-control) + var(--spacing) * 1)",
+      "--pad-control-sm": "calc(var(--pad-control) * 0.9)",
+      "--pad-control-lg": "calc(var(--pad-control) * 1.2)",
       "--h-tab": "calc(var(--spacing) * 7)",
       "--pad-tab": "calc(var(--spacing) * 1.5)",
       "--gap-text": "calc(var(--spacing) * 1)"
@@ -69,6 +75,113 @@
     "type": {
       "--font-pretendard": "\"Pretendard Variable\", Pretendard"
     }
+  },
+  "layers": {
+    "foundation": {
+      "spacing": {
+        "$doc": "밀도의 기준. Tailwind 의 p-4 · gap-6 이 전부 이 값 × n 이다. 하나만 줄이면 화면 전체가 조밀해진다.",
+        "base": "0.25rem"
+      },
+      "radius": {
+        "$doc": "모서리의 기준. sm~4xl 이 전부 여기서 계산된다 — 값을 따로 적어 두면 기준을 바꿔도 그 자리만 옛 값을 쓴다.",
+        "base": "0.625rem"
+      },
+      "control": {
+        "$doc": "한 줄에 나란히 서는 것들의 기준. 버튼·입력·셀렉트·토글이 이 값을 받으므로 줄이 어긋나지 않는다.",
+        "height": "spacing.8",
+        "paddingX": "spacing.2.5"
+      },
+      "text": {
+        "$doc": "글자 크기. Tailwind 의 text-* 를 그대로 쓴다 — 이름이 갈라지면 어느 쪽이 정본인지 알 수 없다.",
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem"
+      }
+    },
+    "components": {
+      "button": {
+        "$doc": "누르면 무언가가 실행되는 가장 작은 단위.",
+        "radius": "radius.md",
+        "gap": "spacing.1.5",
+        "sizes": {
+          "xs": {
+            "height": "spacing.6",
+            "paddingX": "spacing.2",
+            "fontSize": "text.xs"
+          },
+          "sm": {
+            "height": "spacing.7",
+            "paddingX": "spacing.2.5",
+            "fontSize": "text.xs"
+          },
+          "md": {
+            "height": "control.height",
+            "paddingX": "control.paddingX",
+            "fontSize": "text.sm"
+          },
+          "lg": {
+            "height": "spacing.9",
+            "paddingX": "spacing.3",
+            "fontSize": "text.sm"
+          }
+        }
+      },
+      "input": {
+        "$doc": "한 줄짜리 값을 받는 자리. 버튼과 나란히 서므로 같은 기준을 받는다.",
+        "radius": "radius.md",
+        "gap": "spacing.2",
+        "sizes": {
+          "xs": {
+            "height": "spacing.6",
+            "paddingX": "spacing.2",
+            "fontSize": "text.xs"
+          },
+          "sm": {
+            "height": "spacing.7",
+            "paddingX": "spacing.2.5",
+            "fontSize": "text.xs"
+          },
+          "md": {
+            "height": "control.height",
+            "paddingX": "control.paddingX",
+            "fontSize": "text.sm"
+          },
+          "lg": {
+            "height": "spacing.9",
+            "paddingX": "spacing.3",
+            "fontSize": "text.sm"
+          }
+        }
+      },
+      "card": {
+        "$doc": "한 덩어리로 읽혀야 하는 것을 묶는 면. 높이는 내용이 정하므로 열지 않는다.",
+        "radius": "radius.xl",
+        "gap": "spacing.1",
+        "sizes": {
+          "md": {
+            "paddingX": "spacing.4",
+            "fontSize": "text.sm"
+          },
+          "sm": {
+            "paddingX": "spacing.3",
+            "fontSize": "text.sm"
+          }
+        }
+      }
+    },
+    "editable": [
+      "button",
+      "input",
+      "card"
+    ],
+    "open": [
+      "height",
+      "paddingX",
+      "radius",
+      "fontSize",
+      "gap"
+    ]
   },
   "components": [
     {

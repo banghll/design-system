@@ -13,6 +13,8 @@ import {
   Boxes,
   Component,
   FileStack,
+  GitCompare,
+  LayoutDashboard,
   Menu,
   Palette,
 } from "lucide-react"
@@ -46,6 +48,8 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "file-stack": FileStack,
   boxes: Boxes,
   blocks: Blocks,
+  layout: LayoutDashboard,
+  gitcompare: GitCompare,
 }
 
 /* 페이지 목록. 사이드바와 모바일 서랍이 같은 것을 그린다 —

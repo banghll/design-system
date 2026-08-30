@@ -1,11 +1,14 @@
 import type { Metadata } from "next"
 import { DM_Sans, JetBrains_Mono } from "next/font/google"
 
+import { ComponentTokenProvider } from "@/components/component-tokens"
 import { LangProvider } from "@/components/lang"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
+import COMPONENT_TOKENS from "@/data/components.json"
+import FOUNDATION from "@/data/foundation.json"
 
 import "./globals.css"
 
@@ -45,7 +48,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <ThemeProvider>
           <LangProvider>
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+              {/* 컴포넌트 편집값은 모든 화면에 얹힌다 — /components/button 에서
+                * 바꾼 값이 /preview 에서 바로 보여야 판정이 된다 */}
+              <ComponentTokenProvider
+                base={COMPONENT_TOKENS as never}
+                foundation={FOUNDATION as never}
+              >
+                {children}
+              </ComponentTokenProvider>
+            </TooltipProvider>
           </LangProvider>
         </ThemeProvider>
         <Toaster />

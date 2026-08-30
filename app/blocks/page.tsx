@@ -162,6 +162,12 @@ function BlocksCatalog() {
               copy that folder and swap the content.
             </>
           )}
+          {/* 이 층은 브라우저에서 못 고친다 — 화면 한 벌이라 값이 아니다 */}
+          <p className="text-muted-foreground mt-4 text-xs">
+            {lang === "ko"
+              ? "읽기 전용 — 여기서는 값을 고칠 수 없습니다. 크기·여백은 컴포넌트 층에서 옵니다."
+              : "Read-only — nothing here is editable. Sizes and spacing come from the component layer."}
+          </p>
         </CatalogHeader>
 
         <div className="mb-4 flex flex-wrap items-center gap-3">

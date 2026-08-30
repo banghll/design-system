@@ -313,6 +313,29 @@ export const PAGES: Page[] = [
     sections: PATTERN_SECTIONS,
   },
   {
+    /* 판정 화면. 카탈로그가 아니라 «시스템이 실제 화면에서 서는가» 를 보는 자리라
+     * 목록의 맨 뒤에 둔다 — 앞에 두면 카탈로그의 일부로 읽힌다. */
+    /* 저장해 둔 변경을 한 번에 레포로 넘기는 자리 */
+    href: "/changes",
+    label: { ko: "변경사항", en: "Changes" },
+    icon: "gitcompare",
+    summary: {
+      ko: "컴포넌트별로 저장한 값을 모아 한 번에 내보낸다",
+      en: "Collects saved changes and exports them in one go",
+    },
+    sections: [],
+  },
+  {
+    href: "/preview",
+    label: { ko: "판정 화면", en: "Judgement" },
+    icon: "layout",
+    summary: {
+      ko: "목록 · 폼 · 대시보드 셋. 밀도는 여기서만 판단된다",
+      en: "List, form, dashboard — the only place density can be judged",
+    },
+    sections: [],
+  },
+  {
     href: "/blocks",
     label: { ko: "블록", en: "Blocks" },
     icon: "blocks",

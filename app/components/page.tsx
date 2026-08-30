@@ -13,6 +13,7 @@ import { OpenState } from "@/components/examples/open-states"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { PAGES } from "@/lib/catalog-nav"
+import EDITABLE from "@/data/components.json"
 
 import X0 from "@/components/examples/accordion-example"
 import X1 from "@/components/examples/alert-dialog-example"
@@ -177,6 +178,10 @@ const SHELL = [
 const SECTIONS = PAGES.find((p) => p.href === "/components")!.sections
 const sec = (id: string) => SECTIONS.find((s) => s.id === id)!
 
+/* 토큰 레시피가 있는 것만 편집 화면이 있다. 목록에서 그걸 알 수 있어야
+ * «어디까지 손댈 수 있는가» 가 보인다 — 파일럿이 끝나면 이 배지가 늘어난다. */
+const editable = new Set(Object.keys(EDITABLE).filter((k) => !k.startsWith("$")))
+
 export default function ComponentsPage() {
   const { t, lang } = useLang()
 
@@ -252,6 +257,14 @@ export default function ComponentsPage() {
                     <div className="mb-3">
                       <div className="flex flex-wrap items-baseline gap-2">
                         <h3 className="text-lg font-semibold">{id}</h3>
+                        {editable.has(id) ? (
+                          <Link
+                            href={"/components/" + id}
+                            className="text-primary text-xs underline underline-offset-4"
+                          >
+                            {lang === "ko" ? "편집 →" : "Edit →"}
+                          </Link>
+                        ) : null}
                         <code className="text-muted-foreground text-[11px]">
                           components/ui/{id}.tsx
                         </code>

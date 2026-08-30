@@ -1,0 +1,79 @@
+{
+  "$doc": "컴포넌트별 레시피. 값은 반드시 foundation 을 가리킨다 — 리터럴을 적으면 그 자리만 파운데이션에서 떨어져 나간다.",
+  "$refs": "spacing.<수> · radius.<sm|md|lg|xl|2xl|3xl> · text.<xs|sm|base|lg> · control.<height|paddingX>",
+  "$open": ["height", "paddingX", "radius", "fontSize", "gap"],
+  "$note": "여는 속성은 다섯 개로 못 박는다. 더 열면 «토큰으로 조절한다» 가 «CSS 를 브라우저에서 쓴다» 가 된다.",
+  "$pilot": ["button", "input", "card"],
+
+  "button": {
+    "$doc": "누르면 무언가가 실행되는 가장 작은 단위.",
+    "radius": "radius.md",
+    "gap": "spacing.1.5",
+    "sizes": {
+      "xs": {
+        "height": "spacing.6",
+        "paddingX": "spacing.2",
+        "fontSize": "text.xs"
+      },
+      "sm": {
+        "height": "spacing.7",
+        "paddingX": "spacing.2.5",
+        "fontSize": "text.xs"
+      },
+      "md": {
+        "height": "control.height",
+        "paddingX": "control.paddingX",
+        "fontSize": "text.sm"
+      },
+      "lg": {
+        "height": "spacing.9",
+        "paddingX": "spacing.3",
+        "fontSize": "text.sm"
+      }
+    }
+  },
+
+  "input": {
+    "$doc": "한 줄짜리 값을 받는 자리. 버튼과 나란히 서므로 같은 기준을 받는다.",
+    "radius": "radius.md",
+    "gap": "spacing.2",
+    "sizes": {
+      "xs": {
+        "height": "spacing.6",
+        "paddingX": "spacing.2",
+        "fontSize": "text.xs"
+      },
+      "sm": {
+        "height": "spacing.7",
+        "paddingX": "spacing.2.5",
+        "fontSize": "text.xs"
+      },
+      "md": {
+        "height": "control.height",
+        "paddingX": "control.paddingX",
+        "fontSize": "text.sm"
+      },
+      "lg": {
+        "height": "spacing.9",
+        "paddingX": "spacing.3",
+        "fontSize": "text.sm"
+      }
+    }
+  },
+
+  "card": {
+    "$doc": "한 덩어리로 읽혀야 하는 것을 묶는 면. 높이는 내용이 정하므로 열지 않는다.",
+    "radius": "radius.xl",
+    "gap": "spacing.1",
+    "sizes": {
+      "md": {
+        "paddingX": "spacing.4",
+        "fontSize": "text.sm"
+      },
+      "sm": {
+        "paddingX": "spacing.3",
+        "fontSize": "text.sm"
+      }
+    }
+  }
+}

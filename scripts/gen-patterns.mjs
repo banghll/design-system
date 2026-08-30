@@ -223,7 +223,14 @@ export default function PatternsPage() {
               copied out as-is.
             </>
           )}
-        </CatalogHeader>
+                  {/* 이 층은 브라우저에서 못 고친다 — 조립 결과라 값이 아니다.
+            * 고치려면 컴포넌트 토큰이나 그 조립 코드를 고쳐야 한다. */}
+          <p className="text-muted-foreground mt-4 text-xs">
+            {lang === "ko"
+              ? "읽기 전용 — 여기서는 값을 고칠 수 없습니다. 크기·여백은 컴포넌트 층에서 옵니다."
+              : "Read-only — nothing here is editable. Sizes and spacing come from the component layer."}
+          </p>
+</CatalogHeader>
 
         <div className="flex flex-col gap-16">
           {PATTERN_SECTIONS.map((section) => {

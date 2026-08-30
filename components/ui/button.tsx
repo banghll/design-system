@@ -5,7 +5,7 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-(--button-radius) border border-transparent bg-clip-padding font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -26,16 +26,17 @@ const buttonVariants = cva(
        * 아이콘이 있어도 좌우 여백은 그대로다. 예전에는 아이콘 쪽 여백을 줄였는데,
        * «패딩 12» 라고 적어 두고 실제로는 8 이 나오면 값이 값 노릇을 못 한다. */
       size: {
-        default: "h-(--h-button) gap-1.5 px-(--pad-button)",
-        xs: "h-(--h-button-xs) gap-1 rounded-[min(var(--radius-md),10px)] px-(--pad-button-xs) text-xs in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-(--h-button-sm) gap-1 rounded-[min(var(--radius-md),12px)] px-(--pad-button-sm) text-[0.8rem] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-(--h-button-lg) gap-1.5 px-(--pad-button-lg)",
-        icon: "size-(--h-button)",
+        default:
+          "h-(--button-md-height) gap-(--button-gap) px-(--button-md-padding-x) text-(length:--button-md-font-size)",
+        xs: "h-(--button-xs-height) gap-(--button-gap) px-(--button-xs-padding-x) text-(length:--button-xs-font-size) in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-(--button-sm-height) gap-(--button-gap) px-(--button-sm-padding-x) text-(length:--button-sm-font-size) in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-(--button-lg-height) gap-(--button-gap) px-(--button-lg-padding-x) text-(length:--button-lg-font-size)",
+        icon: "size-(--button-md-height)",
         "icon-xs":
-          "size-(--h-button-xs) rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+          "size-(--button-xs-height) in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
-          "size-(--h-button-sm) rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-(--h-button-lg)",
+          "size-(--button-sm-height) in-data-[slot=button-group]:rounded-lg",
+        "icon-lg": "size-(--button-lg-height)",
       },
     },
     defaultVariants: {

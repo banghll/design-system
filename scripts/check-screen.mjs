@@ -134,7 +134,30 @@ const targets = args.length
       .map((d) => `app/${d.name}/page.tsx`)
       .filter((p) => fs.existsSync(path.join(root, p)))
 
-let bad = 0
+/* components/ui 는 시스템이 정한 것만 있는 자리다. 새로 만든 것이 섞이면
+ * 다음 사람이 «없어서 만든 것» 과 «정본» 을 구분할 수 없다.
+ * 새 컴포넌트는 components/_draft 로 간다 — 거기 규칙은 그 폴더의 README 에. */
+function draftCheck() {
+  const registry = JSON.parse(
+    fs.readFileSync(path.join(root, "design-system.json"), "utf8")
+  )
+  const known = new Set(registry.components.map((c) => c.id))
+  const stray = fs
+    .readdirSync(path.join(root, "components/ui"))
+    .filter((f) => f.endsWith(".tsx"))
+    .map((f) => f.replace(/\.tsx$/, ""))
+    .filter((id) => !known.has(id))
+
+  if (!stray.length) return 0
+  console.log(
+    `\ncomponents/ui — 색인에 없는 파일 ${stray.length}개: ${stray.join(", ")}\n` +
+      `  · 새 컴포넌트는 components/_draft 에 만든다.\n` +
+      `  · 색인이 낡았을 뿐이면 npm run registry.`
+  )
+  return stray.length
+}
+
+let bad = draftCheck()
 for (const t of targets) {
   const r = scan(t)
   if (r.generated) {
