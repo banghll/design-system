@@ -9,6 +9,7 @@
 import { Check, Palette, RotateCcw } from "lucide-react"
 import { useEffect, useState } from "react"
 
+import { useLang } from "@/components/lang"
 import { defaultPresets, type ThemeVars } from "@/lib/theme-presets"
 import { Button } from "@/components/ui/button"
 import {
@@ -65,6 +66,7 @@ function apply(id: string | null) {
 }
 
 export function ThemeSwitcher() {
+  const { lang } = useLang()
   const [current, setCurrent] = useState<string | null>(null)
 
   /* 새로고침해도 고른 프리셋이 유지되도록 한다. */
@@ -91,15 +93,21 @@ export function ThemeSwitcher() {
         <Button variant="outline" size="sm" className="w-full justify-start">
           <Palette className="size-4" />
           <span className="min-w-0 flex-1 truncate text-left">
-            {current ? defaultPresets[current].label : "기본 테마"}
+            {current
+              ? defaultPresets[current].label
+              : lang === "ko"
+                ? "기본 테마"
+                : "Base theme"}
           </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="max-h-96 w-56 overflow-y-auto">
-        <DropdownMenuLabel>프리셋 {entries.length}종</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {lang === "ko" ? `프리셋 ${entries.length}종` : `${entries.length} presets`}
+        </DropdownMenuLabel>
         <DropdownMenuItem onClick={() => pick(null)}>
           <RotateCcw className="size-4" />
-          기본으로 되돌리기
+          {lang === "ko" ? "기본으로 되돌리기" : "Back to base"}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         {entries.map(([id, preset]) => (

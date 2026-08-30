@@ -1,39 +1,51 @@
 import type { Metadata } from "next"
+import { DM_Sans, JetBrains_Mono } from "next/font/google"
 
+import { LangProvider } from "@/components/lang"
+import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 import "./globals.css"
 
+/* 라틴 — 본문과 제목 */
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" })
+
+/* 코드와 토큰 값 — 숫자가 자리를 지켜야 표가 흔들리지 않는다 */
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" })
+
 export const metadata: Metadata = {
-  title: "slate × shadcn",
-  description:
-    "slate 파운데이션 위에 올린 shadcn/ui + AI Elements 컴포넌트 레포",
+  title: "shadcn 디자인 시스템",
+  description: "shadcn/ui 로 만든 에이전틱 디자인 시스템 레퍼런스",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={cn("dark h-full antialiased", "font-sans")}>
+    /* suppressHydrationWarning — 테마 클래스를 스크립트가 먼저 붙이므로
+     * 서버가 그린 html 과 한 프레임 어긋난다. 이 한 요소에만 해당한다. */
+    <html
+      lang="ko"
+      suppressHydrationWarning
+      className={cn("h-full antialiased font-sans", dmSans.variable, mono.variable)}
+    >
       <head>
-        {/* 폰트는 next/font 를 쓰지 않는다.
-         * next/font 는 해시된 패밀리명(__DM_Sans_xxx)을 만들고 --font-sans 를 그 값으로
-         * 덮어쓴다. 그러면 tokens/typography.css 가 이름으로 참조하는 "DM Sans" 와
-         * 어긋나 파운데이션의 타이포 계약이 끊긴다.
-         * 실제 패밀리명이 유지되는 이 방식이라야 typography.css 의 --font-sans 가 그대로 산다. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* 한글 — Pretendard. Google Fonts 에 없어 CDN 에서 동적 서브셋으로 받는다.
+          * 자체 호스팅으로 옮기려면 dist/web/variable 을 public/ 에 두면 된다. */}
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
           rel="stylesheet"
+          as="style"
+          crossOrigin="anonymous"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
+        <style>{`:root { --font-pretendard: "Pretendard Variable", Pretendard; }`}</style>
       </head>
       <body className="flex min-h-full flex-col">
-        <TooltipProvider>{children}</TooltipProvider>
+        <ThemeProvider>
+          <LangProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+          </LangProvider>
+        </ThemeProvider>
         <Toaster />
       </body>
     </html>

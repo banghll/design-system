@@ -20,7 +20,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
+import { type Copy, useLang } from "@/components/lang"
+import { ShellControls } from "@/components/shell-controls"
 import { ThemeSwitcher } from "@/components/theme-switcher"
+import { TokenEditor } from "@/components/token-editor"
+import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import {
   Collapsible,
@@ -41,6 +45,7 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function CatalogShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const { t } = useLang()
 
   /* 지금 보고 있는 페이지는 펼친 채로 둔다. 나머지는 접는다. */
   const [open, setOpen] = useState<string | null>(null)
@@ -75,7 +80,7 @@ export function CatalogShell({ children }: { children: React.ReactNode }) {
       <aside className="bg-sidebar sticky top-0 hidden h-dvh w-64 shrink-0 flex-col lg:flex">
         <div className="flex h-14 shrink-0 items-center gap-2 px-5">
           <Boxes className="size-4" />
-          <span className="text-sm font-semibold">slate × shadcn</span>
+          <span className="text-sm font-semibold">shadcn 디자인 시스템</span>
         </div>
 
         <ScrollArea className="min-h-0 flex-1">
@@ -110,13 +115,13 @@ export function CatalogShell({ children }: { children: React.ReactNode }) {
                       )}
                     >
                       <Icon className="size-4 shrink-0" />
-                      <span className="min-w-0 flex-1 truncate">{page.label}</span>
+                      <span className="min-w-0 flex-1 truncate">{t(page.label)}</span>
                     </Link>
 
                     {page.sections.length > 0 ? (
                       <CollapsibleTrigger
                         className="hover:text-foreground shrink-0 px-2 py-1.5"
-                        aria-label={`${page.label} 하위 목록`}
+                        aria-label={`${t(page.label)} 하위 목록`}
                       >
                         <ChevronRight
                           className={cn(
@@ -136,7 +141,7 @@ export function CatalogShell({ children }: { children: React.ReactNode }) {
                           href={`${page.href}#${s.id}`}
                           className="text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-md px-2 py-1 text-[13px]"
                         >
-                          <span className="min-w-0 flex-1 truncate">{s.label}</span>
+                          <span className="min-w-0 flex-1 truncate">{t(s.label)}</span>
                           {s.count ? (
                             <span className="text-[11px] tabular-nums opacity-60">
                               {s.count}
@@ -152,8 +157,10 @@ export function CatalogShell({ children }: { children: React.ReactNode }) {
           </nav>
         </ScrollArea>
 
-        <div className="p-3">
+        <div className="flex flex-col gap-2 p-3">
           <ThemeSwitcher />
+          <TokenEditor />
+          <ShellControls />
         </div>
       </aside>
 
@@ -162,51 +169,71 @@ export function CatalogShell({ children }: { children: React.ReactNode }) {
   )
 }
 
-/* 페이지 머리말 — 카탈로그 페이지가 같은 모양을 갖게 한다. */
+/* 페이지 머리말.
+ *
+ * 세 단을 고정한다 — 이름 · 정의 한 문단 · 구분선.
+ * 구분선까지가 "여기가 어디인가"이고, 그 아래부터가 내용이다.
+ * 탭마다 이 순서가 같아야 어느 탭에 들어가든 읽는 법이 같아진다. */
 export function CatalogHeader({
   title,
   count,
   children,
 }: {
-  title: string
+  title: Copy | string
   count?: string
   children: React.ReactNode
 }) {
+  const { t } = useLang()
   return (
-    <header className="mb-8">
-      <div className="mb-2 flex items-center gap-2">
-        <h1 className="text-2xl font-semibold">{title}</h1>
-        {count ? <Badge variant="secondary">{count}</Badge> : null}
+    <header className="mb-14">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <h1 className="text-5xl leading-tight font-semibold tracking-tight text-balance">
+          {t(title)}
+        </h1>
+        {count ? (
+          <Badge variant="secondary" className="translate-y-1">
+            {count}
+          </Badge>
+        ) : null}
       </div>
-      <p className="text-muted-foreground max-w-[64ch] text-sm">{children}</p>
+      <div className="text-muted-foreground max-w-[72ch] text-base leading-relaxed [&_b]:text-foreground [&_b]:font-medium">
+        {children}
+      </div>
+      <Separator className="mt-10" />
     </header>
   )
 }
 
-/* 군 머리말 — 무엇이고 언제 쓰는지를 항상 같은 자리에 둔다. */
+/* 군 머리말.
+ *
+ * 페이지 안에서 한 단 아래 — 제목만으로는 "빈 상태"가 무엇의 빈 상태인지 알 수 없으므로,
+ * 정의 한 줄을 항상 붙인다. 옆자리 디자이너에게 건네는 설명이라고 생각하고 쓴다. */
 export function GroupHeader({
   title,
   note,
   count,
   icon: Icon,
 }: {
-  title: string
-  note: string
+  title: Copy | string
+  note: Copy | string
   count?: number
   icon?: React.ComponentType<{ className?: string }>
 }) {
+  const { t } = useLang()
   return (
-    <div className="mb-5">
-      <div className="flex items-center gap-2">
-        {Icon ? <Icon className="text-muted-foreground size-4" /> : null}
-        <h2 className="text-base font-semibold">{title}</h2>
+    <div className="mb-7">
+      <div className="flex items-center gap-2.5">
+        {Icon ? <Icon className="text-muted-foreground size-5" /> : null}
+        <h2 className="text-2xl font-semibold tracking-tight">{t(title)}</h2>
         {count != null ? (
-          <span className="text-muted-foreground text-xs tabular-nums">
+          <Badge variant="outline" className="translate-y-px tabular-nums">
             {count}
-          </span>
+          </Badge>
         ) : null}
       </div>
-      <p className="text-muted-foreground mt-1 max-w-[60ch] text-sm">{note}</p>
+      <p className="text-muted-foreground mt-2 max-w-[68ch] text-sm leading-relaxed">
+        {t(note)}
+      </p>
     </div>
   )
 }

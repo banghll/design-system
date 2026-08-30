@@ -1,93 +1,86 @@
-# slate × shadcn × AI Elements
+# shadcn 디자인 시스템
 
-slate 디자인 시스템의 **파운데이션(토큰)** 위에 shadcn/ui 와 Vercel AI Elements
-컴포넌트를 통째로 올린 레포. 값은 slate 에서만 오고, 컴포넌트는 그 값을
-참조하는 껍데기다.
+shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스와, 그것으로 만든 예제 제품 하나.
 
-```
-tokens/                slate 파운데이션 (여기가 값의 출처)
-app/globals.css        slate ↔ shadcn 브리지 (두 시스템이 만나는 유일한 지점)
-components/ui/         shadcn/ui 61개
-components/ai-elements/ AI Elements 48개
-```
+값이 적히는 자리를 한 곳(파운데이션)으로 몰고, 그 위에 컴포넌트 → 패턴 → 블록을
+쌓았다. 각 항목에 **무엇이고 언제 쓰는지**를 값으로 적어 두어, 사람과 에이전트가
+같은 문장을 보고 고르게 했다.
 
 ## 화면
 
-| 경로 | 내용 |
+| 경로 | 무엇 |
 | --- | --- |
-| `/` | 파운데이션 — 색·타이포·간격·모서리·그림자, 그리고 브리지 표 |
-| `/components` | 컴포넌트 109개 인벤토리 + 살아 있는 샘플 |
-| `/ai` | AI Elements 채팅 데모 (모델 없이 UI 층만) |
-| `/chat` | AI 채팅 앱 — 스레드 목록·모델 선택·사고 과정 블록 (모델 미연결) |
-| `/movies` | 영화 평점 사이트 — 검색·필터·별점 매기기 (평점은 직접 매긴 것만) |
+| `/` | 파운데이션 — 색 · 모서리 · 간격 · 타이포 · 그림자. 값이 적히는 유일한 자리 |
+| `/components` | 컴포넌트 109개 (shadcn/ui 61 + AI Elements 48) |
+| `/patterns` | 패턴 74개 — 컴포넌트를 조립해 한 상황을 푼 것 |
+| `/blocks` | 블록 32개 — 화면 한 벌. 목록에서 실물 미리보기로 바로 보인다 |
+| `/movies` | 씨네덱 — 이 시스템으로 만든 예제 제품 ([PRD](docs/movies-prd.md)) |
 
-## 실행
+## 다른 컴퓨터에서 시작하기
 
 ```bash
+git clone <이 저장소 주소>
+cd design-system
+npm install
 npm run dev
 ```
 
-Node 는 이 PC 에서 `C:\Users\kis85\tools\nodejs` 에 포터블로 설치돼 있다.
-PATH 가 안 잡히면 `node.exe` 전체 경로를 쓴다.
+http://localhost:3000 — Node 20 이상이면 된다. 다른 준비물은 없다.
+데이터베이스도 API 키도 쓰지 않는다. 씨네덱의 기록은 브라우저 localStorage 에만 남는다.
 
-## 파운데이션은 어떻게 들어왔나
+## 구조
 
-`tokens/` 는 `../slate-design-system/tokens/` 에서 **CSS 파일만** 복사한 사본이다.
-
-- 가져온 것: `color` `typography` `spacing` `radius` `motion` `elevation`
-  `icon` `layout` `breakpoint` `component-height` `z-index`
-- 가져오지 않은 것: `component.css` (컴포넌트 토큰 — 파운데이션이 아니다),
-  `components/*.component.json` (사용 계약), `docs/`
-
-`tokens/index.css` 에서 `component.css` import 한 줄을 지운 것 외에 slate
-원본을 고치지 않았다. 원본이 갱신되면 `*.css` 를 다시 복사하면 된다.
-
-## 브리지
-
-shadcn 과 AI Elements 는 `--background` `--primary` 같은 **자기 이름**만 안다.
-`app/globals.css` 에서 그 이름들을 slate Semantic 토큰으로 연결한다.
-
-```css
---background: var(--color-background);
---primary:    var(--color-primary);
---border:     var(--color-border);
---radius:     var(--radius-md);
+```
+app/                 라우트. 파운데이션 · 컴포넌트 · 패턴 · 블록 · 씨네덱
+components/
+  ui/                shadcn/ui 컴포넌트 61개 — 시스템의 바닥
+  ai-elements/       Vercel AI Elements 48개
+  examples/          공식 예제 (컴포넌트 화면이 그대로 렌더한다)
+  blocks/            공식 블록 (블록 화면이 iframe 으로 그대로 띄운다)
+  movies/            씨네덱 전용 조립 — 새 UI 컴포넌트는 만들지 않았다
+  catalog-shell.tsx  카탈로그 셸. 이 사이트 자신의 사이드바
+  token-editor.tsx   파운데이션 편집기 (상주 패널)
+  theme-switcher.tsx tweakcn 프리셋 43종
+  lang.tsx           한국어 · English
+lib/
+  catalog-nav.ts     내비 매니페스트 — 사이드바와 각 페이지가 같은 데이터를 본다
+  block-catalog.ts   블록 32개의 정의와 선택 조건
+  theme-presets.ts   프리셋 값 (tweakcn, Apache-2.0)
+  movies/            씨네덱 데이터와 저장소
+scripts/             페이지 생성기. app/components · app/patterns 는 여기서 나온다
+docs/movies-prd.md   예제 제품의 요구사항
 ```
 
-Tailwind 의 `rounded-*` 유틸리티도 slate radius 스케일을 보도록 `@theme inline`
-에서 다시 물렸다.
+## 고칠 때 주의할 것
 
-**다크 전용이다.** slate 규칙에 따라 `.dark` 분기를 두지 않고 `:root` 값이 곧
-다크값이다. shadcn 이 기본 생성한 `.dark` 블록은 제거했다.
+- **`app/components/page.tsx` 와 `app/patterns/page.tsx` 는 직접 고치지 않는다.**
+  `scripts/gen-components.mjs` · `scripts/gen-patterns.mjs` 가 생성한다.
+  설명 문구를 바꾸려면 스크립트의 `DOC` / `META` 를 고치고 다시 돌린다.
 
-## 알려진 간극
+  ```bash
+  node scripts/gen-components.mjs
+  node scripts/gen-patterns.mjs
+  ```
 
-지어낸 값 없이 접은 자리들. 필요해지면 slate 에 토큰을 요청할 대상이다.
+- **리터럴 색을 쓰지 않는다.** `bg-primary` · `text-muted-foreground` 만 쓴다.
+  hex 를 한 번 쓰면 그 자리만 프리셋 전환에서 빠진다.
+- **간격은 스케일에서만 꺼낸다.** `gap-4` · `p-6`. 임의의 px 는 밀도 토큰을 따라오지 않는다.
+- 사이드바 목록과 페이지 구획은 `lib/catalog-nav.ts` 한 곳에서 온다. 두 벌로 갈라지지 않게.
 
-| 자리 | 지금 처리 | 왜 |
-| --- | --- | --- |
-| `rounded-3xl` `rounded-4xl` | `--radius-2xl` 로 접음 | slate radius 스케일에 3xl/4xl 이 없다 |
-| `--chart-1..5` | slate Accent 6색 중 5개 | slate 에 차트 전용 색 역할이 없다 |
-| `--popover` | `--color-card-alt` | slate 에 popover 표면 역할이 따로 없다 |
-| Pretendard | 미로드 | Google Fonts 에 없다. DM Sans + 시스템 한글 폰트로 폴백 |
+## 도구
 
-## 이 레포에 없는 것
+왼쪽 아래에 세 가지가 있다.
 
-- 백엔드, API 라우트, 모델 연결 — `/ai` 는 고정 문구를 흘려보내는 UI 데모다
-- slate 컴포넌트 스펙(`*.component.json`) — 파운데이션만 가져왔다
+- **프리셋 43종** — tweakcn 테마. 고르면 색 · 모서리 · 글꼴이 한 번에 바뀐다.
+- **파운데이션 편집** — 상주 패널. 색 19종 · 모서리 · 밀도 · 글꼴을 직접 밀면
+  화면이 그 자리에서 따라온다. 마음에 들면 CSS 를 복사해 `app/globals.css` 에 붙인다.
+- **모드 · 언어** — 라이트 / 다크 / 시스템, 한국어 / English.
 
 ## 라이선스
 
-컴포넌트는 전부 MIT/ISC (shadcn/ui, AI Elements, Radix, Next.js).
-`tokens/` 는 slate 디자인 시스템 사본이다.
-
-## 데이터에 대해
-
-`/movies` 의 별점·메모는 **사용자가 그 화면에서 매긴 값만** 보여준다. 평균 평점·
-후기·관객 수 같은 수치는 만들어 넣지 않았다(slate 게이트 58 — 지어낸 숫자 금지).
-제목·연도·감독·장르는 작품 사실이라 그대로 쓴다. 포스터 이미지는 없으므로
-제목 첫 글자를 쓴 자리표시자를 둔다.
-
-`/chat` 은 모델이 연결되어 있지 않다. 응답은 입력을 되비추는 고정 문구이며,
-`compose()` 함수 하나를 API 호출로 바꾸면 실제 모델에 연결된다. 새로고침하면
-대화는 사라진다 — 저장소가 없다.
+- shadcn/ui 컴포넌트와 블록 — MIT (shadcn-ui/ui)
+- AI Elements — Vercel
+- tweakcn 프리셋 — Apache-2.0 (jnsahaj/tweakcn)
+- lucide 아이콘 — ISC
+- Pretendard — SIL OFL 1.1
+- 씨네덱의 작품 24편은 전부 가상이다. 포스터 자리에는 Unsplash 사진을 쓴다.
