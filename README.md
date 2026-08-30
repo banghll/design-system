@@ -105,6 +105,16 @@ GitHub Pages 를 쓴다면 [`.github/workflows/pages.yml`](.github/workflows/pag
 이미 들어 있다. 저장소 Settings → Pages → Source 를 **GitHub Actions** 로 바꾸고 main 에
 밀면, 밀 때마다 공개 주소가 갱신된다. (main · master 둘 다에서 돈다)
 
+### 한 장짜리 색인 — 호스팅 없이 보낼 때
+
+```bash
+npm run share:page   # share-index.html 한 파일
+```
+
+컴포넌트 62개와 패턴 74개의 «무엇 / 언제 / import 경로 / variant» 가 전부 들어간
+자체 완결 HTML 한 장이다. 실제 컴포넌트가 렌더되지는 않지만, 고를 때 필요한 것은
+다 있다. 메일에 붙이든 어디에 올리든 그대로 열린다.
+
 공유본에서 달라지는 것은 하나뿐이다 — 파운데이션 편집기의 «저장» 이
 `data/themes.json` 대신 **보는 사람의 브라우저**에 남는다. 서버가 없어서다.
 레포에 테마를 남기려면 로컬에서 `npm run dev` 로 저장해야 한다.

@@ -10,7 +10,8 @@
     "registry": "node scripts/gen-registry.mjs",
     "check": "node scripts/check-screen.mjs",
     "gen": "node scripts/gen-components.mjs && node scripts/gen-patterns.mjs && node scripts/gen-3p.mjs && node scripts/gen-registry.mjs",
-    "share": "node scripts/build-static.mjs"
+    "share": "node scripts/build-static.mjs",
+    "share:page": "node scripts/gen-share-page.mjs share-index.html"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.87",

@@ -45,3 +45,4 @@ next-env.d.ts
 
 # 패턴 추출 중간 산물
 /scripts/.cache
+share-index.html
