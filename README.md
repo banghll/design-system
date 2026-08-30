@@ -1,6 +1,6 @@
 # shadcn 디자인 시스템
 
-shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스와, 그것으로 만든 예제 제품 하나.
+shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스.
 
 값이 적히는 자리를 한 곳(파운데이션)으로 몰고, 그 위에 컴포넌트 → 패턴 → 블록을
 쌓았다. 각 항목에 **무엇이고 언제 쓰는지**를 값으로 적어 두어, 사람과 에이전트가
@@ -14,9 +14,6 @@ shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스와, 그것
 | `/components` | 컴포넌트 109개 (shadcn/ui 61 + AI Elements 48) |
 | `/patterns` | 패턴 74개 — 컴포넌트를 조립해 한 상황을 푼 것 |
 | `/blocks` | 블록 32개 — 화면 한 벌. 목록에서 실물 미리보기로 바로 보인다 |
-| `/movies` | 씨네덱 · 영화 평점 — 이 시스템으로 만든 예제 제품 ([PRD](docs/prd-movies.md)) |
-| `/studio` | 스튜디오 · 이미지 생성 |
-| `/reel` | 릴 · 영상 생성 ([PRD](docs/prd-reel.md)) |
 
 ## 다른 컴퓨터에서 이어서 작업하기
 
@@ -64,7 +61,7 @@ Claude Code 를 열면 규칙과 스킬이 그대로 걸린다.
 **안 따라간다** — `node_modules`(→ `npm install`), `.next`·`out`(빌드 결과),
 `vendor`(서드파티 원본 클론, 필요하면 `node scripts/fetch-3p.mjs`),
 그리고 **브라우저 localStorage 에 있는 것**: 편집기에서 아직 저장 안 한 값,
-언어·다크모드 선택, 씨네덱의 평점 기록. 이건 컴퓨터마다 따로 논다.
+그리고 언어·다크모드 선택. 이건 컴퓨터마다 따로 논다.
 
 > 편집기에서 만든 테마는 **이름을 붙여 저장**해야 `data/themes.json` 에 들어가고,
 > 그래야 커밋돼서 따라간다. 저장 안 한 값은 그 브라우저에만 있다.
@@ -89,7 +86,7 @@ Claude Code 를 열면 규칙과 스킬이 그대로 걸린다.
 ```bash
 npm run registry     # design-system.json 갱신
 npm run check        # app 아래 화면 전부 검사
-npm run check app/reel/page.tsx
+npm run check app/<이름>/page.tsx
 npm run gen          # 컴포넌트 · 패턴 · 서드파티 · 색인 전부 다시 생성
 ```
 
@@ -106,7 +103,7 @@ npm run share        # out/ 에 정적 사이트가 나온다 (파일 약 2,000�
 
 GitHub Pages 를 쓴다면 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 이
 이미 들어 있다. 저장소 Settings → Pages → Source 를 **GitHub Actions** 로 바꾸고 main 에
-밀면, 밀 때마다 공개 주소가 갱신된다.
+밀면, 밀 때마다 공개 주소가 갱신된다. (main · master 둘 다에서 돈다)
 
 공유본에서 달라지는 것은 하나뿐이다 — 파운데이션 편집기의 «저장» 이
 `data/themes.json` 대신 **보는 사람의 브라우저**에 남는다. 서버가 없어서다.
@@ -115,13 +112,12 @@ GitHub Pages 를 쓴다면 [`.github/workflows/pages.yml`](.github/workflows/pag
 ## 구조
 
 ```
-app/                 라우트. 파운데이션 · 컴포넌트 · 패턴 · 블록 · 씨네덱
+app/                 라우트. 파운데이션 · 컴포넌트 · 패턴 · 블록
 components/
   ui/                shadcn/ui 컴포넌트 61개 — 시스템의 바닥
   ai-elements/       Vercel AI Elements 48개
   examples/          공식 예제 (컴포넌트 화면이 그대로 렌더한다)
   blocks/            공식 블록 (블록 화면이 iframe 으로 그대로 띄운다)
-  movies/            씨네덱 전용 조립 — 새 UI 컴포넌트는 만들지 않았다
   catalog-shell.tsx  카탈로그 셸. 이 사이트 자신의 사이드바
   token-editor.tsx   파운데이션 편집기 (상주 패널)
   theme-switcher.tsx tweakcn 프리셋 43종
@@ -130,9 +126,7 @@ lib/
   catalog-nav.ts     내비 매니페스트 — 사이드바와 각 페이지가 같은 데이터를 본다
   block-catalog.ts   블록 32개의 정의와 선택 조건
   theme-presets.ts   프리셋 값 (tweakcn, Apache-2.0)
-  movies/            씨네덱 데이터와 저장소
 scripts/             페이지 생성기. app/components · app/patterns 는 여기서 나온다
-docs/movies-prd.md   예제 제품의 요구사항
 ```
 
 ## 고칠 때 주의할 것
@@ -183,4 +177,3 @@ node scripts/shoot-blocks.mjs --all  # 전부 다시
 - tweakcn 프리셋 — Apache-2.0 (jnsahaj/tweakcn)
 - lucide 아이콘 — ISC
 - Pretendard — SIL OFL 1.1
-- 씨네덱의 작품 24편은 전부 가상이다. 포스터 자리에는 Unsplash 사진을 쓴다.

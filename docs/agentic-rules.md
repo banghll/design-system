@@ -46,7 +46,7 @@ node -e 'const r=require("./design-system.json");
   `--h-tab` · `--pad-tab` · `--gap-text`.
   xs·sm·lg 는 각 기준에서 자동으로 파생된다. 손으로 `h-9` 를 적지 않는다.
 - **한 화면에만 다른 값을 쓰고 싶으면** 전역을 고치지 말고,
-  그 화면의 루트에 인라인 스타일로 얹는다. `lib/theme-test-padding-2.ts` 가 예다.
+  그 화면의 루트에 인라인 스타일로 얹는다. 전역 `:root` 는 건드리지 않는다.
 
 ⚠️ `--spacing-base` 가 아니라 `--spacing` 을 덮는다. 기준값은 `:root` 에서 한 번
 계산돼 자식에게 *계산된 값* 으로 내려오므로, 하위에서 `-base` 를 바꾸면 아무 일도

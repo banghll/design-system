@@ -1,6 +1,6 @@
 /* 새로 만든 화면이 이 디자인 시스템을 실제로 쓰는지 검사한다.
  *
- * 배경 — /reel 첫 판은 «컴포넌트를 쓴다» 고 말하면서도 입력 상자·예시 카드·
+ * 배경 — 예제 화면 첫 판은 «컴포넌트를 쓴다» 고 말하면서도 입력 상자·예시 카드·
  * 말풍선을 div 로 새로 짰다. 규칙을 문서에만 적어 두면 이런 일이 계속 난다.
  * 사람이 눈으로 잡을 수 없는 종류의 실수라서, 기계가 잡아야 한다.
  *
@@ -9,7 +9,7 @@
  *   2) 이미 있는 컴포넌트를 손으로 다시 짠 흔적
  *   3) 시스템에서 가져온 것과 직접 짠 것의 비율
  *
- * 실행: node scripts/check-screen.mjs app/reel/page.tsx
+ * 실행: node scripts/check-screen.mjs app/<이름>/page.tsx
  *       node scripts/check-screen.mjs            (app 아래 화면 전부)
  */
 import fs from "node:fs"
