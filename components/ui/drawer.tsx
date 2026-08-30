@@ -4,6 +4,7 @@ import * as React from "react"
 import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
+import { useOverlayContainer } from "@/components/ui/overlay-stage"
 
 function Drawer({
   ...props
@@ -50,8 +51,10 @@ function DrawerContent({
   children,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+  const container = useOverlayContainer()
+
   return (
-    <DrawerPortal data-slot="drawer-portal">
+    <DrawerPortal data-slot="drawer-portal" container={container}>
       <DrawerOverlay />
       <DrawerPrimitive.Content
         data-slot="drawer-content"

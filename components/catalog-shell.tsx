@@ -11,9 +11,12 @@
 import {
   Blocks,
   Boxes,
+  Clapperboard,
   Component,
   FileStack,
+  ImageIcon,
   Palette,
+  Star,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -37,6 +40,14 @@ const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   boxes: Boxes,
   blocks: Blocks,
 }
+
+/* 카탈로그가 아니라 결과물. 세 화면 다 새 컴포넌트 없이 이 시스템의
+ * 컴포넌트만으로 짜여 있어서, 시스템이 실제로 서는지 보는 자리다. */
+const PRODUCTS: { href: string; label: Copy; icon: typeof Star }[] = [
+  { href: "/movies", label: { ko: "씨네덱 · 영화 평점", en: "Cinedeck · ratings" }, icon: Star },
+  { href: "/studio", label: { ko: "스튜디오 · 이미지 생성", en: "Studio · images" }, icon: ImageIcon },
+  { href: "/reel", label: { ko: "릴 · 영상 생성", en: "Reel · video" }, icon: Clapperboard },
+]
 
 export function CatalogShell({
   children,
@@ -101,6 +112,27 @@ export function CatalogShell({
                 </Link>
               )
             })}
+
+            {/* 이 시스템으로 실제로 만든 화면들. 카탈로그와 층이 다르므로
+              * 목록을 갈라 두고, 여기서만 밖으로 나간다. */}
+            <div className="text-muted-foreground mt-4 mb-1 px-2 text-[11px] font-medium">
+              {t({ ko: "이걸로 만든 것", en: "Built with it" })}
+            </div>
+            {PRODUCTS.map((p) => (
+              <Link
+                key={p.href}
+                href={p.href}
+                className={cn(
+                  "flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
+                  pathname.startsWith(p.href)
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                    : "text-muted-foreground hover:bg-sidebar-accent/50"
+                )}
+              >
+                <p.icon className="size-4 shrink-0" />
+                <span className="min-w-0 flex-1 truncate">{t(p.label)}</span>
+              </Link>
+            ))}
           </nav>
         </ScrollArea>
 

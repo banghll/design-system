@@ -9,6 +9,7 @@ import Link from "next/link"
 import { SectionAi } from "@/components/ai-demos/section-ai"
 import { SectionAi2 } from "@/components/ai-demos/section-ai2"
 import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
+import { OpenState } from "@/components/examples/open-states"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { PAGES } from "@/lib/catalog-nav"
@@ -180,7 +181,7 @@ export default function ComponentsPage() {
   const { t, lang } = useLang()
 
   return (
-    <CatalogShell toc={SECTIONS.map((s) => ({ id: s.id, label: s.label }))}>
+    <CatalogShell>
       <main className="mx-auto w-full max-w-[1100px] px-6 py-14 lg:px-10">
         <CatalogHeader
           title={{ ko: "컴포넌트", en: "Components" }}
@@ -264,6 +265,7 @@ export default function ComponentsPage() {
                     </div>
                     <div className="bg-card rounded-lg border p-6">
                       <Comp />
+                      <OpenState id={id} />
                     </div>
                   </article>
                 ))}

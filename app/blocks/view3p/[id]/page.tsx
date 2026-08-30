@@ -1,26 +1,14 @@
-/* 서드파티 블록 상세. 공식 블록과 같은 뷰어를 쓰되 출처를 함께 보인다. */
-"use client"
+/* 서드파티 블록 상세.
+ *
+ * 정적 내보내기(공유용 빌드)에서는 모든 경로를 미리 알아야 한다.
+ * 그래서 이 파일은 목록만 대고, 화면은 view.tsx 가 그린다. */
+import { THIRD_PARTY_BLOCKS } from "@/lib/third-party-catalog"
+import View from "./view"
 
-import { notFound, useParams } from "next/navigation"
+export function generateStaticParams() {
+  return THIRD_PARTY_BLOCKS.map((b) => ({ id: b.id }))
+}
 
-import { BlockViewer } from "@/components/block-viewer"
-import { SOURCES, THIRD_PARTY_BLOCKS } from "@/lib/third-party-catalog"
-
-export default function ViewThirdPartyPage() {
-  const { id } = useParams<{ id: string }>()
-  const block = THIRD_PARTY_BLOCKS.find((b) => b.id === id)
-  if (!block) notFound()
-
-  return (
-    <BlockViewer
-      src={`/blocks/3p/${block.id}`}
-      title={`${block.kind} · ${block.variant}`}
-      code={`components/3p/${block.source}`}
-      what={block.what}
-      when={block.when}
-      backHref="/blocks#third-party"
-      backLabel={{ ko: "블록 목록", en: "All blocks" }}
-      source={SOURCES[block.source]}
-    />
-  )
+export default function Page() {
+  return <View />
 }

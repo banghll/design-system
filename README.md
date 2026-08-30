@@ -14,7 +14,9 @@ shadcn/ui 위에 올린 에이전틱 디자인 시스템 레퍼런스와, 그것
 | `/components` | 컴포넌트 109개 (shadcn/ui 61 + AI Elements 48) |
 | `/patterns` | 패턴 74개 — 컴포넌트를 조립해 한 상황을 푼 것 |
 | `/blocks` | 블록 32개 — 화면 한 벌. 목록에서 실물 미리보기로 바로 보인다 |
-| `/movies` | 씨네덱 — 이 시스템으로 만든 예제 제품 ([PRD](docs/movies-prd.md)) |
+| `/movies` | 씨네덱 · 영화 평점 — 이 시스템으로 만든 예제 제품 ([PRD](docs/prd-movies.md)) |
+| `/studio` | 스튜디오 · 이미지 생성 |
+| `/reel` | 릴 · 영상 생성 ([PRD](docs/prd-reel.md)) |
 
 ## 다른 컴퓨터에서 시작하기
 
@@ -27,6 +29,43 @@ npm run dev
 
 http://localhost:3000 — Node 20 이상이면 된다. 다른 준비물은 없다.
 데이터베이스도 API 키도 쓰지 않는다. 씨네덱의 기록은 브라우저 localStorage 에만 남는다.
+
+## 에이전트로 화면 만들기
+
+이 레포는 «있는 것으로 조립한다» 를 규칙이 아니라 **환경**으로 만들어 뒀다.
+
+| 파일 | 하는 일 |
+| --- | --- |
+| [`design-system.json`](design-system.json) | 기계가 읽는 색인. 컴포넌트 62 · 패턴 74 · 블록 88 · 토큰 58 — id, import 경로, export 이름, variant/size, 정의가 전부 여기 |
+| [`docs/agentic-rules.md`](docs/agentic-rules.md) | 순서와 금지 사항 |
+| [`.claude/skills/build-screen`](.claude/skills/build-screen/SKILL.md) | 화면 요청이 오면 자동으로 걸리는 작업 절차 |
+| [`scripts/check-screen.mjs`](scripts/check-screen.mjs) | 다 만든 뒤 «이미 있는 걸 다시 짰나» 를 검사 |
+
+```bash
+npm run registry     # design-system.json 갱신
+npm run check        # app 아래 화면 전부 검사
+npm run check app/reel/page.tsx
+npm run gen          # 컴포넌트 · 패턴 · 서드파티 · 색인 전부 다시 생성
+```
+
+## 다른 사람에게 공유하기
+
+서버 없이 도는 한 벌을 만든다.
+
+```bash
+npm run share        # out/ 에 정적 사이트가 나온다 (파일 약 2,000개)
+```
+
+`out/` 을 그대로 올리면 된다 — Netlify · Cloudflare Pages · S3 · 사내 정적 호스트 어디든.
+하위 경로에 올릴 때는 `BASE_PATH=/design-system npm run share`.
+
+GitHub Pages 를 쓴다면 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 이
+이미 들어 있다. 저장소 Settings → Pages → Source 를 **GitHub Actions** 로 바꾸고 main 에
+밀면, 밀 때마다 공개 주소가 갱신된다.
+
+공유본에서 달라지는 것은 하나뿐이다 — 파운데이션 편집기의 «저장» 이
+`data/themes.json` 대신 **보는 사람의 브라우저**에 남는다. 서버가 없어서다.
+레포에 테마를 남기려면 로컬에서 `npm run dev` 로 저장해야 한다.
 
 ## 구조
 

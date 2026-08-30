@@ -10,13 +10,13 @@
  *
  * 준비:  dev 서버가 떠 있어야 한다 (npm run dev)
  * 실행:  node scripts/extract-patterns.mjs
- * 결과:  scripts/_paper-patterns.json
+ * 결과:  scripts/.cache/_paper-patterns.json
  */
 import { existsSync, writeFileSync } from "node:fs"
 import puppeteer from "puppeteer-core"
 
 const BASE = process.env.BASE_URL ?? "http://localhost:3000"
-const OUT = "scripts/_paper-patterns.json"
+const OUT = "scripts/.cache/_paper-patterns.json"
 
 const CANDIDATES = [
   "C:/Program Files/Google/Chrome/Application/chrome.exe",

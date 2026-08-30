@@ -20,18 +20,22 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
       },
+      /* 크기는 토큰 사다리를 탄다 — 각 크기가 자기 숫자를 갖고 있으면
+       * 기준을 옮겨도 하나만 안 따라와서 한 줄이 어긋난다.
+       *
+       * 아이콘이 있어도 좌우 여백은 그대로다. 예전에는 아이콘 쪽 여백을 줄였는데,
+       * «패딩 12» 라고 적어 두고 실제로는 8 이 나오면 값이 값 노릇을 못 한다. */
       size: {
-        default:
-          "h-(--h-button) gap-1.5 px-(--pad-button) has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-8",
+        default: "h-(--h-button) gap-1.5 px-(--pad-button)",
+        xs: "h-(--h-button-xs) gap-1 rounded-[min(var(--radius-md),10px)] px-(--pad-button-xs) text-xs in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-(--h-button-sm) gap-1 rounded-[min(var(--radius-md),12px)] px-(--pad-button-sm) text-[0.8rem] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-(--h-button-lg) gap-1.5 px-(--pad-button-lg)",
+        icon: "size-(--h-button)",
         "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+          "size-(--h-button-xs) rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
         "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+          "size-(--h-button-sm) rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+        "icon-lg": "size-(--h-button-lg)",
       },
     },
     defaultVariants: {

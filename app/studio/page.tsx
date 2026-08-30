@@ -35,8 +35,16 @@ import {
 import Link from "next/link"
 import { useState } from "react"
 
+import { TEST_PADDING_2 } from "@/lib/theme-test-padding-2"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from "@/components/ui/item"
 import { Button } from "@/components/ui/button"
 import { Kbd } from "@/components/ui/kbd"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -91,46 +99,7 @@ export default function StudioPage() {
     <div
       data-surface="studio"
       className="bg-background text-foreground flex h-dvh flex-col overflow-x-clip"
-      style={
-        {
-          "--secondary": "#f2f2f2",
-          "--muted": "#f2f2f2",
-          "--accent": "#f7f7f7",
-          "--sidebar": "#ffffff",
-          "--primary-foreground": "#ffffff",
-          "--card": "#ffffff",
-          "--background": "#fafafa",
-          "--primary": "#292929",
-          /* --spacing-base 가 아니라 --spacing. :root 에서 이미 계산돼 상속되므로
-           * 하위에서 base 를 바꿔도 안 먹는다. */
-          "--spacing": "0.25rem",
-          "--pad-card": "calc(var(--spacing) * 5)",
-          "--h-control": "calc(var(--spacing) * 10)",
-          "--pad-control": "calc(var(--spacing) * 4)",
-          "--font-sans": "Geist, var(--font-pretendard), ui-sans-serif, sans-serif",
-
-          /* Test 에 없는 나머지 절반 — 라이트 모드의 글자와 선.
-           * 테마가 «바꾼 값» 만 저장하기 때문에, 다른 모드 위에 입힐 때는
-           * 짝이 되는 값들을 함께 세워 줘야 대비가 무너지지 않는다. */
-          "--foreground": "#252525",
-          "--card-foreground": "#252525",
-          "--popover": "#ffffff",
-          "--popover-foreground": "#252525",
-          "--secondary-foreground": "#292929",
-          "--accent-foreground": "#292929",
-          "--muted-foreground": "#737373",
-          "--border": "#e5e5e5",
-          "--input": "#e5e5e5",
-          "--ring": "#a3a3a3",
-          "--sidebar-foreground": "#252525",
-          "--destructive": "#e7000b",
-          /* Test 가 정한 컨트롤 값에서 탭만 한 단 내린다 —
-           * 탭이 버튼과 같은 높이면 «전환» 이 «실행» 처럼 읽힌다. */
-          "--h-tab": "calc(var(--spacing) * 8)",
-          "--pad-tab": "calc(var(--spacing) * 3)",
-          "--gap-text": "calc(var(--spacing) * 1)",
-        } as React.CSSProperties
-      }
+      style={TEST_PADDING_2}
     >
       {/* N9 — edge-aligned. The chrome gets out of the canvas's way; there is no
         * centre lane and no separator ladder, only the two edges. */}
@@ -186,18 +155,20 @@ export default function StudioPage() {
 
           <ScrollArea className="min-h-0 flex-1">
             <div className="flex flex-col gap-6 px-4 py-5">
-              <button
-                type="button"
-                className="hover:border-foreground/30 focus-visible:ring-ring group flex items-center gap-3 rounded-lg border px-3 py-2 text-left outline-none focus-visible:ring-2"
-              >
-                <span className="min-w-0 flex-1">
-                  <span className="text-muted-foreground block font-mono text-[10px] tracking-wide uppercase">
-                    Model
-                  </span>
-                  <span className="block truncate text-sm font-medium">Aurora 2.0</span>
-                </span>
-                <ChevronRight className="text-muted-foreground group-hover:text-foreground size-4 shrink-0 transition-colors" />
-              </button>
+              {/* 한 줄짜리 선택지는 Item 이 이미 한다 — 여백·정렬·호버가 딸려 온다 */}
+              <Item variant="outline" size="sm" asChild>
+                <button type="button" className="group text-left">
+                  <ItemContent>
+                    <ItemDescription className="font-mono text-xs tracking-wide uppercase">
+                      Model
+                    </ItemDescription>
+                    <ItemTitle>Aurora 2.0</ItemTitle>
+                  </ItemContent>
+                  <ItemActions>
+                    <ChevronRight className="text-muted-foreground group-hover:text-foreground size-4 transition-colors" />
+                  </ItemActions>
+                </button>
+              </Item>
 
               <section className="flex flex-col gap-2.5">
                 <div className="flex items-baseline justify-between">

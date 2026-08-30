@@ -19,8 +19,8 @@ async function call(name, args) {
   return r
 }
 
-const CARDS = JSON.parse(readFileSync("scripts/_paper-patterns.json", "utf8"))
-const STATE = "scripts/_paper-state.json"
+const CARDS = JSON.parse(readFileSync("scripts/.cache/_paper-patterns.json", "utf8"))
+const STATE = "scripts/.cache/_paper-state.json"
 
 /* 어느 카드가 어느 군인지는 생성된 패턴 페이지가 이미 알고 있다. */
 const page = readFileSync("app/patterns/page.tsx", "utf8")

@@ -19,6 +19,7 @@
 
 import {
   Check,
+  ChevronRight,
   Copy as CopyIcon,
   FilePlus,
   Loader2,
@@ -32,7 +33,7 @@ import {
 import { useTheme } from "next-themes"
 import { useCallback, useEffect, useRef, useState } from "react"
 
-import type { SavedTheme } from "@/app/api/themes/route"
+import type { SavedTheme } from "@/app/api/themes/route.dev"
 import { type Copy, useLang } from "@/components/lang"
 import { TokenInspector } from "@/components/token-inspector"
 import { readPx } from "@/lib/token-read"
@@ -332,6 +333,46 @@ function loadFont(family: string) {
   document.head.appendChild(link)
 }
 
+/* 파일 API 가 없을 때의 보관소.
+ *
+ * 공유용 정적 빌드에는 서버가 없다. 그 자리에서 테마를 만들어 본 사람이
+ * 저장을 눌렀을 때 «실패» 만 보는 것보다는, 자기 브라우저에 남는 편이 낫다.
+ * 대신 그건 그 사람 브라우저에만 있고 레포에는 안 들어온다. */
+const LOCAL_THEMES = "ds-themes-local"
+
+function readLocalThemes(): SavedTheme[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_THEMES)
+    return raw ? (JSON.parse(raw) as SavedTheme[]) : []
+  } catch {
+    return []
+  }
+}
+
+function writeLocalThemes(body: object): SavedTheme[] {
+  const list = readLocalThemes()
+  const b = body as { remove?: string; name?: string; mode?: string; vars?: object }
+  const next = b.remove
+    ? list.filter((t) => t.id !== b.remove)
+    : [
+        ...list,
+        {
+          id: `local-${list.length + 1}-${b.name}`,
+          name: b.name ?? "이름 없음",
+          mode: (b.mode ?? "light") as SavedTheme["mode"],
+          at: "",
+          vars: (b.vars ?? {}) as SavedTheme["vars"],
+        },
+      ]
+  try {
+    localStorage.setItem(LOCAL_THEMES, JSON.stringify(next))
+  } catch {}
+  return next
+}
+
+/** 서버가 없다는 뜻. 실패가 아니라 다른 경로로 가라는 신호다. */
+class OfflineStore extends Error {}
+
 export function TokenEditor() {
   const { t, lang } = useLang()
   const { resolvedTheme } = useTheme()
@@ -495,13 +536,17 @@ export function TokenEditor() {
 
   const count = Object.keys(edits).length
 
-  /* 저장한 테마 목록을 읽어 온다. 파일이 정본이라 다른 컴퓨터에서도 같은 목록이다. */
+  /* 저장한 테마 목록을 읽어 온다.
+   *
+   * 개발 중에는 data/themes.json 이 정본이라 다른 컴퓨터에서도 같은 목록이 뜬다.
+   * 공유용 정적 빌드에는 그 API 가 없으므로 브라우저 안에만 저장한다 —
+   * 보는 사람이 «저장이 안 되네» 로 멈추는 대신, 자기 브라우저에서는 되게. */
   useEffect(() => {
     if (!open) return
     fetch("/api/themes")
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((j) => setSaved(j.themes ?? []))
-      .catch(() => {})
+      .catch(() => setSaved(readLocalThemes()))
   }, [open])
 
   const push = async (body: object) => {
@@ -512,11 +557,16 @@ export function TokenEditor() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(body),
       })
+      if (res.status === 404 || res.status === 405) throw new OfflineStore()
       const j = await res.json()
       if (!res.ok) throw new Error(j.error ?? "저장하지 못했습니다")
       setSaved(j.themes ?? [])
       return true
     } catch (e) {
+      if (e instanceof OfflineStore || e instanceof TypeError) {
+        setSaved(writeLocalThemes(body))
+        return true
+      }
       toast.error(e instanceof Error ? e.message : String(e))
       return false
     } finally {
@@ -618,51 +668,45 @@ export function TokenEditor() {
         className="bg-popover text-popover-foreground fixed inset-y-0 right-0 z-40 flex flex-col border-l shadow-xl"
         style={{ width: PANEL }}
       >
-        <div className="flex items-start justify-between gap-3 px-6 pt-6 pb-4">
-          <div className="min-w-0">
-            <h2 className="font-semibold">
-              {lang === "ko" ? "파운데이션 편집" : "Edit foundation"}
-            </h2>
-            <p className="text-muted-foreground mt-1 text-xs leading-relaxed">
-              {lang === "ko"
-                ? "바꾼 값은 왼쪽 화면에 즉시 반영된다. 열어 둔 채로 페이지를 옮겨 다녀도 되고, 원본 파일은 그대로라 언제든 되돌릴 수 있다."
-                : "Changes land on the page to the left immediately. Leave it open while you move between pages — the source files are untouched, so you can always revert."}
-            </p>
+        <div className="flex items-center justify-between gap-2 px-4 pt-4 pb-2">
+          <h2 className="min-w-0 truncate text-sm font-semibold">
+            {lang === "ko" ? "파운데이션 편집" : "Edit foundation"}
+          </h2>
+          <div className="flex shrink-0 items-center gap-1">
+            <Button
+              variant={picking ? "default" : "ghost"}
+              size="icon-sm"
+              onClick={() => setPicking((v) => !v)}
+              aria-pressed={picking}
+              title={
+                picking
+                  ? lang === "ko"
+                    ? "고르는 중 · Esc 로 나가기"
+                    : "Picking · Esc to exit"
+                  : lang === "ko"
+                    ? "화면에서 요소 골라 고치기"
+                    : "Pick an element on screen"
+              }
+              aria-label={
+                lang === "ko" ? "화면에서 요소 골라 고치기" : "Pick an element on screen"
+              }
+            >
+              <MousePointerClick className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setOpen(false)}
+              aria-label={lang === "ko" ? "편집기 닫기" : "Close editor"}
+            >
+              <X className="size-4" />
+            </Button>
           </div>
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            onClick={() => setOpen(false)}
-            aria-label={lang === "ko" ? "편집기 닫기" : "Close editor"}
-            className="shrink-0"
-          >
-            <X className="size-4" />
-          </Button>
         </div>
 
-        {/* 슬라이더는 무엇을 고칠지 이미 아는 사람에게만 쓸모가 있다.
-          * 화면에서 짚는 쪽이 실제로 하는 일에 가까워 여기 위에 둔다. */}
-        <div className="px-6 pb-3">
-          <Button
-            variant={picking ? "default" : "outline"}
-            size="sm"
-            className="w-full justify-start"
-            onClick={() => setPicking((v) => !v)}
-            aria-pressed={picking}
-          >
-            <MousePointerClick className="size-4" />
-            {picking
-              ? lang === "ko"
-                ? "고르는 중 · Esc 로 나가기"
-                : "Picking · Esc to exit"
-              : lang === "ko"
-                ? "화면에서 요소 골라 고치기"
-                : "Pick an element on screen"}
-          </Button>
-        </div>
 
         <Tabs defaultValue="color" className="flex min-h-0 flex-1 flex-col">
-          <div className="px-6 pt-4">
+          <div className="px-4 pt-2">
             <TabsList className="w-full">
               <TabsTrigger value="color" className="flex-1">
                 {lang === "ko" ? "색" : "Color"}
@@ -677,7 +721,7 @@ export function TokenEditor() {
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto">
-            <TabsContent value="color" className="mt-0 flex flex-col gap-1 p-6">
+            <TabsContent value="color" className="mt-0 flex flex-col gap-1 p-4">
               <p className="text-muted-foreground mb-3 text-xs leading-relaxed">
                 {lang === "ko"
                   ? `지금 편집 중인 모드: ${resolvedTheme === "dark" ? "다크" : "라이트"}. 모드를 바꾸면 그쪽 값을 따로 편집한다.`
@@ -718,7 +762,7 @@ export function TokenEditor() {
               ))}
             </TabsContent>
 
-            <TabsContent value="shape" className="mt-0 flex flex-col gap-8 p-6">
+            <TabsContent value="shape" className="mt-0 flex flex-col gap-6 p-4">
               <div>
                 <div className="mb-1 flex items-baseline justify-between">
                   <Label>{lang === "ko" ? "모서리" : "Radius"}</Label>
@@ -838,7 +882,7 @@ export function TokenEditor() {
               })}
             </TabsContent>
 
-            <TabsContent value="type" className="mt-0 flex flex-col gap-8 p-6">
+            <TabsContent value="type" className="mt-0 flex flex-col gap-6 p-4">
               <div>
                 <Label className="mb-1">{lang === "ko" ? "본문 글꼴" : "Sans"}</Label>
                 <p className="text-muted-foreground mb-3 text-xs leading-relaxed">
@@ -897,51 +941,22 @@ export function TokenEditor() {
           </div>
 
           <Separator />
-          <div className="flex flex-col gap-3 p-6">
-            {count ? (
-              <pre className="bg-muted/50 max-h-32 overflow-auto rounded-md p-3 font-mono text-[11px] leading-relaxed">
-                {css}
-              </pre>
-            ) : (
-              <p className="text-muted-foreground text-xs">
-                {lang === "ko"
-                  ? "아직 바꾼 값이 없다. 무엇이든 하나 밀어 보면 화면이 따라오는 게 보인다."
-                  : "Nothing changed yet. Nudge any value and watch the screen follow."}
-              </p>
-            )}
-            {/* 새로 시작하기. 이게 없으면 저장이 늘 직전 테마를 물려받아,
-              * «새로 만든다» 가 «고친다» 와 구분되지 않는다. */}
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full justify-start"
-              onClick={() => {
-                reset()
-                setName("")
-                setTimeout(() => nameRef.current?.focus(), 0)
-                toast(lang === "ko" ? "새 테마를 시작합니다" : "Started a new theme", {
-                  description:
-                    lang === "ko"
-                      ? "기본값에서 시작합니다. 값을 바꾸고 이름을 붙여 저장하세요."
-                      : "Back to defaults. Change values, name it, save.",
-                })
-              }}
-            >
-              <FilePlus className="size-4" />
-              {lang === "ko" ? "새 테마 만들기" : "New theme"}
-            </Button>
-
-            {/* 이름을 붙여 저장한다. 이름 없이 저장하면 나중에 목록에서
-              * 무엇이 무엇인지 알아볼 수 없어, 결국 아무것도 안 고른다. */}
+          {/* 아래 칸은 «지금 값을 어떻게 할 것인가» 만 맡는다.
+            * 예전에는 여기에 CSS 미리보기까지 늘 펼쳐져 있어서 슬라이더가
+            * 화면 밖으로 밀렸다 — 확인용은 접어 두고, 손이 가는 것만 남긴다. */}
+          <div className="flex flex-col gap-2 p-4">
             <div className="flex gap-2">
               <Input
                 ref={nameRef}
+                size="sm"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") void save()
                 }}
-                placeholder={lang === "ko" ? "테마 이름" : "Theme name"}
+                placeholder={
+                  lang === "ko" ? "이름을 붙여 저장" : "Name it, then save"
+                }
                 disabled={!count}
                 className="flex-1"
               />
@@ -955,77 +970,107 @@ export function TokenEditor() {
               </Button>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex items-center gap-1">
+              <span className="text-muted-foreground mr-auto text-[11px] tabular-nums">
+                {count
+                  ? lang === "ko"
+                    ? `바꾼 값 ${count}개`
+                    : `${count} changed`
+                  : lang === "ko"
+                    ? "바꾼 값 없음"
+                    : "Nothing changed"}
+              </span>
               <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                onClick={reset}
-                disabled={!count}
+                variant="ghost"
+                size="xs"
+                onClick={() => {
+                  reset()
+                  setName("")
+                  setTimeout(() => nameRef.current?.focus(), 0)
+                  toast(lang === "ko" ? "새 테마를 시작합니다" : "Started a new theme", {
+                    description:
+                      lang === "ko"
+                        ? "기본값에서 시작합니다. 값을 바꾸고 이름을 붙여 저장하세요."
+                        : "Back to defaults. Change values, name it, save.",
+                  })
+                }}
               >
-                <RotateCcw className="size-4" />
+                <FilePlus className="size-3.5" />
+                {lang === "ko" ? "새로" : "New"}
+              </Button>
+              <Button variant="ghost" size="xs" onClick={reset} disabled={!count}>
+                <RotateCcw className="size-3.5" />
                 {lang === "ko" ? "되돌리기" : "Reset"}
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                onClick={copy}
-                disabled={!count}
-              >
-                {copied ? <Check className="size-4" /> : <CopyIcon className="size-4" />}
+              <Button variant="ghost" size="xs" onClick={copy} disabled={!count}>
+                {copied ? <Check className="size-3.5" /> : <CopyIcon className="size-3.5" />}
                 {copied
                   ? lang === "ko"
                     ? "복사됨"
                     : "Copied"
-                  : lang === "ko"
-                    ? "CSS 복사"
-                    : "Copy CSS"}
+                  : "CSS"}
               </Button>
             </div>
 
-            {/* 저장한 것들. 눌러서 다시 얹거나 지운다. */}
+            {/* 저장한 것들. 목록이 길어지면 이 칸만 스크롤한다 —
+              * 위의 슬라이더를 밀어내지 않게. */}
             {saved.length ? (
-              <div className="flex flex-col gap-1.5 pt-1">
-                <p className="text-muted-foreground text-xs">
+              <details className="group/saved">
+                <summary className="text-muted-foreground hover:text-foreground flex cursor-pointer list-none items-center gap-1.5 py-1 text-[11px]">
+                  <ChevronRight className="size-3.5 transition-transform group-open/saved:rotate-90" />
                   {lang === "ko"
-                    ? `저장한 테마 ${saved.length}개 · data/themes.json`
-                    : `${saved.length} saved · data/themes.json`}
-                </p>
-                {saved.map((th) => (
-                  <div
-                    key={th.id}
-                    className="hover:bg-muted/50 -mx-2 flex items-center gap-2 rounded-md px-2 py-1"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => apply(th)}
-                      className="min-w-0 flex-1 truncate text-left text-sm"
+                    ? `저장한 테마 ${saved.length}개`
+                    : `${saved.length} saved`}
+                </summary>
+                <div className="mt-1 flex max-h-40 flex-col gap-0.5 overflow-y-auto">
+                  {saved.map((th) => (
+                    <div
+                      key={th.id}
+                      className="hover:bg-muted/50 -mx-2 flex items-center gap-2 rounded-md px-2 py-1"
                     >
-                      {th.name}
-                    </button>
-                    <span className="text-muted-foreground shrink-0 text-[11px]">
-                      {th.mode === "dark"
-                        ? lang === "ko"
-                          ? "다크"
-                          : "dark"
-                        : lang === "ko"
-                          ? "라이트"
-                          : "light"}
-                      {" · "}
-                      {Object.keys(th.vars).length}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => void remove(th.id)}
-                      aria-label={lang === "ko" ? `${th.name} 지우기` : `Delete ${th.name}`}
-                      className="text-muted-foreground hover:text-destructive shrink-0"
-                    >
-                      <Trash2 className="size-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
+                      <button
+                        type="button"
+                        onClick={() => apply(th)}
+                        className="min-w-0 flex-1 truncate text-left text-sm"
+                      >
+                        {th.name}
+                      </button>
+                      <span className="text-muted-foreground shrink-0 text-[11px] tabular-nums">
+                        {th.mode === "dark"
+                          ? lang === "ko"
+                            ? "다크"
+                            : "dark"
+                          : lang === "ko"
+                            ? "라이트"
+                            : "light"}
+                        {" · "}
+                        {Object.keys(th.vars).length}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => void remove(th.id)}
+                        aria-label={
+                          lang === "ko" ? `${th.name} 지우기` : `Delete ${th.name}`
+                        }
+                        className="text-muted-foreground hover:text-destructive shrink-0"
+                      >
+                        <Trash2 className="size-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ) : null}
+
+            {count ? (
+              <details>
+                <summary className="text-muted-foreground hover:text-foreground cursor-pointer list-none py-1 text-[11px]">
+                  {lang === "ko" ? "바뀐 CSS 보기" : "Show changed CSS"}
+                </summary>
+                <pre className="bg-muted/50 mt-1 max-h-32 overflow-auto rounded-md p-2 font-mono text-[11px] leading-relaxed">
+                  {css}
+                </pre>
+              </details>
             ) : null}
           </div>
         </Tabs>

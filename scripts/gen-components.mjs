@@ -472,6 +472,7 @@ import Link from "next/link"
 import { SectionAi } from "@/components/ai-demos/section-ai"
 import { SectionAi2 } from "@/components/ai-demos/section-ai2"
 import { CatalogHeader, CatalogShell, GroupHeader } from "@/components/catalog-shell"
+import { OpenState } from "@/components/examples/open-states"
 import { useLang } from "@/components/lang"
 import { Badge } from "@/components/ui/badge"
 import { PAGES } from "@/lib/catalog-nav"
@@ -577,6 +578,7 @@ export default function ComponentsPage() {
                     </div>
                     <div className="bg-card rounded-lg border p-6">
                       <Comp />
+                      <OpenState id={id} />
                     </div>
                   </article>
                 ))}

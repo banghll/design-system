@@ -1,0 +1,3210 @@
+{
+  "$schema": "https://nation-a.local/design-system-registry",
+  "version": 1,
+  "rule": "새 화면은 이 목록에서 고른다. 여기 없는 것을 새로 만들기 전에 반드시 보고한다.",
+  "tokens": {
+    "color": {
+      "--card": "oklch(1 0 0)",
+      "--card-foreground": "oklch(0.145 0 0)",
+      "--popover": "oklch(1 0 0)",
+      "--popover-foreground": "oklch(0.145 0 0)",
+      "--primary": "oklch(0.205 0 0)",
+      "--primary-foreground": "oklch(0.985 0 0)",
+      "--secondary": "oklch(0.97 0 0)",
+      "--secondary-foreground": "oklch(0.205 0 0)",
+      "--accent": "oklch(0.97 0 0)",
+      "--accent-foreground": "oklch(0.205 0 0)",
+      "--destructive": "oklch(0.577 0.245 27.325)",
+      "--destructive-foreground": "var(--primary-foreground)",
+      "--muted": "oklch(0.97 0 0)",
+      "--muted-foreground": "oklch(0.556 0 0)",
+      "--border": "oklch(0.922 0 0)",
+      "--input": "oklch(0.922 0 0)",
+      "--ring": "oklch(0.708 0 0)",
+      "--chart-1": "oklch(0.87 0 0)",
+      "--chart-2": "oklch(0.556 0 0)",
+      "--chart-3": "oklch(0.439 0 0)",
+      "--chart-4": "oklch(0.371 0 0)",
+      "--chart-5": "oklch(0.269 0 0)",
+      "--sidebar": "oklch(0.985 0 0)",
+      "--sidebar-foreground": "oklch(0.145 0 0)",
+      "--sidebar-primary": "oklch(0.205 0 0)",
+      "--sidebar-primary-foreground": "oklch(0.985 0 0)",
+      "--sidebar-accent": "oklch(0.97 0 0)",
+      "--sidebar-accent-foreground": "oklch(0.205 0 0)",
+      "--sidebar-border": "oklch(0.922 0 0)",
+      "--sidebar-ring": "oklch(0.708 0 0)",
+      "--background": "oklch(1 0 0)",
+      "--foreground": "oklch(0.145 0 0)"
+    },
+    "shape": {
+      "--radius": "0.625rem",
+      "--spacing-base": "0.25rem"
+    },
+    "control": {
+      "--pad-card": "calc(var(--spacing) * 4)",
+      "--pad-card-sm": "calc(var(--spacing) * 3)",
+      "--h-control": "calc(var(--spacing) * 8)",
+      "--pad-control": "calc(var(--spacing) * 2.5)",
+      "--h-button": "var(--h-control)",
+      "--h-button-xs": "calc(var(--h-button) - var(--spacing) * 2)",
+      "--h-button-sm": "calc(var(--h-button) - var(--spacing) * 1)",
+      "--h-button-lg": "calc(var(--h-button) + var(--spacing) * 1)",
+      "--pad-button": "var(--pad-control)",
+      "--pad-button-xs": "calc(var(--pad-button) * 0.8)",
+      "--pad-button-sm": "calc(var(--pad-button) * 0.9)",
+      "--pad-button-lg": "calc(var(--pad-button) * 1.2)",
+      "--h-input": "var(--h-control)",
+      "--h-input-xs": "calc(var(--h-input) - var(--spacing) * 2)",
+      "--h-input-sm": "calc(var(--h-input) - var(--spacing) * 1)",
+      "--h-input-lg": "calc(var(--h-input) + var(--spacing) * 1)",
+      "--pad-input": "var(--pad-control)",
+      "--pad-input-xs": "calc(var(--pad-input) * 0.8)",
+      "--pad-input-sm": "calc(var(--pad-input) * 0.9)",
+      "--pad-input-lg": "calc(var(--pad-input) * 1.2)",
+      "--h-tab": "calc(var(--spacing) * 7)",
+      "--pad-tab": "calc(var(--spacing) * 1.5)",
+      "--gap-text": "calc(var(--spacing) * 1)"
+    },
+    "type": {
+      "--font-pretendard": "\"Pretendard Variable\", Pretendard"
+    }
+  },
+  "components": [
+    {
+      "id": "accordion",
+      "group": "c-nav",
+      "import": "@/components/ui/accordion",
+      "file": "components/ui/accordion.tsx",
+      "exports": [
+        "Accordion",
+        "AccordionContent",
+        "AccordionItem",
+        "AccordionTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/accordion-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "길어서 다 보여줄 수 없는 것을 접어 두는 것.",
+          "en": "Folding away what's too long to show at once."
+        },
+        "when": {
+          "ko": "숨기기 전에 '이게 이 화면에 있어야 하나' 를 먼저 묻는다. 대개는 아니다.",
+          "en": "Before hiding it, ask whether it belongs on this screen at all. Usually it doesn't."
+        }
+      }
+    },
+    {
+      "id": "alert-dialog",
+      "group": "c-overlay",
+      "import": "@/components/ui/alert-dialog",
+      "file": "components/ui/alert-dialog.tsx",
+      "exports": [
+        "AlertDialog",
+        "AlertDialogAction",
+        "AlertDialogCancel",
+        "AlertDialogContent",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogHeader",
+        "AlertDialogMedia",
+        "AlertDialogOverlay",
+        "AlertDialogPortal",
+        "AlertDialogTitle",
+        "AlertDialogTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/alert-dialog-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "되돌릴 수 없는 일 앞의 확인.",
+          "en": "A confirmation before something irreversible."
+        },
+        "when": {
+          "ko": "확인 없이 지나갈 수 없다. 되돌릴 수 있는 일에는 쓰지 말고, 실행한 뒤 '되돌리기' 를 주는 편이 낫다.",
+          "en": "It cannot be dismissed past. For reversible actions, skip it and offer undo afterward instead."
+        }
+      }
+    },
+    {
+      "id": "alert",
+      "group": "c-display",
+      "import": "@/components/ui/alert",
+      "file": "components/ui/alert.tsx",
+      "exports": [
+        "Alert",
+        "AlertAction",
+        "AlertDescription",
+        "AlertTitle"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "destructive"
+        ]
+      },
+      "example": "components/examples/alert-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "화면 안에 머무는 안내.",
+          "en": "A notice that stays on the page."
+        },
+        "when": {
+          "ko": "사라지지 않는다. 잠깐 알리고 끝날 것은 Toast(sonner) 다.",
+          "en": "It does not dismiss itself. If it should, that's a toast."
+        }
+      }
+    },
+    {
+      "id": "aspect-ratio",
+      "group": "c-display",
+      "import": "@/components/ui/aspect-ratio",
+      "file": "components/ui/aspect-ratio.tsx",
+      "exports": [
+        "AspectRatio"
+      ],
+      "variants": {},
+      "example": "components/examples/aspect-ratio-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "비율을 고정하는 상자.",
+          "en": "A box that holds a fixed ratio."
+        },
+        "when": {
+          "ko": "이미지 · 영상 자리. 로드 전후로 레이아웃이 흔들리지 않게 미리 자리를 잡는다.",
+          "en": "For images and video — reserves the space so nothing shifts when the asset lands."
+        }
+      }
+    },
+    {
+      "id": "attachment",
+      "group": "c-display",
+      "import": "@/components/ui/attachment",
+      "file": "components/ui/attachment.tsx",
+      "exports": [
+        "Attachment",
+        "AttachmentAction",
+        "AttachmentActions",
+        "AttachmentContent",
+        "AttachmentDescription",
+        "AttachmentGroup",
+        "AttachmentMedia",
+        "AttachmentTitle",
+        "AttachmentTrigger"
+      ],
+      "variants": {
+        "size": [
+          "default",
+          "sm",
+          "xs"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "variant": [
+          "icon",
+          "image"
+        ]
+      },
+      "example": "components/examples/attachment-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "대화나 폼에 붙인 파일.",
+          "en": "A file attached to a message or form."
+        },
+        "when": {
+          "ko": "올리는 중 · 실패 상태를 갖는다. 실패는 원인(용량 · 형식)까지 말해야 다시 시도할 수 있다.",
+          "en": "It has uploading and failed states. Failure must name the cause — size, format — or retrying is guesswork."
+        }
+      }
+    },
+    {
+      "id": "avatar",
+      "group": "c-display",
+      "import": "@/components/ui/avatar",
+      "file": "components/ui/avatar.tsx",
+      "exports": [
+        "Avatar",
+        "AvatarBadge",
+        "AvatarFallback",
+        "AvatarGroup",
+        "AvatarGroupCount",
+        "AvatarImage"
+      ],
+      "variants": {},
+      "example": "components/examples/avatar-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "사람이나 팀을 식별하는 작은 이미지.",
+          "en": "A small image identifying a person or team."
+        },
+        "when": {
+          "ko": "이미지가 없을 때의 이니셜 폴백을 반드시 둔다 — 실제로는 없는 경우가 더 많다.",
+          "en": "Always ship the initials fallback. In practice, missing images are the common case."
+        }
+      }
+    },
+    {
+      "id": "badge",
+      "group": "c-display",
+      "import": "@/components/ui/badge",
+      "file": "components/ui/badge.tsx",
+      "exports": [
+        "Badge",
+        "badgeVariants"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ]
+      },
+      "example": "components/examples/badge-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "상태나 분류를 짧게 표시하는 라벨.",
+          "en": "A short label for status or category."
+        },
+        "when": {
+          "ko": "누르는 것이 아니다. 누를 수 있어야 하면 Button 이거나 Toggle 이다.",
+          "en": "It isn't pressable. If it needs to be, it's a Button or a Toggle."
+        }
+      }
+    },
+    {
+      "id": "breadcrumb",
+      "group": "c-nav",
+      "import": "@/components/ui/breadcrumb",
+      "file": "components/ui/breadcrumb.tsx",
+      "exports": [
+        "Breadcrumb",
+        "BreadcrumbEllipsis",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbList",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator"
+      ],
+      "variants": {},
+      "example": "components/examples/breadcrumb-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "지금 어디인지, 어디서 왔는지.",
+          "en": "Where you are and how you got here."
+        },
+        "when": {
+          "ko": "계층이 두 단계를 넘을 때만 값을 한다. 평평한 사이트에서는 자리만 차지한다.",
+          "en": "Only earns its space past two levels of hierarchy. On a flat site it's decoration."
+        }
+      }
+    },
+    {
+      "id": "bubble",
+      "group": "c-display",
+      "import": "@/components/ui/bubble",
+      "file": "components/ui/bubble.tsx",
+      "exports": [
+        "Bubble",
+        "BubbleContent",
+        "BubbleGroup",
+        "BubbleReactions"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "secondary",
+          "muted",
+          "tinted",
+          "outline",
+          "ghost",
+          "destructive"
+        ]
+      },
+      "example": "components/examples/bubble-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "말풍선.",
+          "en": "A speech bubble."
+        },
+        "when": {
+          "ko": "보낸 사람에 따라 좌우가 갈린다. 사람 간 대화에 쓴다 — AI 대화는 AI Elements 쪽이다.",
+          "en": "Sides split by sender. For human conversation; AI conversation lives in AI Elements."
+        }
+      }
+    },
+    {
+      "id": "button-group",
+      "group": "c-action",
+      "import": "@/components/ui/button-group",
+      "file": "components/ui/button-group.tsx",
+      "exports": [
+        "ButtonGroup",
+        "ButtonGroupSeparator",
+        "ButtonGroupText",
+        "buttonGroupVariants"
+      ],
+      "variants": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "example": "components/examples/button-group-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "성격이 같은 버튼을 하나의 덩어리로 붙인 것.",
+          "en": "Buttons of the same kind fused into one unit."
+        },
+        "when": {
+          "ko": "기간(일 · 주 · 월)이나 보기 전환처럼 서로 배타적인 선택. 개별 버튼으로 나열하면 그 배타성이 안 보인다.",
+          "en": "Mutually exclusive choices — day/week/month, view switches. Listed separately, that exclusivity disappears."
+        }
+      }
+    },
+    {
+      "id": "button",
+      "group": "c-action",
+      "import": "@/components/ui/button",
+      "file": "components/ui/button.tsx",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ],
+        "size": [
+          "default",
+          "xs",
+          "sm",
+          "lg",
+          "icon",
+          "icon-xs",
+          "icon-sm",
+          "icon-lg"
+        ]
+      },
+      "example": "components/examples/button-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "누르면 무언가가 실행되는 가장 작은 단위. 상태를 바꾸거나 화면을 옮긴다.",
+          "en": "The smallest unit that makes something happen — changes state or moves you."
+        },
+        "when": {
+          "ko": "화면당 default 는 하나. 나머지는 secondary · outline · ghost 로 내리고, 되돌릴 수 없는 것만 destructive 로 올린다.",
+          "en": "One default per screen. Everything else steps down to secondary, outline or ghost; only the irreversible steps up to destructive."
+        }
+      }
+    },
+    {
+      "id": "calendar",
+      "group": "c-data",
+      "import": "@/components/ui/calendar",
+      "file": "components/ui/calendar.tsx",
+      "exports": [
+        "Calendar",
+        "CalendarDayButton"
+      ],
+      "variants": {},
+      "example": "components/examples/calendar-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "날짜 하나 또는 범위를 고르는 것.",
+          "en": "Picking a date or a range."
+        },
+        "when": {
+          "ko": "입력이 하나뿐이라면 날짜 입력창이 더 빠를 수 있다. 달력은 주변 날짜의 맥락이 필요할 때 값을 한다.",
+          "en": "For a single value, a date field may be faster. A calendar earns its space when surrounding dates matter."
+        }
+      }
+    },
+    {
+      "id": "card",
+      "group": "c-display",
+      "import": "@/components/ui/card",
+      "file": "components/ui/card.tsx",
+      "exports": [
+        "Card",
+        "CardAction",
+        "CardContent",
+        "CardDescription",
+        "CardFooter",
+        "CardHeader",
+        "CardTitle"
+      ],
+      "variants": {},
+      "example": "components/examples/card-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "관련된 내용을 한 덩어리로 묶는 면.",
+          "en": "A surface grouping related content."
+        },
+        "when": {
+          "ko": "모든 것을 카드에 넣지 않는다. 카드 안에 카드를 넣으면 위계가 무너진다.",
+          "en": "Not everything belongs in one. Nesting cards collapses the hierarchy."
+        }
+      }
+    },
+    {
+      "id": "carousel",
+      "group": "c-data",
+      "import": "@/components/ui/carousel",
+      "file": "components/ui/carousel.tsx",
+      "exports": [
+        "Carousel",
+        "CarouselContent",
+        "CarouselItem",
+        "CarouselNext",
+        "CarouselPrevious",
+        "type CarouselApi",
+        "useCarousel"
+      ],
+      "variants": {},
+      "example": "components/examples/carousel-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "가로로 넘겨 보는 목록.",
+          "en": "A list you swipe through sideways."
+        },
+        "when": {
+          "ko": "중요한 것을 캐러셀 뒤에 숨기지 않는다. 첫 장만 보고 넘어가는 사람이 대부분이다.",
+          "en": "Never hide anything important past the first slide — most people never advance it."
+        }
+      }
+    },
+    {
+      "id": "chart",
+      "group": "c-data",
+      "import": "@/components/ui/chart",
+      "file": "components/ui/chart.tsx",
+      "exports": [
+        "ChartContainer",
+        "ChartLegend",
+        "ChartLegendContent",
+        "ChartStyle",
+        "ChartTooltip",
+        "ChartTooltipContent"
+      ],
+      "variants": {},
+      "example": "components/examples/chart-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "추세와 비교를 그림으로.",
+          "en": "Trend and comparison, drawn."
+        },
+        "when": {
+          "ko": "recharts 위에 우리 토큰을 씌운 것. 색은 chart-1 부터 5 까지 순서대로 쓴다 — 순서가 곧 의미다.",
+          "en": "recharts wearing our tokens. Use chart-1 through 5 in order — the order carries meaning."
+        }
+      }
+    },
+    {
+      "id": "checkbox",
+      "group": "c-input",
+      "import": "@/components/ui/checkbox",
+      "file": "components/ui/checkbox.tsx",
+      "exports": [
+        "Checkbox"
+      ],
+      "variants": {},
+      "example": "components/examples/checkbox-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "서로 무관한 항목을 각각 켜고 끄는 것.",
+          "en": "Independent items switched on and off individually."
+        },
+        "when": {
+          "ko": "항목끼리 영향을 주지 않을 때. 하나만 골라야 하면 radio-group 이다.",
+          "en": "When choices don't affect each other. If only one may be chosen, that's a radio group."
+        }
+      }
+    },
+    {
+      "id": "collapsible",
+      "group": "c-nav",
+      "import": "@/components/ui/collapsible",
+      "file": "components/ui/collapsible.tsx",
+      "exports": [
+        "Collapsible",
+        "CollapsibleContent",
+        "CollapsibleTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/collapsible-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "한 덩어리를 접었다 펴는 것.",
+          "en": "One block that folds and unfolds."
+        },
+        "when": {
+          "ko": "Accordion 과 달리 여러 개가 동시에 열려 있어도 된다.",
+          "en": "Unlike an accordion, several may be open at once."
+        }
+      }
+    },
+    {
+      "id": "combobox",
+      "group": "c-input",
+      "import": "@/components/ui/combobox",
+      "file": "components/ui/combobox.tsx",
+      "exports": [
+        "Combobox",
+        "ComboboxChip",
+        "ComboboxChips",
+        "ComboboxChipsInput",
+        "ComboboxCollection",
+        "ComboboxContent",
+        "ComboboxEmpty",
+        "ComboboxGroup",
+        "ComboboxInput",
+        "ComboboxItem",
+        "ComboboxLabel",
+        "ComboboxList",
+        "ComboboxSeparator",
+        "ComboboxTrigger",
+        "ComboboxValue",
+        "useComboboxAnchor"
+      ],
+      "variants": {},
+      "example": "components/examples/combobox-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "검색이 붙은 선택.",
+          "en": "A select with search attached."
+        },
+        "when": {
+          "ko": "선택지가 열 개를 넘어 눈으로 훑기 어려울 때.",
+          "en": "Past about ten options, when scanning stops working."
+        }
+      }
+    },
+    {
+      "id": "command",
+      "group": "c-data",
+      "import": "@/components/ui/command",
+      "file": "components/ui/command.tsx",
+      "exports": [
+        "Command",
+        "CommandDialog",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandInput",
+        "CommandItem",
+        "CommandList",
+        "CommandSeparator",
+        "CommandShortcut"
+      ],
+      "variants": {},
+      "example": "components/examples/command-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "검색으로 실행하는 명령 팔레트.",
+          "en": "A searchable command palette."
+        },
+        "when": {
+          "ko": "숙련 사용자를 위한 지름길. 어떤 기능의 유일한 경로로 두면 안 된다.",
+          "en": "A shortcut for experienced users. It must never be the only path to a feature."
+        }
+      }
+    },
+    {
+      "id": "context-menu",
+      "group": "c-overlay",
+      "import": "@/components/ui/context-menu",
+      "file": "components/ui/context-menu.tsx",
+      "exports": [
+        "ContextMenu",
+        "ContextMenuCheckboxItem",
+        "ContextMenuContent",
+        "ContextMenuGroup",
+        "ContextMenuItem",
+        "ContextMenuLabel",
+        "ContextMenuPortal",
+        "ContextMenuRadioGroup",
+        "ContextMenuRadioItem",
+        "ContextMenuSeparator",
+        "ContextMenuShortcut",
+        "ContextMenuSub",
+        "ContextMenuSubContent",
+        "ContextMenuSubTrigger",
+        "ContextMenuTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/context-menu-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "우클릭으로 여는 그 자리의 동작.",
+          "en": "Actions opened by right-click, scoped to what's under the cursor."
+        },
+        "when": {
+          "ko": "유일한 경로로 두지 않는다. 모바일에는 우클릭이 없다.",
+          "en": "Never the only path — there is no right-click on mobile."
+        }
+      }
+    },
+    {
+      "id": "dialog",
+      "group": "c-overlay",
+      "import": "@/components/ui/dialog",
+      "file": "components/ui/dialog.tsx",
+      "exports": [
+        "Dialog",
+        "DialogClose",
+        "DialogContent",
+        "DialogDescription",
+        "DialogFooter",
+        "DialogHeader",
+        "DialogOverlay",
+        "DialogPortal",
+        "DialogTitle",
+        "DialogTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/dialog-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "지금 하던 일을 멈추고 처리해야 하는 것.",
+          "en": "Something that must be dealt with before continuing."
+        },
+        "when": {
+          "ko": "남용하면 흐름이 계속 끊긴다. 뒤 화면을 보여 주는 Sheet 가 나은 경우가 많다.",
+          "en": "Overused, it chops the flow to pieces. A sheet — which keeps the background visible — is often the better answer."
+        }
+      }
+    },
+    {
+      "id": "direction",
+      "group": null,
+      "import": "@/components/ui/direction",
+      "file": "components/ui/direction.tsx",
+      "exports": [
+        "DirectionProvider",
+        "useDirection"
+      ],
+      "variants": {},
+      "example": null,
+      "doc": null
+    },
+    {
+      "id": "drawer",
+      "group": "c-overlay",
+      "import": "@/components/ui/drawer",
+      "file": "components/ui/drawer.tsx",
+      "exports": [
+        "Drawer",
+        "DrawerClose",
+        "DrawerContent",
+        "DrawerDescription",
+        "DrawerFooter",
+        "DrawerHeader",
+        "DrawerOverlay",
+        "DrawerPortal",
+        "DrawerTitle",
+        "DrawerTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/drawer-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "화면 아래에서 올라오는 패널.",
+          "en": "A panel rising from the bottom."
+        },
+        "when": {
+          "ko": "모바일에서 엄지가 닿는 자리. 데스크톱에서는 Sheet 가 맞다.",
+          "en": "Where a thumb reaches on mobile. On desktop, a sheet is the right shape."
+        }
+      }
+    },
+    {
+      "id": "dropdown-menu",
+      "group": "c-overlay",
+      "import": "@/components/ui/dropdown-menu",
+      "file": "components/ui/dropdown-menu.tsx",
+      "exports": [
+        "DropdownMenu",
+        "DropdownMenuCheckboxItem",
+        "DropdownMenuContent",
+        "DropdownMenuGroup",
+        "DropdownMenuItem",
+        "DropdownMenuLabel",
+        "DropdownMenuPortal",
+        "DropdownMenuRadioGroup",
+        "DropdownMenuRadioItem",
+        "DropdownMenuSeparator",
+        "DropdownMenuShortcut",
+        "DropdownMenuSub",
+        "DropdownMenuSubContent",
+        "DropdownMenuSubTrigger",
+        "DropdownMenuTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/dropdown-menu-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "한 버튼에 딸린 동작 목록.",
+          "en": "A list of actions hanging off one button."
+        },
+        "when": {
+          "ko": "선택이 아니라 실행이다. 값을 고르는 것이라면 Select 다.",
+          "en": "These execute, they don't select. If a value is being chosen, that's a Select."
+        }
+      }
+    },
+    {
+      "id": "empty",
+      "group": "c-display",
+      "import": "@/components/ui/empty",
+      "file": "components/ui/empty.tsx",
+      "exports": [
+        "Empty",
+        "EmptyContent",
+        "EmptyDescription",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "icon"
+        ]
+      },
+      "example": "components/examples/empty-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "보여줄 것이 없을 때의 화면.",
+          "en": "The screen when there is nothing to show."
+        },
+        "when": {
+          "ko": "막다른 화면을 만들지 않는다. 다음 행동을 카드 안에 둔다.",
+          "en": "Never a dead end — the next action belongs inside the card."
+        }
+      }
+    },
+    {
+      "id": "field",
+      "group": "c-input",
+      "import": "@/components/ui/field",
+      "file": "components/ui/field.tsx",
+      "exports": [
+        "Field",
+        "FieldContent",
+        "FieldDescription",
+        "FieldError",
+        "FieldGroup",
+        "FieldLabel",
+        "FieldLegend",
+        "FieldSeparator",
+        "FieldSet",
+        "FieldTitle"
+      ],
+      "variants": {
+        "orientation": [
+          "vertical",
+          "horizontal",
+          "responsive"
+        ]
+      },
+      "example": "components/examples/field-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "라벨 · 입력 · 설명 · 오류를 한 벌로 묶은 폼의 최소 단위.",
+          "en": "Label, input, description and error as one unit — the atom of a form."
+        },
+        "when": {
+          "ko": "폼을 만들 때는 Input 을 직접 쓰지 말고 Field 로 감싼다. 오류가 들어갈 자리가 미리 잡혀 있어 나중에 레이아웃이 안 흔들린다.",
+          "en": "Never place a bare Input in a form; wrap it. The error slot is reserved up front, so the layout doesn't shift later."
+        }
+      }
+    },
+    {
+      "id": "hover-card",
+      "group": "c-overlay",
+      "import": "@/components/ui/hover-card",
+      "file": "components/ui/hover-card.tsx",
+      "exports": [
+        "HoverCard",
+        "HoverCardContent",
+        "HoverCardTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/hover-card-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "hover 로 보는 미리보기.",
+          "en": "A preview shown on hover."
+        },
+        "when": {
+          "ko": "링크를 누르지 않고도 무엇인지 알게 한다. 역시 터치에서는 뜨지 않는다.",
+          "en": "Lets people know what a link holds without opening it. Also absent on touch."
+        }
+      }
+    },
+    {
+      "id": "input-group",
+      "group": "c-input",
+      "import": "@/components/ui/input-group",
+      "file": "components/ui/input-group.tsx",
+      "exports": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupButton",
+        "InputGroupInput",
+        "InputGroupText",
+        "InputGroupTextarea"
+      ],
+      "variants": {
+        "align": [
+          "inline-start",
+          "inline-end",
+          "block-start",
+          "block-end"
+        ],
+        "size": [
+          "xs",
+          "sm",
+          "icon-xs",
+          "icon-sm"
+        ]
+      },
+      "example": "components/examples/input-group-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "입력 앞뒤에 아이콘 · 단위 · 버튼을 붙인 것.",
+          "en": "An input with icons, units or buttons attached to its edges."
+        },
+        "when": {
+          "ko": "검색창의 돋보기, 주소의 .com, 전송 버튼. 입력과 부속이 한 덩어리로 읽혀야 할 때.",
+          "en": "The magnifier in a search box, the .com on a domain, a send button — when field and fitting must read as one thing."
+        }
+      }
+    },
+    {
+      "id": "input-otp",
+      "group": "c-input",
+      "import": "@/components/ui/input-otp",
+      "file": "components/ui/input-otp.tsx",
+      "exports": [
+        "InputOTP",
+        "InputOTPGroup",
+        "InputOTPSeparator",
+        "InputOTPSlot"
+      ],
+      "variants": {},
+      "example": "components/examples/input-otp-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "자릿수가 정해진 입력.",
+          "en": "An input with a fixed number of characters."
+        },
+        "when": {
+          "ko": "인증번호. 칸을 나눠 몇 자리인지 눈으로 알 수 있게 한다.",
+          "en": "Verification codes. Splitting the boxes tells the eye the length before typing starts."
+        }
+      }
+    },
+    {
+      "id": "input",
+      "group": "c-input",
+      "import": "@/components/ui/input",
+      "file": "components/ui/input.tsx",
+      "exports": [
+        "Input",
+        "inputVariants"
+      ],
+      "variants": {
+        "size": [
+          "default",
+          "xs",
+          "sm",
+          "lg"
+        ]
+      },
+      "example": "components/examples/input-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "한 줄짜리 값을 받는 자리.",
+          "en": "A single line that takes a value."
+        },
+        "when": {
+          "ko": "기본 · 값 있음 · 비활성 · 오류 네 상태를 모두 갖춰야 한다. 오류는 색만이 아니라 문구로 무엇을 고쳐야 하는지 말한다.",
+          "en": "All four states must exist: empty, filled, disabled, error. An error needs words that say what to fix, not just a color."
+        }
+      }
+    },
+    {
+      "id": "item",
+      "group": "c-display",
+      "import": "@/components/ui/item",
+      "file": "components/ui/item.tsx",
+      "exports": [
+        "Item",
+        "ItemActions",
+        "ItemContent",
+        "ItemDescription",
+        "ItemFooter",
+        "ItemGroup",
+        "ItemHeader",
+        "ItemMedia",
+        "ItemSeparator",
+        "ItemTitle"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "icon",
+          "image"
+        ],
+        "size": [
+          "default",
+          "sm",
+          "xs"
+        ]
+      },
+      "example": "components/examples/item-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "목록의 한 줄.",
+          "en": "One row of a list."
+        },
+        "when": {
+          "ko": "아이콘 · 제목 · 설명 · 액션이 세로 레인을 맞춰 정렬된다. 줄마다 구조가 달라지면 목록이 아니다.",
+          "en": "Icon, title, description and action stay in vertical lanes. If rows differ structurally, it isn't a list."
+        }
+      }
+    },
+    {
+      "id": "kbd",
+      "group": "c-action",
+      "import": "@/components/ui/kbd",
+      "file": "components/ui/kbd.tsx",
+      "exports": [
+        "Kbd",
+        "KbdGroup"
+      ],
+      "variants": {},
+      "example": "components/examples/kbd-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "단축키를 글자로 표기한 것.",
+          "en": "A keyboard shortcut, written out."
+        },
+        "when": {
+          "ko": "실행하는 것이 아니라 알려주는 것. 메뉴 항목 오른쪽이나 툴팁 안에 둔다.",
+          "en": "It informs, it doesn't execute. Park it at the right edge of a menu item or inside a tooltip."
+        }
+      }
+    },
+    {
+      "id": "label",
+      "group": "c-input",
+      "import": "@/components/ui/label",
+      "file": "components/ui/label.tsx",
+      "exports": [
+        "Label"
+      ],
+      "variants": {},
+      "example": "components/examples/label-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "입력과 짝을 이루는 이름표.",
+          "en": "The name attached to an input."
+        },
+        "when": {
+          "ko": "누르면 입력으로 초점이 간다. htmlFor 를 빠뜨리면 그 이점이 사라진다.",
+          "en": "Clicking it focuses the field. Drop htmlFor and you lose that entirely."
+        }
+      }
+    },
+    {
+      "id": "marker",
+      "group": "c-display",
+      "import": "@/components/ui/marker",
+      "file": "components/ui/marker.tsx",
+      "exports": [
+        "Marker",
+        "MarkerContent",
+        "MarkerIcon",
+        "markerVariants"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "separator",
+          "border"
+        ]
+      },
+      "example": "components/examples/marker-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "새로 생긴 것 · 바뀐 것을 표시하는 점.",
+          "en": "A dot marking what's new or changed."
+        },
+        "when": {
+          "ko": "많이 쓰면 아무것도 새것이 아니게 된다. 읽으면 사라져야 한다.",
+          "en": "Overuse and nothing reads as new. It must clear once seen."
+        }
+      }
+    },
+    {
+      "id": "menubar",
+      "group": "c-nav",
+      "import": "@/components/ui/menubar",
+      "file": "components/ui/menubar.tsx",
+      "exports": [
+        "Menubar",
+        "MenubarCheckboxItem",
+        "MenubarContent",
+        "MenubarGroup",
+        "MenubarItem",
+        "MenubarLabel",
+        "MenubarMenu",
+        "MenubarPortal",
+        "MenubarRadioGroup",
+        "MenubarRadioItem",
+        "MenubarSeparator",
+        "MenubarShortcut",
+        "MenubarSub",
+        "MenubarSubContent",
+        "MenubarSubTrigger",
+        "MenubarTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/menubar-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "데스크톱 앱 스타일의 메뉴 줄.",
+          "en": "A desktop-app style menu bar."
+        },
+        "when": {
+          "ko": "편집기처럼 명령이 아주 많고, 사용자가 그 앱에 오래 머무를 때.",
+          "en": "For editor-class surfaces with many commands and users who stay a long time."
+        }
+      }
+    },
+    {
+      "id": "message-scroller",
+      "group": "c-data",
+      "import": "@/components/ui/message-scroller",
+      "file": "components/ui/message-scroller.tsx",
+      "exports": [
+        "MessageScroller",
+        "MessageScrollerButton",
+        "MessageScrollerContent",
+        "MessageScrollerItem",
+        "MessageScrollerProvider",
+        "MessageScrollerViewport",
+        "useMessageScroller",
+        "useMessageScrollerScrollable",
+        "useMessageScrollerVisibility"
+      ],
+      "variants": {},
+      "example": "components/examples/message-scroller-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "새 메시지가 오면 아래로 따라가는 대화 목록.",
+          "en": "A message list that follows new arrivals downward."
+        },
+        "when": {
+          "ko": "사용자가 위로 올려 읽는 중이면 따라가지 않아야 한다. 이 예외를 빠뜨리면 읽기를 방해한다.",
+          "en": "It must stop following while the user is scrolled up reading. Miss that and it fights them."
+        }
+      }
+    },
+    {
+      "id": "message",
+      "group": "c-display",
+      "import": "@/components/ui/message",
+      "file": "components/ui/message.tsx",
+      "exports": [
+        "Message",
+        "MessageAvatar",
+        "MessageContent",
+        "MessageFooter",
+        "MessageGroup",
+        "MessageHeader"
+      ],
+      "variants": {},
+      "example": "components/examples/message-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "대화 한 줄. 아바타 · 본문 · 시각.",
+          "en": "One turn of a conversation — avatar, body, timestamp."
+        },
+        "when": {
+          "ko": "사람이 여럿인 대화. 보낸 사람이 한눈에 구분돼야 한다.",
+          "en": "Multi-person threads, where the sender must be identifiable at a glance."
+        }
+      }
+    },
+    {
+      "id": "native-select",
+      "group": "c-input",
+      "import": "@/components/ui/native-select",
+      "file": "components/ui/native-select.tsx",
+      "exports": [
+        "NativeSelect",
+        "NativeSelectOptGroup",
+        "NativeSelectOption"
+      ],
+      "variants": {},
+      "example": "components/examples/native-select-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "브라우저가 그리는 선택 목록.",
+          "en": "A select drawn by the browser itself."
+        },
+        "when": {
+          "ko": "모바일에서 가장 익숙하고 접근성이 공짜다. 그룹 · 아이콘이 필요 없다면 이쪽이 낫다.",
+          "en": "Most familiar on mobile and accessible for free. If you don't need groups or icons, this is the better choice."
+        }
+      }
+    },
+    {
+      "id": "navigation-menu",
+      "group": "c-nav",
+      "import": "@/components/ui/navigation-menu",
+      "file": "components/ui/navigation-menu.tsx",
+      "exports": [
+        "NavigationMenu",
+        "NavigationMenuContent",
+        "NavigationMenuIndicator",
+        "NavigationMenuItem",
+        "NavigationMenuLink",
+        "NavigationMenuList",
+        "NavigationMenuTrigger",
+        "NavigationMenuViewport",
+        "navigationMenuTriggerStyle"
+      ],
+      "variants": {},
+      "example": "components/examples/navigation-menu-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "제품 상단의 주 탐색.",
+          "en": "The product's top-level navigation."
+        },
+        "when": {
+          "ko": "하위 메뉴가 있을 만큼 사이트가 클 때. 링크가 두세 개면 그냥 링크를 나열한다.",
+          "en": "For sites large enough to have submenus. Two or three links? Just list them."
+        }
+      }
+    },
+    {
+      "id": "overlay-stage",
+      "group": null,
+      "import": "@/components/ui/overlay-stage",
+      "file": "components/ui/overlay-stage.tsx",
+      "exports": [
+        "OverlayStage",
+        "useOverlayContainer"
+      ],
+      "variants": {},
+      "example": null,
+      "doc": null
+    },
+    {
+      "id": "pagination",
+      "group": "c-nav",
+      "import": "@/components/ui/pagination",
+      "file": "components/ui/pagination.tsx",
+      "exports": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationEllipsis",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationNext",
+        "PaginationPrevious"
+      ],
+      "variants": {},
+      "example": "components/examples/pagination-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "긴 목록을 쪽으로 나누는 것.",
+          "en": "Splitting a long list into pages."
+        },
+        "when": {
+          "ko": "무한 스크롤과 달리 특정 지점으로 되돌아올 수 있다. 위치를 기억해야 하는 목록에 쓴다.",
+          "en": "Unlike infinite scroll, you can return to a specific spot. Use it when position must be recoverable."
+        }
+      }
+    },
+    {
+      "id": "popover",
+      "group": "c-overlay",
+      "import": "@/components/ui/popover",
+      "file": "components/ui/popover.tsx",
+      "exports": [
+        "Popover",
+        "PopoverAnchor",
+        "PopoverContent",
+        "PopoverDescription",
+        "PopoverHeader",
+        "PopoverTitle",
+        "PopoverTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/popover-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "누른 자리 옆에 붙는 작은 면.",
+          "en": "A small surface anchored to what you pressed."
+        },
+        "when": {
+          "ko": "초점을 완전히 가져가지 않는다. 짧은 설정이나 설명.",
+          "en": "It doesn't take focus away entirely. For short settings or explanations."
+        }
+      }
+    },
+    {
+      "id": "progress",
+      "group": "c-display",
+      "import": "@/components/ui/progress",
+      "file": "components/ui/progress.tsx",
+      "exports": [
+        "Progress"
+      ],
+      "variants": {},
+      "example": "components/examples/progress-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "끝이 정해진 작업의 진행률.",
+          "en": "Progress on work with a known end."
+        },
+        "when": {
+          "ko": "끝을 모르면 Spinner 다. 오래 걸리면 남은 시간과 취소를 함께 둔다.",
+          "en": "If the end is unknown, that's a spinner. If it's long, add remaining time and a way to cancel."
+        }
+      }
+    },
+    {
+      "id": "questionnaire",
+      "group": "c-input",
+      "import": "@/components/ui/questionnaire",
+      "file": "components/ui/questionnaire.tsx",
+      "exports": [
+        "Questionnaire",
+        "QuestionnaireActions",
+        "QuestionnaireChoice",
+        "QuestionnaireChoiceDescription",
+        "QuestionnaireChoices",
+        "QuestionnaireDescription",
+        "QuestionnaireError",
+        "QuestionnaireInput",
+        "QuestionnaireItem",
+        "QuestionnaireNext",
+        "QuestionnairePrevious",
+        "QuestionnaireProgress",
+        "QuestionnaireSkip",
+        "QuestionnaireSubmit",
+        "QuestionnaireTitle"
+      ],
+      "variants": {},
+      "example": "components/examples/questionnaire-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "여러 문항을 순서대로 받는 구조.",
+          "en": "A structure that asks several questions in sequence."
+        },
+        "when": {
+          "ko": "온보딩 · 설문처럼 한 번에 다 보여주면 부담스러운 것.",
+          "en": "Onboarding and surveys — anything that intimidates when shown all at once."
+        }
+      }
+    },
+    {
+      "id": "radio-group",
+      "group": "c-input",
+      "import": "@/components/ui/radio-group",
+      "file": "components/ui/radio-group.tsx",
+      "exports": [
+        "RadioGroup",
+        "RadioGroupItem"
+      ],
+      "variants": {},
+      "example": "components/examples/radio-group-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "서로 배타적인 것 중 하나만 고르는 것.",
+          "en": "One choice from a mutually exclusive set."
+        },
+        "when": {
+          "ko": "선택지가 다섯을 넘으면 select 로 바꾼다. 그 이상은 나열이 오히려 안 읽힌다.",
+          "en": "Past five options, switch to a select — listing them stops helping."
+        }
+      }
+    },
+    {
+      "id": "resizable",
+      "group": "c-data",
+      "import": "@/components/ui/resizable",
+      "file": "components/ui/resizable.tsx",
+      "exports": [
+        "ResizableHandle",
+        "ResizablePanel",
+        "ResizablePanelGroup"
+      ],
+      "variants": {},
+      "example": "components/examples/resizable-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "사용자가 폭을 조절하는 분할 화면.",
+          "en": "A split view the user can resize."
+        },
+        "when": {
+          "ko": "목록과 본문을 같이 보면서 어느 쪽에 무게를 둘지 사용자가 정하게 할 때.",
+          "en": "When list and detail are both visible and the user should decide which gets the weight."
+        }
+      }
+    },
+    {
+      "id": "scroll-area",
+      "group": "c-data",
+      "import": "@/components/ui/scroll-area",
+      "file": "components/ui/scroll-area.tsx",
+      "exports": [
+        "ScrollArea",
+        "ScrollBar"
+      ],
+      "variants": {},
+      "example": "components/examples/scroll-area-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "넘치는 내용을 자기 안에서 스크롤하는 상자.",
+          "en": "A box that scrolls its own overflow."
+        },
+        "when": {
+          "ko": "페이지 전체를 밀지 않아야 할 때. 사이드바 · 목록 · 팝오버 안쪽.",
+          "en": "When the page itself must stay put — sidebars, lists, the inside of popovers."
+        }
+      }
+    },
+    {
+      "id": "select",
+      "group": "c-input",
+      "import": "@/components/ui/select",
+      "file": "components/ui/select.tsx",
+      "exports": [
+        "Select",
+        "SelectContent",
+        "SelectGroup",
+        "SelectItem",
+        "SelectLabel",
+        "SelectScrollDownButton",
+        "SelectScrollUpButton",
+        "SelectSeparator",
+        "SelectTrigger",
+        "SelectValue"
+      ],
+      "variants": {},
+      "example": "components/examples/select-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "직접 그린 선택 목록.",
+          "en": "A select we draw ourselves."
+        },
+        "when": {
+          "ko": "그룹 · 구분선 · 아이콘이 필요할 때. 대신 접근성을 스스로 책임져야 한다.",
+          "en": "When you need groups, separators or icons — and are willing to own the accessibility."
+        }
+      }
+    },
+    {
+      "id": "separator",
+      "group": "c-display",
+      "import": "@/components/ui/separator",
+      "file": "components/ui/separator.tsx",
+      "exports": [
+        "Separator"
+      ],
+      "variants": {},
+      "example": "components/examples/separator-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "구분선.",
+          "en": "A dividing line."
+        },
+        "when": {
+          "ko": "여백으로 나눌 수 없는 자리에만. 선이 많아지면 화면이 격자로 갇힌다.",
+          "en": "Only where whitespace can't do the job. Too many and the screen turns into a grid cage."
+        }
+      }
+    },
+    {
+      "id": "sheet",
+      "group": "c-overlay",
+      "import": "@/components/ui/sheet",
+      "file": "components/ui/sheet.tsx",
+      "exports": [
+        "Sheet",
+        "SheetClose",
+        "SheetContent",
+        "SheetDescription",
+        "SheetFooter",
+        "SheetHeader",
+        "SheetTitle",
+        "SheetTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/sheet-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "화면 옆에서 밀려 나오는 패널.",
+          "en": "A panel sliding in from the edge."
+        },
+        "when": {
+          "ko": "뒤 화면이 보여 맥락을 잃지 않는다. 설정 · 필터 · 상세 보기.",
+          "en": "The background stays visible, so context survives. Settings, filters, detail views."
+        }
+      }
+    },
+    {
+      "id": "sidebar",
+      "group": null,
+      "import": "@/components/ui/sidebar",
+      "file": "components/ui/sidebar.tsx",
+      "exports": [
+        "Sidebar",
+        "SidebarContent",
+        "SidebarFooter",
+        "SidebarGroup",
+        "SidebarGroupAction",
+        "SidebarGroupContent",
+        "SidebarGroupLabel",
+        "SidebarHeader",
+        "SidebarInput",
+        "SidebarInset",
+        "SidebarMenu",
+        "SidebarMenuAction",
+        "SidebarMenuBadge",
+        "SidebarMenuButton",
+        "SidebarMenuItem",
+        "SidebarMenuSkeleton",
+        "SidebarMenuSub",
+        "SidebarMenuSubButton",
+        "SidebarMenuSubItem",
+        "SidebarProvider",
+        "SidebarRail",
+        "SidebarSeparator",
+        "SidebarTrigger",
+        "useSidebar"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "outline"
+        ],
+        "size": [
+          "default",
+          "sm",
+          "lg"
+        ]
+      },
+      "example": "components/examples/sidebar-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "앱 셸의 좌측 탐색.",
+          "en": "The app shell's left-hand navigation."
+        },
+        "when": {
+          "ko": "제품 화면의 뼈대. 접힘 · 아이콘 전용 · 인셋 변형이 있고, 고르는 기준은 블록 탭에 정리돼 있다.",
+          "en": "The frame of a product screen. Folding, icon-only and inset variants exist — the selection criteria live in the Blocks tab."
+        }
+      }
+    },
+    {
+      "id": "skeleton",
+      "group": "c-display",
+      "import": "@/components/ui/skeleton",
+      "file": "components/ui/skeleton.tsx",
+      "exports": [
+        "Skeleton"
+      ],
+      "variants": {},
+      "example": "components/examples/skeleton-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "올 내용의 자리를 미리 잡아 두는 뼈대.",
+          "en": "A placeholder shaped like what's coming."
+        },
+        "when": {
+          "ko": "최종 레이아웃과 같은 모양이어야 한다. 다르면 로드되는 순간 화면이 튄다.",
+          "en": "It must match the final layout. If it doesn't, the screen jumps on arrival."
+        }
+      }
+    },
+    {
+      "id": "slider",
+      "group": "c-input",
+      "import": "@/components/ui/slider",
+      "file": "components/ui/slider.tsx",
+      "exports": [
+        "Slider"
+      ],
+      "variants": {},
+      "example": "components/examples/slider-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "범위 안에서 값을 고르는 것.",
+          "en": "Picking a value within a range."
+        },
+        "when": {
+          "ko": "정확한 숫자보다 감각이 중요할 때. 정확해야 한다면 숫자 입력을 나란히 둔다.",
+          "en": "When feel matters more than the exact number. If precision matters, pair it with a numeric field."
+        }
+      }
+    },
+    {
+      "id": "sonner",
+      "group": "c-overlay",
+      "import": "@/components/ui/sonner",
+      "file": "components/ui/sonner.tsx",
+      "exports": [
+        "Toaster"
+      ],
+      "variants": {},
+      "example": "components/examples/sonner-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "작업 결과를 잠깐 알리는 토스트.",
+          "en": "A toast reporting the result of an action."
+        },
+        "when": {
+          "ko": "이미 눈에 보이는 결과에는 띄우지 않는다. 조용한 성공이 기본이고, 실패만 말한다.",
+          "en": "Don't announce what's already visible. Silent success is the default; speak up on failure."
+        }
+      }
+    },
+    {
+      "id": "spinner",
+      "group": "c-display",
+      "import": "@/components/ui/spinner",
+      "file": "components/ui/spinner.tsx",
+      "exports": [
+        "Spinner"
+      ],
+      "variants": {},
+      "example": "components/examples/spinner-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "끝을 모르는 대기 표시.",
+          "en": "A wait of unknown length."
+        },
+        "when": {
+          "ko": "3초를 넘길 것 같으면 무엇을 기다리는지 문구를 붙인다. 도는 원만으로는 멈춘 것처럼 보인다.",
+          "en": "Past three seconds, say what is being waited on. A spinning circle alone reads as broken."
+        }
+      }
+    },
+    {
+      "id": "switch",
+      "group": "c-input",
+      "import": "@/components/ui/switch",
+      "file": "components/ui/switch.tsx",
+      "exports": [
+        "Switch"
+      ],
+      "variants": {},
+      "example": "components/examples/switch-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "즉시 반영되는 on/off.",
+          "en": "An on/off that takes effect immediately."
+        },
+        "when": {
+          "ko": "저장 버튼이 없는 설정. 저장을 눌러야 반영되는 설정이라면 checkbox 를 쓴다.",
+          "en": "For settings with no save button. If it needs a save, use a checkbox instead."
+        }
+      }
+    },
+    {
+      "id": "table",
+      "group": "c-data",
+      "import": "@/components/ui/table",
+      "file": "components/ui/table.tsx",
+      "exports": [
+        "Table",
+        "TableBody",
+        "TableCaption",
+        "TableCell",
+        "TableFooter",
+        "TableHead",
+        "TableHeader",
+        "TableRow"
+      ],
+      "variants": {},
+      "example": "components/examples/table-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "행과 열로 정렬된 데이터.",
+          "en": "Data aligned in rows and columns."
+        },
+        "when": {
+          "ko": "값끼리 비교하는 게 목적일 때. 모바일 가로 스크롤을 반드시 처리하고, 열이 너무 많으면 카드 목록으로 바꾼다.",
+          "en": "When comparison across rows is the point. Handle horizontal scroll on mobile; past a certain width, switch to cards."
+        }
+      }
+    },
+    {
+      "id": "tabs",
+      "group": "c-nav",
+      "import": "@/components/ui/tabs",
+      "file": "components/ui/tabs.tsx",
+      "exports": [
+        "Tabs",
+        "TabsContent",
+        "TabsList",
+        "TabsTrigger",
+        "tabsListVariants"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "line"
+        ]
+      },
+      "example": "components/examples/tabs-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "같은 자리에서 내용을 바꾸는 것.",
+          "en": "Swapping content in the same place."
+        },
+        "when": {
+          "ko": "서로 배타적이고 동시에 볼 필요가 없는 묶음. 탭 안에 탭을 넣지 않는다.",
+          "en": "For sets that are mutually exclusive and never needed side by side. Never nest tabs."
+        }
+      }
+    },
+    {
+      "id": "textarea",
+      "group": "c-input",
+      "import": "@/components/ui/textarea",
+      "file": "components/ui/textarea.tsx",
+      "exports": [
+        "Textarea"
+      ],
+      "variants": {},
+      "example": "components/examples/textarea-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "여러 줄짜리 값을 받는 자리.",
+          "en": "A multi-line field."
+        },
+        "when": {
+          "ko": "길이 제한이 있으면 남은 글자 수를 함께 보여준다. 제출한 뒤에 알리면 늦다.",
+          "en": "If there's a limit, show what's left while typing. Telling them after submit is too late."
+        }
+      }
+    },
+    {
+      "id": "toggle-group",
+      "group": "c-action",
+      "import": "@/components/ui/toggle-group",
+      "file": "components/ui/toggle-group.tsx",
+      "exports": [
+        "ToggleGroup",
+        "ToggleGroupItem"
+      ],
+      "variants": {},
+      "example": "components/examples/toggle-group-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "토글 여러 개를 한 축으로 묶은 것.",
+          "en": "Several toggles bound to one axis."
+        },
+        "when": {
+          "ko": "정렬 방향처럼 하나만(single), 서식처럼 여러 개(multiple). 어느 쪽인지 만들기 전에 정한다.",
+          "en": "single for alignment, multiple for formatting. Decide which before you build it."
+        }
+      }
+    },
+    {
+      "id": "toggle",
+      "group": "c-action",
+      "import": "@/components/ui/toggle",
+      "file": "components/ui/toggle.tsx",
+      "exports": [
+        "Toggle",
+        "toggleVariants"
+      ],
+      "variants": {
+        "variant": [
+          "default",
+          "outline"
+        ],
+        "size": [
+          "default",
+          "sm",
+          "lg"
+        ]
+      },
+      "example": "components/examples/toggle-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "눌린 상태가 남는 버튼.",
+          "en": "A button that stays pressed."
+        },
+        "when": {
+          "ko": "굵게 · 기울임처럼 켜고 끄는 서식. 누르는 즉시 반영되고 저장 버튼이 없다.",
+          "en": "On/off formatting like bold or italic. It applies on press; there is no save step."
+        }
+      }
+    },
+    {
+      "id": "tooltip",
+      "group": "c-overlay",
+      "import": "@/components/ui/tooltip",
+      "file": "components/ui/tooltip.tsx",
+      "exports": [
+        "Tooltip",
+        "TooltipContent",
+        "TooltipProvider",
+        "TooltipTrigger"
+      ],
+      "variants": {},
+      "example": "components/examples/tooltip-example.tsx",
+      "doc": {
+        "what": {
+          "ko": "hover 로만 보이는 짧은 설명.",
+          "en": "A short explanation that appears on hover."
+        },
+        "when": {
+          "ko": "필수 정보를 넣지 않는다. 터치 기기에서는 존재하지 않는 것과 같다.",
+          "en": "Never put required information here. On touch devices it effectively doesn't exist."
+        }
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "id": "account-access",
+      "group": "form",
+      "title": "Account Access",
+      "note": {
+        "ko": "비밀번호·재인증처럼 위험한 변경. 파괴적 동작을 따로 묶는다",
+        "en": "Risky changes like password or re-auth. Destructive actions kept separate"
+      },
+      "wide": false,
+      "export": "AccountAccess",
+      "import": "@/components/blocks/preview-02/cards/account-access"
+    },
+    {
+      "id": "album-card",
+      "group": "media",
+      "title": "Synthetic Horizons EP",
+      "note": {
+        "ko": "표지 + 제목 + 발매일. 음악·영상 항목",
+        "en": "Cover, title, release date — a music or video item"
+      },
+      "wide": false,
+      "export": "AlbumCard",
+      "import": "@/components/blocks/preview-02/cards/album-card"
+    },
+    {
+      "id": "card-overview",
+      "group": "metric",
+      "title": "US$12.94",
+      "note": {
+        "ko": "핵심 숫자 하나를 크게. 보조 정보는 아래로 내린다",
+        "en": "One number, made large. Supporting detail drops below"
+      },
+      "wide": false,
+      "export": "CardOverview",
+      "import": "@/components/blocks/preview-02/cards/card-overview"
+    },
+    {
+      "id": "catalog-toolbar",
+      "group": "list",
+      "title": "catalog-toolbar",
+      "note": {
+        "ko": "목록 위의 도구 줄 — 검색 · 필터 · 보기 전환",
+        "en": "The bar above a list — search, filter, view switch"
+      },
+      "wide": true,
+      "export": "CatalogToolbar",
+      "import": "@/components/blocks/preview-02/cards/catalog-toolbar"
+    },
+    {
+      "id": "claimable-balance",
+      "group": "metric",
+      "title": "$0.00",
+      "note": {
+        "ko": "받을 수 있는 금액 + 받기 액션이 한 자리에",
+        "en": "An available amount with its claim action in the same place"
+      },
+      "wide": false,
+      "export": "ClaimableBalance",
+      "import": "@/components/blocks/preview-02/cards/claimable-balance"
+    },
+    {
+      "id": "contribution-history",
+      "group": "metric",
+      "title": "Contribution History",
+      "note": {
+        "ko": "활동을 달력 격자로. 밀도 자체가 정보다",
+        "en": "Activity as a calendar grid, where density is the information"
+      },
+      "wide": true,
+      "export": "ContributionHistory",
+      "import": "@/components/blocks/preview-02/cards/contribution-history"
+    },
+    {
+      "id": "cover-art",
+      "group": "media",
+      "title": "cover-art",
+      "note": {
+        "ko": "이미지 업로드 자리. 규격을 미리 알린다",
+        "en": "Image upload that states the spec before the file is picked"
+      },
+      "wide": false,
+      "export": "CoverArt",
+      "import": "@/components/blocks/preview-02/cards/cover-art"
+    },
+    {
+      "id": "dividend-income",
+      "group": "metric",
+      "title": "Q2 Dividend Income",
+      "note": {
+        "ko": "분기별 수입 비교",
+        "en": "Income compared quarter by quarter"
+      },
+      "wide": true,
+      "export": "DividendIncome",
+      "import": "@/components/blocks/preview-02/cards/dividend-income"
+    },
+    {
+      "id": "empty-connect-bank",
+      "group": "empty",
+      "title": "empty-connect-bank",
+      "note": {
+        "ko": "연동이 안 끝나 데이터가 아직 없을 때. 다음 행동(연결하기)이 카드 안에 있다",
+        "en": "Setup isn't finished, so there's no data yet. The next action lives inside the card"
+      },
+      "wide": false,
+      "export": "EmptyConnectBank",
+      "import": "@/components/blocks/preview-02/cards/empty-connect-bank"
+    },
+    {
+      "id": "empty-distribute-track",
+      "group": "empty",
+      "title": "empty-distribute-track",
+      "note": {
+        "ko": "만들었지만 아직 내보내지 않은 항목. 게시로 유도한다",
+        "en": "Made but not yet shipped. Nudges toward publishing"
+      },
+      "wide": false,
+      "export": "EmptyDistributeTrack",
+      "import": "@/components/blocks/preview-02/cards/empty-distribute-track"
+    },
+    {
+      "id": "empty-explore-catalog",
+      "group": "empty",
+      "title": "empty-explore-catalog",
+      "note": {
+        "ko": "탐색을 시작하기 전. 무엇이 있는지 둘러보게 한다",
+        "en": "Before browsing starts — invites a look around"
+      },
+      "wide": false,
+      "export": "EmptyExploreCatalog",
+      "import": "@/components/blocks/preview-02/cards/empty-explore-catalog"
+    },
+    {
+      "id": "faq",
+      "group": "notice",
+      "title": "faq",
+      "note": {
+        "ko": "같은 질문이 반복될 때. 지원 요청 자체를 줄인다",
+        "en": "When the same question keeps coming — cuts support volume"
+      },
+      "wide": false,
+      "export": "Faq",
+      "import": "@/components/blocks/preview-02/cards/faq"
+    },
+    {
+      "id": "front-door",
+      "group": "device",
+      "title": "Front Door",
+      "note": {
+        "ko": "잠금처럼 두 상태인 기기. 현재 상태가 조작보다 먼저 읽혀야 한다",
+        "en": "A two-state device like a lock — current state must read before the control"
+      },
+      "wide": false,
+      "export": "FrontDoor",
+      "import": "@/components/blocks/preview-02/cards/front-door"
+    },
+    {
+      "id": "index-investing",
+      "group": "metric",
+      "title": "Dollar-Cost Averaging",
+      "note": {
+        "ko": "개념을 설명하는 교육형 카드. 숫자보다 이해가 목적",
+        "en": "An explanatory card — understanding, not numbers, is the point"
+      },
+      "wide": false,
+      "export": "IndexInvesting",
+      "import": "@/components/blocks/preview-02/cards/index-investing"
+    },
+    {
+      "id": "kitchen-island",
+      "group": "device",
+      "title": "Kitchen Island",
+      "note": {
+        "ko": "밝기와 색을 가진 조명 제어",
+        "en": "Lighting control with brightness and color"
+      },
+      "wide": false,
+      "export": "KitchenIsland",
+      "import": "@/components/blocks/preview-02/cards/kitchen-island"
+    },
+    {
+      "id": "loading-card",
+      "group": "loading",
+      "title": "loading-card",
+      "note": {
+        "ko": "카드 한 장이 아직 안 왔을 때의 자리표시",
+        "en": "Placeholder while a single card is still in flight"
+      },
+      "wide": false,
+      "export": "LoadingCard",
+      "import": "@/components/blocks/preview-02/cards/loading-card"
+    },
+    {
+      "id": "new-milestone",
+      "group": "form",
+      "title": "Set a new milestone",
+      "note": {
+        "ko": "목표를 새로 만드는 생성 폼. 이름 + 금액 + 기한",
+        "en": "Creating a goal — name, amount, deadline"
+      },
+      "wide": false,
+      "export": "NewMilestone",
+      "import": "@/components/blocks/preview-02/cards/new-milestone"
+    },
+    {
+      "id": "notification-settings",
+      "group": "form",
+      "title": "Notifications",
+      "note": {
+        "ko": "알림 종류별 on/off. 스위치가 여럿인 설정",
+        "en": "Per-type notification toggles — a settings screen made of switches"
+      },
+      "wide": false,
+      "export": "NotificationSettings",
+      "import": "@/components/blocks/preview-02/cards/notification-settings"
+    },
+    {
+      "id": "payments",
+      "group": "list",
+      "title": "payments",
+      "note": {
+        "ko": "결제 수단 목록. 기본값 표시와 추가",
+        "en": "Payment methods — which is default, and how to add"
+      },
+      "wide": true,
+      "export": "Payments",
+      "import": "@/components/blocks/preview-02/cards/payments"
+    },
+    {
+      "id": "payout-threshold",
+      "group": "form",
+      "title": "Payout Threshold",
+      "note": {
+        "ko": "임계값 하나를 정하는 설정. 슬라이더 + 숫자 입력",
+        "en": "Setting a single threshold — slider paired with a number field"
+      },
+      "wide": false,
+      "export": "PayoutThreshold",
+      "import": "@/components/blocks/preview-02/cards/payout-threshold"
+    },
+    {
+      "id": "power-usage",
+      "group": "metric",
+      "title": "Power Usage",
+      "note": {
+        "ko": "시간대별 사용량과 현재값",
+        "en": "Usage by hour alongside the current reading"
+      },
+      "wide": true,
+      "export": "PowerUsage",
+      "import": "@/components/blocks/preview-02/cards/power-usage"
+    },
+    {
+      "id": "preferences",
+      "group": "form",
+      "title": "Preferences",
+      "note": {
+        "ko": "계정 전반 설정. 성격이 비슷한 항목을 한 카드에 묶는다",
+        "en": "Account-wide preferences, related items grouped into one card"
+      },
+      "wide": false,
+      "export": "Preferences",
+      "import": "@/components/blocks/preview-02/cards/preferences"
+    },
+    {
+      "id": "qr-connect",
+      "group": "notice",
+      "title": "Scan to connect your mobile device",
+      "note": {
+        "ko": "다른 기기로 이어가야 할 때. 로그인·페어링",
+        "en": "Handing off to another device — sign-in, pairing"
+      },
+      "wide": false,
+      "export": "QrConnect",
+      "import": "@/components/blocks/preview-02/cards/qr-connect"
+    },
+    {
+      "id": "receiving-method",
+      "group": "form",
+      "title": "Receiving Method",
+      "note": {
+        "ko": "선택지에 따라 입력칸이 바뀌는 폼. 분기가 눈에 보여야 한다",
+        "en": "Fields change with the choice — the branch must be visible"
+      },
+      "wide": false,
+      "export": "ReceivingMethod",
+      "import": "@/components/blocks/preview-02/cards/receiving-method"
+    },
+    {
+      "id": "recent-transactions",
+      "group": "list",
+      "title": "Recent Transactions",
+      "note": {
+        "ko": "최근 활동. 금액 + 시각 + 상태",
+        "en": "Recent activity — amount, time, status"
+      },
+      "wide": true,
+      "export": "RecentTransactions",
+      "import": "@/components/blocks/preview-02/cards/recent-transactions"
+    },
+    {
+      "id": "release-catalog",
+      "group": "list",
+      "title": "release-catalog",
+      "note": {
+        "ko": "발매·릴리스 목록. 썸네일 + 메타",
+        "en": "Releases — thumbnail plus metadata"
+      },
+      "wide": true,
+      "export": "ReleaseCatalog",
+      "import": "@/components/blocks/preview-02/cards/release-catalog"
+    },
+    {
+      "id": "roller-shades",
+      "group": "device",
+      "title": "Living Room",
+      "note": {
+        "ko": "위치를 백분율로 조절하는 기기",
+        "en": "A device positioned by percentage"
+      },
+      "wide": false,
+      "export": "RollerShades",
+      "import": "@/components/blocks/preview-02/cards/roller-shades"
+    },
+    {
+      "id": "savings-progress",
+      "group": "metric",
+      "title": "savings-progress",
+      "note": {
+        "ko": "목표 대비 진행률. 값보다 남은 거리가 중요할 때",
+        "en": "Progress toward a goal, when the gap matters more than the value"
+      },
+      "wide": false,
+      "export": "SavingsProgress",
+      "import": "@/components/blocks/preview-02/cards/savings-progress"
+    },
+    {
+      "id": "savings-targets",
+      "group": "metric",
+      "title": "Savings Targets",
+      "note": {
+        "ko": "여러 목표의 진행 상황을 한 목록에",
+        "en": "Several goals and their progress in one list"
+      },
+      "wide": true,
+      "export": "SavingsTargets",
+      "import": "@/components/blocks/preview-02/cards/savings-targets"
+    },
+    {
+      "id": "sidebar-nav",
+      "group": "list",
+      "title": "sidebar-nav",
+      "note": {
+        "ko": "카드 안에 들어가는 좁은 탐색 목록",
+        "en": "A narrow navigation list that lives inside a card"
+      },
+      "wide": false,
+      "export": "SidebarNav",
+      "import": "@/components/blocks/preview-02/cards/sidebar-nav"
+    },
+    {
+      "id": "social-links",
+      "group": "form",
+      "title": "Social Links",
+      "note": {
+        "ko": "링크 여러 개를 붙였다 뗐다 하는 반복 입력",
+        "en": "Repeatable input — links added and removed freely"
+      },
+      "wide": false,
+      "export": "SocialLinks",
+      "import": "@/components/blocks/preview-02/cards/social-links"
+    },
+    {
+      "id": "stock-performance",
+      "group": "metric",
+      "title": "Stock Performance",
+      "note": {
+        "ko": "가격 추이 선형 차트",
+        "en": "Price movement as a line"
+      },
+      "wide": true,
+      "export": "StockPerformance",
+      "import": "@/components/blocks/preview-02/cards/stock-performance"
+    },
+    {
+      "id": "syncing-state",
+      "group": "loading",
+      "title": "syncing-state",
+      "note": {
+        "ko": "백그라운드 동기화 중. 화면을 막지 않고 상태만 알린다",
+        "en": "Syncing in the background — reports state without blocking"
+      },
+      "wide": false,
+      "export": "SyncingState",
+      "import": "@/components/blocks/preview-02/cards/syncing-state"
+    },
+    {
+      "id": "transfer-funds",
+      "group": "form",
+      "title": "Transfer Funds",
+      "note": {
+        "ko": "계좌를 고르고 금액을 넣는 이체. 수수료와 도착 시각을 미리 보여준다",
+        "en": "Transfer — pick accounts, enter amount, see fee and arrival before confirming"
+      },
+      "wide": true,
+      "export": "TransferFunds",
+      "import": "@/components/blocks/preview-02/cards/transfer-funds"
+    },
+    {
+      "id": "upcoming-payments",
+      "group": "list",
+      "title": "Upcoming Payments",
+      "note": {
+        "ko": "예정된 것. 날짜를 골라 좁힌다",
+        "en": "What's coming, narrowed by date"
+      },
+      "wide": true,
+      "export": "UpcomingPayments",
+      "import": "@/components/blocks/preview-02/cards/upcoming-payments"
+    },
+    {
+      "id": "activate-agent-dialog",
+      "group": "notice",
+      "title": "Ship faster & safer with Vercel Agent",
+      "note": {
+        "ko": "유료·권한이 필요한 기능을 켜기 전 동의를 받는 자리",
+        "en": "Consent before switching on something paid or privileged"
+      },
+      "wide": false,
+      "export": "ActivateAgentDialog",
+      "import": "@/components/blocks/preview/cards/activate-agent-dialog"
+    },
+    {
+      "id": "analytics-card",
+      "group": "metric",
+      "title": "Analytics",
+      "note": {
+        "ko": "총량 + 추세선. 값과 방향을 함께 읽힌다",
+        "en": "A total with a trend line — value and direction read together"
+      },
+      "wide": true,
+      "export": "AnalyticsCard",
+      "import": "@/components/blocks/preview/cards/analytics-card"
+    },
+    {
+      "id": "anomaly-alert",
+      "group": "notice",
+      "title": "anomaly-alert",
+      "note": {
+        "ko": "지표가 평소와 다를 때. 사용자가 찾아보지 않아도 먼저 뜬다",
+        "en": "A metric left its normal range — surfaced before anyone goes looking"
+      },
+      "wide": false,
+      "export": "AnomalyAlert",
+      "import": "@/components/blocks/preview/cards/anomaly-alert"
+    },
+    {
+      "id": "assign-issue",
+      "group": "form",
+      "title": "Assign Issue",
+      "note": {
+        "ko": "여러 명 중에서 고르는 배정. 검색 + 다중 선택",
+        "en": "Assignment from many people — search plus multi-select"
+      },
+      "wide": true,
+      "export": "AssignIssue",
+      "import": "@/components/blocks/preview/cards/assign-issue"
+    },
+    {
+      "id": "bar-chart-card",
+      "group": "metric",
+      "title": "Traffic channels",
+      "note": {
+        "ko": "두 계열 비교 막대",
+        "en": "Bars comparing two series"
+      },
+      "wide": true,
+      "export": "BarChartCard",
+      "import": "@/components/blocks/preview/cards/bar-chart-card"
+    },
+    {
+      "id": "bar-visualizer",
+      "group": "media",
+      "title": "Audio Frequency Visualizer",
+      "note": {
+        "ko": "오디오 주파수 실시간 표시",
+        "en": "Live audio frequency display"
+      },
+      "wide": false,
+      "export": "BarVisualizerCard",
+      "import": "@/components/blocks/preview/cards/bar-visualizer"
+    },
+    {
+      "id": "book-appointment",
+      "group": "form",
+      "title": "Book Appointment",
+      "note": {
+        "ko": "날짜와 시간대를 함께 고르는 예약",
+        "en": "Booking — date and time slot chosen together"
+      },
+      "wide": true,
+      "export": "BookAppointment",
+      "import": "@/components/blocks/preview/cards/book-appointment"
+    },
+    {
+      "id": "codespaces-card",
+      "group": "dev",
+      "title": "codespaces-card",
+      "note": {
+        "ko": "개발 환경 상태와 접속",
+        "en": "Dev environment status and how to connect"
+      },
+      "wide": false,
+      "export": "CodespacesCard",
+      "import": "@/components/blocks/preview/cards/codespaces-card"
+    },
+    {
+      "id": "contributions-activity",
+      "group": "form",
+      "title": "Contributions & Activity",
+      "note": {
+        "ko": "공개 범위 설정. 무엇을 남에게 보일지 정한다",
+        "en": "Visibility settings — deciding what others can see"
+      },
+      "wide": false,
+      "export": "ContributionsActivity",
+      "import": "@/components/blocks/preview/cards/contributions-activity"
+    },
+    {
+      "id": "contributors",
+      "group": "list",
+      "title": "Contributors",
+      "note": {
+        "ko": "사람 목록. 아바타 + 기여량",
+        "en": "People — avatar plus contribution volume"
+      },
+      "wide": true,
+      "export": "Contributors",
+      "import": "@/components/blocks/preview/cards/contributors"
+    },
+    {
+      "id": "environment-variables",
+      "group": "form",
+      "title": "Environment Variables",
+      "note": {
+        "ko": "키·값 쌍 관리. 값은 가려두고 필요할 때만 연다",
+        "en": "Key-value management with values masked until asked for"
+      },
+      "wide": true,
+      "export": "EnvironmentVariables",
+      "import": "@/components/blocks/preview/cards/environment-variables"
+    },
+    {
+      "id": "feedback-form",
+      "group": "form",
+      "title": "feedback-form",
+      "note": {
+        "ko": "가벼운 의견 수집. 짧게 끝나야 응답이 온다",
+        "en": "Light feedback — it only gets answered if it stays short"
+      },
+      "wide": false,
+      "export": "FeedbackForm",
+      "import": "@/components/blocks/preview/cards/feedback-form"
+    },
+    {
+      "id": "file-upload",
+      "group": "media",
+      "title": "File Upload",
+      "note": {
+        "ko": "드래그 앤 드롭 업로드. 형식과 용량 제한을 함께 적는다",
+        "en": "Drag-and-drop upload with format and size limits stated"
+      },
+      "wide": false,
+      "export": "FileUpload",
+      "import": "@/components/blocks/preview/cards/file-upload"
+    },
+    {
+      "id": "github-profile",
+      "group": "form",
+      "title": "Profile",
+      "note": {
+        "ko": "프로필 편집. 아바타 + 이름 + 소개",
+        "en": "Profile editing — avatar, name, bio"
+      },
+      "wide": false,
+      "export": "GithubProfile",
+      "import": "@/components/blocks/preview/cards/github-profile"
+    },
+    {
+      "id": "icon-preview-grid",
+      "group": "media",
+      "title": "icon-preview-grid",
+      "note": {
+        "ko": "아이콘 세트를 한눈에 훑는 격자",
+        "en": "A grid for scanning an icon set at once"
+      },
+      "wide": true,
+      "export": "IconPreviewGrid",
+      "import": "@/components/blocks/preview/cards/icon-preview-grid"
+    },
+    {
+      "id": "invite-team",
+      "group": "form",
+      "title": "Invite Team",
+      "note": {
+        "ko": "이메일로 사람을 부르고 권한을 함께 정한다",
+        "en": "Invite by email and assign the role in the same step"
+      },
+      "wide": true,
+      "export": "InviteTeam",
+      "import": "@/components/blocks/preview/cards/invite-team"
+    },
+    {
+      "id": "invoice",
+      "group": "dev",
+      "title": "Invoice #INV-2847",
+      "note": {
+        "ko": "청구서. 항목 + 합계 + 기한",
+        "en": "An invoice — line items, total, due date"
+      },
+      "wide": true,
+      "export": "Invoice",
+      "import": "@/components/blocks/preview/cards/invoice"
+    },
+    {
+      "id": "live-waveform",
+      "group": "media",
+      "title": "Live Audio Waveform",
+      "note": {
+        "ko": "마이크 입력 파형. 녹음 중임을 몸으로 보인다",
+        "en": "Microphone waveform — recording made physically visible"
+      },
+      "wide": false,
+      "export": "LiveWaveformCard",
+      "import": "@/components/blocks/preview/cards/live-waveform"
+    },
+    {
+      "id": "no-team-members",
+      "group": "empty",
+      "title": "no-team-members",
+      "note": {
+        "ko": "협업 공간에 나 혼자일 때. 초대가 다음 행동이다",
+        "en": "Alone in a shared space. Inviting is the next move"
+      },
+      "wide": false,
+      "export": "NoTeamMembers",
+      "import": "@/components/blocks/preview/cards/no-team-members"
+    },
+    {
+      "id": "not-found",
+      "group": "empty",
+      "title": "not-found",
+      "note": {
+        "ko": "검색·필터 결과가 0건. 조건을 되돌릴 길을 준다",
+        "en": "Zero results from search or filter. Offers a way back"
+      },
+      "wide": false,
+      "export": "NotFound",
+      "import": "@/components/blocks/preview/cards/not-found"
+    },
+    {
+      "id": "observability-card",
+      "group": "notice",
+      "title": "Observability Plus is replacing Monitoring",
+      "note": {
+        "ko": "기능이 바뀌거나 대체될 때의 전환 안내",
+        "en": "Migration notice when a feature changes or is replaced"
+      },
+      "wide": false,
+      "export": "ObservabilityCard",
+      "import": "@/components/blocks/preview/cards/observability-card"
+    },
+    {
+      "id": "pie-chart-card",
+      "group": "metric",
+      "title": "Browser Share",
+      "note": {
+        "ko": "구성비. 항목이 다섯을 넘으면 쓰지 않는다",
+        "en": "Composition — not past five slices"
+      },
+      "wide": false,
+      "export": "PieChartCard",
+      "import": "@/components/blocks/preview/cards/pie-chart-card"
+    },
+    {
+      "id": "report-bug",
+      "group": "form",
+      "title": "Report Bug",
+      "note": {
+        "ko": "오류 신고. 재현 방법을 받아내는 구조",
+        "en": "Bug report, structured to extract reproduction steps"
+      },
+      "wide": false,
+      "export": "ReportBug",
+      "import": "@/components/blocks/preview/cards/report-bug"
+    },
+    {
+      "id": "shipping-address",
+      "group": "form",
+      "title": "Shipping Address",
+      "note": {
+        "ko": "주소 입력. 여러 줄 + 우편번호 조합",
+        "en": "Address entry — multiple lines plus a postal code"
+      },
+      "wide": true,
+      "export": "ShippingAddress",
+      "import": "@/components/blocks/preview/cards/shipping-address"
+    },
+    {
+      "id": "shortcuts",
+      "group": "notice",
+      "title": "shortcuts",
+      "note": {
+        "ko": "키보드로 빨리 쓰는 사용자를 위한 단축키 안내",
+        "en": "Shortcut reference for keyboard-first users"
+      },
+      "wide": false,
+      "export": "Shortcuts",
+      "import": "@/components/blocks/preview/cards/shortcuts"
+    },
+    {
+      "id": "skeleton-loading",
+      "group": "loading",
+      "title": "skeleton-loading",
+      "note": {
+        "ko": "목록·본문이 오기 전. 최종 레이아웃과 같은 뼈대라 도착해도 화면이 안 튄다",
+        "en": "Before a list or body arrives. Matches the final layout so nothing jumps"
+      },
+      "wide": false,
+      "export": "SkeletonLoading",
+      "import": "@/components/blocks/preview/cards/skeleton-loading"
+    },
+    {
+      "id": "sleep-report",
+      "group": "metric",
+      "title": "Sleep Report",
+      "note": {
+        "ko": "구간별 상태를 띠로. 수면·집중 같은 연속 데이터",
+        "en": "Banded states over time — sleep, focus, other continuous data"
+      },
+      "wide": true,
+      "export": "SleepReport",
+      "import": "@/components/blocks/preview/cards/sleep-report"
+    },
+    {
+      "id": "style-overview",
+      "group": "dev",
+      "title": "style-overview",
+      "note": {
+        "ko": "지금 적용된 스타일과 폰트를 보여주는 진단 카드",
+        "en": "A diagnostic card showing the style and fonts currently applied"
+      },
+      "wide": true,
+      "export": "StyleOverview",
+      "import": "@/components/blocks/preview/cards/style-overview"
+    },
+    {
+      "id": "typography-specimen",
+      "group": "dev",
+      "title": "typography-specimen",
+      "note": {
+        "ko": "타입 스케일 견본",
+        "en": "A type scale specimen"
+      },
+      "wide": true,
+      "export": "TypographySpecimen",
+      "import": "@/components/blocks/preview/cards/typography-specimen"
+    },
+    {
+      "id": "ui-elements",
+      "group": "dev",
+      "title": "ui-elements",
+      "note": {
+        "ko": "여러 컨트롤을 한 카드에 모은 확인용",
+        "en": "Assorted controls gathered for checking"
+      },
+      "wide": true,
+      "export": "UIElements",
+      "import": "@/components/blocks/preview/cards/ui-elements"
+    },
+    {
+      "id": "usage-card",
+      "group": "metric",
+      "title": "5 days remaining in cycle",
+      "note": {
+        "ko": "남은 한도와 주기. 초과하기 전에 알린다",
+        "en": "Remaining quota and cycle — warns before the limit, not after"
+      },
+      "wide": false,
+      "export": "UsageCard",
+      "import": "@/components/blocks/preview/cards/usage-card"
+    },
+    {
+      "id": "visitors",
+      "group": "metric",
+      "title": "Visitors",
+      "note": {
+        "ko": "기간별 추이. 막대 하나가 한 구간",
+        "en": "Change over periods — one bar per bucket"
+      },
+      "wide": true,
+      "export": "Visitors",
+      "import": "@/components/blocks/preview/cards/visitors"
+    },
+    {
+      "id": "weekly-fitness-summary",
+      "group": "metric",
+      "title": "Weekly Fitness Summary",
+      "note": {
+        "ko": "요일별 누적. 주 단위 리듬을 본다",
+        "en": "Daily totals across a week, to read the weekly rhythm"
+      },
+      "wide": true,
+      "export": "WeeklyFitnessSummary",
+      "import": "@/components/blocks/preview/cards/weekly-fitness-summary"
+    },
+    {
+      "id": "files-chat",
+      "group": "ai",
+      "title": "File review",
+      "note": {
+        "ko": "이미지·문서를 주고받는 대화",
+        "en": "Conversation that passes images and documents"
+      },
+      "wide": true,
+      "export": "FilesChat",
+      "import": "@/components/blocks/preview-03/cards/files-chat"
+    },
+    {
+      "id": "group-chat",
+      "group": "ai",
+      "title": "Saturday dinner plans",
+      "note": {
+        "ko": "사람이 여럿인 대화. 보낸 사람이 구분돼야 한다",
+        "en": "Multi-person conversation, where the sender must be distinguishable"
+      },
+      "wide": true,
+      "export": "GroupChat",
+      "import": "@/components/blocks/preview-03/cards/group-chat"
+    },
+    {
+      "id": "reasoning-chat",
+      "group": "ai",
+      "title": "Reasoning trace",
+      "note": {
+        "ko": "모델의 사고 과정을 접었다 펴는 형태",
+        "en": "The model's reasoning, foldable"
+      },
+      "wide": true,
+      "export": "ReasoningChat",
+      "import": "@/components/blocks/preview-03/cards/reasoning-chat"
+    },
+    {
+      "id": "simple-chat",
+      "group": "ai",
+      "title": "What can I help you with today?",
+      "note": {
+        "ko": "가장 기본 형태. 질문 하나에 답 하나",
+        "en": "The base case — one question, one answer"
+      },
+      "wide": true,
+      "export": "SimpleChat",
+      "import": "@/components/blocks/preview-03/cards/simple-chat"
+    },
+    {
+      "id": "sources-chat",
+      "group": "ai",
+      "title": "Reading list",
+      "note": {
+        "ko": "답의 근거가 되는 출처를 함께 단다",
+        "en": "Answers carrying the sources they relied on"
+      },
+      "wide": true,
+      "export": "SourcesChat",
+      "import": "@/components/blocks/preview-03/cards/sources-chat"
+    },
+    {
+      "id": "tool-chat",
+      "group": "ai",
+      "title": "Deployment check",
+      "note": {
+        "ko": "도구 호출과 그 결과를 대화 안에서 보여준다",
+        "en": "Tool calls and their results shown inside the conversation"
+      },
+      "wide": true,
+      "export": "ToolChat",
+      "import": "@/components/blocks/preview-03/cards/tool-chat"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "sidebar-ours",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-ours"
+    },
+    {
+      "id": "sidebar-01",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-01"
+    },
+    {
+      "id": "sidebar-02",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-02"
+    },
+    {
+      "id": "sidebar-03",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-03"
+    },
+    {
+      "id": "sidebar-04",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-04"
+    },
+    {
+      "id": "sidebar-05",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-05"
+    },
+    {
+      "id": "sidebar-06",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-06"
+    },
+    {
+      "id": "sidebar-07",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-07"
+    },
+    {
+      "id": "sidebar-08",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-08"
+    },
+    {
+      "id": "sidebar-09",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-09"
+    },
+    {
+      "id": "sidebar-10",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-10"
+    },
+    {
+      "id": "sidebar-11",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-11"
+    },
+    {
+      "id": "sidebar-12",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-12"
+    },
+    {
+      "id": "sidebar-13",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-13"
+    },
+    {
+      "id": "sidebar-14",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-14"
+    },
+    {
+      "id": "sidebar-15",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-15"
+    },
+    {
+      "id": "sidebar-16",
+      "group": "sidebar",
+      "kind": "shadcn",
+      "route": "/blocks/view/sidebar-16"
+    },
+    {
+      "id": "dashboard-01",
+      "group": "dashboard",
+      "kind": "shadcn",
+      "route": "/blocks/view/dashboard-01"
+    },
+    {
+      "id": "preview",
+      "group": "preview",
+      "kind": "shadcn",
+      "route": "/blocks/view/preview"
+    },
+    {
+      "id": "preview-02",
+      "group": "preview",
+      "kind": "shadcn",
+      "route": "/blocks/view/preview-02"
+    },
+    {
+      "id": "preview-03",
+      "group": "preview",
+      "kind": "shadcn",
+      "route": "/blocks/view/preview-03"
+    },
+    {
+      "id": "login-01",
+      "group": "login",
+      "kind": "shadcn",
+      "route": "/blocks/view/login-01"
+    },
+    {
+      "id": "login-02",
+      "group": "login",
+      "kind": "shadcn",
+      "route": "/blocks/view/login-02"
+    },
+    {
+      "id": "login-03",
+      "group": "login",
+      "kind": "shadcn",
+      "route": "/blocks/view/login-03"
+    },
+    {
+      "id": "login-04",
+      "group": "login",
+      "kind": "shadcn",
+      "route": "/blocks/view/login-04"
+    },
+    {
+      "id": "login-05",
+      "group": "login",
+      "kind": "shadcn",
+      "route": "/blocks/view/login-05"
+    },
+    {
+      "id": "signup-01",
+      "group": "signup",
+      "kind": "shadcn",
+      "route": "/blocks/view/signup-01"
+    },
+    {
+      "id": "signup-02",
+      "group": "signup",
+      "kind": "shadcn",
+      "route": "/blocks/view/signup-02"
+    },
+    {
+      "id": "signup-03",
+      "group": "signup",
+      "kind": "shadcn",
+      "route": "/blocks/view/signup-03"
+    },
+    {
+      "id": "signup-04",
+      "group": "signup",
+      "kind": "shadcn",
+      "route": "/blocks/view/signup-04"
+    },
+    {
+      "id": "signup-05",
+      "group": "signup",
+      "kind": "shadcn",
+      "route": "/blocks/view/signup-05"
+    },
+    {
+      "id": "calendars",
+      "group": "calendars",
+      "kind": "shadcn",
+      "route": "/blocks/view/calendars"
+    },
+    {
+      "id": "launch-faq",
+      "kind": "third-party",
+      "source": "launch",
+      "route": "/blocks/view3p/launch-faq"
+    },
+    {
+      "id": "launch-footer",
+      "kind": "third-party",
+      "source": "launch",
+      "route": "/blocks/view3p/launch-footer"
+    },
+    {
+      "id": "launch-navbar",
+      "kind": "third-party",
+      "source": "launch",
+      "route": "/blocks/view3p/launch-navbar"
+    },
+    {
+      "id": "launch-stats",
+      "kind": "third-party",
+      "source": "launch",
+      "route": "/blocks/view3p/launch-stats"
+    },
+    {
+      "id": "space-faq-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-faq-01"
+    },
+    {
+      "id": "space-feature-02",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-feature-02"
+    },
+    {
+      "id": "space-footer-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-footer-01"
+    },
+    {
+      "id": "space-gallery-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-gallery-01"
+    },
+    {
+      "id": "space-hero-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-hero-01"
+    },
+    {
+      "id": "space-hero-02",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-hero-02"
+    },
+    {
+      "id": "space-team-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-team-01"
+    },
+    {
+      "id": "space-testimonial-01",
+      "kind": "third-party",
+      "source": "space",
+      "route": "/blocks/view3p/space-testimonial-01"
+    },
+    {
+      "id": "tailark-dusk-content-four",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-content-four"
+    },
+    {
+      "id": "tailark-dusk-content-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-content-three"
+    },
+    {
+      "id": "tailark-dusk-content-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-content-two"
+    },
+    {
+      "id": "tailark-dusk-faqs-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-faqs-one"
+    },
+    {
+      "id": "tailark-dusk-features-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-features-one"
+    },
+    {
+      "id": "tailark-dusk-footer-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-footer-one"
+    },
+    {
+      "id": "tailark-dusk-footer-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-footer-two"
+    },
+    {
+      "id": "tailark-dusk-hero-section-eight",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-eight"
+    },
+    {
+      "id": "tailark-dusk-hero-section-five",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-five"
+    },
+    {
+      "id": "tailark-dusk-hero-section-four",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-four"
+    },
+    {
+      "id": "tailark-dusk-hero-section-nine",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-nine"
+    },
+    {
+      "id": "tailark-dusk-hero-section-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-one"
+    },
+    {
+      "id": "tailark-dusk-hero-section-seven",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-seven"
+    },
+    {
+      "id": "tailark-dusk-hero-section-six",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-six"
+    },
+    {
+      "id": "tailark-dusk-hero-section-ten",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-ten"
+    },
+    {
+      "id": "tailark-dusk-hero-section-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-three"
+    },
+    {
+      "id": "tailark-dusk-hero-section-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-hero-section-two"
+    },
+    {
+      "id": "tailark-dusk-pricing-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-pricing-one"
+    },
+    {
+      "id": "tailark-dusk-stats-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-stats-one"
+    },
+    {
+      "id": "tailark-dusk-stats-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-stats-two"
+    },
+    {
+      "id": "tailark-dusk-team-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-team-two"
+    },
+    {
+      "id": "tailark-dusk-testimonials-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-dusk-testimonials-two"
+    },
+    {
+      "id": "tailark-mist-faqs-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-faqs-three"
+    },
+    {
+      "id": "tailark-mist-features-five",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-features-five"
+    },
+    {
+      "id": "tailark-mist-features-seven",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-features-seven"
+    },
+    {
+      "id": "tailark-mist-features-ten",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-features-ten"
+    },
+    {
+      "id": "tailark-mist-features-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-features-two"
+    },
+    {
+      "id": "tailark-mist-forgot-password-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-forgot-password-one"
+    },
+    {
+      "id": "tailark-mist-hero-section-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-hero-section-one"
+    },
+    {
+      "id": "tailark-mist-hero-section-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-hero-section-three"
+    },
+    {
+      "id": "tailark-mist-hero-section-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-hero-section-two"
+    },
+    {
+      "id": "tailark-mist-integrations-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-integrations-three"
+    },
+    {
+      "id": "tailark-mist-login-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-login-one"
+    },
+    {
+      "id": "tailark-mist-sign-up-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-sign-up-one"
+    },
+    {
+      "id": "tailark-mist-testimonials-five",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-mist-testimonials-five"
+    },
+    {
+      "id": "tailark-veil-forgot-password-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-forgot-password-three"
+    },
+    {
+      "id": "tailark-veil-hero-section-five",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-hero-section-five"
+    },
+    {
+      "id": "tailark-veil-hero-section-four",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-hero-section-four"
+    },
+    {
+      "id": "tailark-veil-login-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-login-one"
+    },
+    {
+      "id": "tailark-veil-login-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-login-three"
+    },
+    {
+      "id": "tailark-veil-login-two",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-login-two"
+    },
+    {
+      "id": "tailark-veil-sign-up-one",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-sign-up-one"
+    },
+    {
+      "id": "tailark-veil-sign-up-three",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-sign-up-three"
+    },
+    {
+      "id": "tailark-veil-stats-four",
+      "kind": "third-party",
+      "source": "tailark",
+      "route": "/blocks/view3p/tailark-veil-stats-four"
+    }
+  ]
+}

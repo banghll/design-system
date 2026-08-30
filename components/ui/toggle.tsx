@@ -15,10 +15,9 @@ const toggleVariants = cva(
         outline: "border border-input bg-transparent hover:bg-muted",
       },
       size: {
-        default:
-          "h-8 min-w-8 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        sm: "h-7 min-w-7 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-9 min-w-9 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        default: "h-(--h-button) min-w-(--h-button) px-(--pad-button)",
+        sm: "h-(--h-button-sm) min-w-(--h-button-sm) rounded-[min(var(--radius-md),12px)] px-(--pad-button-sm) text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-(--h-button-lg) min-w-(--h-button-lg) px-(--pad-button-lg)",
       },
     },
     defaultVariants: {

@@ -1,26 +1,14 @@
-/* 공식 블록 상세. 셸을 두른 채 16:9 로 띄운다. */
-"use client"
-
-import { notFound, useParams } from "next/navigation"
-
-import { BlockViewer } from "@/components/block-viewer"
+/* 공식 블록 상세.
+ *
+ * 정적 내보내기(공유용 빌드)에서는 모든 경로를 미리 알아야 한다.
+ * 그래서 이 파일은 목록만 대고, 화면은 view.tsx 가 그린다. */
 import { BLOCKS } from "@/lib/block-catalog"
+import View from "./view"
 
-export default function ViewBlockPage() {
-  const { id } = useParams<{ id: string }>()
-  const block = BLOCKS.find((b) => b.id === id)
-  if (!block) notFound()
+export function generateStaticParams() {
+  return BLOCKS.map((b) => ({ id: b.id }))
+}
 
-  return (
-    <BlockViewer
-      src={`/blocks/${block.id}`}
-      title={block.title}
-      code={`app/blocks/${block.id}`}
-      what={block.what}
-      when={block.when}
-      tags={block.tags}
-      backHref="/blocks"
-      backLabel={{ ko: "블록 목록", en: "All blocks" }}
-    />
-  )
+export default function Page() {
+  return <View />
 }

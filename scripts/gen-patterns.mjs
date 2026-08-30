@@ -8,7 +8,7 @@
  */
 import fs from "node:fs"
 
-const CARDS = JSON.parse(fs.readFileSync("scripts/_cards.json", "utf8"))
+const CARDS = JSON.parse(fs.readFileSync("scripts/.cache/_cards.json", "utf8"))
 
 /* id → [군, 한국어, English] */
 const META = {
