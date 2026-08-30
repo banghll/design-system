@@ -101,19 +101,23 @@ npm run share        # out/ 에 정적 사이트가 나온다 (파일 약 2,000�
 `out/` 을 그대로 올리면 된다 — Netlify · Cloudflare Pages · S3 · 사내 정적 호스트 어디든.
 하위 경로에 올릴 때는 `BASE_PATH=/design-system npm run share`.
 
-GitHub Pages 를 쓴다면 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 이
-이미 들어 있다. 저장소 Settings → Pages → Source 를 **GitHub Actions** 로 바꾸고 main 에
-밀면, 밀 때마다 공개 주소가 갱신된다. (main · master 둘 다에서 돈다)
+### 공개 주소
 
-### 한 장짜리 색인 — 호스팅 없이 보낼 때
+**https://banghll.github.io/design-system/**
+
+master 에 밀면 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 이 정적
+빌드를 만들어 `gh-pages` 브랜치에 밀고, 그 브랜치가 곧 사이트다.
+
+`actions/deploy-pages` 를 쓰지 않는 이유가 있다 — 그쪽은 Pages 사이트를 API 로
+만들어야 하는데 기본 토큰에 그 권한이 없어서 세 번 다 «Resource not accessible by
+integration» 으로 죽었다. `gh-pages` 라는 이름의 브랜치는 GitHub 이 알아서
+붙여 주므로 권한 문제가 없다.
+
+손으로 올리고 싶으면:
 
 ```bash
-npm run share:page   # share-index.html 한 파일
+BASE_PATH=/design-system npm run share   # PowerShell: $env:BASE_PATH="/design-system"; npm run share
 ```
-
-컴포넌트 62개와 패턴 74개의 «무엇 / 언제 / import 경로 / variant» 가 전부 들어간
-자체 완결 HTML 한 장이다. 실제 컴포넌트가 렌더되지는 않지만, 고를 때 필요한 것은
-다 있다. 메일에 붙이든 어디에 올리든 그대로 열린다.
 
 공유본에서 달라지는 것은 하나뿐이다 — 파운데이션 편집기의 «저장» 이
 `data/themes.json` 대신 **보는 사람의 브라우저**에 남는다. 서버가 없어서다.

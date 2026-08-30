@@ -18,6 +18,10 @@
 import Image from "next/image"
 import { useState } from "react"
 
+/* 하위 경로 배포(예: /design-system)에서도 그림이 뜨게 한다.
+ * 문자열로 적은 경로에는 Next 가 basePath 를 안 붙여 준다. */
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
+
 import { Skeleton } from "@/components/ui/skeleton"
 import thumbs from "@/data/thumbs.json"
 import { cn } from "@/lib/utils"
@@ -51,7 +55,7 @@ export function BlockThumb({
     >
       {hasThumb ? (
         <Image
-          src={`/thumbs/${id}.webp`}
+          src={`${BASE}/thumbs/${id}.webp`}
           alt=""
           fill
           loading="lazy"

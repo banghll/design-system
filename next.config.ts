@@ -11,6 +11,10 @@ const isStatic = process.env.STATIC_EXPORT === "1"
 const basePath = process.env.BASE_PATH ?? ""
 
 const nextConfig: NextConfig = {
+  /* 하위 경로에 올릴 때, next/link · next/image 는 basePath 를 알아서 붙이지만
+   * 손으로 적은 문자열 경로는 안 붙는다. 브라우저 코드가 읽을 수 있게 내보낸다 —
+   * 이걸 안 해서 GitHub Pages 에서 썸네일 200장이 통째로 404 났다. */
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   /* api 폴더 아래의 route.dev.ts 는 개발 중에만 라우트가 된다.
    * 파일에 쓰는 API 라 정적 빌드에는 담을 수 없고(POST 를 못 담는다),
    * 파일을 옮기는 대신 확장자로 가른다 — 옮기면 dev 서버가 물고 있어서 실패한다. */
