@@ -128,20 +128,27 @@ for (const [key, label] of GROUPS) {
   const boardW = PAD * 2 + CARD_W * COLS + GAP * (COLS - 1)
   const boardH = PAD * 2 + 120 + rows * (maxH + GAP)
 
-  const made = textOf(
-    await call("create_artboard", {
-      name: `패턴 · ${label}`,
-      styles: {
-        width: `${boardW}px`,
-        height: "fit-content",
-        minHeight: `${boardH}px`,
-        backgroundColor: "var(--background)",
-        x: 0,
-        y: cursorY,
-      },
-    })
+  /* 응답은 JSON 이다. 정규식으로 훑으면 contentHash 같은 엉뚱한 키를 집는다 —
+   * 실제로 그렇게 집어서 «Node not found: contentHash» 로 멈췄다. */
+  const made = JSON.parse(
+    textOf(
+      await call("create_artboard", {
+        name: `패턴 · ${label}`,
+        styles: {
+          width: `${boardW}px`,
+          height: "fit-content",
+          minHeight: `${boardH}px`,
+          backgroundColor: "var(--background)",
+          x: 0,
+          y: cursorY,
+        },
+      })
+    )
   )
-  const boardId = made.match(/"?(\d+-\d+)"?/)?.[1] ?? made.match(/[0-9a-z_-]{4,}/i)?.[0]
+  const boardId = made.id
+  if (!boardId) {
+    throw new Error(`아트보드 id 를 못 읽었다: ${JSON.stringify(made).slice(0, 200)}`)
+  }
   console.log(`\n${label} — 아트보드 ${boardId} · 카드 ${items.length}장`)
 
   /* 머리말을 먼저 쓴다. 무엇을 모아 둔 판인지가 판 안에 있어야 한다. */

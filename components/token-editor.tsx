@@ -20,6 +20,7 @@
 import {
   Check,
   Copy as CopyIcon,
+  FilePlus,
   Loader2,
   RotateCcw,
   MousePointerClick,
@@ -792,6 +793,28 @@ export function TokenEditor() {
                   : "Nothing changed yet. Nudge any value and watch the screen follow."}
               </p>
             )}
+            {/* 새로 시작하기. 이게 없으면 저장이 늘 직전 테마를 물려받아,
+              * «새로 만든다» 가 «고친다» 와 구분되지 않는다. */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full justify-start"
+              onClick={() => {
+                reset()
+                setName("")
+                setTimeout(() => nameRef.current?.focus(), 0)
+                toast(lang === "ko" ? "새 테마를 시작합니다" : "Started a new theme", {
+                  description:
+                    lang === "ko"
+                      ? "기본값에서 시작합니다. 값을 바꾸고 이름을 붙여 저장하세요."
+                      : "Back to defaults. Change values, name it, save.",
+                })
+              }}
+            >
+              <FilePlus className="size-4" />
+              {lang === "ko" ? "새 테마 만들기" : "New theme"}
+            </Button>
+
             {/* 이름을 붙여 저장한다. 이름 없이 저장하면 나중에 목록에서
               * 무엇이 무엇인지 알아볼 수 없어, 결국 아무것도 안 고른다. */}
             <div className="flex gap-2">
@@ -896,7 +919,6 @@ export function TokenEditor() {
         active={picking}
         onExit={() => setPicking(false)}
         setToken={setToken}
-        spacing={spacing}
       />
     </>
   )

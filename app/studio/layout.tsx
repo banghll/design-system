@@ -1,11 +1,15 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "스튜디오 — 이미지 생성 화면",
+  title: "Studio — image generation",
   description:
-    "이 디자인 시스템으로 다시 그린 생성형 이미지 스튜디오. 왼쪽에서 조건을 쌓고 오른쪽에서 결과를 본다.",
+    "An image-generation surface drawn with this design system. Conditions on the left, canvas on the right.",
 }
 
-export default function StudioLayout({ children }: LayoutProps<"/studio">) {
+export default function StudioLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return children
 }
