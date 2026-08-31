@@ -20,7 +20,6 @@
 import {
   Check,
   ChevronRight,
-  Plus,
   Copy as CopyIcon,
   FilePlus,
   Loader2,
@@ -36,6 +35,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import type { SavedTheme } from "@/app/api/themes/route.dev"
 import { type Copy, useLang } from "@/components/lang"
+import { FoundationTokens } from "@/components/foundation-tokens"
 import { TokenInspector } from "@/components/token-inspector"
 import { readPx } from "@/lib/token-read"
 import { Button } from "@/components/ui/button"
@@ -58,25 +58,20 @@ const PANEL = "23rem"
 const OPEN_KEY = "ds-editor-open"
 const EDITS_KEY = "ds-editor-edits"
 
-/* 사용자가 직접 더한 색 이름.
+/* 색을 더하고 지우는 일은 이 파일이 하지 않는다.
  *
- * 팔레트는 닫혀 있어야 한다는 게 원칙이지만, 닫아 두기만 하면 필요한 이름이
- * 생겼을 때 갈 곳이 없어 결국 컴포넌트 안에 hex 를 적게 된다. 그래서 더하는
- * 길을 열되, 더한 것이 «내가 더한 것» 으로 보이게 표시하고 지울 수 있게 한다. */
-const CUSTOM_KEY = "ds-editor-custom"
-
-type CustomToken = { name: string; value: string }
-
-function readCustom(): CustomToken[] {
-  try {
-    return JSON.parse(localStorage.getItem(CUSTOM_KEY) ?? "[]") as CustomToken[]
-  } catch {
-    return []
-  }
-}
+ * 예전에는 여기에 «내가 더한 색» 목록이 있었다. 그런데 그건 localStorage 에만
+ * 남는 값이라, 더해도 레포에 안 들어가고 컴포넌트 편집기의 «면 색» 목록에도
+ * 안 떴다 — 더할 수는 있는데 쓸 수는 없는 색이었다. 이제 그 일은
+ * FoundationTokens 가 data/foundation.json 에 직접 한다. */
 
 /* 간격 슬라이더 — 값이 아니라 "기준의 몇 배" 로 다룬다.
- * px 로 직접 적게 하면 밀도 토큰을 바꿨을 때 이 값만 따로 놀게 된다. */
+ * px 로 직접 적게 하면 밀도 토큰을 바꿨을 때 이 값만 따로 놀게 된다.
+ *
+ * 여기 있던 «탭 높이 · 탭 좌우 여백 · 글줄 사이» 셋은 뺐다. 탭의 높이는 전역이
+ * 아니라 탭이라는 컴포넌트의 값이라 컴포넌트 층(--tabs-md-height)으로 내려갔고,
+ * --gap-text 는 코드 어디에서도 읽지 않는 이름이었다 — 밀어도 아무 일이
+ * 일어나지 않는 슬라이더가 셋 있었던 셈이다. */
 const SPACE_TOKENS: {
   name: string
   group: Copy
@@ -108,42 +103,6 @@ const SPACE_TOKENS: {
     },
     min: 1,
     max: 8,
-    step: 0.5,
-  },
-  {
-    name: "h-tab",
-    group: { ko: "탭", en: "Tabs" },
-    label: { ko: "높이", en: "Height" },
-    note: {
-      ko: "버튼보다 한 단 작게 둔다. 같은 높이면 «전환» 이 «실행» 처럼 읽힌다",
-      en: "Keep it a step under the button — matched heights make switching look like doing",
-    },
-    min: 5,
-    max: 14,
-    step: 0.5,
-  },
-  {
-    name: "pad-tab",
-    group: { ko: "탭", en: "Tabs" },
-    label: { ko: "좌우 여백", en: "Padding" },
-    note: {
-      ko: "탭이 여럿일 때 이 값이 전체 너비를 정한다",
-      en: "With several tabs, this decides the strip’s whole width",
-    },
-    min: 0.5,
-    max: 6,
-    step: 0.5,
-  },
-  {
-    name: "gap-text",
-    group: { ko: "글줄", en: "Text" },
-    label: { ko: "글줄 사이", en: "Between lines" },
-    note: {
-      ko: "제목과 설명처럼 «이어 말하는» 두 줄 사이. 넓히면 두 얘기로 읽힌다",
-      en: "Between a title and its description. Widen it and they read as two things",
-    },
-    min: 0,
-    max: 4,
     step: 0.5,
   },
 ]
@@ -346,36 +305,39 @@ export function TokenEditor() {
   const [saving, setSaving] = useState(false)
   const nameRef = useRef<HTMLInputElement>(null)
   const [picking, setPicking] = useState(false)
-  const [custom, setCustom] = useState<CustomToken[]>([])
-  const [newName, setNewName] = useState("")
 
-  useEffect(() => setCustom(readCustom()), [])
+  /* 굴려 볼 수 있는 색 목록은 파운데이션이 정한다.
+   *
+   * 예전에는 이 목록이 이 파일에 손으로 적혀 있었다. 그래서 색을 하나 더해도
+   * 여기에는 안 떴다 — 더한 사람은 «더했는데 왜 없지» 가 되고, 그 색은
+   * 테마에 못 들어간다. 목록이 값을 정하는 게 아니라 값이 목록을 정해야 한다.
+   * 설명은 아래 표에 있는 것을 쓰고, 없으면 파운데이션이 적어 둔 것을 쓴다. */
+  const [repoColors, setRepoColors] = useState<{ name: string; doc?: string }[]>([])
 
-  /* 더한 색은 :root 에 얹어 둔다. 지우면 이름째로 사라진다 —
-   * 값만 지우고 이름을 남기면 «없는 색을 가리키는 참조» 가 생긴다. */
-  const saveCustom = (next: CustomToken[]) => {
-    setCustom(next)
-    try {
-      localStorage.setItem(CUSTOM_KEY, JSON.stringify(next))
-    } catch {}
-    for (const t of next) document.documentElement.style.setProperty(`--${t.name}`, t.value)
-  }
+  useEffect(() => {
+    if (!open) return
+    fetch("/api/foundation")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((j) =>
+        setRepoColors(
+          Object.entries(j.foundation?.color ?? {})
+            .filter(([k]) => !k.startsWith("$"))
+            .map(([name, def]) => ({ name, doc: (def as { $doc?: string }).$doc }))
+        )
+      )
+      .catch(() => setRepoColors([]))
+  }, [open])
 
-  const addCustom = () => {
-    const name = newName.trim().replace(/^--/, "").replace(/[^a-z0-9-]/gi, "-").toLowerCase()
-    if (!name) return
-    if (custom.some((c) => c.name === name) || COLOR_TOKENS.some((c) => c.name === name)) {
-      toast.error(lang === "ko" ? "이미 있는 이름입니다" : "That name already exists")
-      return
-    }
-    saveCustom([...custom, { name, value: "#888888" }])
-    setNewName("")
-  }
-
-  const removeCustom = (name: string) => {
-    document.documentElement.style.removeProperty(`--${name}`)
-    saveCustom(custom.filter((c) => c.name !== name))
-  }
+  const known = new Map(COLOR_TOKENS.map((t) => [t.name, t]))
+  const colorList: { name: string; label: Copy; note: Copy }[] = repoColors.length
+    ? repoColors.map(({ name, doc }) => {
+        const k = known.get(name)
+        return (
+          k ?? { name, label: { ko: name, en: name }, note: { ko: doc ?? "", en: doc ?? "" } }
+        )
+      })
+    : /* API 가 없는 정적 빌드에서는 손으로 적어 둔 표로 되돌아간다 */
+      COLOR_TOKENS
 
   /* 열 때마다, 그리고 모드가 바뀔 때마다 지금 값을 다시 읽는다.
    * 라이트와 다크는 값이 다르므로 편집기도 지금 보고 있는 쪽을 보여 줘야 한다. */
@@ -715,65 +677,9 @@ export function TokenEditor() {
                   ? `지금 편집 중인 모드: ${resolvedTheme === "dark" ? "다크" : "라이트"}. 모드를 바꾸면 그쪽 값을 따로 편집한다.`
                   : `Editing ${resolvedTheme === "dark" ? "dark" : "light"} mode. Switch modes to edit the other set.`}
               </p>
-              {custom.map((tok) => (
-                <div
-                  key={tok.name}
-                  className="hover:bg-muted/50 -mx-2 flex items-center gap-3 rounded-md px-2 py-1.5"
-                >
-                  <label className="relative size-8 shrink-0 cursor-pointer overflow-hidden rounded-md border">
-                    <span className="block size-full" style={{ background: tok.value }} />
-                    <input
-                      type="color"
-                      value={tok.value}
-                      onChange={(e) =>
-                        saveCustom(
-                          custom.map((c) =>
-                            c.name === tok.name ? { ...c, value: e.target.value } : c
-                          )
-                        )
-                      }
-                      className="absolute inset-0 cursor-pointer opacity-0"
-                    />
-                  </label>
-                  <div className="min-w-0 flex-1">
-                    <code className="text-xs">--{tok.name}</code>
-                    <p className="text-muted-foreground text-[11px]">
-                      {lang === "ko" ? "내가 더한 색" : "Added by you"}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeCustom(tok.name)}
-                    aria-label={lang === "ko" ? `${tok.name} 지우기` : `Delete ${tok.name}`}
-                    className="text-muted-foreground hover:text-destructive shrink-0"
-                  >
-                    <Trash2 className="size-3.5" />
-                  </button>
-                </div>
-              ))}
-
-              {/* 더하기. 팔레트를 닫아 두기만 하면 필요한 이름이 생겼을 때
-                * 컴포넌트 안에 hex 를 적게 된다 — 그것보다는 이름을 늘리는 편이 낫다. */}
-              <div className="mt-2 flex gap-2">
-                <Input
-                  size="sm"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") addCustom()
-                  }}
-                  placeholder={lang === "ko" ? "새 색 이름 (예: brand)" : "New color name"}
-                  className="flex-1"
-                />
-                <Button size="sm" variant="outline" onClick={addCustom} disabled={!newName.trim()}>
-                  <Plus className="size-4" />
-                  {lang === "ko" ? "더하기" : "Add"}
-                </Button>
-              </div>
-
-              <Separator className="my-3" />
-
-              {COLOR_TOKENS.map((tok) => (
+              {/* 굴려 보는 값. :root 에 인라인으로 얹히므로 새로고침하면 사라진다 —
+                * 시스템의 값을 정하는 것은 이 탭 아래쪽의 «시스템의 값» 칸이다. */}
+              {colorList.map((tok) => (
                 <div
                   key={tok.name}
                   className="hover:bg-muted/50 -mx-2 flex items-center gap-3 rounded-md px-2 py-1.5"
@@ -806,6 +712,11 @@ export function TokenEditor() {
                   </div>
                 </div>
               ))}
+
+              <Separator className="my-4" />
+
+              {/* 시스템의 값을 정하는 칸. 위와 달리 여기서 고친 것은 파일에 쓰인다. */}
+              <FoundationTokens mode={resolvedTheme === "dark" ? "dark" : "light"} />
             </TabsContent>
 
             <TabsContent value="shape" className="mt-0 flex flex-col gap-6 p-4">

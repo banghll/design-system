@@ -97,22 +97,65 @@ for (const [name, recipe] of Object.entries(components)) {
   }
 }
 
-/* --- 끼워 넣기 --- */
-const css = fs.readFileSync("app/globals.css", "utf8")
-const a = css.indexOf(BEGIN)
-const b = css.indexOf(END)
-if (a < 0 || b < 0) {
-  throw new Error(
-    `app/globals.css 에 표시 구획이 없다. :root 안에 아래 두 줄을 넣을 것:\n${BEGIN}\n${END}`
-  )
+/* --- 색 ---
+ *
+ * 색도 이 층의 값이다. 예전에는 globals.css 에 손으로 적혀 있어서,
+ * 화면에서 색을 더해도 그 브라우저의 인라인 스타일로만 남았다 —
+ * 새로고침하면 사라지고, 컴포넌트 편집기의 «면 색» 목록에도 안 떴다.
+ * 여기서 만들어 내면 더한 색이 다른 색들과 똑같은 자격을 갖는다. */
+const colors = Object.entries(foundation.color ?? {}).filter(([k]) => !k.startsWith("$"))
+
+const lightLines = []
+const darkLines = []
+const themeLines = []
+for (const [name, def] of colors) {
+  if (def.$doc) lightLines.push(`  /* ${def.$doc} */`)
+  lightLines.push(`  --${name}: ${def.light};`)
+  /* 다크 값이 없으면 라이트를 그대로 쓴다 — 한쪽만 적힌 색을 만들지 않는다. */
+  if (def.dark && def.dark !== def.light) darkLines.push(`  --${name}: ${def.dark};`)
+  themeLines.push(`  --color-${name}: var(--${name});`)
 }
 
-const next =
-  css.slice(0, a + BEGIN.length) + "\n" + lines.join("\n") + "\n" + css.slice(b)
+/* --- 끼워 넣기 --- */
+let css = fs.readFileSync("app/globals.css", "utf8")
 
-fs.writeFileSync("app/globals.css", next)
+function splice(source, begin, end, body, what) {
+  const a = source.indexOf(begin)
+  const b = source.indexOf(end)
+  if (a < 0 || b < 0) {
+    throw new Error(
+      `app/globals.css 에 ${what} 구획이 없다. 아래 두 줄을 넣을 것:\n${begin}\n${end}`
+    )
+  }
+  return source.slice(0, a + begin.length) + "\n" + body.join("\n") + "\n" + source.slice(b)
+}
+
+css = splice(css, BEGIN, END, lines, "@generated:tokens")
+css = splice(
+  css,
+  "  /* @generated:colors — data/foundation.json · node scripts/gen-tokens.mjs */",
+  "  /* @generated:colors:end */",
+  lightLines,
+  "@generated:colors"
+)
+css = splice(
+  css,
+  "  /* @generated:colors:dark — 같은 이름의 다크 값 */",
+  "  /* @generated:colors:dark:end */",
+  darkLines,
+  "@generated:colors:dark"
+)
+css = splice(
+  css,
+  "  /* @generated:theme — 색 이름을 Tailwind 유틸리티로 연다 */",
+  "  /* @generated:theme:end */",
+  themeLines,
+  "@generated:theme"
+)
+
+fs.writeFileSync("app/globals.css", css)
 console.log(
-  `globals.css — 파운데이션 4 · 컴포넌트 변수 ${count}개 (${
+  `globals.css — 파운데이션 4 · 색 ${colors.length}개 · 컴포넌트 변수 ${count}개 (${
     Object.keys(components).filter((k) => !k.startsWith("$")).length
   }개 컴포넌트)`
 )

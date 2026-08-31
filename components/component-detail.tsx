@@ -355,15 +355,44 @@ export function ComponentDetail({
           <h2 className="mb-5 text-sm font-semibold">
             {lang === "ko" ? "모든 변형과 상태" : "Every variant and state"}
           </h2>
-          {Preview ? (
-            <Preview />
-          ) : example ? (
-            example
-          ) : (
-            <p className="text-muted-foreground text-sm">
-              {lang === "ko" ? "미리보기가 아직 없습니다." : "No preview yet."}
-            </p>
-          )}
+          {/* 예제 래퍼는 «페이지 하나를 다 쓴다» 는 전제로 만들어졌다.
+            * md:grid-cols-2 가 **뷰포트** 768px 에서 켜지는데, 여기서는 오른쪽에
+            * 편집 패널이 320px 를 가져가서 이 칸이 660px 밖에 안 된다. 뷰포트는
+            * 넓고 칸은 좁으니 2단이 켜지고, 한 칸이 266px 이 된다. 거기에
+            * 예제 카드의 p-12(좌우 96px)가 들어가면 내용 자리는 170px 뿐인데
+            * 탭 띠는 w-fit 이라 안 줄어든다 — 230px 짜리가 카드 밖으로 나가
+            * 옆 카드와 겹쳤다.
+            *
+            * 그래서 뷰포트가 아니라 이 칸의 폭으로 단을 나눈다(@container).
+            * 예제 파일은 생성물이라 고치지 않고, 좁은 칸에 놓는 쪽이 자기 사정을
+            * 말하는 편이 맞다 — 같은 예제가 넓은 화면에서는 그대로 2단이다. */}
+          <div
+            className={[
+              "@container",
+              /* 페이지 안에 들어왔으니 래퍼가 화면 하나를 통째로 쓰지 않는다 */
+              "[&_[data-slot=example-wrapper]]:min-h-0",
+              "[&_[data-slot=example-wrapper]]:p-0",
+              /* 칸이 좁으면 1단, 넓어지면 그때 2단 */
+              "[&_[data-slot=example-wrapper]]:grid-cols-1",
+              "@3xl:[&_[data-slot=example-wrapper]]:grid-cols-2",
+              /* 카드 안쪽 여백도 칸에 맞춘다 */
+              "[&_[data-slot=example-content]]:p-6",
+              "@3xl:[&_[data-slot=example-content]]:p-12",
+              /* 그래도 안 들어가는 띠는 카드 안에서 줄여 잡는다 —
+               * 옆 카드를 덮는 것보다 낫다 */
+              "[&_[data-slot=tabs-list]]:max-w-full",
+            ].join(" ")}
+          >
+            {Preview ? (
+              <Preview />
+            ) : example ? (
+              example
+            ) : (
+              <p className="text-muted-foreground text-sm">
+                {lang === "ko" ? "미리보기가 아직 없습니다." : "No preview yet."}
+              </p>
+            )}
+          </div>
         </section>
 
         <aside className="lg:sticky lg:top-6 lg:self-start">

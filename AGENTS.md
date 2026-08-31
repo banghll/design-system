@@ -27,8 +27,19 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 토큰은 두 층이다 — `data/foundation.json`(전역)과 `data/components.json`(레시피).
 컴포넌트 값은 파운데이션을 **참조만** 한다(`spacing.9`, `radius.md`). 리터럴 금지.
 둘 중 하나를 고치면 `npm run gen` 이 globals.css · 색인 · 생성 페이지를 전부 따라오게 한다.
-지금 편집 가능한 것은 button · input · card 셋이고, 여는 속성은
-height · paddingX · radius · fontSize · gap 다섯뿐이다.
+편집은 62개 전부 열려 있다. 다만 «열려 있다» 는 말이 «화면이 바뀐다» 는 뜻이어야
+하므로, 레시피에 슬롯을 더했으면 그 이름을 컴포넌트 코드가 실제로 읽게 잇는다
+(`node scripts/wire-tokens.mjs` 의 표). 이었는지는 `npm run audit` 이 센다 —
+읽지 않는 이름이 하나라도 있으면 그 줄은 편집기에서 아무 일도 하지 않는 손잡이다.
+
+여는 속성은 height · paddingX · radius · fontSize · gap 과 면 색 넷
+(surface · surfaceForeground · activeSurface · activeSurfaceForeground)이다.
+자기 면도 모서리도 없는 컴포넌트(collapsible · aspect-ratio · spinner · direction)는
+슬롯을 두지 않는다 — 없는 손잡이를 그려 두는 것은 안 되는 손잡이보다 나쁘다.
+
+파운데이션은 화면에서 더하고 지울 수 있다(색 · 글자 크기). 고치면
+`data/foundation.json` 이 바뀌고 globals.css 가 다시 생성되며, 그 이름을 가리키던
+자리들은 «정리안» 으로 올라온다.
 
 자세한 것은 [docs/agentic-rules.md](docs/agentic-rules.md).
 

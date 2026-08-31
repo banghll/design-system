@@ -46,8 +46,13 @@ node -e 'const r=require("./design-system.json");
 컴포넌트 값에 px 를 적지 않는다. `"height": "spacing.9"` 처럼 이름을 가리켜야
 밀도 기준을 바꿨을 때 함께 움직인다. 고친 뒤에는 `npm run gen`.
 
-편집 화면은 `/components/<id>` 다 — 지금은 button · input · card 셋.
-여는 속성은 height · paddingX · radius · fontSize · gap 다섯으로 못 박혀 있다.
+편집 화면은 `/components/<id>` 다 — 62개 전부. 여는 속성은
+height · paddingX · radius · fontSize · gap 과 면 색 넷(surface ·
+surfaceForeground · activeSurface · activeSurfaceForeground)이다.
+
+레시피에 슬롯을 더했으면 그 이름을 컴포넌트 코드가 읽게 잇는다
+(`node scripts/wire-tokens.mjs`). `npm run audit` 이 «편집 패널의 어느 줄이
+화면을 안 바꾸는가» 를 세므로, 이 값이 0 이 아니면 편집기가 거짓을 말하는 중이다.
 바꾼 결과는 `/preview` 세 화면(목록 · 폼 · 대시보드)에서 판정한다.
 
 

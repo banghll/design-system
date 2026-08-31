@@ -28,32 +28,52 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { COLOR_PROPS, OPEN_PROPS, type OpenProp, refToPx } from "@/lib/tokens"
+import {
+  COLOR_PROPS,
+  OPEN_PROPS,
+  type Foundation,
+  type OpenProp,
+  refToPx,
+} from "@/lib/tokens"
 
 /* 고를 수 있는 참조. 속성마다 «말이 되는 것» 만 연다 —
  * 높이 자리에 radius 를 고를 수 있으면 그건 선택지가 아니라 함정이다. */
-const SPACING_STEPS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16]
-const RADIUS_STEPS = ["sm", "md", "lg", "xl", "2xl", "3xl"]
+const SPACING_STEPS = [
+  0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 8, 9, 10, 11, 12, 14, 16,
+]
+/* 4xl 이 빠져 있었다. 배지·아바타·스위치처럼 «둥근 것» 은 전부 이 단계를 쓰는데,
+ * 목록에 없으니 Select 가 고를 값을 못 찾아 빈 칸으로 떴다 — 값은 멀쩡한데
+ * 화면에는 아무것도 안 적힌 줄이 되는 것이다. */
+const RADIUS_STEPS = ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl"]
 const TEXT_STEPS = ["xs", "sm", "base", "lg"]
 
-/* 면에 쓸 수 있는 색. 파운데이션의 이름만 고를 수 있고, 여기 없는 색은 쓸 수 없다 —
- * 컴포넌트가 자기만의 색을 갖기 시작하면 팔레트가 팔레트가 아니게 된다. */
-const SURFACES = [
-  "background", "card", "popover", "muted", "secondary", "accent",
-  "primary", "destructive", "sidebar", "input", "border",
-]
-const FOREGROUNDS = [
-  "foreground", "muted-foreground", "card-foreground", "popover-foreground",
-  "secondary-foreground", "accent-foreground", "primary-foreground", "destructive",
-]
+/* 면에 쓸 수 있는 색은 파운데이션이 정한다.
+ *
+ * 예전에는 이 목록이 여기 손으로 적혀 있었다. 그래서 파운데이션에 색을 하나
+ * 더해도 여기에는 안 떴고, 더한 색을 쓸 방법이 없었다 — 더할 수는 있는데
+ * 쓸 수는 없는 색. 목록이 값을 정하는 게 아니라 값이 목록을 정해야 한다.
+ *
+ * 두 갈래로 나누는 것은 남긴다. 면 자리에 «-foreground» 를 고를 수 있으면
+ * 그건 선택지가 아니라 함정이다. */
+function paletteFrom(foundation: Foundation) {
+  const all = Object.keys(foundation.color ?? {}).filter((k) => !k.startsWith("$"))
+  const surfaces = all.filter((c) => !c.endsWith("-foreground"))
+  const foregrounds = all.filter((c) => c.endsWith("-foreground") || c === "foreground")
+  return { surfaces, foregrounds }
+}
 
-function optionsFor(prop: OpenProp): string[] {
+function optionsFor(prop: OpenProp, foundation: Foundation): string[] {
+  const { surfaces, foregrounds } = paletteFrom(foundation)
   if (prop === "surface" || prop === "activeSurface")
-    return SURFACES.map((c) => `color.${c}`)
+    return surfaces.map((c) => `color.${c}`)
   if (prop === "surfaceForeground" || prop === "activeSurfaceForeground")
-    return FOREGROUNDS.map((c) => `color.${c}`)
+    return foregrounds.map((c) => `color.${c}`)
   if (prop === "radius") return RADIUS_STEPS.map((r) => `radius.${r}`)
-  if (prop === "fontSize") return TEXT_STEPS.map((t) => `text.${t}`)
+  /* 글자 크기도 파운데이션이 정한다 — 스케일에 단을 더하면 여기에 바로 뜬다. */
+  if (prop === "fontSize") {
+    const steps = Object.keys(foundation.text ?? {}).filter((k) => !k.startsWith("$"))
+    return (steps.length ? steps : TEXT_STEPS).map((t) => `text.${t}`)
+  }
   const spacing = SPACING_STEPS.map((n) => `spacing.${n}`)
   /* 높이·좌우여백은 «기준을 그대로 받는다» 를 첫 선택지로 둔다.
    * 이게 없으면 모두가 숫자를 골라 버리고, 한 줄 정렬이 첫날에 깨진다. */
@@ -92,6 +112,15 @@ function Row({
   const px = refToPx(ref, foundation)
   const key = editKey(component, prop, size)
 
+  /* 지금 값은 목록에 없더라도 반드시 들어간다.
+   *
+   * 고를 수 있는 것을 손으로 적어 두면, 레시피가 그 목록 밖의 값을 쓰는 순간
+   * Select 는 맞는 항목을 못 찾아 빈 칸이 된다. 사용자에게는 «값이 사라진»
+   * 것으로 보이고, 한 번 건드리면 진짜로 다른 값이 된다. 목록이 값을
+   * 정하는 게 아니라 값이 목록에 들어와야 한다. */
+  const options = optionsFor(prop, foundation)
+  const choices = options.includes(ref) ? options : [ref, ...options]
+
   return (
     <div className="flex items-center gap-2">
       <Label className="text-muted-foreground flex w-24 shrink-0 items-center gap-1 text-xs font-normal">
@@ -109,7 +138,7 @@ function Row({
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          {optionsFor(prop).map((o) => (
+          {choices.map((o) => (
             <SelectItem key={o} value={o}>
               {o}
             </SelectItem>
@@ -159,6 +188,30 @@ export function ComponentEditor({ component }: { component: string }) {
           ? "아직 토큰화하지 않은 컴포넌트입니다. data/components.json 에 레시피를 적으면 여기에 패널이 생깁니다."
           : "Not tokenized yet. Add a recipe to data/components.json and this panel appears."}
       </p>
+    )
+  }
+
+  /* 슬롯이 하나도 없는 컴포넌트가 있다. 자리를 잡거나 상태를 나를 뿐
+   * 자기 면도 모서리도 갖지 않는 것들이다. 예전에는 여기에도 면 색과 좌우 여백
+   * 줄이 그려져 있었는데, 무엇을 골라도 화면은 그대로였다.
+   * 없는 손잡이를 그려 두는 것은 안 되는 손잡이보다 나쁘다 — 없다고 말한다. */
+  const slotCount =
+    (["radius", "gap", "surface", "surfaceForeground", "activeSurface", "activeSurfaceForeground"] as const)
+      .filter((p) => recipe[p]).length +
+    Object.values(recipe.sizes ?? {}).reduce((n, props) => n + Object.keys(props).length, 0)
+
+  if (!slotCount) {
+    return (
+      <div className="flex flex-col gap-3">
+        <Badge variant="secondary">
+          {lang === "ko" ? "편집할 값 없음" : "Nothing to edit"}
+        </Badge>
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          {lang === "ko"
+            ? "자기 면도 모서리도 갖지 않는 컴포넌트입니다. 자리를 잡거나 상태를 나르기만 하므로 여기서 바꿀 값이 없습니다 — 안에 담기는 것들을 각자의 화면에서 편집하세요."
+            : "This component carries no surface of its own — it only positions or conveys state. Edit the things inside it on their own screens."}
+        </p>
+      </div>
     )
   }
 

@@ -34,7 +34,7 @@ export function OverlayStage({
       ref={setEl}
       data-slot="overlay-stage"
       className={cn(
-        "relative isolate min-h-64 overflow-hidden rounded-lg border border-dashed border-border bg-background [transform:translateZ(0)]",
+        "relative isolate min-h-64 overflow-hidden rounded-(--overlay-stage-radius) border border-dashed border-border bg-(--overlay-stage-surface) [transform:translateZ(0)]",
         className
       )}
       {...props}

@@ -44,7 +44,6 @@
   "input": {
     "$doc": "한 줄짜리 값을 받는 자리. 버튼과 나란히 서므로 같은 기준을 받는다.",
     "radius": "radius.md",
-    "gap": "spacing.2",
     "sizes": {
       "xs": {
         "height": "spacing.6",
@@ -85,21 +84,15 @@
   },
   "accordion": {
     "$doc": "길어서 다 보여줄 수 없는 것을 접어 두는 것.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
     "radius": "radius.lg",
-    "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "alert-dialog": {
     "$doc": "되돌릴 수 없는 일 앞의 확인.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
     "radius": "radius.xl",
@@ -113,103 +106,87 @@
   },
   "alert": {
     "$doc": "화면 안에 머무는 안내.",
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "surface": "color.card",
+    "surfaceForeground": "color.card-foreground",
     "radius": "radius.lg",
     "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
+        "paddingX": "spacing.4",
         "fontSize": "text.sm"
       }
     }
   },
   "aspect-ratio": {
-    "$doc": "비율을 고정하는 상자.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "$doc": "비율을 고정하는 상자."
   },
   "attachment": {
     "$doc": "대화나 폼에 붙인 파일.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
+    "surface": "color.card",
+    "surfaceForeground": "color.card-foreground",
+    "radius": "radius.xl",
     "gap": "spacing.2",
     "sizes": {
+      "xs": {
+        "paddingX": "spacing.1.5",
+        "fontSize": "text.xs"
+      },
+      "sm": {
+        "paddingX": "spacing.2",
+        "fontSize": "text.xs"
+      },
       "md": {
-        "paddingX": "spacing.3",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
   "avatar": {
     "$doc": "사람이나 팀을 식별하는 작은 이미지.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "surfaceForeground": "color.muted-foreground",
+    "radius": "radius.4xl",
     "sizes": {
+      "sm": {
+        "height": "spacing.6"
+      },
       "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.8",
         "fontSize": "text.sm"
+      },
+      "lg": {
+        "height": "spacing.10"
       }
     }
   },
   "badge": {
     "$doc": "상태나 분류를 짧게 표시하는 라벨.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "surface": "color.primary",
+    "surfaceForeground": "color.primary-foreground",
+    "radius": "radius.4xl",
+    "gap": "spacing.1",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.5",
+        "paddingX": "spacing.2",
+        "fontSize": "text.xs"
       }
     }
   },
   "breadcrumb": {
     "$doc": "지금 어디인지, 어디서 왔는지.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "gap": "spacing.1.5",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "bubble": {
     "$doc": "말풍선.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "radius": "radius.xl",
+    "gap": "spacing.1",
     "sizes": {
       "md": {
         "paddingX": "spacing.3",
@@ -219,157 +196,100 @@
   },
   "button-group": {
     "$doc": "성격이 같은 버튼을 하나의 덩어리로 붙인 것.",
-    "$wired": false,
-    "radius": "radius.md",
+    "surface": "color.muted",
+    "radius": "radius.lg",
     "gap": "spacing.2",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
   "calendar": {
     "$doc": "날짜 하나 또는 범위를 고르는 것.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "surface": "color.background",
+    "activeSurface": "color.primary",
+    "activeSurfaceForeground": "color.primary-foreground",
+    "radius": "radius.md",
+    "gap": "spacing.4",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "carousel": {
-    "$doc": "가로로 넘겨 보는 목록.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.7",
         "fontSize": "text.sm"
       }
     }
   },
+  "carousel": {
+    "$doc": "가로로 넘겨 보는 목록.",
+    "radius": "radius.4xl"
+  },
   "chart": {
     "$doc": "추세와 비교를 그림으로.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "surface": "color.background",
     "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.1.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "paddingX": "spacing.2.5",
+        "fontSize": "text.xs"
       }
     }
   },
   "checkbox": {
     "$doc": "서로 무관한 항목을 각각 켜고 끄는 것.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "radius": "radius.sm",
+    "activeSurface": "color.primary",
+    "activeSurfaceForeground": "color.primary-foreground",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.4"
       }
     }
   },
   "collapsible": {
-    "$doc": "한 덩어리를 접었다 펴는 것.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "$doc": "한 덩어리를 접었다 펴는 것."
   },
   "combobox": {
     "$doc": "검색이 붙은 선택.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "surface": "color.popover",
+    "surfaceForeground": "color.popover-foreground",
+    "radius": "radius.lg",
+    "gap": "spacing.1",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
+        "height": "spacing.8",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
   "command": {
     "$doc": "검색으로 실행하는 명령 팔레트.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
+    "activeSurface": "color.muted",
+    "activeSurfaceForeground": "color.foreground",
     "radius": "radius.xl",
-    "gap": "spacing.4",
+    "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
+        "paddingX": "spacing.2",
         "fontSize": "text.sm"
       }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
+    }
   },
   "context-menu": {
     "$doc": "우클릭으로 여는 그 자리의 동작.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
-    "gap": "spacing.4",
+    "activeSurface": "color.accent",
+    "activeSurfaceForeground": "color.accent-foreground",
+    "radius": "radius.lg",
+    "gap": "spacing.1.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
+        "paddingX": "spacing.1.5",
         "fontSize": "text.sm"
       }
     }
@@ -382,32 +302,19 @@
     "gap": "spacing.4",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
+        "paddingX": "spacing.6",
         "fontSize": "text.sm"
       }
     }
   },
   "direction": {
-    "$doc": "",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "$doc": ""
   },
   "drawer": {
     "$doc": "화면 아래에서 올라오는 패널.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
     "radius": "radius.xl",
-    "gap": "spacing.4",
     "sizes": {
       "md": {
         "paddingX": "spacing.4",
@@ -419,198 +326,150 @@
     "$doc": "한 버튼에 딸린 동작 목록.",
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
+    "activeSurface": "color.accent",
+    "activeSurfaceForeground": "color.accent-foreground",
+    "radius": "radius.lg",
+    "gap": "spacing.1.5",
+    "sizes": {
+      "md": {
+        "paddingX": "spacing.1.5",
+        "fontSize": "text.sm"
+      }
+    }
+  },
+  "empty": {
+    "$doc": "보여줄 것이 없을 때의 화면.",
+    "surface": "color.muted",
+    "surfaceForeground": "color.foreground",
     "radius": "radius.xl",
     "gap": "spacing.4",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "empty": {
-    "$doc": "보여줄 것이 없을 때의 화면.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
+        "paddingX": "spacing.6",
         "fontSize": "text.sm"
       }
     }
   },
   "field": {
     "$doc": "라벨 · 입력 · 설명 · 오류를 한 벌로 묶은 폼의 최소 단위.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.4",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "hover-card": {
     "$doc": "hover 로 보는 미리보기.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
-    "gap": "spacing.4",
+    "radius": "radius.lg",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
   "input-group": {
     "$doc": "입력 앞뒤에 아이콘 · 단위 · 버튼을 붙인 것.",
-    "$wired": false,
-    "radius": "radius.md",
+    "radius": "radius.lg",
     "gap": "spacing.2",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
         "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "input-otp": {
     "$doc": "자릿수가 정해진 입력.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "radius": "radius.lg",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
+        "height": "spacing.8",
         "fontSize": "text.sm"
       }
     }
   },
   "item": {
     "$doc": "목록의 한 줄.",
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "activeSurface": "color.muted",
     "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.2.5",
     "sizes": {
       "md": {
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
+      },
+      "xs": {
+        "paddingX": "spacing.2.5",
+        "gap": "spacing.2"
       }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
+    }
   },
   "kbd": {
     "$doc": "단축키를 글자로 표기한 것.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "surfaceForeground": "color.muted-foreground",
+    "radius": "radius.sm",
+    "gap": "spacing.1",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.5",
+        "paddingX": "spacing.1",
+        "fontSize": "text.xs"
       }
     }
   },
   "label": {
     "$doc": "입력과 짝을 이루는 이름표.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
     "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "marker": {
     "$doc": "새로 생긴 것 · 바뀐 것을 표시하는 점.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
+    "surface": "color.border",
+    "surfaceForeground": "color.muted-foreground",
     "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "menubar": {
     "$doc": "데스크톱 앱 스타일의 메뉴 줄.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "surface": "color.popover",
+    "surfaceForeground": "color.popover-foreground",
+    "activeSurface": "color.accent",
+    "activeSurfaceForeground": "color.accent-foreground",
     "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.1.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "message-scroller": {
-    "$doc": "새 메시지가 오면 아래로 따라가는 대화 목록.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.8",
+        "paddingX": "spacing.1.5",
         "fontSize": "text.sm"
       }
     }
   },
+  "message-scroller": {
+    "$doc": "새 메시지가 오면 아래로 따라가는 대화 목록.",
+    "surface": "color.background",
+    "surfaceForeground": "color.foreground",
+    "activeSurface": "color.muted",
+    "gap": "spacing.6"
+  },
   "message": {
     "$doc": "대화 한 줄. 아바타 · 본문 · 시각.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
+    "surfaceForeground": "color.muted-foreground",
+    "radius": "radius.4xl",
     "gap": "spacing.2",
     "sizes": {
       "md": {
@@ -621,77 +480,45 @@
   },
   "native-select": {
     "$doc": "브라우저가 그리는 선택 목록.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "radius": "radius.lg",
     "sizes": {
       "sm": {
         "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
+        "paddingX": "spacing.2"
       },
       "md": {
         "height": "control.height",
         "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "navigation-menu": {
     "$doc": "제품 상단의 주 탐색.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "surface": "color.popover",
+    "surfaceForeground": "color.popover-foreground",
+    "activeSurface": "color.muted",
     "radius": "radius.lg",
     "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "overlay-stage": {
-    "$doc": "",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.9",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
+  "overlay-stage": {
+    "$doc": "",
+    "surface": "color.background",
+    "radius": "radius.lg"
+  },
   "pagination": {
     "$doc": "긴 목록을 쪽으로 나누는 것.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "gap": "spacing.0.5",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.8"
       }
     }
   },
@@ -699,38 +526,34 @@
     "$doc": "누른 자리 옆에 붙는 작은 면.",
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
-    "gap": "spacing.4",
+    "radius": "radius.lg",
+    "gap": "spacing.2.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
+        "paddingX": "spacing.2.5",
         "fontSize": "text.sm"
       }
     }
   },
   "progress": {
     "$doc": "끝이 정해진 작업의 진행률.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "activeSurface": "color.primary",
+    "radius": "radius.4xl",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.1"
       }
     }
   },
   "questionnaire": {
     "$doc": "여러 문항을 순서대로 받는 구조.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "activeSurface": "color.muted",
     "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.4",
     "sizes": {
       "md": {
+        "height": "spacing.11",
         "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
@@ -738,100 +561,54 @@
   },
   "radio-group": {
     "$doc": "서로 배타적인 것 중 하나만 고르는 것.",
-    "$wired": false,
-    "radius": "radius.md",
+    "radius": "radius.4xl",
     "gap": "spacing.2",
+    "activeSurface": "color.primary",
+    "activeSurfaceForeground": "color.primary-foreground",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.4"
       }
     }
   },
   "resizable": {
     "$doc": "사용자가 폭을 조절하는 분할 화면.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "surface": "color.border",
+    "radius": "radius.lg"
   },
   "scroll-area": {
     "$doc": "넘치는 내용을 자기 안에서 스크롤하는 상자.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "surface": "color.border",
+    "radius": "radius.4xl"
   },
   "select": {
     "$doc": "직접 그린 선택 목록.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "surface": "color.popover",
+    "surfaceForeground": "color.popover-foreground",
+    "activeSurface": "color.accent",
+    "activeSurfaceForeground": "color.accent-foreground",
+    "radius": "radius.lg",
+    "gap": "spacing.1.5",
     "sizes": {
       "sm": {
         "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
+        "paddingX": "spacing.2"
       },
       "md": {
         "height": "control.height",
         "paddingX": "control.paddingX",
         "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "separator": {
-    "$doc": "구분선.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
       }
     }
   },
+  "separator": {
+    "$doc": "구분선.",
+    "surface": "color.border"
+  },
   "sheet": {
     "$doc": "화면 옆에서 밀려 나오는 패널.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
     "gap": "spacing.4",
     "sizes": {
       "md": {
@@ -842,118 +619,66 @@
   },
   "sidebar": {
     "$doc": "앱 셸의 좌측 탐색.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
+    "surface": "color.sidebar",
+    "surfaceForeground": "color.sidebar-foreground",
+    "activeSurface": "color.sidebar-accent",
+    "activeSurfaceForeground": "color.sidebar-accent-foreground",
+    "radius": "radius.md",
     "gap": "spacing.2",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
-  },
-  "skeleton": {
-    "$doc": "올 내용의 자리를 미리 잡아 두는 뼈대.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
+        "paddingX": "spacing.2",
         "fontSize": "text.sm"
       }
     }
   },
+  "skeleton": {
+    "$doc": "올 내용의 자리를 미리 잡아 두는 뼈대.",
+    "surface": "color.muted",
+    "radius": "radius.md"
+  },
   "slider": {
     "$doc": "범위 안에서 값을 고르는 것.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "surface": "color.muted",
+    "activeSurface": "color.primary",
+    "radius": "radius.4xl",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.1"
       }
     }
   },
   "sonner": {
     "$doc": "작업 결과를 잠깐 알리는 토스트.",
-    "$wired": false,
     "surface": "color.popover",
     "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
-    "gap": "spacing.4",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.4",
-        "fontSize": "text.sm"
-      }
-    }
+    "radius": "radius.lg"
   },
   "spinner": {
-    "$doc": "끝을 모르는 대기 표시.",
-    "$wired": false,
-    "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
-    "sizes": {
-      "md": {
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    }
+    "$doc": "끝을 모르는 대기 표시."
   },
   "switch": {
     "$doc": "즉시 반영되는 on/off.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "surface": "color.input",
+    "activeSurface": "color.primary",
+    "radius": "radius.4xl",
     "sizes": {
       "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
+        "height": "spacing.3.5"
       },
       "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "height": "spacing.4.5"
       }
     }
   },
   "table": {
     "$doc": "행과 열로 정렬된 데이터.",
-    "$wired": false,
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
-    "radius": "radius.lg",
-    "gap": "spacing.2",
+    "activeSurface": "color.muted",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.10",
+        "paddingX": "spacing.2",
         "fontSize": "text.sm"
       }
     }
@@ -961,75 +686,42 @@
   "tabs": {
     "$doc": "같은 자리에서 내용을 바꾸는 것.",
     "surface": "color.muted",
-    "surfaceForeground": "color.foreground",
+    "surfaceForeground": "color.muted-foreground",
+    "activeSurface": "color.background",
+    "activeSurfaceForeground": "color.foreground",
     "radius": "radius.lg",
-    "gap": "spacing.2",
+    "gap": "spacing.1.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.3",
+        "height": "spacing.7",
+        "paddingX": "spacing.1.5",
         "fontSize": "text.sm"
       }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
+    }
   },
   "textarea": {
     "$doc": "여러 줄짜리 값을 받는 자리.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "radius": "radius.lg",
     "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
       "md": {
-        "height": "control.height",
         "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
         "fontSize": "text.sm"
       }
     }
   },
   "toggle-group": {
     "$doc": "토글 여러 개를 한 축으로 묶은 것.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
-    "sizes": {
-      "sm": {
-        "height": "spacing.7",
-        "paddingX": "spacing.2.5",
-        "fontSize": "text.xs"
-      },
-      "md": {
-        "height": "control.height",
-        "paddingX": "control.paddingX",
-        "fontSize": "text.sm"
-      },
-      "lg": {
-        "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
-      }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
+    "radius": "radius.lg"
   },
   "toggle": {
     "$doc": "눌린 상태가 남는 버튼.",
-    "$wired": false,
-    "radius": "radius.md",
-    "gap": "spacing.2",
+    "radius": "radius.lg",
+    "gap": "spacing.1",
+    "activeSurface": "color.muted",
     "sizes": {
       "sm": {
         "height": "spacing.7",
-        "paddingX": "spacing.2.5",
+        "paddingX": "spacing.2",
         "fontSize": "text.xs"
       },
       "md": {
@@ -1039,24 +731,20 @@
       },
       "lg": {
         "height": "spacing.9",
-        "paddingX": "spacing.3",
-        "fontSize": "text.sm"
+        "paddingX": "spacing.3"
       }
-    },
-    "activeSurface": "color.background",
-    "activeSurfaceForeground": "color.foreground"
+    }
   },
   "tooltip": {
     "$doc": "hover 로만 보이는 짧은 설명.",
-    "$wired": false,
-    "surface": "color.popover",
-    "surfaceForeground": "color.popover-foreground",
-    "radius": "radius.xl",
-    "gap": "spacing.4",
+    "surface": "color.foreground",
+    "surfaceForeground": "color.background",
+    "radius": "radius.md",
+    "gap": "spacing.1.5",
     "sizes": {
       "md": {
-        "paddingX": "spacing.4",
-        "fontSize": "text.sm"
+        "paddingX": "spacing.3",
+        "fontSize": "text.xs"
       }
     }
   }

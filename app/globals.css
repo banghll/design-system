@@ -17,8 +17,40 @@ body {
 }
 
 @theme inline {
+  /* @generated:theme — 색 이름을 Tailwind 유틸리티로 연다 */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* @generated:theme:end */
   /* 라틴은 DM Sans, 한글은 Pretendard. 브라우저가 글자마다 알아서 나눠 쓴다 —
    * 두 벌을 섞는 게 아니라, 각자 잘하는 글자를 맡는 구조다. */
   --font-sans: var(--font-dm-sans), var(--font-pretendard), ui-sans-serif,
@@ -30,35 +62,6 @@ body {
   /* 간격의 기준값. Tailwind 의 p-4 · gap-6 이 전부 이 값 × n 으로 계산된다.
    * 하나만 줄이면 화면 전체가 조밀해진다 — 밀도가 토큰 하나로 조절된다. */
   --spacing: var(--spacing-base);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
   /* 모서리는 --radius 하나에서 파생시킨다. 값을 따로 적어 두면
    * 프리셋이 --radius 를 바꿔도 컴포넌트는 옛 값을 계속 쓴다. */
   --radius-sm: calc(var(--radius) - 4px);
@@ -96,39 +99,48 @@ body {
  * 리터럴 색을 적으면 그 자리만 프리셋을 따라가지 않고 남는다 — 적지 않는다.
  * ───────────────────────────────────────────────────────────── */
 :root {
-  /* 표면 */
+  /* @generated:colors — data/foundation.json · node scripts/gen-tokens.mjs */
+  /* 배경에서 한 단계 올라온 면 */
   --card: oklch(1 0 0);
+  /* 카드 면 위의 글자 */
   --card-foreground: oklch(0.145 0 0);
+  /* 본문 위에 떠오르는 면 */
   --popover: oklch(1 0 0);
+  /* 떠오른 면 위의 글자 */
   --popover-foreground: oklch(0.145 0 0);
-
-  /* 액션 */
+  /* 화면당 하나. 여기서 눌러야 하는 것 */
   --primary: oklch(0.205 0 0);
+  /* 주 액션 위에 얹히는 글자 */
   --primary-foreground: oklch(0.985 0 0);
+  /* 주 액션 옆의 낮은 강조 */
   --secondary: oklch(0.97 0 0);
+  /* 보조 면 위의 글자 */
   --secondary-foreground: oklch(0.205 0 0);
+  /* hover·선택된 항목의 면 */
   --accent: oklch(0.97 0 0);
+  /* 강조 면 위의 글자 */
   --accent-foreground: oklch(0.205 0 0);
+  /* 되돌릴 수 없는 것에만 */
   --destructive: oklch(0.577 0.245 27.325);
+  /* 파괴적 액션 위의 글자 */
   --destructive-foreground: var(--primary-foreground);
-
-  /* 보조 텍스트 / 흐린 면 */
+  /* 비활성·배경 블록 */
   --muted: oklch(0.97 0 0);
+  /* 설명문·캡션. 본문보다 한 단계 낮게 */
   --muted-foreground: oklch(0.556 0 0);
-
-  /* 선 */
+  /* 요소를 가르는 기본 선 */
   --border: oklch(0.922 0 0);
+  /* 값을 받는 자리의 테두리 */
   --input: oklch(0.922 0 0);
+  /* 키보드 사용자에게 지금 위치를 알린다 */
   --ring: oklch(0.708 0 0);
-
-  /* 차트 — 계열이 다섯 개보다 많아지면 반복된다. 순서가 곧 의미다 */
+  /* 계열 순서 = 의미 순서 */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-
-  /* 사이드바 */
+  /* 앱 셸의 좌측 면 */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -137,6 +149,22 @@ body {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* 페이지의 가장 바깥 면 */
+  --background: oklch(1 0 0);
+  /* 배경 위에 놓이는 기본 글자색 */
+  --foreground: oklch(0.145 0 0);
+  /* @generated:colors:end */
+  /* 표면 */
+
+  /* 액션 */
+
+  /* 보조 텍스트 / 흐린 면 */
+
+  /* 선 */
+
+  /* 차트 — 계열이 다섯 개보다 많아지면 반복된다. 순서가 곧 의미다 */
+
+  /* 사이드바 */
 
   /* 한글 글꼴 이름. 실제 파일은 layout 의 <link> 가 CDN 에서 받아 온다.
    * 인라인 <style> 로 두면 브라우저가 head 를 정리하면서 위치가 달라진다 —
@@ -169,7 +197,6 @@ body {
 
   /* input — 한 줄짜리 값을 받는 자리. 버튼과 나란히 서므로 같은 기준을 받는다. */
   --input-radius: var(--radius-md);
-  --input-gap: calc(var(--spacing) * 2);
   --input-xs-height: calc(var(--spacing) * 6);
   --input-xs-padding-x: calc(var(--spacing) * 2);
   --input-xs-font-size: var(--text-xs);
@@ -193,10 +220,6 @@ body {
 
   /* accordion — 길어서 다 보여줄 수 없는 것을 접어 두는 것. */
   --accordion-radius: var(--radius-lg);
-  --accordion-gap: calc(var(--spacing) * 2);
-  --accordion-surface: var(--muted);
-  --accordion-surface-foreground: var(--foreground);
-  --accordion-md-padding-x: calc(var(--spacing) * 3);
   --accordion-md-font-size: var(--text-sm);
 
   /* alert-dialog — 되돌릴 수 없는 일 앞의 확인. */
@@ -210,153 +233,115 @@ body {
   /* alert — 화면 안에 머무는 안내. */
   --alert-radius: var(--radius-lg);
   --alert-gap: calc(var(--spacing) * 2);
-  --alert-surface: var(--muted);
-  --alert-surface-foreground: var(--foreground);
-  --alert-md-padding-x: calc(var(--spacing) * 3);
+  --alert-surface: var(--card);
+  --alert-surface-foreground: var(--card-foreground);
+  --alert-md-padding-x: calc(var(--spacing) * 4);
   --alert-md-font-size: var(--text-sm);
 
   /* aspect-ratio — 비율을 고정하는 상자. */
-  --aspect-ratio-radius: var(--radius-lg);
-  --aspect-ratio-gap: calc(var(--spacing) * 2);
-  --aspect-ratio-surface: var(--muted);
-  --aspect-ratio-surface-foreground: var(--foreground);
-  --aspect-ratio-md-padding-x: calc(var(--spacing) * 3);
-  --aspect-ratio-md-font-size: var(--text-sm);
 
   /* attachment — 대화나 폼에 붙인 파일. */
-  --attachment-radius: var(--radius-lg);
+  --attachment-radius: var(--radius-xl);
   --attachment-gap: calc(var(--spacing) * 2);
-  --attachment-surface: var(--muted);
-  --attachment-surface-foreground: var(--foreground);
-  --attachment-md-padding-x: calc(var(--spacing) * 3);
+  --attachment-surface: var(--card);
+  --attachment-surface-foreground: var(--card-foreground);
+  --attachment-xs-padding-x: calc(var(--spacing) * 1.5);
+  --attachment-xs-font-size: var(--text-xs);
+  --attachment-sm-padding-x: calc(var(--spacing) * 2);
+  --attachment-sm-font-size: var(--text-xs);
+  --attachment-md-padding-x: calc(var(--spacing) * 2.5);
   --attachment-md-font-size: var(--text-sm);
 
   /* avatar — 사람이나 팀을 식별하는 작은 이미지. */
-  --avatar-radius: var(--radius-lg);
-  --avatar-gap: calc(var(--spacing) * 2);
+  --avatar-radius: var(--radius-4xl);
   --avatar-surface: var(--muted);
-  --avatar-surface-foreground: var(--foreground);
-  --avatar-md-padding-x: calc(var(--spacing) * 3);
+  --avatar-surface-foreground: var(--muted-foreground);
+  --avatar-sm-height: calc(var(--spacing) * 6);
+  --avatar-md-height: calc(var(--spacing) * 8);
   --avatar-md-font-size: var(--text-sm);
+  --avatar-lg-height: calc(var(--spacing) * 10);
 
   /* badge — 상태나 분류를 짧게 표시하는 라벨. */
-  --badge-radius: var(--radius-lg);
-  --badge-gap: calc(var(--spacing) * 2);
-  --badge-surface: var(--muted);
-  --badge-surface-foreground: var(--foreground);
-  --badge-md-padding-x: calc(var(--spacing) * 3);
-  --badge-md-font-size: var(--text-sm);
+  --badge-radius: var(--radius-4xl);
+  --badge-gap: calc(var(--spacing) * 1);
+  --badge-surface: var(--primary);
+  --badge-surface-foreground: var(--primary-foreground);
+  --badge-md-height: calc(var(--spacing) * 5);
+  --badge-md-padding-x: calc(var(--spacing) * 2);
+  --badge-md-font-size: var(--text-xs);
 
   /* breadcrumb — 지금 어디인지, 어디서 왔는지. */
-  --breadcrumb-radius: var(--radius-md);
-  --breadcrumb-gap: calc(var(--spacing) * 2);
-  --breadcrumb-sm-height: calc(var(--spacing) * 7);
-  --breadcrumb-sm-padding-x: calc(var(--spacing) * 2.5);
-  --breadcrumb-sm-font-size: var(--text-xs);
-  --breadcrumb-md-height: var(--h-control);
-  --breadcrumb-md-padding-x: var(--pad-control);
+  --breadcrumb-gap: calc(var(--spacing) * 1.5);
   --breadcrumb-md-font-size: var(--text-sm);
-  --breadcrumb-lg-height: calc(var(--spacing) * 9);
-  --breadcrumb-lg-padding-x: calc(var(--spacing) * 3);
-  --breadcrumb-lg-font-size: var(--text-sm);
 
   /* bubble — 말풍선. */
-  --bubble-radius: var(--radius-lg);
-  --bubble-gap: calc(var(--spacing) * 2);
+  --bubble-radius: var(--radius-xl);
+  --bubble-gap: calc(var(--spacing) * 1);
   --bubble-surface: var(--muted);
-  --bubble-surface-foreground: var(--foreground);
   --bubble-md-padding-x: calc(var(--spacing) * 3);
   --bubble-md-font-size: var(--text-sm);
 
   /* button-group — 성격이 같은 버튼을 하나의 덩어리로 붙인 것. */
-  --button-group-radius: var(--radius-md);
+  --button-group-radius: var(--radius-lg);
   --button-group-gap: calc(var(--spacing) * 2);
-  --button-group-sm-height: calc(var(--spacing) * 7);
-  --button-group-sm-padding-x: calc(var(--spacing) * 2.5);
-  --button-group-sm-font-size: var(--text-xs);
-  --button-group-md-height: var(--h-control);
-  --button-group-md-padding-x: var(--pad-control);
+  --button-group-surface: var(--muted);
+  --button-group-md-padding-x: calc(var(--spacing) * 2.5);
   --button-group-md-font-size: var(--text-sm);
-  --button-group-lg-height: calc(var(--spacing) * 9);
-  --button-group-lg-padding-x: calc(var(--spacing) * 3);
-  --button-group-lg-font-size: var(--text-sm);
 
   /* calendar — 날짜 하나 또는 범위를 고르는 것. */
-  --calendar-radius: var(--radius-lg);
-  --calendar-gap: calc(var(--spacing) * 2);
-  --calendar-surface: var(--muted);
-  --calendar-surface-foreground: var(--foreground);
-  --calendar-active-surface: var(--background);
-  --calendar-active-surface-foreground: var(--foreground);
-  --calendar-md-padding-x: calc(var(--spacing) * 3);
+  --calendar-radius: var(--radius-md);
+  --calendar-gap: calc(var(--spacing) * 4);
+  --calendar-surface: var(--background);
+  --calendar-active-surface: var(--primary);
+  --calendar-active-surface-foreground: var(--primary-foreground);
+  --calendar-md-height: calc(var(--spacing) * 7);
   --calendar-md-font-size: var(--text-sm);
 
   /* carousel — 가로로 넘겨 보는 목록. */
-  --carousel-radius: var(--radius-lg);
-  --carousel-gap: calc(var(--spacing) * 2);
-  --carousel-surface: var(--muted);
-  --carousel-surface-foreground: var(--foreground);
-  --carousel-md-padding-x: calc(var(--spacing) * 3);
-  --carousel-md-font-size: var(--text-sm);
+  --carousel-radius: var(--radius-4xl);
 
   /* chart — 추세와 비교를 그림으로. */
   --chart-radius: var(--radius-lg);
-  --chart-gap: calc(var(--spacing) * 2);
-  --chart-surface: var(--muted);
-  --chart-surface-foreground: var(--foreground);
-  --chart-md-padding-x: calc(var(--spacing) * 3);
-  --chart-md-font-size: var(--text-sm);
+  --chart-gap: calc(var(--spacing) * 1.5);
+  --chart-surface: var(--background);
+  --chart-md-padding-x: calc(var(--spacing) * 2.5);
+  --chart-md-font-size: var(--text-xs);
 
   /* checkbox — 서로 무관한 항목을 각각 켜고 끄는 것. */
-  --checkbox-radius: var(--radius-md);
-  --checkbox-gap: calc(var(--spacing) * 2);
-  --checkbox-sm-height: calc(var(--spacing) * 7);
-  --checkbox-sm-padding-x: calc(var(--spacing) * 2.5);
-  --checkbox-sm-font-size: var(--text-xs);
-  --checkbox-md-height: var(--h-control);
-  --checkbox-md-padding-x: var(--pad-control);
-  --checkbox-md-font-size: var(--text-sm);
-  --checkbox-lg-height: calc(var(--spacing) * 9);
-  --checkbox-lg-padding-x: calc(var(--spacing) * 3);
-  --checkbox-lg-font-size: var(--text-sm);
+  --checkbox-radius: var(--radius-sm);
+  --checkbox-active-surface: var(--primary);
+  --checkbox-active-surface-foreground: var(--primary-foreground);
+  --checkbox-md-height: calc(var(--spacing) * 4);
 
   /* collapsible — 한 덩어리를 접었다 펴는 것. */
-  --collapsible-radius: var(--radius-lg);
-  --collapsible-gap: calc(var(--spacing) * 2);
-  --collapsible-surface: var(--muted);
-  --collapsible-surface-foreground: var(--foreground);
-  --collapsible-md-padding-x: calc(var(--spacing) * 3);
-  --collapsible-md-font-size: var(--text-sm);
 
   /* combobox — 검색이 붙은 선택. */
-  --combobox-radius: var(--radius-md);
-  --combobox-gap: calc(var(--spacing) * 2);
-  --combobox-sm-height: calc(var(--spacing) * 7);
-  --combobox-sm-padding-x: calc(var(--spacing) * 2.5);
-  --combobox-sm-font-size: var(--text-xs);
-  --combobox-md-height: var(--h-control);
-  --combobox-md-padding-x: var(--pad-control);
+  --combobox-radius: var(--radius-lg);
+  --combobox-gap: calc(var(--spacing) * 1);
+  --combobox-surface: var(--popover);
+  --combobox-surface-foreground: var(--popover-foreground);
+  --combobox-md-height: calc(var(--spacing) * 8);
+  --combobox-md-padding-x: calc(var(--spacing) * 2.5);
   --combobox-md-font-size: var(--text-sm);
-  --combobox-lg-height: calc(var(--spacing) * 9);
-  --combobox-lg-padding-x: calc(var(--spacing) * 3);
-  --combobox-lg-font-size: var(--text-sm);
 
   /* command — 검색으로 실행하는 명령 팔레트. */
   --command-radius: var(--radius-xl);
-  --command-gap: calc(var(--spacing) * 4);
+  --command-gap: calc(var(--spacing) * 2);
   --command-surface: var(--popover);
   --command-surface-foreground: var(--popover-foreground);
-  --command-active-surface: var(--background);
+  --command-active-surface: var(--muted);
   --command-active-surface-foreground: var(--foreground);
-  --command-md-padding-x: calc(var(--spacing) * 4);
+  --command-md-padding-x: calc(var(--spacing) * 2);
   --command-md-font-size: var(--text-sm);
 
   /* context-menu — 우클릭으로 여는 그 자리의 동작. */
-  --context-menu-radius: var(--radius-xl);
-  --context-menu-gap: calc(var(--spacing) * 4);
+  --context-menu-radius: var(--radius-lg);
+  --context-menu-gap: calc(var(--spacing) * 1.5);
   --context-menu-surface: var(--popover);
   --context-menu-surface-foreground: var(--popover-foreground);
-  --context-menu-md-padding-x: calc(var(--spacing) * 4);
+  --context-menu-active-surface: var(--accent);
+  --context-menu-active-surface-foreground: var(--accent-foreground);
+  --context-menu-md-padding-x: calc(var(--spacing) * 1.5);
   --context-menu-md-font-size: var(--text-sm);
 
   /* dialog — 지금 하던 일을 멈추고 처리해야 하는 것. */
@@ -364,267 +349,191 @@ body {
   --dialog-gap: calc(var(--spacing) * 4);
   --dialog-surface: var(--popover);
   --dialog-surface-foreground: var(--popover-foreground);
-  --dialog-md-padding-x: calc(var(--spacing) * 4);
+  --dialog-md-padding-x: calc(var(--spacing) * 6);
   --dialog-md-font-size: var(--text-sm);
 
   /* direction —  */
-  --direction-radius: var(--radius-lg);
-  --direction-gap: calc(var(--spacing) * 2);
-  --direction-surface: var(--muted);
-  --direction-surface-foreground: var(--foreground);
-  --direction-md-padding-x: calc(var(--spacing) * 3);
-  --direction-md-font-size: var(--text-sm);
 
   /* drawer — 화면 아래에서 올라오는 패널. */
   --drawer-radius: var(--radius-xl);
-  --drawer-gap: calc(var(--spacing) * 4);
   --drawer-surface: var(--popover);
   --drawer-surface-foreground: var(--popover-foreground);
   --drawer-md-padding-x: calc(var(--spacing) * 4);
   --drawer-md-font-size: var(--text-sm);
 
   /* dropdown-menu — 한 버튼에 딸린 동작 목록. */
-  --dropdown-menu-radius: var(--radius-xl);
-  --dropdown-menu-gap: calc(var(--spacing) * 4);
+  --dropdown-menu-radius: var(--radius-lg);
+  --dropdown-menu-gap: calc(var(--spacing) * 1.5);
   --dropdown-menu-surface: var(--popover);
   --dropdown-menu-surface-foreground: var(--popover-foreground);
-  --dropdown-menu-active-surface: var(--background);
-  --dropdown-menu-active-surface-foreground: var(--foreground);
-  --dropdown-menu-md-padding-x: calc(var(--spacing) * 4);
+  --dropdown-menu-active-surface: var(--accent);
+  --dropdown-menu-active-surface-foreground: var(--accent-foreground);
+  --dropdown-menu-md-padding-x: calc(var(--spacing) * 1.5);
   --dropdown-menu-md-font-size: var(--text-sm);
 
   /* empty — 보여줄 것이 없을 때의 화면. */
-  --empty-radius: var(--radius-lg);
-  --empty-gap: calc(var(--spacing) * 2);
+  --empty-radius: var(--radius-xl);
+  --empty-gap: calc(var(--spacing) * 4);
   --empty-surface: var(--muted);
   --empty-surface-foreground: var(--foreground);
-  --empty-md-padding-x: calc(var(--spacing) * 3);
+  --empty-md-padding-x: calc(var(--spacing) * 6);
   --empty-md-font-size: var(--text-sm);
 
   /* field — 라벨 · 입력 · 설명 · 오류를 한 벌로 묶은 폼의 최소 단위. */
-  --field-radius: var(--radius-lg);
-  --field-gap: calc(var(--spacing) * 2);
-  --field-surface: var(--muted);
-  --field-surface-foreground: var(--foreground);
-  --field-md-padding-x: calc(var(--spacing) * 3);
+  --field-gap: calc(var(--spacing) * 4);
   --field-md-font-size: var(--text-sm);
 
   /* hover-card — hover 로 보는 미리보기. */
-  --hover-card-radius: var(--radius-xl);
-  --hover-card-gap: calc(var(--spacing) * 4);
+  --hover-card-radius: var(--radius-lg);
   --hover-card-surface: var(--popover);
   --hover-card-surface-foreground: var(--popover-foreground);
-  --hover-card-md-padding-x: calc(var(--spacing) * 4);
+  --hover-card-md-padding-x: calc(var(--spacing) * 2.5);
   --hover-card-md-font-size: var(--text-sm);
 
   /* input-group — 입력 앞뒤에 아이콘 · 단위 · 버튼을 붙인 것. */
-  --input-group-radius: var(--radius-md);
+  --input-group-radius: var(--radius-lg);
   --input-group-gap: calc(var(--spacing) * 2);
-  --input-group-sm-height: calc(var(--spacing) * 7);
-  --input-group-sm-padding-x: calc(var(--spacing) * 2.5);
-  --input-group-sm-font-size: var(--text-xs);
   --input-group-md-height: var(--h-control);
-  --input-group-md-padding-x: var(--pad-control);
   --input-group-md-font-size: var(--text-sm);
-  --input-group-lg-height: calc(var(--spacing) * 9);
-  --input-group-lg-padding-x: calc(var(--spacing) * 3);
-  --input-group-lg-font-size: var(--text-sm);
 
   /* input-otp — 자릿수가 정해진 입력. */
-  --input-otp-radius: var(--radius-md);
-  --input-otp-gap: calc(var(--spacing) * 2);
-  --input-otp-sm-height: calc(var(--spacing) * 7);
-  --input-otp-sm-padding-x: calc(var(--spacing) * 2.5);
-  --input-otp-sm-font-size: var(--text-xs);
-  --input-otp-md-height: var(--h-control);
-  --input-otp-md-padding-x: var(--pad-control);
+  --input-otp-radius: var(--radius-lg);
+  --input-otp-md-height: calc(var(--spacing) * 8);
   --input-otp-md-font-size: var(--text-sm);
-  --input-otp-lg-height: calc(var(--spacing) * 9);
-  --input-otp-lg-padding-x: calc(var(--spacing) * 3);
-  --input-otp-lg-font-size: var(--text-sm);
 
   /* item — 목록의 한 줄. */
   --item-radius: var(--radius-lg);
-  --item-gap: calc(var(--spacing) * 2);
-  --item-surface: var(--muted);
-  --item-surface-foreground: var(--foreground);
-  --item-active-surface: var(--background);
-  --item-active-surface-foreground: var(--foreground);
+  --item-gap: calc(var(--spacing) * 2.5);
+  --item-active-surface: var(--muted);
   --item-md-padding-x: calc(var(--spacing) * 3);
   --item-md-font-size: var(--text-sm);
+  --item-xs-padding-x: calc(var(--spacing) * 2.5);
+  --item-xs-gap: calc(var(--spacing) * 2);
 
   /* kbd — 단축키를 글자로 표기한 것. */
-  --kbd-radius: var(--radius-lg);
-  --kbd-gap: calc(var(--spacing) * 2);
+  --kbd-radius: var(--radius-sm);
+  --kbd-gap: calc(var(--spacing) * 1);
   --kbd-surface: var(--muted);
-  --kbd-surface-foreground: var(--foreground);
-  --kbd-md-padding-x: calc(var(--spacing) * 3);
-  --kbd-md-font-size: var(--text-sm);
+  --kbd-surface-foreground: var(--muted-foreground);
+  --kbd-md-height: calc(var(--spacing) * 5);
+  --kbd-md-padding-x: calc(var(--spacing) * 1);
+  --kbd-md-font-size: var(--text-xs);
 
   /* label — 입력과 짝을 이루는 이름표. */
-  --label-radius: var(--radius-lg);
   --label-gap: calc(var(--spacing) * 2);
-  --label-surface: var(--muted);
-  --label-surface-foreground: var(--foreground);
-  --label-md-padding-x: calc(var(--spacing) * 3);
   --label-md-font-size: var(--text-sm);
 
   /* marker — 새로 생긴 것 · 바뀐 것을 표시하는 점. */
-  --marker-radius: var(--radius-lg);
   --marker-gap: calc(var(--spacing) * 2);
-  --marker-surface: var(--muted);
-  --marker-surface-foreground: var(--foreground);
-  --marker-md-padding-x: calc(var(--spacing) * 3);
+  --marker-surface: var(--border);
+  --marker-surface-foreground: var(--muted-foreground);
   --marker-md-font-size: var(--text-sm);
 
   /* menubar — 데스크톱 앱 스타일의 메뉴 줄. */
   --menubar-radius: var(--radius-lg);
-  --menubar-gap: calc(var(--spacing) * 2);
-  --menubar-surface: var(--muted);
-  --menubar-surface-foreground: var(--foreground);
-  --menubar-active-surface: var(--background);
-  --menubar-active-surface-foreground: var(--foreground);
-  --menubar-md-padding-x: calc(var(--spacing) * 3);
+  --menubar-gap: calc(var(--spacing) * 1.5);
+  --menubar-surface: var(--popover);
+  --menubar-surface-foreground: var(--popover-foreground);
+  --menubar-active-surface: var(--accent);
+  --menubar-active-surface-foreground: var(--accent-foreground);
+  --menubar-md-height: calc(var(--spacing) * 8);
+  --menubar-md-padding-x: calc(var(--spacing) * 1.5);
   --menubar-md-font-size: var(--text-sm);
 
   /* message-scroller — 새 메시지가 오면 아래로 따라가는 대화 목록. */
-  --message-scroller-radius: var(--radius-lg);
-  --message-scroller-gap: calc(var(--spacing) * 2);
-  --message-scroller-surface: var(--muted);
+  --message-scroller-gap: calc(var(--spacing) * 6);
+  --message-scroller-surface: var(--background);
   --message-scroller-surface-foreground: var(--foreground);
-  --message-scroller-md-padding-x: calc(var(--spacing) * 3);
-  --message-scroller-md-font-size: var(--text-sm);
+  --message-scroller-active-surface: var(--muted);
 
   /* message — 대화 한 줄. 아바타 · 본문 · 시각. */
-  --message-radius: var(--radius-lg);
+  --message-radius: var(--radius-4xl);
   --message-gap: calc(var(--spacing) * 2);
   --message-surface: var(--muted);
-  --message-surface-foreground: var(--foreground);
+  --message-surface-foreground: var(--muted-foreground);
   --message-md-padding-x: calc(var(--spacing) * 3);
   --message-md-font-size: var(--text-sm);
 
   /* native-select — 브라우저가 그리는 선택 목록. */
-  --native-select-radius: var(--radius-md);
-  --native-select-gap: calc(var(--spacing) * 2);
+  --native-select-radius: var(--radius-lg);
   --native-select-sm-height: calc(var(--spacing) * 7);
-  --native-select-sm-padding-x: calc(var(--spacing) * 2.5);
-  --native-select-sm-font-size: var(--text-xs);
+  --native-select-sm-padding-x: calc(var(--spacing) * 2);
   --native-select-md-height: var(--h-control);
   --native-select-md-padding-x: var(--pad-control);
   --native-select-md-font-size: var(--text-sm);
-  --native-select-lg-height: calc(var(--spacing) * 9);
-  --native-select-lg-padding-x: calc(var(--spacing) * 3);
-  --native-select-lg-font-size: var(--text-sm);
 
   /* navigation-menu — 제품 상단의 주 탐색. */
   --navigation-menu-radius: var(--radius-lg);
   --navigation-menu-gap: calc(var(--spacing) * 2);
-  --navigation-menu-surface: var(--muted);
-  --navigation-menu-surface-foreground: var(--foreground);
-  --navigation-menu-active-surface: var(--background);
-  --navigation-menu-active-surface-foreground: var(--foreground);
-  --navigation-menu-md-padding-x: calc(var(--spacing) * 3);
+  --navigation-menu-surface: var(--popover);
+  --navigation-menu-surface-foreground: var(--popover-foreground);
+  --navigation-menu-active-surface: var(--muted);
+  --navigation-menu-md-height: calc(var(--spacing) * 9);
+  --navigation-menu-md-padding-x: calc(var(--spacing) * 2.5);
   --navigation-menu-md-font-size: var(--text-sm);
 
   /* overlay-stage —  */
   --overlay-stage-radius: var(--radius-lg);
-  --overlay-stage-gap: calc(var(--spacing) * 2);
-  --overlay-stage-surface: var(--muted);
-  --overlay-stage-surface-foreground: var(--foreground);
-  --overlay-stage-md-padding-x: calc(var(--spacing) * 3);
-  --overlay-stage-md-font-size: var(--text-sm);
+  --overlay-stage-surface: var(--background);
 
   /* pagination — 긴 목록을 쪽으로 나누는 것. */
-  --pagination-radius: var(--radius-md);
-  --pagination-gap: calc(var(--spacing) * 2);
-  --pagination-sm-height: calc(var(--spacing) * 7);
-  --pagination-sm-padding-x: calc(var(--spacing) * 2.5);
-  --pagination-sm-font-size: var(--text-xs);
-  --pagination-md-height: var(--h-control);
-  --pagination-md-padding-x: var(--pad-control);
-  --pagination-md-font-size: var(--text-sm);
-  --pagination-lg-height: calc(var(--spacing) * 9);
-  --pagination-lg-padding-x: calc(var(--spacing) * 3);
-  --pagination-lg-font-size: var(--text-sm);
+  --pagination-gap: calc(var(--spacing) * 0.5);
+  --pagination-md-height: calc(var(--spacing) * 8);
 
   /* popover — 누른 자리 옆에 붙는 작은 면. */
-  --popover-radius: var(--radius-xl);
-  --popover-gap: calc(var(--spacing) * 4);
+  --popover-radius: var(--radius-lg);
+  --popover-gap: calc(var(--spacing) * 2.5);
   --popover-surface: var(--popover);
   --popover-surface-foreground: var(--popover-foreground);
-  --popover-md-padding-x: calc(var(--spacing) * 4);
+  --popover-md-padding-x: calc(var(--spacing) * 2.5);
   --popover-md-font-size: var(--text-sm);
 
   /* progress — 끝이 정해진 작업의 진행률. */
-  --progress-radius: var(--radius-lg);
-  --progress-gap: calc(var(--spacing) * 2);
+  --progress-radius: var(--radius-4xl);
   --progress-surface: var(--muted);
-  --progress-surface-foreground: var(--foreground);
-  --progress-md-padding-x: calc(var(--spacing) * 3);
-  --progress-md-font-size: var(--text-sm);
+  --progress-active-surface: var(--primary);
+  --progress-md-height: calc(var(--spacing) * 1);
 
   /* questionnaire — 여러 문항을 순서대로 받는 구조. */
   --questionnaire-radius: var(--radius-lg);
-  --questionnaire-gap: calc(var(--spacing) * 2);
-  --questionnaire-surface: var(--muted);
-  --questionnaire-surface-foreground: var(--foreground);
+  --questionnaire-gap: calc(var(--spacing) * 4);
+  --questionnaire-active-surface: var(--muted);
+  --questionnaire-md-height: calc(var(--spacing) * 11);
   --questionnaire-md-padding-x: calc(var(--spacing) * 3);
   --questionnaire-md-font-size: var(--text-sm);
 
   /* radio-group — 서로 배타적인 것 중 하나만 고르는 것. */
-  --radio-group-radius: var(--radius-md);
+  --radio-group-radius: var(--radius-4xl);
   --radio-group-gap: calc(var(--spacing) * 2);
-  --radio-group-sm-height: calc(var(--spacing) * 7);
-  --radio-group-sm-padding-x: calc(var(--spacing) * 2.5);
-  --radio-group-sm-font-size: var(--text-xs);
-  --radio-group-md-height: var(--h-control);
-  --radio-group-md-padding-x: var(--pad-control);
-  --radio-group-md-font-size: var(--text-sm);
-  --radio-group-lg-height: calc(var(--spacing) * 9);
-  --radio-group-lg-padding-x: calc(var(--spacing) * 3);
-  --radio-group-lg-font-size: var(--text-sm);
+  --radio-group-active-surface: var(--primary);
+  --radio-group-active-surface-foreground: var(--primary-foreground);
+  --radio-group-md-height: calc(var(--spacing) * 4);
 
   /* resizable — 사용자가 폭을 조절하는 분할 화면. */
   --resizable-radius: var(--radius-lg);
-  --resizable-gap: calc(var(--spacing) * 2);
-  --resizable-surface: var(--muted);
-  --resizable-surface-foreground: var(--foreground);
-  --resizable-md-padding-x: calc(var(--spacing) * 3);
-  --resizable-md-font-size: var(--text-sm);
+  --resizable-surface: var(--border);
 
   /* scroll-area — 넘치는 내용을 자기 안에서 스크롤하는 상자. */
-  --scroll-area-radius: var(--radius-lg);
-  --scroll-area-gap: calc(var(--spacing) * 2);
-  --scroll-area-surface: var(--muted);
-  --scroll-area-surface-foreground: var(--foreground);
-  --scroll-area-md-padding-x: calc(var(--spacing) * 3);
-  --scroll-area-md-font-size: var(--text-sm);
+  --scroll-area-radius: var(--radius-4xl);
+  --scroll-area-surface: var(--border);
 
   /* select — 직접 그린 선택 목록. */
-  --select-radius: var(--radius-md);
-  --select-gap: calc(var(--spacing) * 2);
-  --select-active-surface: var(--background);
-  --select-active-surface-foreground: var(--foreground);
+  --select-radius: var(--radius-lg);
+  --select-gap: calc(var(--spacing) * 1.5);
+  --select-surface: var(--popover);
+  --select-surface-foreground: var(--popover-foreground);
+  --select-active-surface: var(--accent);
+  --select-active-surface-foreground: var(--accent-foreground);
   --select-sm-height: calc(var(--spacing) * 7);
-  --select-sm-padding-x: calc(var(--spacing) * 2.5);
-  --select-sm-font-size: var(--text-xs);
+  --select-sm-padding-x: calc(var(--spacing) * 2);
   --select-md-height: var(--h-control);
   --select-md-padding-x: var(--pad-control);
   --select-md-font-size: var(--text-sm);
-  --select-lg-height: calc(var(--spacing) * 9);
-  --select-lg-padding-x: calc(var(--spacing) * 3);
-  --select-lg-font-size: var(--text-sm);
 
   /* separator — 구분선. */
-  --separator-radius: var(--radius-lg);
-  --separator-gap: calc(var(--spacing) * 2);
-  --separator-surface: var(--muted);
-  --separator-surface-foreground: var(--foreground);
-  --separator-md-padding-x: calc(var(--spacing) * 3);
-  --separator-md-font-size: var(--text-sm);
+  --separator-surface: var(--border);
 
   /* sheet — 화면 옆에서 밀려 나오는 패널. */
-  --sheet-radius: var(--radius-xl);
   --sheet-gap: calc(var(--spacing) * 4);
   --sheet-surface: var(--popover);
   --sheet-surface-foreground: var(--popover-foreground);
@@ -632,133 +541,85 @@ body {
   --sheet-md-font-size: var(--text-sm);
 
   /* sidebar — 앱 셸의 좌측 탐색. */
-  --sidebar-radius: var(--radius-lg);
+  --sidebar-radius: var(--radius-md);
   --sidebar-gap: calc(var(--spacing) * 2);
-  --sidebar-surface: var(--muted);
-  --sidebar-surface-foreground: var(--foreground);
-  --sidebar-active-surface: var(--background);
-  --sidebar-active-surface-foreground: var(--foreground);
-  --sidebar-md-padding-x: calc(var(--spacing) * 3);
+  --sidebar-surface: var(--sidebar);
+  --sidebar-surface-foreground: var(--sidebar-foreground);
+  --sidebar-active-surface: var(--sidebar-accent);
+  --sidebar-active-surface-foreground: var(--sidebar-accent-foreground);
+  --sidebar-md-padding-x: calc(var(--spacing) * 2);
   --sidebar-md-font-size: var(--text-sm);
 
   /* skeleton — 올 내용의 자리를 미리 잡아 두는 뼈대. */
-  --skeleton-radius: var(--radius-lg);
-  --skeleton-gap: calc(var(--spacing) * 2);
+  --skeleton-radius: var(--radius-md);
   --skeleton-surface: var(--muted);
-  --skeleton-surface-foreground: var(--foreground);
-  --skeleton-md-padding-x: calc(var(--spacing) * 3);
-  --skeleton-md-font-size: var(--text-sm);
 
   /* slider — 범위 안에서 값을 고르는 것. */
-  --slider-radius: var(--radius-md);
-  --slider-gap: calc(var(--spacing) * 2);
-  --slider-sm-height: calc(var(--spacing) * 7);
-  --slider-sm-padding-x: calc(var(--spacing) * 2.5);
-  --slider-sm-font-size: var(--text-xs);
-  --slider-md-height: var(--h-control);
-  --slider-md-padding-x: var(--pad-control);
-  --slider-md-font-size: var(--text-sm);
-  --slider-lg-height: calc(var(--spacing) * 9);
-  --slider-lg-padding-x: calc(var(--spacing) * 3);
-  --slider-lg-font-size: var(--text-sm);
+  --slider-radius: var(--radius-4xl);
+  --slider-surface: var(--muted);
+  --slider-active-surface: var(--primary);
+  --slider-md-height: calc(var(--spacing) * 1);
 
   /* sonner — 작업 결과를 잠깐 알리는 토스트. */
-  --sonner-radius: var(--radius-xl);
-  --sonner-gap: calc(var(--spacing) * 4);
+  --sonner-radius: var(--radius-lg);
   --sonner-surface: var(--popover);
   --sonner-surface-foreground: var(--popover-foreground);
-  --sonner-md-padding-x: calc(var(--spacing) * 4);
-  --sonner-md-font-size: var(--text-sm);
 
   /* spinner — 끝을 모르는 대기 표시. */
-  --spinner-radius: var(--radius-lg);
-  --spinner-gap: calc(var(--spacing) * 2);
-  --spinner-surface: var(--muted);
-  --spinner-surface-foreground: var(--foreground);
-  --spinner-md-padding-x: calc(var(--spacing) * 3);
-  --spinner-md-font-size: var(--text-sm);
 
   /* switch — 즉시 반영되는 on/off. */
-  --switch-radius: var(--radius-md);
-  --switch-gap: calc(var(--spacing) * 2);
-  --switch-sm-height: calc(var(--spacing) * 7);
-  --switch-sm-padding-x: calc(var(--spacing) * 2.5);
-  --switch-sm-font-size: var(--text-xs);
-  --switch-md-height: var(--h-control);
-  --switch-md-padding-x: var(--pad-control);
-  --switch-md-font-size: var(--text-sm);
-  --switch-lg-height: calc(var(--spacing) * 9);
-  --switch-lg-padding-x: calc(var(--spacing) * 3);
-  --switch-lg-font-size: var(--text-sm);
+  --switch-radius: var(--radius-4xl);
+  --switch-surface: var(--input);
+  --switch-active-surface: var(--primary);
+  --switch-sm-height: calc(var(--spacing) * 3.5);
+  --switch-md-height: calc(var(--spacing) * 4.5);
 
   /* table — 행과 열로 정렬된 데이터. */
-  --table-radius: var(--radius-lg);
-  --table-gap: calc(var(--spacing) * 2);
   --table-surface: var(--muted);
-  --table-surface-foreground: var(--foreground);
-  --table-md-padding-x: calc(var(--spacing) * 3);
+  --table-active-surface: var(--muted);
+  --table-md-height: calc(var(--spacing) * 10);
+  --table-md-padding-x: calc(var(--spacing) * 2);
   --table-md-font-size: var(--text-sm);
 
   /* tabs — 같은 자리에서 내용을 바꾸는 것. */
   --tabs-radius: var(--radius-lg);
-  --tabs-gap: calc(var(--spacing) * 2);
+  --tabs-gap: calc(var(--spacing) * 1.5);
   --tabs-surface: var(--muted);
-  --tabs-surface-foreground: var(--foreground);
+  --tabs-surface-foreground: var(--muted-foreground);
   --tabs-active-surface: var(--background);
   --tabs-active-surface-foreground: var(--foreground);
-  --tabs-md-padding-x: calc(var(--spacing) * 3);
+  --tabs-md-height: calc(var(--spacing) * 7);
+  --tabs-md-padding-x: calc(var(--spacing) * 1.5);
   --tabs-md-font-size: var(--text-sm);
 
   /* textarea — 여러 줄짜리 값을 받는 자리. */
-  --textarea-radius: var(--radius-md);
-  --textarea-gap: calc(var(--spacing) * 2);
-  --textarea-sm-height: calc(var(--spacing) * 7);
-  --textarea-sm-padding-x: calc(var(--spacing) * 2.5);
-  --textarea-sm-font-size: var(--text-xs);
-  --textarea-md-height: var(--h-control);
+  --textarea-radius: var(--radius-lg);
   --textarea-md-padding-x: var(--pad-control);
   --textarea-md-font-size: var(--text-sm);
-  --textarea-lg-height: calc(var(--spacing) * 9);
-  --textarea-lg-padding-x: calc(var(--spacing) * 3);
-  --textarea-lg-font-size: var(--text-sm);
 
   /* toggle-group — 토글 여러 개를 한 축으로 묶은 것. */
-  --toggle-group-radius: var(--radius-md);
-  --toggle-group-gap: calc(var(--spacing) * 2);
-  --toggle-group-active-surface: var(--background);
-  --toggle-group-active-surface-foreground: var(--foreground);
-  --toggle-group-sm-height: calc(var(--spacing) * 7);
-  --toggle-group-sm-padding-x: calc(var(--spacing) * 2.5);
-  --toggle-group-sm-font-size: var(--text-xs);
-  --toggle-group-md-height: var(--h-control);
-  --toggle-group-md-padding-x: var(--pad-control);
-  --toggle-group-md-font-size: var(--text-sm);
-  --toggle-group-lg-height: calc(var(--spacing) * 9);
-  --toggle-group-lg-padding-x: calc(var(--spacing) * 3);
-  --toggle-group-lg-font-size: var(--text-sm);
+  --toggle-group-radius: var(--radius-lg);
 
   /* toggle — 눌린 상태가 남는 버튼. */
-  --toggle-radius: var(--radius-md);
-  --toggle-gap: calc(var(--spacing) * 2);
-  --toggle-active-surface: var(--background);
-  --toggle-active-surface-foreground: var(--foreground);
+  --toggle-radius: var(--radius-lg);
+  --toggle-gap: calc(var(--spacing) * 1);
+  --toggle-active-surface: var(--muted);
   --toggle-sm-height: calc(var(--spacing) * 7);
-  --toggle-sm-padding-x: calc(var(--spacing) * 2.5);
+  --toggle-sm-padding-x: calc(var(--spacing) * 2);
   --toggle-sm-font-size: var(--text-xs);
   --toggle-md-height: var(--h-control);
   --toggle-md-padding-x: var(--pad-control);
   --toggle-md-font-size: var(--text-sm);
   --toggle-lg-height: calc(var(--spacing) * 9);
   --toggle-lg-padding-x: calc(var(--spacing) * 3);
-  --toggle-lg-font-size: var(--text-sm);
 
   /* tooltip — hover 로만 보이는 짧은 설명. */
-  --tooltip-radius: var(--radius-xl);
-  --tooltip-gap: calc(var(--spacing) * 4);
-  --tooltip-surface: var(--popover);
-  --tooltip-surface-foreground: var(--popover-foreground);
-  --tooltip-md-padding-x: calc(var(--spacing) * 4);
-  --tooltip-md-font-size: var(--text-sm);
+  --tooltip-radius: var(--radius-md);
+  --tooltip-gap: calc(var(--spacing) * 1.5);
+  --tooltip-surface: var(--foreground);
+  --tooltip-surface-foreground: var(--background);
+  --tooltip-md-padding-x: calc(var(--spacing) * 3);
+  --tooltip-md-font-size: var(--text-xs);
   /* @generated:tokens:end */
 
   /* 아직 토큰화하지 않은 컨트롤이 기준을 받는 자리.
@@ -769,16 +630,10 @@ body {
   --pad-control-sm: calc(var(--pad-control) * 0.9);
   --pad-control-lg: calc(var(--pad-control) * 1.2);
 
-  /* 탭은 버튼보다 한 단 작다. 같은 높이로 두면 탭이 버튼처럼 읽혀
-   * «누르면 실행» 과 «누르면 전환» 이 구분되지 않는다. */
-  --h-tab: calc(var(--spacing) * 7);
-  --pad-tab: calc(var(--spacing) * 1.5);
+  /* 탭의 높이·좌우 여백은 여기 있었지만 컴포넌트 층으로 내려갔다
+   * (--tabs-md-height · --tabs-md-padding-x). 탭 하나의 크기는 전역이 아니라
+   * 그 컴포넌트의 값이고, 두 곳에 두면 어느 쪽을 고쳐야 하는지 알 수 없다. */
 
-  /* 글줄 사이. 제목과 설명처럼 «같은 것을 이어 말하는» 간격이다. */
-  --gap-text: calc(var(--spacing) * 1);
-
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 }
 
 /* 스튜디오 화면 하나가 쓰는 강조색.
@@ -821,8 +676,7 @@ body {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  /* @generated:colors:dark — 같은 이름의 다크 값 */
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -831,25 +685,22 @@ body {
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  /* @generated:colors:dark:end */
 }

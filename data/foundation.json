@@ -1,28 +1,175 @@
 {
   "$doc": "전역 토큰. 값이 리터럴로 적히는 유일한 층이다. 컴포넌트는 여기를 참조만 한다.",
   "$generated": "app/globals.css 의 @generated:tokens 구획 — node scripts/gen-tokens.mjs",
-
   "spacing": {
     "$doc": "밀도의 기준. Tailwind 의 p-4 · gap-6 이 전부 이 값 × n 이다. 하나만 줄이면 화면 전체가 조밀해진다.",
     "base": "0.25rem"
   },
-
   "radius": {
     "$doc": "모서리의 기준. sm~4xl 이 전부 여기서 계산된다 — 값을 따로 적어 두면 기준을 바꿔도 그 자리만 옛 값을 쓴다.",
     "base": "0.625rem"
   },
-
   "control": {
     "$doc": "한 줄에 나란히 서는 것들의 기준. 버튼·입력·셀렉트·토글이 이 값을 받으므로 줄이 어긋나지 않는다.",
     "height": "spacing.8",
     "paddingX": "spacing.2.5"
   },
-
   "text": {
     "$doc": "글자 크기. Tailwind 의 text-* 를 그대로 쓴다 — 이름이 갈라지면 어느 쪽이 정본인지 알 수 없다.",
     "xs": "0.75rem",
     "sm": "0.875rem",
     "base": "1rem",
     "lg": "1.125rem"
+  },
+  "color": {
+    "$doc": "색. 라이트와 다크는 서로 다른 값이라 한 이름이 두 값을 갖는다.",
+    "card": {
+      "light": "oklch(1 0 0)",
+      "dark": "oklch(0.205 0 0)",
+      "$doc": "배경에서 한 단계 올라온 면"
+    },
+    "card-foreground": {
+      "light": "oklch(0.145 0 0)",
+      "dark": "oklch(0.985 0 0)",
+      "$doc": "카드 면 위의 글자"
+    },
+    "popover": {
+      "light": "oklch(1 0 0)",
+      "dark": "oklch(0.205 0 0)",
+      "$doc": "본문 위에 떠오르는 면"
+    },
+    "popover-foreground": {
+      "light": "oklch(0.145 0 0)",
+      "dark": "oklch(0.985 0 0)",
+      "$doc": "떠오른 면 위의 글자"
+    },
+    "primary": {
+      "light": "oklch(0.205 0 0)",
+      "dark": "oklch(0.922 0 0)",
+      "$doc": "화면당 하나. 여기서 눌러야 하는 것"
+    },
+    "primary-foreground": {
+      "light": "oklch(0.985 0 0)",
+      "dark": "oklch(0.205 0 0)",
+      "$doc": "주 액션 위에 얹히는 글자"
+    },
+    "secondary": {
+      "light": "oklch(0.97 0 0)",
+      "dark": "oklch(0.269 0 0)",
+      "$doc": "주 액션 옆의 낮은 강조"
+    },
+    "secondary-foreground": {
+      "light": "oklch(0.205 0 0)",
+      "dark": "oklch(0.985 0 0)",
+      "$doc": "보조 면 위의 글자"
+    },
+    "accent": {
+      "light": "oklch(0.97 0 0)",
+      "dark": "oklch(0.269 0 0)",
+      "$doc": "hover·선택된 항목의 면"
+    },
+    "accent-foreground": {
+      "light": "oklch(0.205 0 0)",
+      "dark": "oklch(0.985 0 0)",
+      "$doc": "강조 면 위의 글자"
+    },
+    "destructive": {
+      "light": "oklch(0.577 0.245 27.325)",
+      "dark": "oklch(0.704 0.191 22.216)",
+      "$doc": "되돌릴 수 없는 것에만"
+    },
+    "destructive-foreground": {
+      "light": "var(--primary-foreground)",
+      "$doc": "파괴적 액션 위의 글자"
+    },
+    "muted": {
+      "light": "oklch(0.97 0 0)",
+      "dark": "oklch(0.269 0 0)",
+      "$doc": "비활성·배경 블록"
+    },
+    "muted-foreground": {
+      "light": "oklch(0.556 0 0)",
+      "dark": "oklch(0.708 0 0)",
+      "$doc": "설명문·캡션. 본문보다 한 단계 낮게"
+    },
+    "border": {
+      "light": "oklch(0.922 0 0)",
+      "dark": "oklch(1 0 0 / 10%)",
+      "$doc": "요소를 가르는 기본 선"
+    },
+    "input": {
+      "light": "oklch(0.922 0 0)",
+      "dark": "oklch(1 0 0 / 15%)",
+      "$doc": "값을 받는 자리의 테두리"
+    },
+    "ring": {
+      "light": "oklch(0.708 0 0)",
+      "dark": "oklch(0.556 0 0)",
+      "$doc": "키보드 사용자에게 지금 위치를 알린다"
+    },
+    "chart-1": {
+      "light": "oklch(0.87 0 0)",
+      "dark": "oklch(0.87 0 0)",
+      "$doc": "계열 순서 = 의미 순서"
+    },
+    "chart-2": {
+      "light": "oklch(0.556 0 0)",
+      "dark": "oklch(0.556 0 0)"
+    },
+    "chart-3": {
+      "light": "oklch(0.439 0 0)",
+      "dark": "oklch(0.439 0 0)"
+    },
+    "chart-4": {
+      "light": "oklch(0.371 0 0)",
+      "dark": "oklch(0.371 0 0)"
+    },
+    "chart-5": {
+      "light": "oklch(0.269 0 0)",
+      "dark": "oklch(0.269 0 0)"
+    },
+    "sidebar": {
+      "light": "oklch(0.985 0 0)",
+      "dark": "oklch(0.205 0 0)",
+      "$doc": "앱 셸의 좌측 면"
+    },
+    "sidebar-foreground": {
+      "light": "oklch(0.145 0 0)",
+      "dark": "oklch(0.985 0 0)"
+    },
+    "sidebar-primary": {
+      "light": "oklch(0.205 0 0)",
+      "dark": "oklch(0.488 0.243 264.376)"
+    },
+    "sidebar-primary-foreground": {
+      "light": "oklch(0.985 0 0)",
+      "dark": "oklch(0.985 0 0)"
+    },
+    "sidebar-accent": {
+      "light": "oklch(0.97 0 0)",
+      "dark": "oklch(0.269 0 0)"
+    },
+    "sidebar-accent-foreground": {
+      "light": "oklch(0.205 0 0)",
+      "dark": "oklch(0.985 0 0)"
+    },
+    "sidebar-border": {
+      "light": "oklch(0.922 0 0)",
+      "dark": "oklch(1 0 0 / 10%)"
+    },
+    "sidebar-ring": {
+      "light": "oklch(0.708 0 0)",
+      "dark": "oklch(0.556 0 0)"
+    },
+    "background": {
+      "light": "oklch(1 0 0)",
+      "dark": "oklch(0.145 0 0)",
+      "$doc": "페이지의 가장 바깥 면"
+    },
+    "foreground": {
+      "light": "oklch(0.145 0 0)",
+      "dark": "oklch(0.985 0 0)",
+      "$doc": "배경 위에 놓이는 기본 글자색"
+    }
   }
 }

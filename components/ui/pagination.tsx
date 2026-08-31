@@ -23,7 +23,7 @@ function PaginationContent({
   return (
     <ul
       data-slot="pagination-content"
-      className={cn("flex items-center gap-0.5", className)}
+      className={cn("flex items-center gap-(--pagination-gap)", className)}
       {...props}
     />
   )
@@ -106,7 +106,7 @@ function PaginationEllipsis({
       aria-hidden
       data-slot="pagination-ellipsis"
       className={cn(
-        "flex size-8 items-center justify-center [&_svg:not([class*='size-'])]:size-4",
+        "flex size-(--pagination-md-height) items-center justify-center [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}

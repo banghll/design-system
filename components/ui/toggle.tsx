@@ -7,7 +7,7 @@ import { Toggle as TogglePrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted data-[state=on]:bg-muted dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/toggle inline-flex items-center justify-center gap-(--toggle-gap) rounded-(--toggle-radius) text-(length:--toggle-md-font-size) font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-(--toggle-active-surface) data-[state=on]:bg-(--toggle-active-surface) dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -15,9 +15,9 @@ const toggleVariants = cva(
         outline: "border border-input bg-transparent hover:bg-muted",
       },
       size: {
-        default: "h-(--h-control) min-w-(--h-control) px-(--pad-control)",
-        sm: "h-(--h-control-sm) min-w-(--h-control-sm) rounded-[min(var(--radius-md),12px)] px-(--pad-control-sm) text-[0.8rem] [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-(--h-control-lg) min-w-(--h-control-lg) px-(--pad-control-lg)",
+        default: "h-(--toggle-md-height) min-w-(--toggle-md-height) px-(--toggle-md-padding-x)",
+        sm: "h-(--toggle-sm-height) min-w-(--toggle-sm-height) rounded-[min(var(--radius-md),12px)] px-(--toggle-sm-padding-x) text-(length:--toggle-sm-font-size) [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-(--toggle-lg-height) min-w-(--toggle-lg-height) px-(--toggle-lg-padding-x)",
       },
     },
     defaultVariants: {

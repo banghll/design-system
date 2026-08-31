@@ -14,7 +14,7 @@ function Questionnaire({
   return (
     <QuestionnairePrimitive.Root
       data-slot="questionnaire"
-      className={cn("flex w-full min-w-0 flex-col gap-4", className)}
+      className={cn("flex w-full min-w-0 flex-col gap-(--questionnaire-gap)", className)}
       {...props}
     />
   )
@@ -106,7 +106,7 @@ function QuestionnaireChoice({
     <QuestionnairePrimitive.Choice
       data-slot="questionnaire-choice"
       className={cn(
-        "group/questionnaire-choice relative flex min-h-11 cursor-pointer items-start gap-2.5 rounded-lg border border-input bg-transparent px-3 py-2.5 text-start text-sm transition-colors outline-none select-none hover:bg-muted/50 has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-3 has-[>input:focus-visible]:ring-ring/50 data-invalid:border-destructive dark:bg-input/20 data-checked:border-primary/40 data-checked:bg-muted dark:data-checked:bg-muted",
+        "group/questionnaire-choice relative flex min-h-(--questionnaire-md-height) cursor-pointer items-start gap-2.5 rounded-(--questionnaire-radius) border border-input bg-transparent px-(--questionnaire-md-padding-x) py-2.5 text-start text-(length:--questionnaire-md-font-size) transition-colors outline-none select-none hover:bg-muted/50 has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-3 has-[>input:focus-visible]:ring-ring/50 data-invalid:border-destructive dark:bg-input/20 data-checked:border-primary/40 data-checked:bg-(--questionnaire-active-surface) dark:data-checked:bg-(--questionnaire-active-surface)",
         "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50",
         className
       )}

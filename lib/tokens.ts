@@ -14,6 +14,9 @@ export type Foundation = {
   radius: { base: string }
   control: { height: string; paddingX: string }
   text: Record<string, string>
+  /* 색도 이 층의 값이다. 여기 있어야 컴포넌트 편집기가 «고를 수 있는 면 색» 을
+   * 손으로 적어 두지 않고 파운데이션에서 읽어 온다 — 색을 더하면 바로 쓸 수 있게. */
+  color?: Record<string, { light: string; dark?: string; $doc?: string }>
 }
 
 /** 여는 속성. 이 목록 밖은 열지 않는다 — 더 열면 토큰이 아니라 그냥 CSS다. */
