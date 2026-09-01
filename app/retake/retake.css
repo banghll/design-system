@@ -1,0 +1,50 @@
+/* 리테이크 화면 전용. globals.css 는 생성물이라 여기 따로 둔다.
+ *
+ * 색: 이 화면의 분홍은 파운데이션에 대응하는 이름이 없다 —
+ * data/foundation.json 의 색이 전부 무채색(chroma 0)이기 때문이다.
+ * 정식으로 쓰려면 파운데이션에 색을 더하는 결정이 먼저다(decisions 이슈).
+ * 그전까지 이 두 이름은 /retake 안에서만 산다. */
+.retake-scope {
+  --retake-surface: oklch(0.962 0.014 17);
+  --retake-surface-2: oklch(0.977 0.005 40);
+}
+
+/* 디스플레이 서체.
+ * globals.css 의 @theme inline 은 값을 유틸리티 안에 그대로 박아 넣는다 —
+ * 그래서 --font-heading 을 뒤에서 덮어써도 font-heading 은 이미 --font-sans 를 들고 있다.
+ * 시스템 토큰을 건드리지 않고 이 라우트에서만 쓰는 유틸리티를 따로 둔다. */
+.font-anton {
+  font-family: var(--font-anton), var(--font-sans);
+}
+
+/* 잘린 창 안에서 한 줄씩 올라오는 제목 — 1.2s expo-out */
+@keyframes retake-rise {
+  from { transform: translateY(115%); }
+  to { transform: translateY(0); }
+}
+/* 말풍선·단계 교체 */
+@keyframes retake-msg {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+/* 말줄임 세 점 */
+@keyframes retake-blink {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+/* 결과 카드 등장 */
+@keyframes retake-card {
+  from { opacity: 0; transform: scale(0.9) translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+/* 가입 완료 체크 */
+@keyframes retake-pop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: none; }
+}
+/* 떠 있는 카드의 표류. 주기는 카드마다 달리 준다 —
+ * 같으면 열 장이 한 몸처럼 숨쉰다 */
+@keyframes retake-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
