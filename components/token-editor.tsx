@@ -214,6 +214,23 @@ const MONO_FONTS = [
 /* 어떤 CSS 색이든 픽셀로 그려 hex 로 돌려준다.
  * <input type="color"> 은 hex 만 받는데 우리 토큰은 oklch 라 변환이 필요하다.
  * 파서를 직접 쓰는 대신 브라우저가 이미 아는 방법으로 읽는다. */
+/* 값만 바꿨을 때 이미 그려진 것이 옛 모습에 머무르는 자리가 있다.
+ *
+ * color: var(--foreground) 같은 규칙 자체는 안 바뀌고 변수만 바뀌므로,
+ * 브라우저가 스타일을 다시 계산하지 않는 경우가 생긴다. 실측 — 변수만 바꾸면
+ * 배지 모서리와 버튼 높이가 옛 값 그대로였고, 문서를 한 번 재부착하니
+ * 둘 다 새 값이 됐다.
+ *
+ * 그래서 값이 바뀌는 순간에만 재부착한다. 편집할 때만 도는 코드라 평소
+ * 성능과는 무관하고, 이게 없으면 «바꿨는데 그대로» 가 된다. */
+function nudge() {
+  const root = document.documentElement
+  const before = root.style.display
+  root.style.display = "none"
+  void root.offsetHeight
+  root.style.display = before
+}
+
 function toHex(css: string): string {
   try {
     const c = document.createElement("canvas")
@@ -432,6 +449,7 @@ export function TokenEditor() {
     applyToFrames((r) => r.style.setProperty(`--${name}`, value))
     setEdits((e) => ({ ...e, [name]: value }))
     setSwatches((s) => ({ ...s, [name]: toHex(value) }))
+    nudge()
   }
 
   /* 편집한 값을 계속 얹어 둔다.
@@ -468,6 +486,7 @@ export function TokenEditor() {
     applyToFrames((r) => {
       for (const k of Object.keys(edits)) r.style.removeProperty(`--${k}`)
     })
+    nudge()
     setEdits({})
     setTimeout(sync, 0)
   }

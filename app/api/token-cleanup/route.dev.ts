@@ -101,7 +101,9 @@ export async function POST(req: Request) {
       ],
     })
 
-    const parsed = res.parsed_output
+    /* 스키마에서 타입을 끌어온다. res.parsed_output 은 unknown 으로 와서,
+     * 아래 map 의 콜백 인자가 암묵적 any 가 되고 빌드가 멈춘다. */
+    const parsed = res.parsed_output as z.infer<typeof Plan> | undefined
     if (!parsed) throw new Error("정리안을 읽지 못했습니다")
 
     /* 개수가 달라졌으면 규칙 쪽을 믿는다. 다듬으라고 보낸 것이지
