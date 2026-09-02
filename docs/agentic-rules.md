@@ -113,3 +113,32 @@ node scripts/check-screen.mjs app/<이름>/page.tsx
 | `node scripts/gen-3p.mjs` | 서드파티 블록 페이지 |
 | `node scripts/check-screen.mjs` | 화면 검사 |
 | `node scripts/shoot-blocks.mjs` | 블록 썸네일 |
+
+## Figma 로 내보내기
+
+컴포넌트를 Figma 로 옮길 때 **눈으로 옮기지 않는다.** 1px 어긋난 것은
+스크린샷으로 안 보이는데, 그 1px 부터 Figma 와 코드가 갈라진다.
+
+```bash
+npm run share          # 정적 빌드
+node scripts/serve...  # out/ 을 띄운다
+npm run figma:spec     # 헤드리스 크롬이 실제 렌더를 재서 data/figma-spec.json
+```
+
+측정 대상은 `components/export-harness.tsx` 가 정한다 — 진짜 컴포넌트를 렌더해
+두고 브라우저가 계산한 값을 읽는다. 그래서 카탈로그가 바뀌면 스펙도 바뀐다.
+
+`data/figma-spec.json` 이 담는 것:
+
+- `colors.light` / `colors.dark` — 파운데이션 색 32개의 **실제 sRGB 픽셀**
+  (oklch 를 손으로 변환하면 반올림 한 번에 어긋난다)
+- `modes.light` / `modes.dark` — 변형마다 크기·여백·모서리·간격·글자·색
+
+Figma 쪽은 이 값으로 짓고, 지은 뒤 되읽어 대조한다.
+
+```bash
+npm run figma:verify -- scripts/.cache/_figma-readback.json button
+```
+
+«만들었다» 와 «맞게 만들었다» 는 다른 말이다. 대조를 안 하면 어긋난 채로
+쌓이고, 나중에 어느 쪽이 맞는지 아무도 모르게 된다.

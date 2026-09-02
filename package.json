@@ -14,7 +14,9 @@
     "share:page": "node scripts/gen-share-page.mjs share-index.html",
     "tokens": "node scripts/gen-tokens.mjs",
     "recipes": "node scripts/gen-recipes.mjs && node scripts/wire-tokens.mjs && npm run gen",
-    "audit": "node scripts/audit-tokens.mjs"
+    "audit": "node scripts/audit-tokens.mjs",
+    "figma:spec": "node scripts/gen-figma-spec.mjs",
+    "figma:verify": "node scripts/verify-figma.mjs"
   },
   "dependencies": {
     "@ai-sdk/react": "^4.0.87",
